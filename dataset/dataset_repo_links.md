@@ -12,5 +12,5 @@
 - https://github.com/starship/starship
 - https://github.com/netdata/netdata
 - https://github.com/moment/moment
-- https://github.com/redis/redis
+- https://github.com/scrapy/scrapy
 - https://github.com/puppeteer/puppeteer

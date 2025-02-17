@@ -1,0 +1,263 @@
+[
+    {
+        "Issue ID": 19651,
+        "Issue State": "closed",
+        "Issue Title": "build(deps): bump k8s.io/api from 0.32.1 to 0.32.2 in /src/go",
+        "Comment ID": 2660994894,
+        "Author": "dependabot[bot]",
+        "Created At": "2025-02-15T16:33:44Z",
+        "Comment Body": "Looks like k8s.io/api is up-to-date now, so this is no longer needed."
+    },
+    {
+        "Issue ID": 19650,
+        "Issue State": "closed",
+        "Issue Title": "build(deps): bump k8s.io/apimachinery from 0.32.1 to 0.32.2 in /src/go",
+        "Comment ID": 2660994848,
+        "Author": "dependabot[bot]",
+        "Created At": "2025-02-15T16:33:36Z",
+        "Comment Body": "Looks like k8s.io/apimachinery is up-to-date now, so this is no longer needed."
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1091125254,
+        "Author": "ilyam8",
+        "Created At": "2022-04-07T06:23:44Z",
+        "Comment Body": "@dokutan, hi. Let's see the following:\r\n\r\n```bash\r\ntree /sys/class/drm/card0\r\n\r\nfind /sys/class/drm/card0/ -type f -exec printf \"\\n[%s]\\n\" {} \\; -exec cat {} \\;\r\n```"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1091130319,
+        "Author": "MrZammler",
+        "Created At": "2022-04-07T06:31:44Z",
+        "Comment Body": "I can help :-)\r\n\r\n`Device: AMD Radeon RX 570 Series (POLARIS10, DRM 3.42.0, 5.15.26-gentoo, LLVM 13.0.0) (0x67df)`\r\n\r\n<details> \r\n<summary> \r\ntree /sys/class/drm/card0 \r\n</summary>\r\n \r\n```\r\n/sys/class/drm/card0\r\n\u251c\u2500\u2500 card0-DP-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-3\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-8\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 delete_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-1\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 new_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../bus/i2c\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-DP-2\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-4\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-9\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 delete_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-2\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 new_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../bus/i2c\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-DVI-D-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-7\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-HDMI-A-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-5\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-HDMI-A-2\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-6\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 dev\r\n\u251c\u2500\u2500 device -> ../../../0000:06:00.0\r\n\u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u251c\u2500\u2500 subsystem -> ../../../../../../class/drm\r\n\u2514\u2500\u2500 uevent\r\n \r\n```\r\n\r\n</details>\r\n\r\n<details> \r\n<summary> \r\nfind /sys/class/drm/card0/ -type f -exec printf '\\n[%s]\\n' {} \\; -exec cat {} \\;\r\n</summary>\r\n\r\n```\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/uevent]\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/enabled]\r\ndisabled\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/runtime_active_time]\r\n0\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/runtime_status]\r\nunsupported\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/autosuspend_delay_ms]\r\ncat: /sys/class/drm/card0/card0-HDMI-A-1/power/autosuspend_delay_ms: Input/output error\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/runtime_suspended_time]\r\n0\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/control]\r\nauto\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/dpms]\r\nOff\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/status]\r\ndisconnected\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/edid]\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/modes]\r\n\r\n[/sys/class/drm/card0/uevent]\r\nMAJOR=226\r\nMINOR=0\r\nDEVNAME=dri/card0\r\nDEVTYPE=drm_minor\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/uevent]\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/enabled]\r\ndisabled\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/power/runtime_active_time]\r\n0\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/power/runtime_status]\r\nunsupported\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/power/autosuspend_delay_ms]\r\ncat: /sys/class/drm/card0/card0-DVI-D-1/power/autosuspend_delay_ms: Input/output error\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/power/runtime_suspended_time]\r\n0\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/power/control]\r\nauto\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/dpms]\r\nOff\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/status]\r\ndisconnected\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/edid]\r\n\r\n[/sys/class/drm/card0/card0-DVI-D-1/modes]\r\n\r\n[/sys/class/drm/card0/power/runtime_active_time]\r\n0\r\n\r\n[/sys/class/drm/card0/power/runtime_status]\r\nunsupported\r\n\r\n[/sys/class/drm/card0/power/autosuspend_delay_ms]\r\ncat: /sys/class/drm/card0/power/autosuspend_delay_ms: Input/output error\r\n\r\n[/sys/class/drm/card0/power/runtime_suspended_time]\r\n0\r\n\r\n[/sys/class/drm/card0/power/control]\r\nauto\r\n\r\n[/sys/class/drm/card0/dev]\r\n226:0\r\n\r\n[/sys/class/drm/card0/card0"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1091264658,
+        "Author": "dokutan",
+        "Created At": "2022-04-07T08:11:20Z",
+        "Comment Body": "And for my GPU if it helps to have this information for different GPUs:\r\nAdvanced Micro Devices, Inc. [AMD/ATI] Pitcairn XT [Radeon HD 7870 GHz Edition]\r\nKernel version: 5.17.1-arch1-1\r\n\r\n<details>\r\n<summary>tree /sys/class/drm/card0</summary>\r\n\r\n```\r\n/sys/class/drm/card0\r\n\u251c\u2500\u2500 card0-DP-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-3\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 drm_dp_aux0\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-1\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../class/drm_dp_aux_dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-11\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 delete_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-1\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 i2c-11\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 device -> ../../../i2c-11\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 subsystem -> ../../../../../../../../../../class/i2c-dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 new_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../bus/i2c\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-DP-2\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-4\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 drm_dp_aux1\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-2\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../class/drm_dp_aux_dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-12\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 delete_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0-DP-2\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 i2c-dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 i2c-12\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 device -> ../../../i2c-12\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u251c\u2500\u2500 subsystem -> ../../../../../../../../../../class/i2c-dev\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2502\u00a0\u00a0     \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 name\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 new_device\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../../bus/i2c\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-DVI-D-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-7\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-DVI-I-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-8\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 card0-HDMI-A-1\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 ddc -> ../../../i2c-5\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 device -> ../../card0\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dpms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 edid\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 enabled\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 modes\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 status\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 subsystem -> ../../../../../../../class/drm\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 uevent\r\n\u251c\u2500\u2500 dev\r\n\u251c\u2500\u2500 device -> ../../../0000:11:00.0\r\n\u251c\u2500\u2500 power\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 autosuspend_delay_ms\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 control\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_active_time\r\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 runtime_status\r\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 runtime_suspended_time\r\n\u251c\u2500\u2500 subsystem -> ../../../../../../class/drm\r\n\u2514\u2500\u2500 uevent\r\n```\r\n</details>\r\n\r\n<details>\r\n<summary>find /sys/class/drm/card0/ -type f -exec printf \"\\n[%s]\\n\" {} \\; -exec cat {} \\;</summary>\r\n\r\n```\r\n[/sys/class/drm/card0/card0-HDMI-A-1/uevent]\r\nDEVTYPE=drm_connector\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/enabled]\r\nenabled\r\n\r\n[/sys/class/drm/card0/card0-HDMI-A-1/power/runtime_active_time]\r\n0\r\n\r\n[/sys/"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1494456666,
+        "Author": "Dim-P",
+        "Created At": "2023-04-03T14:42:38Z",
+        "Comment Body": "I was thinking of picking this up (since it's been a popular request from users for some time now but I also have an AMD gpu finally, so easy to test). \r\n\r\nNot sure yet if the approach should be to manually collect the necessary metrics or if we could use a 3rd party tool such as: https://github.com/clbr/radeontop that provides a parsable `stdout` dump:\r\n ```\r\n1680532905.521993: bus 03, gpu 0.00%, ee 0.00%, vgt 0.00%, ta 0.00%, sx 0.00%, sh 0.00%, spi 0.00%, sc 0.00%, pa 0.00%, db 0.00%, cb 0.00%, vram 12.08% 983.44mb, gtt 1.97% 314.06mb, mclk 10.97% 0.096ghz, sclk 160.00% 0.800ghz\r\n```"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1494954563,
+        "Author": "dokutan",
+        "Created At": "2023-04-03T20:42:35Z",
+        "Comment Body": "Just in case it helps, i have since upgraded my GPU to a Radeon RX 6600, and the [plugin](https://gist.github.com/dokutan/b613187b5f80e53704f7901b23817ca9#file-amdgpu-chart-sh) i originally wrote works still works with a minor addition: `/sys/class/drm/card0/device/gpu_busy_percent` contains a usable value. `radeontop` unfortunately causes a significant amount of CPU usage on my system, i don't know if/how that could be fixed."
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1495948538,
+        "Author": "Dim-P",
+        "Created At": "2023-04-04T13:11:53Z",
+        "Comment Body": "> Just in case it helps, i have since upgraded my GPU to a Radeon RX 6600, and the [plugin](https://gist.github.com/dokutan/b613187b5f80e53704f7901b23817ca9#file-amdgpu-chart-sh) i originally wrote works still works with a minor addition: `/sys/class/drm/card0/device/gpu_busy_percent` contains a usable value. `radeontop` unfortunately causes a significant amount of CPU usage on my system, i don't know if/how that could be fixed.\r\n\r\nThanks @dokutan , that's helpful to have as a baseline - same GPU here. `radeontop` probably uses a lot of CPU because it collects data at 120Hz by default, which is configurable. \r\n\r\nI will have a think about it, but probably will go down the route of a new Go or internal C plugin."
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1496442254,
+        "Author": "andrewm4894",
+        "Created At": "2023-04-04T18:48:36Z",
+        "Comment Body": "@dokutan do you mind if I copy you collector into here\r\n\r\nhttps://github.com/netdata/community/tree/main/collectors/charts.d.plugin\r\n\r\nIt's a nice example I'd like to add in there of that's ok with you?"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1496569234,
+        "Author": "dokutan",
+        "Created At": "2023-04-04T20:32:46Z",
+        "Comment Body": "@andrewm4894 Of course, feel free to use it. I just uploaded the updated version including `gpu_busy_percent`, choose the version you prefer."
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1496644541,
+        "Author": "andrewm4894",
+        "Created At": "2023-04-04T21:46:11Z",
+        "Comment Body": "Great thanks! - added [here](https://github.com/netdata/community/commit/42c1273178d5b3190dbcc18800e85e52ff5ffc7b)"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1521077182,
+        "Author": "martinmiglio",
+        "Created At": "2023-04-25T02:35:41Z",
+        "Comment Body": "This looks good! Is there a way to make this extensible to more than one GPU?"
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 1667680343,
+        "Author": "Dim-P",
+        "Created At": "2023-08-07T11:26:47Z",
+        "Comment Body": "> This looks good! Is there a way to make this extensible to more than one GPU?\r\n\r\nHey @martinmiglio , https://github.com/netdata/netdata/pull/15515 should work with multiple AMD GPUs, so if you have access to such a setup, some feedback and testing would be greatly appreciated once that PR gets merged."
+    },
+    {
+        "Issue ID": 12616,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: AMD GPU monitoring",
+        "Comment ID": 2660875555,
+        "Author": "DocMAX",
+        "Created At": "2025-02-15T11:15:54Z",
+        "Comment Body": "This module is not monitoring in detail. For example video encoding usage and so on."
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2166616998,
+        "Author": "ilyam8",
+        "Created At": "2024-06-13T19:28:50Z",
+        "Comment Body": "Hi, @rebelonion.\r\n\r\n~Show `intel_gpu_top -L -J`~. Listing available GPUs doesn't support JSON output \ud83d\ude22 \r\n"
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2166716669,
+        "Author": "rebelonion",
+        "Created At": "2024-06-13T20:34:38Z",
+        "Comment Body": "> Listing available GPUs doesn't support JSON output \ud83d\ude22\r\n\r\nYeah I noticed that. pretty unfortunate \ud83d\ude05"
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2166805176,
+        "Author": "ilyam8",
+        "Created At": "2024-06-13T21:13:02Z",
+        "Comment Body": "@rebelonion As a quick fix I added a configuration option to select a device in #17884\r\n\r\nI plan to add an option to monitor all devices using one job, but it will be later if there is a need for that (feature request).\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2517844737,
+        "Author": "DocMAX",
+        "Created At": "2024-12-04T15:51:36Z",
+        "Comment Body": "+1, please add support for multiple (intel) gpus"
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2517900212,
+        "Author": "ilyam8",
+        "Created At": "2024-12-04T16:12:06Z",
+        "Comment Body": "It has been added. You need to create multiple data collection jobs. Consider reading collector\u2019s readme. "
+    },
+    {
+        "Issue ID": 17881,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Intel GPU integration only pulls from one GPU",
+        "Comment ID": 2660623540,
+        "Author": "DocMAX",
+        "Created At": "2025-02-15T01:49:41Z",
+        "Comment Body": "Like this? Doesn't seem to work :-(\n```\n/etc/netdata/go.d/intelgpu.conf:\njobs:\n  - name: arc_a380\n    device: pci:vendor=8086,device=56A5\n  - name: arc_a310\n    device: pci:vendor=8086,device=56A6\n```\nI don't get 2 GPUs with this:\n\n![Image](https://github.com/user-attachments/assets/8a000583-20ee-4867-9abf-bf58de81a8ec)"
+    },
+    {
+        "Issue ID": 19648,
+        "Issue State": "closed",
+        "Issue Title": "Fix Hyperv issues",
+        "Comment ID": 2660522928,
+        "Author": "thiagoftsm",
+        "Created At": "2025-02-14T23:52:29Z",
+        "Comment Body": "This PR has commits from others. I am going to cleanup and publish a new."
+    },
+    {
+        "Issue ID": 12593,
+        "Issue State": "closed",
+        "Issue Title": "[Feat]: streaming charts are missing",
+        "Comment ID": 2659216667,
+        "Author": "ilyam8",
+        "Created At": "2025-02-14T12:30:37Z",
+        "Comment Body": "I think this has been implemented."
+    },
+    {
+        "Issue ID": 19638,
+        "Issue State": "closed",
+        "Issue Title": "add Group=netdata to systemd unit file",
+        "Comment ID": 2656390176,
+        "Author": "ilyam8",
+        "Created At": "2025-02-13T12:02:49Z",
+        "Comment Body": "> they aren\u2019t needed anymore with this change\r\n\r\nThe one that chown run/netdata didn't work anyway."
+    },
+    {
+        "Issue ID": 19622,
+        "Issue State": "closed",
+        "Issue Title": "detect the system ca bundle at runtime",
+        "Comment ID": 2652272534,
+        "Author": "ktsaou",
+        "Created At": "2025-02-11T23:13:46Z",
+        "Comment Body": "@Ferroin I need to understand this.\r\n\r\nToday, the installer is just switching directories. However, since the certificate filenames do not match the expected, switching directories is useless.\r\n\r\nI think the right way would be for the installer to find the right CA bundle and either:\r\n\r\n1. link the right CA bundle to the directory libcurl expects the bundle, or\r\n2. instruct somehow Netdata to use it from the directory and filename it already is.\r\n\r\nThe problem we have today, is that libcurl in our static installs, is that the directory and filename is hardcoded to `/etc/ssl/certs/ca-certificates.crt`.\r\n\r\nThe installer changes the link in `/opt/netdata/etc/ssl`, but this directory and whatever it contains IS NOT USED.\r\n\r\nA way around this, would be to compile libcurl with `/opt/netdata/etc/ssl` and then make the decision at the installer, provided it will also link the filename, not just the path.\r\n\r\nIf this cannot be done, then we need to move the certificate validation code from the installer to Netdata to do it at runtime."
+    },
+    {
+        "Issue ID": 19622,
+        "Issue State": "closed",
+        "Issue Title": "detect the system ca bundle at runtime",
+        "Comment ID": 2652285917,
+        "Author": "Ferroin",
+        "Created At": "2025-02-11T23:24:50Z",
+        "Comment Body": "I\u2019m working on changes to the static installer code to sort out the different naming and paths and always have `/opt/netdata/etc/ssl/certs/ca-certificates.crt` point to the correct file (and similar for the OpenSSL config file, though that shouldn\u2019t impact anything we\u2019re doing currently).\r\n\r\nBut independently of the static build, we do still need to ensure that what libcurl uses is consistent with what OpenSSL/LibreSSL or whatever other TLS implementation we use is using. The current situation is partly a result of us not ensuring that, but it can and will eventually cause other problems for us if we don\u2019t do this right and blindly assume that libcurl matches up with what the system uses (_especially_ when we eventually transition to a native build on Windows instead of using MSYS2, since on Windows libcurl does use the OS certificate store correctly by default)."
+    },
+    {
+        "Issue ID": 19622,
+        "Issue State": "closed",
+        "Issue Title": "detect the system ca bundle at runtime",
+        "Comment ID": 2653118753,
+        "Author": "ktsaou",
+        "Created At": "2025-02-12T09:30:24Z",
+        "Comment Body": "@Ferroin I am confused. So please let's redefine the problem here:\r\n\r\n1. Our static install, can't find the right certificates in RHEL, OpenSuse and possibly more. This is true for both libcurl (claiming) and openssl (aclk). Both of them don't work.\r\n2. Then you are saying that we have a problem of openssl finding the right certificates, but libcurl doesn't. How do you know? I mean libcurl is for claiming and openssl for establishing ACLK. It should be the other way around: claiming works (libcurl), ACLK doesn't (openssl). How can you know that claiming does not work, but ACLK does?\r\n\r\n"
+    },
+    {
+        "Issue ID": 19622,
+        "Issue State": "closed",
+        "Issue Title": "detect the system ca bundle at runtime",
+        "Comment ID": 2653728906,
+        "Author": "Ferroin",
+        "Created At": "2025-02-12T13:33:35Z",
+        "Comment Body": "I\u2019m working on separate fixes for 1 in the static installer code.\r\n\r\nRegarding 2, _either_ possibility may happen if libcurl and OpenSSL are using different certs, and it\u2019s both a pain to debug this type of thing and _trivial_ for us to preemptively fix by just ensuring that libcurl is using the same certs as OpenSSL. This possibility is _NOT_ unique to static builds, it just has not happened anywhere else yet AFAIK. Given that the check and the cert setup should only be happening once (on startup), and that the overhead is negligible if we\u2019re doing it right (namely, just asking OpenSSL what to use instead of trying to find it ourselves), I contend that we should just have this on _all_ builds, not only static builds, because it will prevent either possibility from being an issue."
+    },
+    {
+        "Issue ID": 19622,
+        "Issue State": "closed",
+        "Issue Title": "detect the system ca bundle at runtime",
+        "Comment ID": 2653745312,
+        "Author": "Ferroin",
+        "Created At": "2025-02-12T13:40:12Z",
+        "Comment Body": "As far as the current implementation:\r\n\r\n- As mentioned, I _strongly_ disagree with limiting this to static builds. The possibility of libcurl and openssl having different certificates is not exclusive to static builds, it just hasn\u2019t been an issue yet elsewhere. Fixing it correctly should have a minimal fixed overhead that is only incurred on agent startup, so there is not really any reason to not fix it everywhere to prevent it from ever being an issue.\r\n- We should not be scanning for the certs ourselves. OpenSSL already knows where to find them, and second guessing that runs the real possibility of us _not_ using the certificates the user wants us to. Just query OpenSSL for where to look, and check the paths it returns for known file names to tell libcurl what to use.\r\n- If the above point is resolved, then the validity check becomes superfluous, because it already happens as part of the connection process. Invalid certs are _not_ something we should be hiding from the user at runtime, and the case of the system certs not being valid is already handled by the static installer code."
+    },
+    {
+        "Issue ID": 19627,
+        "Issue State": "closed",
+        "Issue Title": "Initialize sentry after rrd_init().",
+        "Comment ID": 2653702735,
+        "Author": "vkalintiris",
+        "Created At": "2025-02-12T13:22:36Z",
+        "Comment Body": "Closing in favor of https://github.com/netdata/netdata/pull/19628."
+    }
+]

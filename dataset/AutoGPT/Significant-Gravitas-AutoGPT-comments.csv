@@ -1,0 +1,1395 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2654459774,deepsource-io[bot],2025-02-12T17:55:31Z,"<div><p>Here's the code health analysis summary for commits <code>7e04fbd..b1bf290</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/aa51c29b-fb98-4558-b4cf-747959ff6b51/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/aa51c29b-fb98-4558-b4cf-747959ff6b51/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/aa51c29b-fb98-4558-b4cf-747959ff6b51/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2654460103,netlify[bot],2025-02-12T17:55:42Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | b1bf29027dbfb6d1c263702db173b2f2e68839fe |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ad2c3a13d32800082c790a |"
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2654463012,netlify[bot],2025-02-12T17:56:55Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | b1bf29027dbfb6d1c263702db173b2f2e68839fe |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ad2c3a13d32800082c7906 |"
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2655047547,github-actions[bot],2025-02-12T23:14:15Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2655054720,github-actions[bot],2025-02-12T23:18:30Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2659981076,github-actions[bot],2025-02-14T18:15:26Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9474,closed,chore(backend/deps): bump the production-dependencies group across 1 directory with 3 updates,2659989793,dependabot[bot],2025-02-14T18:20:24Z,"Looks like these dependencies are updatable in another way, so this is no longer needed."
+9469,closed,feat(backend): add ability to send emails to notification service,2652627279,qodo-merge-pro[bot],2025-02-12T04:23:03Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 3 🔵🔵🔵⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>Sensitive information exposure:</strong><br> The code logs email addresses, subjects and full email bodies which could expose sensitive information in log files. Consider removing or masking sensitive data in logs on lines 44, 62 in email.py.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9469/files#diff-a55ae994499aaa1a2b586390f09d031c1a03bec50517af2b68e2290929fb4b94R44-R46'><strong>Hardcoded Subject</strong></a>
+
+The email subject is hardcoded as ""subject"" in the send_templated method. This should be parameterized based on the notification type or passed as an argument.</summary>
+
+```python
+    f""Sending email to {user_email} with subject {""subject""} and body {body}""
+)
+self._send_email(user_email, ""subject"", body)
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9469/files#diff-a55ae994499aaa1a2b586390f09d031c1a03bec50517af2b68e2290929fb4b94R64-R69'><strong>Error Handling</strong></a>
+
+The email sending code lacks proper error handling for cases like invalid email addresses, network issues, or API failures when sending emails via Postmark.</summary>
+
+```python
+self.postmark.emails.send(
+    From=settings.config.postmark_sender_email,
+    To=user_email,
+    Subject=subject,
+    HtmlBody=body,
+)
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9469/files#diff-925cf60a5c9f69a2983de19161b02a92aa75f3f0feb28d93b17f9f373cf5d066R1-R6'><strong>Template Quality</strong></a>
+
+The email template is very basic and lacks proper HTML structure, styling and formatting which could affect email readability and professionalism.</summary>
+
+```txt
+AGENT RUN
+
+{{data.name}}
+{{data.node_count}}
+{{data.execution_time}}
+{{data.graph_id}}
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9469,closed,feat(backend): add ability to send emails to notification service,2652627553,deepsource-io[bot],2025-02-12T04:23:21Z,"<div><p>Here's the code health analysis summary for commits <code>15275e2..a618844</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/4c0a37d7-5697-4603-a7a8-0aae7c47cb92/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/4c0a37d7-5697-4603-a7a8-0aae7c47cb92/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 39 occurences introduced</div><div>🎯 19 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/4c0a37d7-5697-4603-a7a8-0aae7c47cb92/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9469,closed,feat(backend): add ability to send emails to notification service,2658228747,github-actions[bot],2025-02-14T04:19:09Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9469,closed,feat(backend): add ability to send emails to notification service,2658232084,netlify[bot],2025-02-14T04:22:41Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | a61884422d00d8abdd3b8e5a32a2dd1373079a9d |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67af760382261b00087ef64a |"
+9469,closed,feat(backend): add ability to send emails to notification service,2658232649,netlify[bot],2025-02-14T04:23:17Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | a61884422d00d8abdd3b8e5a32a2dd1373079a9d |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67af760305d2390008d4e0d9 |"
+9469,closed,feat(backend): add ability to send emails to notification service,2658233834,github-actions[bot],2025-02-14T04:24:36Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9478,closed,[Edited] Refactor code to optimize performance,2657207664,CLAassistant,2025-02-13T16:55:22Z,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9478) <br/>Thank you for your submission! We really appreciate it. Like many open source projects, we ask that you all sign our [Contributor License Agreement](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9478) before we can accept your contribution.<br/>**1** out of **2** committers have signed the CLA.<br/><br/>:white_check_mark: Bentlybro<br/>:x: MayureshMore<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/Significant-Gravitas/AutoGPT?pullRequest=9478) it.</sub>"
+9478,closed,[Edited] Refactor code to optimize performance,2657207803,github-actions[bot],2025-02-13T16:55:26Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9478,closed,[Edited] Refactor code to optimize performance,2657208017,github-actions[bot],2025-02-13T16:55:31Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9478,closed,[Edited] Refactor code to optimize performance,2657208036,qodo-merge-pro[bot],2025-02-13T16:55:32Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 3 🔵🔵🔵⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9478/files#diff-94b7db3506c3a2ea442e68b514d3f26ab2cc3f7744231034750b9da6ea4fb09dR311-R318'><strong>Data Consistency</strong></a>
+
+The update logic now allows changing block IDs which could lead to data inconsistency if there are existing references to the old block ID in other parts of the system</summary>
+
+```python
+await AgentBlock.prisma().update(
+    where={""id"": existing_block.id},
+    data={
+        ""id"": block.id,
+        ""name"": block.name,
+        ""inputSchema"": input_schema,
+        ""outputSchema"": output_schema,
+    },
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9478/files#diff-94b7db3506c3a2ea442e68b514d3f26ab2cc3f7744231034750b9da6ea4fb09dR289-R291'><strong>Duplicate Records</strong></a>
+
+The new find_first query with OR condition could potentially match multiple records but only returns the first one, which may hide duplicate entries in the database</summary>
+
+```python
+existing_block = await AgentBlock.prisma().find_first(
+    where={""OR"": [{""id"": block.id}, {""name"": block.name}]}
+)
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9478,closed,[Edited] Refactor code to optimize performance,2657211234,netlify[bot],2025-02-13T16:56:43Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 6827b4f1ca3f4c70222d863ce726135f1a96b1a6 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ae23f6415ec40009da0427 |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9478--auto-gpt-docs.netlify.app](https://deploy-preview-9478--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NzgtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.JLGF1WYl9SNFCIE2SpkiSvbYNcK59zWAyPff7PYqeTE)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9478--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9478,closed,[Edited] Refactor code to optimize performance,2657215754,deepsource-io[bot],2025-02-13T16:58:29Z,"<div><p>Here's the code health analysis summary for commits <code>b5b9a00..6827b4f</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c4324c43-0c74-4188-a356-a676970b3daf/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 702 occurences introduced</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c4324c43-0c74-4188-a356-a676970b3daf/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 184 occurences introduced</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c4324c43-0c74-4188-a356-a676970b3daf/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9478,closed,[Edited] Refactor code to optimize performance,2657259112,github-actions[bot],2025-02-13T17:16:18Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9478,closed,[Edited] Refactor code to optimize performance,2659547472,ntindle,2025-02-14T14:58:44Z,"Thanks for the contribution, closing until clarity about why this is better"
+9331,closed,Use .env vars in docker-compose.platform.yml,2613112164,github-actions[bot],2025-01-24T18:08:11Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9331,closed,Use .env vars in docker-compose.platform.yml,2613112323,qodo-merge-pro[bot],2025-01-24T18:08:16Z,"## PR Reviewer Guide 🔍
+
+#### (Review updated until commit https://github.com/Significant-Gravitas/AutoGPT/commit/a3ca73416222842ddca7d9752864e6446b241570)
+
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 2 🔵🔵⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>Sensitive information exposure:</strong><br> The PR removes hardcoded credentials but some Redis passwords are still hardcoded in the configuration (lines 65, 104, 137). These should be replaced with ${REDIS_PASSWORD} environment variable to avoid exposing sensitive information in the codebase.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9331/files#diff-f6a211ff1c6d96d19adb5641ee287258a6af8d72a99e33dafb4a334094205a43R7-R7'><strong>Configuration Error</strong></a>
+
+The POSTGRES_DB environment variable is incorrectly set to POSTGRES_PORT value, which would cause database connection issues</summary>
+
+```yaml
+- POSTGRES_DB=${POSTGRES_PORT}
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9331/files#diff-f832e5517b8fc1e20afcb874dc7c108bffdfb3a9b386adde5b026268d787cc3eR65-R65'><strong>Hardcoded Password</strong></a>
+
+Redis password is still hardcoded in multiple places despite the comment suggesting to use environment variable</summary>
+
+```yaml
+- REDIS_PASSWORD=password ### ADD REDIS_PASSWORD=yourpassword TO YOUR .env file and replace password with ${REDIS_PASSWORD}
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9331,closed,Use .env vars in docker-compose.platform.yml,2613113282,netlify[bot],2025-01-24T18:08:52Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 016ec0ff6b38341873735a11d2585a8ad8c623e8 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67af3916845506000815500c |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9331--auto-gpt-docs.netlify.app](https://deploy-preview-9331--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTkzMzEtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.lOsOmWJR4EBQtS1c3vBu-MafN-ma6_GTjJzzQ-syyMY)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9331--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9331,closed,Use .env vars in docker-compose.platform.yml,2613119379,CLAassistant,2025-01-24T18:12:43Z,[![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9331) <br/>All committers have signed the CLA.
+9331,closed,Use .env vars in docker-compose.platform.yml,2613221293,netlify[bot],2025-01-24T19:17:55Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 016ec0ff6b38341873735a11d2585a8ad8c623e8 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67af3916dec357000812c59a |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9331--auto-gpt-docs-dev.netlify.app](https://deploy-preview-9331--auto-gpt-docs-dev.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTkzMzEtLWF1dG8tZ3B0LWRvY3MtZGV2Lm5ldGxpZnkuYXBwIn0.pVtc_Ldic5CwBYf8ohivgCcEFphm-9GC06LJYU42P7g)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs-dev Preview](https://deploy-preview-9331--auto-gpt-docs-dev.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs-dev/configuration/notifications#deploy-webhooks)._"
+9331,closed,Use .env vars in docker-compose.platform.yml,2613946284,ntindle,2025-01-25T12:12:58Z,Any specific reason for closing this? Was in the list to review
+9331,closed,Use .env vars in docker-compose.platform.yml,2630304675,deepsource-io[bot],2025-02-03T08:44:52Z,"<div><p>Here's the code health analysis summary for commits <code>15275e2..016ec0f</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/f60db05f-e2bb-41d1-83c4-f92f9465c927/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/f60db05f-e2bb-41d1-83c4-f92f9465c927/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/f60db05f-e2bb-41d1-83c4-f92f9465c927/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9331,closed,Use .env vars in docker-compose.platform.yml,2631949301,elabbarw,2025-02-03T20:00:42Z,@ntindle reopened and updated PR.
+9331,closed,Use .env vars in docker-compose.platform.yml,2643335597,github-actions[bot],2025-02-07T16:01:53Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9331,closed,Use .env vars in docker-compose.platform.yml,2653010619,elabbarw,2025-02-12T08:43:44Z,"Hey @aarushik93 , can you resolve this?"
+9481,closed,Elabbarw platformcomposeuseenvvar,2659230007,github-actions[bot],2025-02-14T12:36:59Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9481,closed,Elabbarw platformcomposeuseenvvar,2659230069,deepsource-io[bot],2025-02-14T12:37:00Z,"<div><p>Here's the code health analysis summary for commits <code>016ec0f..3fd0392</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d3406262-042b-4ee2-a61e-8e9a1d56d9b9/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d3406262-042b-4ee2-a61e-8e9a1d56d9b9/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d3406262-042b-4ee2-a61e-8e9a1d56d9b9/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9481,closed,Elabbarw platformcomposeuseenvvar,2659230553,qodo-merge-pro[bot],2025-02-14T12:37:08Z,"_Qodo Merge was enabled for this repository. To continue using it, please link your Git account with your Qodo account [here](https://app.qodo.ai/qodo-merge)._
+
+## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 2 🔵🔵⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>Sensitive information exposure:</strong><br> The PR includes a hardcoded RabbitMQ password in the .env.example file (RABBITMQ_DEFAULT_PASS=k0VMxyIJF9S35f3x2uaw5IWAl6Y536O7). Even though it's in an example file, this could pose a security risk if someone uses it in production without changing it.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9481/files#diff-62020caf1b9a15e0e3b9b3b1b69d5f6464bf7643f62354cbbaabf755d57b6064R166-R166'><strong>Hardcoded Secret</strong></a>
+
+The RabbitMQ password is hardcoded in the .env.example file. This should be replaced with a placeholder value to avoid potential security risks if accidentally used in production.</summary>
+
+```txt
+RABBITMQ_DEFAULT_PASS=k0VMxyIJF9S35f3x2uaw5IWAl6Y536O7 # CHANGE THIS TO A RANDOM PASSWORD IN PRODUCTION -- everywhere lol
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9481/files#diff-f832e5517b8fc1e20afcb874dc7c108bffdfb3a9b386adde5b026268d787cc3eR129-R130'><strong>Duplicate Config</strong></a>
+
+The ENABLE_AUTH environment variable is defined twice for the same service, which could lead to confusion or errors.</summary>
+
+```yaml
+- ENABLE_AUTH=true
+- ENABLE_AUTH=true
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9481,closed,Elabbarw platformcomposeuseenvvar,2659232818,netlify[bot],2025-02-14T12:37:39Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 3fd039218cf946b34af1d0859ccd4c51135e9bab |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67af38df5e90f400082b62d3 |"
+9357,closed,WIP - add library and presets backend,2620938105,supabase[bot],2025-01-29T08:04:28Z,"[supa]:bgwpwdsxblryihinutbx
+This pull request has been ignored for the connected project `bgwpwdsxblryihinutbx` because there are no changes detected in `supabase` directory. You can change this behaviour in [Project Integrations Settings ↗︎](https://supabase.com/dashboard/project/bgwpwdsxblryihinutbx/settings/integrations).
+
+<hr/>
+
+Preview Branches by Supabase.
+Learn more about [Supabase Branching ↗︎](https://supabase.com/docs/guides/platform/branching)."
+9357,closed,WIP - add library and presets backend,2620938250,github-actions[bot],2025-01-29T08:04:33Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9357,closed,WIP - add library and presets backend,2620939055,qodo-merge-pro[bot],2025-01-29T08:05:02Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 4 🔵🔵🔵🔵⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>PR contains tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>Sensitive information exposure:</strong><br> The code includes handling of Stripe API keys and payment processing. While the keys themselves are properly handled through environment variables, the code should be reviewed to ensure no payment details or API keys are logged or exposed in error messages or transaction metadata.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9357/files#diff-889da6f844b3dcadbd82c68bcbd3ee24fc90866b0bd3030bbfedb6109c055dd0R102-R144'><strong>Potential Race Condition</strong></a>
+
+The credit transaction system uses locks but could still have edge cases around concurrent transactions and balance updates. The running balance calculation and transaction creation should be carefully reviewed for thread safety.</summary>
+
+```python
+async def _get_credits(self, user_id: str) -> tuple[int, datetime]:
+    """"""
+    Returns the current balance of the user & the latest balance snapshot time.
+    """"""
+    top_time = self.time_now()
+    snapshot = await CreditTransaction.prisma().find_first(
+        where={
+            ""userId"": user_id,
+            ""createdAt"": {""lte"": top_time},
+            ""isActive"": True,
+            ""runningBalance"": {""not"": None},  # type: ignore
+        },
+        order={""createdAt"": ""desc""},
+    )
+    datetime_min = datetime.min.replace(tzinfo=timezone.utc)
+    snapshot_balance = snapshot.runningBalance or 0 if snapshot else 0
+    snapshot_time = snapshot.createdAt if snapshot else datetime_min
+
+    # Get transactions after the snapshot, this should not exist, but just in case.
+    transactions = await CreditTransaction.prisma().group_by(
+        by=[""userId""],
+        sum={""amount"": True},
+        max={""createdAt"": True},
+        where={
+            ""userId"": user_id,
+            ""createdAt"": {
+                ""gt"": snapshot_time,
+                ""lte"": top_time,
+            },
+            ""isActive"": True,
+        },
+    )
+    transaction_balance = (
+        transactions[0].get(""_sum"", {}).get(""amount"", 0) + snapshot_balance
+        if transactions
+        else snapshot_balance
+    )
+    transaction_time = (
+        transactions[0].get(""_max"", {}).get(""createdAt"", datetime_min)
+        if transactions
+        else snapshot_time
+    )
+    return transaction_balance, transaction_time
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9357/files#diff-889da6f844b3dcadbd82c68bcbd3ee24fc90866b0bd3030bbfedb6109c055dd0R295-R304'><strong>Error Handling</strong></a>
+
+The auto top-up error handling logs errors but continues execution. This could lead to users running out of credits unexpectedly if auto top-up silently fails.</summary>
+
+```python
+# Auto top-up if balance just went below threshold due to this transaction.
+auto_top_up = await get_auto_top_up(user_id)
+if balance < auto_top_up.threshold <= balance - cost:
+    try:
+        await self.top_up_credits(user_id=user_id, amount=auto_top_up.amount)
+    except Exception as e:
+        # Failed top-up is not critical, we can move on.
+        logger.error(
+            f""Auto top-up failed for user {user_id}, balance: {balance}, amount: {auto_top_up.amount}, error: {e}""
+        )
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9357/files#diff-4c43dcd2600142d9bb2ca4f8bbb7628315423274432b118ae717add4b1615ef7R173-R205'><strong>API Error Handling</strong></a>
+
+The GitHub API calls lack comprehensive error handling for rate limits, authentication failures and other API errors. This could lead to silent failures or unclear error messages.</summary>
+
+```python
+
+    check_runs_url = f""{repo_url}/check-runs""
+    response = api.post(check_runs_url)
+    result = response.json()
+
+    return {
+        ""id"": result[""id""],
+        ""html_url"": result[""html_url""],
+        ""status"": result[""status""],
+    }
+
+def run(
+    self,
+    input_data: Input,
+    *,
+    credentials: GithubCredentials,
+    **kwargs,
+) -> BlockOutput:
+    try:
+        result = self.create_check_run(
+            credentials=credentials,
+            repo_url=input_data.repo_url,
+            name=input_data.name,
+            head_sha=input_data.head_sha,
+            status=input_data.status,
+            conclusion=input_data.conclusion,
+            details_url=input_data.details_url,
+            output_title=input_data.output_title,
+            output_summary=input_data.output_summary,
+            output_text=input_data.output_text,
+        )
+        yield ""check_run"", result
+    except Exception as e:
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9357,closed,WIP - add library and presets backend,2620940739,netlify[bot],2025-01-29T08:06:06Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | e9cf61aa2d1fa53d5a3539e6508298965daae870 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ae59c214089c0008161d5f |"
+9357,closed,WIP - add library and presets backend,2623975649,netlify[bot],2025-01-30T09:36:03Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | e9cf61aa2d1fa53d5a3539e6508298965daae870 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ae59c2eeb1a00008178cc8 |"
+9357,closed,WIP - add library and presets backend,2623976564,deepsource-io[bot],2025-01-30T09:36:28Z,"<div><p>Here's the code health analysis summary for commits <code>ce1d63c..e9cf61a</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/00c9f2f6-381c-412c-b484-96e60402999e/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 39 occurences introduced</div><div>🎯 28 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/00c9f2f6-381c-412c-b484-96e60402999e/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 36 occurences introduced</div><div>🎯 23 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/00c9f2f6-381c-412c-b484-96e60402999e/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9357,closed,WIP - add library and presets backend,2624012972,github-actions[bot],2025-01-30T09:52:33Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9357,closed,WIP - add library and presets backend,2624614623,github-actions[bot],2025-01-30T14:07:31Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9357,closed,WIP - add library and presets backend,2657339537,github-actions[bot],2025-02-13T17:51:51Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9357,closed,WIP - add library and presets backend,2657648007,github-actions[bot],2025-02-13T20:30:35Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9357,closed,WIP - add library and presets backend,2658566157,Swiftyos,2025-02-14T08:20:57Z,"@Pwuts is leading the library work and I believe the work in this branch has now been discarded, in favor of his own version of this
+
+cc: @Abhi1992002 "
+9464,closed,feat(backend): spawn the notifications service + basic test,2649337743,qodo-merge-pro[bot],2025-02-10T21:59:32Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 3 🔵🔵🔵⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9464/files#diff-d39df64e34f1aa01b02049bca15683dd547ebb99a1d6d07992328acccdcf3546R153-R166'><strong>Error Handling</strong></a>
+
+The notification processing logic in _process_immediate() catches all exceptions generically and returns False, which could mask important errors. Consider adding more specific error handling and logging.</summary>
+
+```python
+async def _process_immediate(self, message: str) -> bool:
+    """"""Process a single notification immediately""""""
+    try:
+        event = NotificationEventDTO.model_validate_json(message)
+        parsed_event = NotificationEventModel[
+            get_data_type(event.type)
+        ].model_validate_json(message)
+        # Implementation of actual notification sending would go here
+        # self.email_sender.send_templated(event.type, event.user_id, parsed_event)
+        logger.info(f""Processing notification: {parsed_event}"")
+        return True
+    except Exception as e:
+        logger.error(f""Error processing notification: {e}"")
+        return False
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9464/files#diff-d39df64e34f1aa01b02049bca15683dd547ebb99a1d6d07992328acccdcf3546R168-R201'><strong>Resource Cleanup</strong></a>
+
+The run_service() method has an infinite loop that may not properly clean up resources if an exception occurs. Consider adding try/finally blocks to ensure proper cleanup.</summary>
+
+```python
+def run_service(self):
+    logger.info(f""[{self.service_name}] Started notification service"")
+
+    # Set up queue consumers
+    channel = self.run_and_wait(self.rabbit.get_channel())
+
+    immediate_queue = self.run_and_wait(
+        channel.get_queue(""immediate_notifications"")
+    )
+
+    while self.running:
+        try:
+            # Process immediate notifications
+            try:
+                message = self.run_and_wait(immediate_queue.get())
+
+                if message:
+                    success = self.run_and_wait(
+                        self._process_immediate(message.body.decode())
+                    )
+                    if success:
+                        self.run_and_wait(message.ack())
+                    else:
+                        self.run_and_wait(message.reject(requeue=True))
+            except QueueEmpty:
+                logger.debug(""Immediate queue empty"")
+
+            time.sleep(0.1)
+
+        except QueueEmpty as e:
+            logger.debug(f""Queue empty: {e}"")
+        except Exception as e:
+            logger.error(f""Error in notification service loop: {e}"")
+
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9464,closed,feat(backend): spawn the notifications service + basic test,2649338574,deepsource-io[bot],2025-02-10T21:59:57Z,"<div><p>Here's the code health analysis summary for commits <code>ce1d63c..e1e5852</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/13dcbda4-b65c-4597-b6aa-06c2604e68f8/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/13dcbda4-b65c-4597-b6aa-06c2604e68f8/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 32 occurences introduced</div><div>🎯 16 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/13dcbda4-b65c-4597-b6aa-06c2604e68f8/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9464,closed,feat(backend): spawn the notifications service + basic test,2650501467,aarushik93,2025-02-11T11:14:55Z,let's test it in dev!
+9464,closed,feat(backend): spawn the notifications service + basic test,2655056851,netlify[bot],2025-02-12T23:19:53Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | e1e585292852c5ebeb3f36fe27baec93014d1b6b |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67aeba8ec98e2f00081243c4 |"
+9464,closed,feat(backend): spawn the notifications service + basic test,2655057663,netlify[bot],2025-02-12T23:20:33Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | e1e585292852c5ebeb3f36fe27baec93014d1b6b |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67aeba8ec7b84400080e90a4 |"
+9480,closed,Update client.ts,2657831490,qodo-merge-pro[bot],2025-02-13T22:20:49Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 1 🔵⚪⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>No major issues detected</strong></td></tr>
+</table>
+"
+9480,closed,Update client.ts,2657831687,deepsource-io[bot],2025-02-13T22:20:57Z,"<div><p>Here's the code health analysis summary for commits <code>ce1d63c..8b0688d</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/171de87a-c6e0-4370-b10f-883c3370786e/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 28 occurences introduced</div><div>🎯 28 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/171de87a-c6e0-4370-b10f-883c3370786e/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/171de87a-c6e0-4370-b10f-883c3370786e/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9480,closed,Update client.ts,2657832808,netlify[bot],2025-02-13T22:21:46Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 8b0688d9624f6b1d406ae30f3b383962d47014e6 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ae703b3de6fb0008098207 |"
+9480,closed,Update client.ts,2657833388,netlify[bot],2025-02-13T22:22:08Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 8b0688d9624f6b1d406ae30f3b383962d47014e6 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ae703b1f51ab0008ead066 |"
+9258,closed,feat(backend): Library v2 Agents and Presets,2587686466,netlify[bot],2025-01-13T17:04:40Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 7b7a247cdd3304155bc065c095e9ffa1d05b7734 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ae1d21ab0c46000876a36d |"
+9258,closed,feat(backend): Library v2 Agents and Presets,2587687925,netlify[bot],2025-01-13T17:05:18Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 7b7a247cdd3304155bc065c095e9ffa1d05b7734 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ae1d21901c600008a98c41 |"
+9258,closed,feat(backend): Library v2 Agents and Presets,2587958025,github-actions[bot],2025-01-13T19:00:22Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9258,closed,feat(backend): Library v2 Agents and Presets,2619231669,github-actions[bot],2025-01-28T14:53:01Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9258,closed,feat(backend): Library v2 Agents and Presets,2619236517,Swiftyos,2025-01-28T14:54:43Z,@Pwuts are you okay with me picking this up again now I'm back?
+9258,closed,feat(backend): Library v2 Agents and Presets,2626708546,Swiftyos,2025-01-31T09:08:41Z,"See #9357, I've cherry picked your changes into my branch"
+9258,closed,feat(backend): Library v2 Agents and Presets,2652406283,deepsource-io[bot],2025-02-12T01:04:08Z,"<div><p>Here's the code health analysis summary for commits <code>b5b9a00..7b7a247</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c42c2731-dddf-4074-b047-3642bf0f9eb5/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c42c2731-dddf-4074-b047-3642bf0f9eb5/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 42 occurences introduced</div><div>🎯 20 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c42c2731-dddf-4074-b047-3642bf0f9eb5/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9258,closed,feat(backend): Library v2 Agents and Presets,2652879110,Swiftyos,2025-02-12T07:35:59Z,This work has already been merged
+9449,closed,Failed to connect to Ollama,2654551639,itsababseh,2025-02-12T18:38:29Z,"Hey @BillShiyaoZhang we had a similar issue a while back: https://github.com/Significant-Gravitas/AutoGPT/issues/9286 where some people have been able to solve this by refreshing the browser and sometimes that fixes this. 
+
+Otherwise, we have another ticket similar to this one that is open that a community member wanted to look into: https://github.com/Significant-Gravitas/AutoGPT/issues/8846"
+9449,closed,Failed to connect to Ollama,2655962034,michaelburghardt,2025-02-13T09:09:38Z,"Hi @BillShiyaoZhang, i had the same problem the last days. It tries to connect to Ollama via localhost. So I guess there are two options:
+
+1.  Set the Ollama host to host.docker.internal:11434 or 172.17.0.1:11434 
+2.  Enable host networking (see screenshot)
+
+![Image](https://github.com/user-attachments/assets/287ddcbd-d40f-4d04-957d-3a63f9e0e038)
+
+I am running it on Ubuntu and for me it was the first option with the host.docker.internal address, but I did not try the second option yet.
+ "
+9449,closed,Failed to connect to Ollama,2656553204,BillShiyaoZhang,2025-02-13T13:09:50Z,Thank you @michaelburghardt !  Setting the Ollama host works for me.
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654481703,supabase[bot],2025-02-12T18:05:28Z,"[supa]:bgwpwdsxblryihinutbx
+This pull request has been ignored for the connected project `bgwpwdsxblryihinutbx` because there are no changes detected in `supabase` directory. You can change this behaviour in [Project Integrations Settings ↗︎](https://supabase.com/dashboard/project/bgwpwdsxblryihinutbx/settings/integrations).
+
+<hr/>
+
+Preview Branches by Supabase.
+Learn more about [Supabase Branching ↗︎](https://supabase.com/docs/guides/platform/branching)."
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654481867,github-actions[bot],2025-02-12T18:05:33Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654482174,qodo-merge-pro[bot],2025-02-12T18:05:42Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 3 🔵🔵🔵⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9475/files#diff-aa2d51abbe9f96d5f91d60508351bfc7839e004e7efbc12dc9b0b62c59335918R18-R23'><strong>Data Migration Risk</strong></a>
+
+The JSON migration script assumes all existing string data is valid JSON. Invalid JSON data could cause migration failures. Consider adding error handling and data validation.</summary>
+
+```sql
+-- 2. Update all rows:
+--    If the original value is NULL, use an empty JSON object.
+--    Otherwise, cast the value to JSON (which will raise an exception if invalid).
+EXECUTE format(
+    'UPDATE %s SET %I = CASE WHEN %I IS NULL THEN ''{}''::json ELSE %I::json END;',
+     full_table, tmp_col, p_col, p_col
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9475/files#diff-2a1c1a968c1e515826c8a551b6050e47ba30d30eb74ce282f640f10aeed54eb6R105-R114'><strong>Type Safety</strong></a>
+
+The type conversion from Prisma Json to dict[str, Any] could fail if the JSON data is malformed. Consider adding error handling around type conversions.</summary>
+
+```python
+    input_data = type.convert(execution.executionData, dict[str, Any])
+else:
+    # For incomplete execution, executionData will not be yet available.
+    input_data: BlockInput = defaultdict()
+    for data in execution.Input or []:
+        input_data[data.name] = data.data
+
+output_data: CompletedBlockOutput = defaultdict(list)
+for data in execution.Output or []:
+    output_data[data.name].append(data.data)
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654483126,deepsource-io[bot],2025-02-12T18:06:09Z,"<div><p>Here's the code health analysis summary for commits <code>7e04fbd..8a0fb0b</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d1850de4-ce98-4f73-9b17-ab7baa35e6d3/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d1850de4-ce98-4f73-9b17-ab7baa35e6d3/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 2 occurences introduced</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/d1850de4-ce98-4f73-9b17-ab7baa35e6d3/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654484715,netlify[bot],2025-02-12T18:06:42Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | dc0537d23aa23af12c8455ba0983100e64a5e226 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ace2e49115400008b29b5c |"
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654487038,netlify[bot],2025-02-12T18:07:34Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 8a0fb0b9b4f7f47f06c737dc5ad3e86943c3da4d |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67adcb4710dbf2000882d971 |"
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2654508680,netlify[bot],2025-02-12T18:17:57Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 8a0fb0b9b4f7f47f06c737dc5ad3e86943c3da4d |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67adcb473d076000086c51e3 |"
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2655047560,github-actions[bot],2025-02-12T23:14:16Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9475,closed,feat(backend): Migrate json encoded string columns into a native json column,2656181558,github-actions[bot],2025-02-13T10:37:06Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2644233212,qodo-merge-pro[bot],2025-02-07T22:20:15Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 3 🔵🔵🔵⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>SQL Injection:</strong><br> The get_executions_in_timerange and get_active_user_ids_in_timerange functions accept date strings and parse them using datetime.fromisoformat(). While this provides some validation, additional input sanitization may be needed to prevent SQL injection through malformed date strings.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9445/files#diff-37bb058b8679dda391e68202323449ed09c3b2a57fc1b027fb8b42561bcfa199R164-R172'><strong>Default Values</strong></a>
+
+The get_user_notification_preference function creates a new NotificationPreference with hardcoded default values (daily_limit=3) and empty preferences. Consider moving these defaults to constants or configuration.</summary>
+
+```python
+notification_preference = NotificationPreference(
+    user_id=user.id,
+    email=user.email,
+    # TODO with the UI when it comes in
+    preferences={},
+    daily_limit=3,
+    emails_sent_today=0,
+    last_reset_date=datetime.now(),
+)
+```
+
+</details>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9445/files#diff-f110f6dd66a70d24e365f5d65260947a4f91ab142f096c04c439b4b2e36b58b4R396-R402'><strong>Timezone Handling</strong></a>
+
+The NotificationPreference model uses datetime.now() as default for last_reset_date without timezone information. This could cause issues with timezone-dependent features like daily limits.</summary>
+
+```python
+class NotificationPreference(BaseModel):
+    user_id: str
+    email: EmailStr
+    preferences: dict[NotificationType, bool] = {}  # Which notifications they want
+    daily_limit: int = 10  # Max emails per day
+    emails_sent_today: int = 0
+    last_reset_date: datetime = datetime.now()
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2644233786,deepsource-io[bot],2025-02-07T22:20:40Z,"<div><p>Here's the code health analysis summary for commits <code>016ec0f..20267d6</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a3b8f310-ed3b-4753-9c14-7494097097d6/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a3b8f310-ed3b-4753-9c14-7494097097d6/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 2 occurences introduced</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a3b8f310-ed3b-4753-9c14-7494097097d6/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2647314615,netlify[bot],2025-02-10T08:52:45Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 20267d62f6e972a9664c257b4f348908e8c1eb11 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ad1e9567eedf0008752a6f |"
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2647317000,netlify[bot],2025-02-10T08:53:41Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 20267d62f6e972a9664c257b4f348908e8c1eb11 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ad1e955cbaec000821d357 |"
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2649263533,github-actions[bot],2025-02-10T21:18:47Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2649284318,github-actions[bot],2025-02-10T21:30:31Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2652497621,github-actions[bot],2025-02-12T02:22:47Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9445,closed,"feat(backend): schema updates, migration, queries for Email Notification Service",2652508860,github-actions[bot],2025-02-12T02:32:51Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2648779480,netlify[bot],2025-02-10T17:39:07Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 96777e82cb38ae167a1b115f1495b9e9f9397cac |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ac06ca520c6e0008febbce |"
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2648779547,deepsource-io[bot],2025-02-10T17:39:09Z,"<div><p>Here's the code health analysis summary for commits <code>1626bf9..96777e8</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c051a97c-caa0-4356-af18-7df20e63c64d/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c051a97c-caa0-4356-af18-7df20e63c64d/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c051a97c-caa0-4356-af18-7df20e63c64d/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2648781014,netlify[bot],2025-02-10T17:39:48Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 96777e82cb38ae167a1b115f1495b9e9f9397cac |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ac06ca1ea88d000890adbb |"
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2649263567,github-actions[bot],2025-02-10T21:18:48Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2649271662,github-actions[bot],2025-02-10T21:23:29Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2652497639,github-actions[bot],2025-02-12T02:22:48Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2652501708,github-actions[bot],2025-02-12T02:26:31Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9455,closed,chore(backend/deps): bump sqlalchemy from 2.0.37 to 2.0.38 in /autogpt_platform/backend in the production-dependencies group,2654458603,dependabot[bot],2025-02-12T17:55:00Z,"Looks like sqlalchemy is updatable in another way, so this is no longer needed."
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2648779539,deepsource-io[bot],2025-02-10T17:39:09Z,"<div><p>Here's the code health analysis summary for commits <code>1626bf9..7b15e2a</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/af2303bc-1152-46fe-8e59-2aa600b2ddb8/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/af2303bc-1152-46fe-8e59-2aa600b2ddb8/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/af2303bc-1152-46fe-8e59-2aa600b2ddb8/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2648780623,netlify[bot],2025-02-10T17:39:37Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 7b15e2a6298f2e2b66af4931108510b8c0b3f83e |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ac06b5c981c800087428de |"
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2648781155,netlify[bot],2025-02-10T17:39:52Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 7b15e2a6298f2e2b66af4931108510b8c0b3f83e |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ac06b5e9b1cd0008fd5c93 |"
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2649263589,github-actions[bot],2025-02-10T21:18:49Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2649269509,github-actions[bot],2025-02-10T21:22:16Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2652497660,github-actions[bot],2025-02-12T02:22:49Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2652501350,github-actions[bot],2025-02-12T02:26:10Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9456,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 5 updates,2654457638,dependabot[bot],2025-02-12T17:54:30Z,Superseded by #9473.
+9313,closed,Marketplace - hover state has the wrong bg color and truncate description,2632048115,andrewhooker2,2025-02-03T20:51:52Z,"@ograce1421 
+
+Happy to pick this up. Would you provide a link to this figma you are referring here to? 
+This helps me visualize the changes you are requesting overall. "
+9471,closed,fix(frontend) update PublishAgentAwaitingReview router push path,2654012136,deepsource-io[bot],2025-02-12T15:12:41Z,"<div><p>Here's the code health analysis summary for commits <code>3b8cde6..1f8c371</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/875a2474-764e-4e26-b8e4-e8b5738a8896/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/875a2474-764e-4e26-b8e4-e8b5738a8896/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/875a2474-764e-4e26-b8e4-e8b5738a8896/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9471,closed,fix(frontend) update PublishAgentAwaitingReview router push path,2654012175,netlify[bot],2025-02-12T15:12:42Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 1f8c371e06e961ac1c3297d43aa9a42b970dc59c |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67acba59622527000817cc8a |"
+9471,closed,fix(frontend) update PublishAgentAwaitingReview router push path,2654016437,netlify[bot],2025-02-12T15:13:55Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 1f8c371e06e961ac1c3297d43aa9a42b970dc59c |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67acba59e9b1cd00083f1a9b |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9471--auto-gpt-docs.netlify.app](https://deploy-preview-9471--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NzEtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.nk_sbVeoR5nvjFYUAB6QHKhnhySZfBAVuDQ1fhTxkPM)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9471--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9470,closed,feat(block): Add batch matched result and its count on ExtractTextInformationBlock,2653077182,qodo-merge-pro[bot],2025-02-12T09:13:12Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 2 🔵🔵⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>PR contains tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9470/files#diff-5a22e3ebc44dadf90d5cbbd581622c351db09fe18d8e8e9a02f006a3b4d6b631R152-R153'><strong>Logic Change</strong></a>
+
+The find_all behavior has been modified - previously it returned after first match, now it collects all matches and then slices. Verify this change maintains expected behavior.</summary>
+
+```python
+if not input_data.find_all:
+    matches = matches[:1]
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9470,closed,feat(block): Add batch matched result and its count on ExtractTextInformationBlock,2653077727,deepsource-io[bot],2025-02-12T09:13:28Z,"<div><p>Here's the code health analysis summary for commits <code>d050a3f..fab644e</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/b906903c-edf5-4d56-9400-84cd5855a170/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/b906903c-edf5-4d56-9400-84cd5855a170/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/b906903c-edf5-4d56-9400-84cd5855a170/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9470,closed,feat(block): Add batch matched result and its count on ExtractTextInformationBlock,2653077792,netlify[bot],2025-02-12T09:13:29Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | fab644e7de371e6002a872eb12ed4d017bdf3783 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67ac667c2f51d70008f137cf |"
+9470,closed,feat(block): Add batch matched result and its count on ExtractTextInformationBlock,2653081126,netlify[bot],2025-02-12T09:14:55Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | c8a47dce4059871fa182fc948ab71191f4b744fe |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ac661e5dddfc0008007c67 |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9470--auto-gpt-docs.netlify.app](https://deploy-preview-9470--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NzAtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.UamiuloFpOnvvy89WSVpD1Grxh7BFIn06YTaxlpKsGo)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9470--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9470,closed,feat(block): Add batch matched result and its count on ExtractTextInformationBlock,2653085519,netlify[bot],2025-02-12T09:16:53Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | fab644e7de371e6002a872eb12ed4d017bdf3783 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67ac667c8b1086000936e72a |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9470--auto-gpt-docs.netlify.app](https://deploy-preview-9470--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NzAtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.UamiuloFpOnvvy89WSVpD1Grxh7BFIn06YTaxlpKsGo)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9470--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9448,closed,docs: Provide feedback when cloning submodules,2645974115,CLAassistant,2025-02-08T22:58:37Z,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9448) <br/>Thank you for your submission! We really appreciate it. Like many open source projects, we ask that you all sign our [Contributor License Agreement](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9448) before we can accept your contribution.<br/>**1** out of **2** committers have signed the CLA.<br/><br/>:white_check_mark: townie<br/>:x: Your Name<br/><hr/>**Your Name** seems not to be a GitHub user. You need a GitHub account to be able to sign the CLA. If you have already a GitHub account, please [add the email address used for this commit to your account](https://help.github.com/articles/why-are-my-commits-linked-to-the-wrong-user/#commits-are-not-linked-to-any-user).<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/Significant-Gravitas/AutoGPT?pullRequest=9448) it.</sub>"
+9448,closed,docs: Provide feedback when cloning submodules,2645974139,qodo-merge-pro[bot],2025-02-08T22:58:41Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 1 🔵⚪⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>No major issues detected</strong></td></tr>
+</table>
+"
+9448,closed,docs: Provide feedback when cloning submodules,2645974145,github-actions[bot],2025-02-08T22:58:43Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9448,closed,docs: Provide feedback when cloning submodules,2645974158,deepsource-io[bot],2025-02-08T22:58:48Z,"<div><p>Here's the code health analysis summary for commits <code>610be98..ebcbd33</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/abe52f3c-3704-49ea-888a-72171452c396/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/abe52f3c-3704-49ea-888a-72171452c396/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/abe52f3c-3704-49ea-888a-72171452c396/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9448,closed,docs: Provide feedback when cloning submodules,2645974541,netlify[bot],2025-02-08T23:00:30Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | ebcbd3399a051d682983ce6565984c29784492d5 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67a7e290f83d850008572a02 |"
+9448,closed,docs: Provide feedback when cloning submodules,2645975208,netlify[bot],2025-02-08T23:03:00Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | ebcbd3399a051d682983ce6565984c29784492d5 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67a7e2906d5f500008806203 |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9448--auto-gpt-docs-dev.netlify.app](https://deploy-preview-9448--auto-gpt-docs-dev.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NDgtLWF1dG8tZ3B0LWRvY3MtZGV2Lm5ldGxpZnkuYXBwIn0.mbfMkVMBG2j5sRvDe9qsSYDiF424HIRB5pkdpvCGYmc)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs-dev Preview](https://deploy-preview-9448--auto-gpt-docs-dev.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs-dev/configuration/notifications#deploy-webhooks)._"
+9448,closed,docs: Provide feedback when cloning submodules,2647724237,ntindle,2025-02-10T11:34:14Z,"This should be good to merge when the CLA is fixed, I think your email you have on your git config may be weird. LMK if you need help here and we can look at it from our side"
+9468,closed,fix(backend): Support Python 3.10,2652459753,deepsource-io[bot],2025-02-12T01:48:25Z,"<div><p>Here's the code health analysis summary for commits <code>40613fe..3b7d111</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a648132e-2639-4352-91b9-90ddf66c0b12/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a648132e-2639-4352-91b9-90ddf66c0b12/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/a648132e-2639-4352-91b9-90ddf66c0b12/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9468,closed,fix(backend): Support Python 3.10,2652459773,netlify[bot],2025-02-12T01:48:26Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 3b7d111536b175aecfa5ef73e55cd5ba9472d843 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67abff49fef2ab0008dbfe70 |"
+9468,closed,fix(backend): Support Python 3.10,2652460434,netlify[bot],2025-02-12T01:49:02Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 3b7d111536b175aecfa5ef73e55cd5ba9472d843 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67abff495b0c550008001778 |"
+9317,closed,Add XML Parsing block,2607677427,Naman-Gupta-work,2025-01-22T16:16:59Z,How do you add a XML parsing block?
+9317,closed,Add XML Parsing block,2610547073,ntindle,2025-01-23T17:42:29Z,You can follow the creating a block docs at https://docs.agpt.co/platform/new_blocks/ and use the linked library above 
+9317,closed,Add XML Parsing block,2629230495,safimuhammad,2025-02-02T03:58:57Z,Hey can I work on this @ntindle 
+9317,closed,Add XML Parsing block,2629330513,ntindle,2025-02-02T10:14:25Z,Go for it!
+9317,closed,Add XML Parsing block,2629340707,safimuhammad,2025-02-02T10:44:35Z,"> Go for it!
+
+Cool, can you provide a basic guide on how to approach this and how to reference these link you've mentioned above.
+Thanks,
+"
+9317,closed,Add XML Parsing block,2633170133,safimuhammad,2025-02-04T08:11:07Z,"@ntindle there appears to be a lot of dependency conflicts between https://github.com/Significant-Gravitas/gravitasml and the autogpt repo, when running poetry lock. any workaround to this?"
+9317,closed,Add XML Parsing block,2633385685,ntindle,2025-02-04T09:47:43Z,Can you share the error 
+9317,closed,Add XML Parsing block,2635797487,safimuhammad,2025-02-05T06:20:18Z,"> Can you share the error
+It throws these errors first and once I raise the version then it starts throwing black, pytest, etc version errors.
+poetry lock
+Resolving dependencies... (0.1s)
+
+The current project's supported Python range (>=3.10,<3.13) is not compatible with some of the required packages Python requirement:
+  - gravitasml requires Python >=3.11,<4.0, so it will not be satisfied for Python >=3.10,<3.11
+
+Because autogpt-platform-backend depends on gravitasml (0.1.0) which requires Python >=3.11,<4.0, version solving failed.
+
+  * Check your dependencies Python requirement: The Python requirement can be specified via the `python` or `markers` properties
+
+    For gravitasml, a possible solution would be to set the `python` property to "">=3.11,<3.13""
+
+    https://python-poetry.org/docs/dependency-specification/#python-restricted-dependencies,
+    https://python-poetry.org/docs/dependency-specification/#using-environment-markers
+"
+9317,closed,Add XML Parsing block,2635799065,safimuhammad,2025-02-05T06:21:36Z,"It throws these errors first and once I raise the version then it starts throwing black, pytest, etc version errors.
+"
+9317,closed,Add XML Parsing block,2638042724,ntindle,2025-02-05T21:18:28Z,"You should be able to make a pr here to fix https://github.com/Significant-Gravitas/gravitasml/blob/main/pyproject.toml
+"
+9317,closed,Add XML Parsing block,2639085996,safimuhammad,2025-02-06T07:56:10Z,"> You should be able to make a pr here to fix https://github.com/Significant-Gravitas/gravitasml/blob/main/pyproject.toml
+
+Alright fixing it."
+9317,closed,Add XML Parsing block,2642174376,safimuhammad,2025-02-07T07:52:45Z,"@ntindle I created PR on https://github.com/Significant-Gravitas/gravitasml , awaiting review to process the merge."
+9317,closed,Add XML Parsing block,2642181471,safimuhammad,2025-02-07T07:56:22Z,once its done and the package is updated I'll try integrating it.
+9317,closed,Add XML Parsing block,2645795702,ntindle,2025-02-08T15:45:17Z,Package is released :)
+9317,closed,Add XML Parsing block,2646077581,safimuhammad,2025-02-09T05:30:42Z,"Great, I'll start working on it now
+"
+9317,closed,Add XML Parsing block,2647013629,safimuhammad,2025-02-10T06:17:42Z,"@ntindle  please review
+"
+9317,closed,Add XML Parsing block,2652446827,Pwuts,2025-02-12T01:38:30Z,Implemented in #9450 
+9465,closed,tweak(frontend): Update user profile from marketplace to appropriate profile route,2649462836,supabase[bot],2025-02-10T23:10:08Z,"[supa]:bgwpwdsxblryihinutbx
+This pull request has been ignored for the connected project `bgwpwdsxblryihinutbx` because there are no changes detected in `supabase` directory. You can change this behaviour in [Project Integrations Settings ↗︎](https://supabase.com/dashboard/project/bgwpwdsxblryihinutbx/settings/integrations).
+
+<hr/>
+
+Preview Branches by Supabase.
+Learn more about [Supabase Branching ↗︎](https://supabase.com/docs/guides/platform/branching)."
+9465,closed,tweak(frontend): Update user profile from marketplace to appropriate profile route,2649462939,github-actions[bot],2025-02-10T23:10:12Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9465,closed,tweak(frontend): Update user profile from marketplace to appropriate profile route,2649463418,deepsource-io[bot],2025-02-10T23:10:34Z,"<div><p>Here's the code health analysis summary for commits <code>6eee920..bd1824d</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/6c6514ca-1f59-4543-989a-1c86b698aa11/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 27 occurences introduced</div><div>🎯 38 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/6c6514ca-1f59-4543-989a-1c86b698aa11/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/6c6514ca-1f59-4543-989a-1c86b698aa11/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9465,closed,tweak(frontend): Update user profile from marketplace to appropriate profile route,2649463558,qodo-merge-pro[bot],2025-02-10T23:10:40Z,"_Qodo Merge was enabled for this repository. To continue using it, please link your Git account with your Qodo account [here](https://app.qodo.ai/qodo-merge)._
+
+## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>
+
+**🎫 Ticket compliance analysis 🔶**
+
+
+
+**[9313](https://github.com/Significant-Gravitas/AutoGPT/issues/9313) - Partially compliant**
+
+Compliant requirements:
+
+- None
+
+Non-compliant requirements:
+
+- Fix hover state background color on agent home page card to match Figma designs
+- Fix truncation of description on agent home page card
+
+Requires further human verification:
+
+- None
+
+
+
+</td></tr>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 5 🔵🔵🔵🔵🔵</td></tr>
+<tr><td>🧪&nbsp;<strong>PR contains tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9465/files#diff-69de95e19acaba021b2e4c08cada30293eb4d8bd451f93aa56cfecb91a5c5f97R92-R917'><strong>Code Complexity</strong></a>
+
+The CustomNode component is very large and complex. Consider breaking it down into smaller, more focused components to improve maintainability and testability.</summary>
+
+```typescript
+
+export type CustomNode = XYNode<CustomNodeData, ""custom"">;
+
+export const CustomNode = React.memo(
+  function CustomNode({
+    data,
+    id,
+    width,
+    height,
+    selected,
+  }: NodeProps<CustomNode>) {
+    const [isOutputOpen, setIsOutputOpen] = useState(
+      data.isOutputOpen || false,
+    );
+    const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeKey, setActiveKey] = useState<string | null>(null);
+    const [inputModalValue, setInputModalValue] = useState<string>("""");
+    const [isOutputModalOpen, setIsOutputModalOpen] = useState(false);
+    const { updateNodeData, deleteElements, addNodes, getNode } = useReactFlow<
+      CustomNode,
+      Edge
+    >();
+    const isInitialSetup = useRef(true);
+    const flowContext = useContext(FlowContext);
+    const api = useBackendAPI();
+    const { formatCredits } = useCredits();
+    let nodeFlowId = """";
+
+    if (data.uiType === BlockUIType.AGENT) {
+      // Display the graph's schema instead AgentExecutorBlock's schema.
+      data.inputSchema = data.hardcodedValues?.input_schema || {};
+      data.outputSchema = data.hardcodedValues?.output_schema || {};
+      nodeFlowId = data.hardcodedValues?.graph_id || nodeFlowId;
+    }
+
+    if (!flowContext) {
+      throw new Error(
+        ""FlowContext consumer must be inside FlowEditor component"",
+      );
+    }
+
+    const { setIsAnyModalOpen, getNextNodeId } = flowContext;
+
+    useEffect(() => {
+      if (data.executionResults || data.status) {
+        setIsOutputOpen(true);
+      }
+    }, [data.executionResults, data.status]);
+
+    useEffect(() => {
+      setIsOutputOpen(data.isOutputOpen);
+    }, [data.isOutputOpen]);
+
+    useEffect(() => {
+      setIsAnyModalOpen?.(isModalOpen || isOutputModalOpen);
+    }, [isModalOpen, isOutputModalOpen, data, setIsAnyModalOpen]);
+
+    useEffect(() => {
+      isInitialSetup.current = false;
+    }, []);
+
+    const setHardcodedValues = (values: any) => {
+      updateNodeData(id, { hardcodedValues: values });
+    };
+
+    const setErrors = (errors: { [key: string]: string }) => {
+      updateNodeData(id, { errors });
+    };
+
+    const toggleOutput = (checked: boolean) => {
+      setIsOutputOpen(checked);
+    };
+
+    const toggleAdvancedSettings = (checked: boolean) => {
+      setIsAdvancedOpen(checked);
+    };
+
+    const generateOutputHandles = (
+      schema: BlockIORootSchema,
+      nodeType: BlockUIType,
+    ) => {
+      if (
+        !schema?.properties ||
+        nodeType === BlockUIType.OUTPUT ||
+        nodeType === BlockUIType.NOTE
+      )
+        return null;
+
+      const renderHandles = (
+        propSchema: { [key: string]: BlockIOSubSchema },
+        keyPrefix = """",
+        titlePrefix = """",
+      ) => {
+        return Object.keys(propSchema).map((propKey) => {
+          const fieldSchema = propSchema[propKey];
+          const fieldTitle =
+            titlePrefix + (fieldSchema.title || beautifyString(propKey));
+
+          return (
+            <div key={propKey}>
+              <NodeHandle
+                title={fieldTitle}
+                keyName={`${keyPrefix}${propKey}`}
+                isConnected={isOutputHandleConnected(propKey)}
+                schema={fieldSchema}
+                side=""right""
+              />
+              {""properties"" in fieldSchema &&
+                renderHandles(
+                  fieldSchema.properties,
+                  `${keyPrefix}${propKey}_#_`,
+                  `${fieldTitle}.`,
+                )}
+            </div>
+          );
+        });
+      };
+
+      return renderHandles(schema.properties);
+    };
+
+    const generateInputHandles = (
+      "
+9465,closed,tweak(frontend): Update user profile from marketplace to appropriate profile route,2649463991,netlify[bot],2025-02-10T23:10:59Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | bd1824da7fc52536f365339364c4fa85db9a34af |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67aa874cfebcc100089619c3 |"
+9463,closed,fix(market): Market featured agent card,2649224188,CLAassistant,2025-02-10T21:00:21Z,[![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9463) <br/>All committers have signed the CLA.
+9463,closed,fix(market): Market featured agent card,2649224210,supabase[bot],2025-02-10T21:00:22Z,"[supa]:bgwpwdsxblryihinutbx
+This pull request has been ignored for the connected project `bgwpwdsxblryihinutbx` because there are no changes detected in `supabase` directory. You can change this behaviour in [Project Integrations Settings ↗︎](https://supabase.com/dashboard/project/bgwpwdsxblryihinutbx/settings/integrations).
+
+<hr/>
+
+Preview Branches by Supabase.
+Learn more about [Supabase Branching ↗︎](https://supabase.com/docs/guides/platform/branching)."
+9463,closed,fix(market): Market featured agent card,2649224391,github-actions[bot],2025-02-10T21:00:27Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9463,closed,fix(market): Market featured agent card,2649224770,qodo-merge-pro[bot],2025-02-10T21:00:39Z,"_Qodo Merge was enabled for this repository. To continue using it, please link your Git account with your Qodo account [here](https://app.qodo.ai/qodo-merge)._
+
+## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>
+
+**🎫 Ticket compliance analysis ✅**
+
+
+
+**[9313](https://github.com/Significant-Gravitas/AutoGPT/issues/9313) - PR Code Verified**
+
+Compliant requirements:
+
+- Fix hover state background color on agent card to match rest of card color
+
+Requires further human verification:
+
+- Match design from Figma - Need to verify final colors match Figma design
+
+
+
+</td></tr>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 2 🔵🔵⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>PR contains tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9463/files#diff-805c5f3317316925c3e1b48dff187cd2634042d9b432808c1751b8be71b658bbR52-R52'><strong>Dark Mode Colors</strong></a>
+
+The dark mode background color is hardcoded to neutral-700. This should be validated against the design system and Figma specs to ensure consistency.</summary>
+
+```typescript
+} rounded-xl dark:bg-neutral-700`}
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9463,closed,fix(market): Market featured agent card,2649224932,deepsource-io[bot],2025-02-10T21:00:44Z,"<div><p>Here's the code health analysis summary for commits <code>00c312d..98b51e1</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/2094d960-8eb2-4ab6-836a-35573755fc1a/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 3 occurences introduced</div><div>🎯 6 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/2094d960-8eb2-4ab6-836a-35573755fc1a/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/2094d960-8eb2-4ab6-836a-35573755fc1a/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9463,closed,fix(market): Market featured agent card,2649228849,netlify[bot],2025-02-10T21:02:52Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 98b51e1d577883168b99378674e72781858ce127 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67aa72fb25fee4000979d0f9 |"
+9463,closed,fix(market): Market featured agent card,2649232085,netlify[bot],2025-02-10T21:04:36Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 98b51e1d577883168b99378674e72781858ce127 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67aa72fb925ecc0008e835c5 |"
+9450,closed,feature(block): Add XML Parser Block,2646899462,github-actions[bot],2025-02-10T04:35:41Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9450,closed,feature(block): Add XML Parser Block,2646899472,netlify[bot],2025-02-10T04:35:42Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | a1273efd08febed4ae9289f2567ac20b42cc8bf0 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67aa20e4cb29660008ab8632 |"
+9450,closed,feature(block): Add XML Parser Block,2646899477,qodo-merge-pro[bot],2025-02-10T04:35:42Z,"_Qodo Merge was enabled for this repository. To continue using it, please link your Git account with your Qodo account [here](https://app.qodo.ai/qodo-merge)._
+
+## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>
+
+**🎫 Ticket compliance analysis ✅**
+
+
+
+**[9317](https://github.com/Significant-Gravitas/AutoGPT/issues/9317) - Fully compliant**
+
+Compliant requirements:
+
+- Add XML Parsing block
+- Use gravitasml package for XML parsing functionality
+
+
+
+</td></tr>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 2 🔵🔵⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>PR contains tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>Security concerns</strong><br><br>
+
+<strong>XML External Entity (XXE) Attack:</strong><br> The PR uses external XML parsing without explicit security controls. XML parsing can be vulnerable to XXE attacks if the parser accepts external entity references. The implementation should verify if gravitasml package has proper XXE prevention mechanisms.</td></tr>
+<tr><td>⚡&nbsp;<strong>Recommended focus areas for review</strong><br><br>
+
+<details><summary><a href='https://github.com/Significant-Gravitas/AutoGPT/pull/9450/files#diff-92948859b34ee89bc2cc77b02e99637603c4b3b239d2c5810b14f61d7c920b7aR14-R37'><strong>Error Handling</strong></a>
+
+The error field in Output schema is defined but never yielded in the run method. Instead, errors are raised directly which might not match the expected behavior.</summary>
+
+```python
+    error : str = SchemaField(description=""Error in parsing"")
+
+def __init__(self):
+    super().__init__(
+        id=""286380af-9529-4b55-8be0-1d7c854abdb5"",
+        description=""Parses XML using gravitasml to tokenize and coverts it to dict"",
+        input_schema=XMLParserBlock.Input,
+        output_schema=XMLParserBlock.Output,
+        test_input={""input_xml"": ""<tag1><tag2>content</tag2></tag1>""},
+        test_output=[
+            (""parsed_xml"", {""tag1"": {""tag2"": ""content""}}),
+        ],
+    )
+
+def run(self, input_data: Input, **kwargs) -> BlockOutput:
+    try:
+        tokens = tokenize(input_data.input_xml)
+        parser = Parser(tokens)
+        parsed_result = parser.parse()
+        yield ""parsed_xml"", parsed_result
+    except ValueError as val_e:
+        raise ValueError(f""Validation error for dict:{val_e}"") from val_e
+    except SyntaxError as syn_e:
+        raise SyntaxError(f""Error in input xml syntax: {syn_e}"") from syn_e
+```
+
+</details>
+
+</td></tr>
+</table>
+"
+9450,closed,feature(block): Add XML Parser Block,2646899821,deepsource-io[bot],2025-02-10T04:36:05Z,"<div><p>Here's the code health analysis summary for commits <code>00c312d..a1273ef</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/895611e9-7860-43e8-81e8-4b5331db3a9d/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/895611e9-7860-43e8-81e8-4b5331db3a9d/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/895611e9-7860-43e8-81e8-4b5331db3a9d/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9450,closed,feature(block): Add XML Parser Block,2646900622,netlify[bot],2025-02-10T04:36:54Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | a1273efd08febed4ae9289f2567ac20b42cc8bf0 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67aa20e415ea960008ab9063 |"
+9450,closed,feature(block): Add XML Parser Block,2646904566,github-actions[bot],2025-02-10T04:40:56Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2631619188,netlify[bot],2025-02-03T17:24:00Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 73ec6fd6337d30bfc1a5e501aee87fa4be571627 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67a3f1c12a1b190008490835 |"
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2631619268,deepsource-io[bot],2025-02-03T17:24:02Z,"<div><p>Here's the code health analysis summary for commits <code>4b76aae..73ec6fd</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/74c494f7-bfa0-4102-8256-2ff3cb53638b/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/74c494f7-bfa0-4102-8256-2ff3cb53638b/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/74c494f7-bfa0-4102-8256-2ff3cb53638b/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2631621994,netlify[bot],2025-02-03T17:25:16Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 73ec6fd6337d30bfc1a5e501aee87fa4be571627 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67a3f1c1deb24700090c5a29 |"
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2638158536,github-actions[bot],2025-02-05T22:13:07Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2638158547,github-actions[bot],2025-02-05T22:13:08Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2638163272,github-actions[bot],2025-02-05T22:16:07Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2640005359,github-actions[bot],2025-02-06T14:36:35Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9396,closed,chore(backend/deps-dev): bump the development-dependencies group across 1 directory with 4 updates,2648778021,dependabot[bot],2025-02-10T17:38:31Z,"Looks like these dependencies are updatable in another way, so this is no longer needed."
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2631720728,deepsource-io[bot],2025-02-03T18:11:55Z,"<div><p>Here's the code health analysis summary for commits <code>4b76aae..eb68e91</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/21132764-6aa7-4da9-8e1b-73020054dec2/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/21132764-6aa7-4da9-8e1b-73020054dec2/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/21132764-6aa7-4da9-8e1b-73020054dec2/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2631721438,netlify[bot],2025-02-03T18:12:16Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | eb68e91432e34286599d03bb8d98f5c7e7d6b789 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67a3f1344686290008b3583c |"
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2631723909,netlify[bot],2025-02-03T18:13:26Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | eb68e91432e34286599d03bb8d98f5c7e7d6b789 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67a3f1345479f9000821b9f5 |"
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2638224834,github-actions[bot],2025-02-05T23:00:09Z,"This pull request has conflicts with the base branch, please resolve those so we can evaluate the pull request."
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2638242790,ntindle,2025-02-05T23:14:13Z,@dependabot recreate
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2638245389,github-actions[bot],2025-02-05T23:16:17Z,Conflicts have been resolved! 🎉 A maintainer will review the pull request shortly.
+9405,closed,chore(libs/deps-dev): bump ruff from 0.9.3 to 0.9.4 in /autogpt_platform/autogpt_libs in the development-dependencies group,2648730571,dependabot[bot],2025-02-10T17:19:55Z,Superseded by #9454.
+9453,closed,Rename FORGE-QUICKSTART.md to Myautogpt.md,2648401427,CLAassistant,2025-02-10T15:29:11Z,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9453) <br/>Thank you for your submission! We really appreciate it. Like many open source projects, we ask that you sign our [Contributor License Agreement](https://cla-assistant.io/Significant-Gravitas/AutoGPT?pullRequest=9453) before we can accept your contribution.<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/Significant-Gravitas/AutoGPT?pullRequest=9453) it.</sub>"
+9453,closed,Rename FORGE-QUICKSTART.md to Myautogpt.md,2648401840,github-actions[bot],2025-02-10T15:29:16Z,"This PR targets the `master` branch but does not come from `dev` or a `hotfix/*` branch.
+
+Automatically setting the base branch to `dev`."
+9453,closed,Rename FORGE-QUICKSTART.md to Myautogpt.md,2648401898,qodo-merge-pro[bot],2025-02-10T15:29:17Z,"## PR Reviewer Guide 🔍
+
+Here are some key observations to aid the review process:
+
+<table>
+<tr><td>⏱️&nbsp;<strong>Estimated effort to review</strong>: 1 🔵⚪⚪⚪⚪</td></tr>
+<tr><td>🧪&nbsp;<strong>No relevant tests</strong></td></tr>
+<tr><td>🔒&nbsp;<strong>No security concerns identified</strong></td></tr>
+<tr><td>⚡&nbsp;<strong>No major issues detected</strong></td></tr>
+</table>
+"
+9453,closed,Rename FORGE-QUICKSTART.md to Myautogpt.md,2648403691,deepsource-io[bot],2025-02-10T15:29:38Z,"<div><p>Here's the code health analysis summary for commits <code>00c312d..6a35bb7</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/0fde279a-d952-45d9-95f6-016dc33d8aa7/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/0fde279a-d952-45d9-95f6-016dc33d8aa7/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/0fde279a-d952-45d9-95f6-016dc33d8aa7/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"
+9453,closed,Rename FORGE-QUICKSTART.md to Myautogpt.md,2648406466,netlify[bot],2025-02-10T15:30:23Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* ready!
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 6a35bb74320da216a8de90ce762b50e598a04ba8 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67aa1b436d5f500008e5b770 |
+|<span aria-hidden=""true"">😎</span> Deploy Preview | [https://deploy-preview-9453--auto-gpt-docs.netlify.app](https://deploy-preview-9453--auto-gpt-docs.netlify.app) |
+|<span aria-hidden=""true"">📱</span> Preview on mobile | <details><summary> Toggle QR Code... </summary><br /><br />![QR Code](https://app.netlify.com/qr-code/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RlcGxveS1wcmV2aWV3LTk0NTMtLWF1dG8tZ3B0LWRvY3MubmV0bGlmeS5hcHAifQ.UHnOQBQoKg2DX1mNmtn6T156G-jOQX22MhfpZDv7kp0)<br /><br />_Use your smartphone camera to open QR code link._</details> |
+---
+<!-- [auto-gpt-docs Preview](https://deploy-preview-9453--auto-gpt-docs.netlify.app) -->
+_To edit notification comments on pull requests, go to your [Netlify site configuration](https://app.netlify.com/sites/auto-gpt-docs/configuration/notifications#deploy-webhooks)._"
+9444,closed,feat(platform): Schedule specific agent version,2643349239,netlify[bot],2025-02-07T16:08:08Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs-dev* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 989b92be06102371e84d6dfe9188bc416f7cf772 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs-dev/deploys/67a62fd9b936b80008d23300 |"
+9444,closed,feat(platform): Schedule specific agent version,2643350235,netlify[bot],2025-02-07T16:08:33Z,"### <span aria-hidden=""true"">✅</span> Deploy Preview for *auto-gpt-docs* canceled.
+
+
+|  Name | Link |
+|:-:|------------------------|
+|<span aria-hidden=""true"">🔨</span> Latest commit | 989b92be06102371e84d6dfe9188bc416f7cf772 |
+|<span aria-hidden=""true"">🔍</span> Latest deploy log | https://app.netlify.com/sites/auto-gpt-docs/deploys/67a62fd92fa026000841c3fa |"
+9444,closed,feat(platform): Schedule specific agent version,2643350955,deepsource-io[bot],2025-02-07T16:08:52Z,"<div><p>Here's the code health analysis summary for commits <code>1a4ba53..989b92b</code>. <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c9a8d258-4101-4334-b6a6-173ee1ff6e86/"">View details on DeepSource</a>&nbsp;↗.</p><h3>Analysis Summary</h3><table><thead><tr><th>Analyzer</th><th>Status</th><th>Summary</th><th>Link</th></tr></thead><tbody><tr><td><img src=""https://static.deepsource.com/analyzer_logos/javascript.svg"" alt=""DeepSource JavaScript Logo"" width=""16px"" height=""16px""/><strong>JavaScript</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 71 occurences introduced</div><div>🎯 7 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c9a8d258-4101-4334-b6a6-173ee1ff6e86/javascript/"">View Check</a>&nbsp;↗</td></tr><tr><td><img src=""https://static.deepsource.com/analyzer_logos/python.svg"" alt=""DeepSource Python Logo"" width=""16px"" height=""16px""/><strong>Python</strong></td><td><span>✅&nbsp;</span><span>Success</span></td><td><div>❗ 8 occurences introduced</div><div>🎯 8 occurences resolved</div></td><td><a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/run/c9a8d258-4101-4334-b6a6-173ee1ff6e86/python/"">View Check</a>&nbsp;↗</td></tr></tbody></table><hr/><blockquote><div>💡 If you’re a repository administrator, you can configure the quality gates from the <a href=""https://app.deepsource.com/gh/Significant-Gravitas/AutoGPT/settings/reporting"">settings</a>.</div></blockquote></div>
+"

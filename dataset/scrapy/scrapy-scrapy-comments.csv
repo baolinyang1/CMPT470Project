@@ -1,0 +1,929 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+6671,closed,Fix getting annotations for _parse_sitemap() at the runtime.,2656641935,codecov[bot],2025-02-13T13:43:19Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6671?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`00167ed`)](https://app.codecov.io/gh/scrapy/scrapy/commit/00167edca0677fd9657a8c5995d30600dd37fe37?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`1f04a1d`)](https://app.codecov.io/gh/scrapy/scrapy/commit/1f04a1d586e83577100b993eb910a0345fc9ea62?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 1 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6671   +/-   ##
+=======================================
+  Coverage   91.36%   91.36%           
+=======================================
+  Files         162      162           
+  Lines       12047    12048    +1     
+  Branches     1551     1551           
+=======================================
++ Hits        11007    11008    +1     
+  Misses        735      735           
+  Partials      305      305           
+```
+
+| [Files with missing lines](https://app.codecov.io/gh/scrapy/scrapy/pull/6671?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) | Coverage Δ | |
+|---|---|---|
+| [scrapy/spiders/sitemap.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6671?src=pr&el=tree&filepath=scrapy%2Fspiders%2Fsitemap.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L3NwaWRlcnMvc2l0ZW1hcC5weQ==) | `85.54% <100.00%> (+0.17%)` | :arrow_up: |
+
+</details>"
+6664,closed,Improve diagnostics for sync-only spider middlewares.,2645934186,codecov[bot],2025-02-08T20:41:55Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6664?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`f041f26`)](https://app.codecov.io/gh/scrapy/scrapy/commit/f041f26a6ff636b764d2bf584ddbc9b9e4334d1b?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`ede9e9c`)](https://app.codecov.io/gh/scrapy/scrapy/commit/ede9e9c3c3f9a9049fea2a6be0339b2c7434b8a1?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 3 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6664   +/-   ##
+=======================================
+  Coverage   91.36%   91.36%           
+=======================================
+  Files         162      162           
+  Lines       12050    12047    -3     
+  Branches     1551     1551           
+=======================================
+- Hits        11009    11007    -2     
+  Misses        735      735           
++ Partials      306      305    -1     
+```
+
+| [Files with missing lines](https://app.codecov.io/gh/scrapy/scrapy/pull/6664?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) | Coverage Δ | |
+|---|---|---|
+| [scrapy/core/spidermw.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6664?src=pr&el=tree&filepath=scrapy%2Fcore%2Fspidermw.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L2NvcmUvc3BpZGVybXcucHk=) | `100.00% <100.00%> (+0.54%)` | :arrow_up: |
+| [scrapy/utils/python.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6664?src=pr&el=tree&filepath=scrapy%2Futils%2Fpython.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L3V0aWxzL3B5dGhvbi5weQ==) | `89.15% <ø> (ø)` | |
+
+</details>"
+5214,closed,Add support for YAML export format,883956450,wRAR,2021-07-21T07:24:25Z,Sorry?
+5214,closed,Add support for YAML export format,884672222,wRAR,2021-07-22T05:55:11Z,@toqp can you please elaborate what were you trying to say here?
+5214,closed,Add support for YAML export format,886071170,toqp,2021-07-24T15:50:52Z,"I noticed that the result of parsing can not be displayed in yml, I wanted to open it myself
+Pull requests, but no time for that. I ask you to add functionality as an output of the parsing result to the yml file."
+5214,closed,Add support for YAML export format,886134910,elacuesta,2021-07-25T01:51:10Z,"Given that there is no stdlib support for YAML and that a functional (although admittedly limited) YAML item exporter is [relatively easy to implement](https://github.com/elacuesta/scrapy-yaml-item-exporter/blob/master/scrapy_yaml_item_exporter/scrapy_yaml_item_exporter.py), I must say I'm -1 on adding support."
+5214,closed,Add support for YAML export format,2651993412,wRAR,2025-02-11T20:26:17Z,Closing per the previous comment.
+6663,closed,HtmlResponse and AttributeError,2644284437,oweitman,2025-02-07T23:02:24Z,"ok i found it.
+
+scrapy.http.HtmlRespons"
+3110,closed,Is there better way to call Scrapy programatically?,363534266,fabioaanthony,2018-02-06T19:19:11Z,"@Urahara you can try something like this:
+
+```
+process.crawl(ProductListSpider, username=username, password=password)
+```
+
+Inside of the spider, `ProductListSpider`, you'd have something like this:
+
+```
+class ProductListSpider(scrapy.Spider):
+    name = 'product_list'
+    start_urls = [
+        '...'
+    ]
+
+    def __init__(self, username="""", password=""""):
+        self.username = username
+        self.password = password
+
+    def parse(self, response):
+        return scrapy.FormRequest.from_response(response,
+            formdata={
+                'username': self.username,
+                'password': self.password
+            },
+            callback=self.__after_login
+        )
+
+    // ... do more stuff
+```"
+3110,closed,Is there better way to call Scrapy programatically?,363733000,Urahara,2018-02-07T10:56:14Z,"Thanks man, for future reference i will leave what i code here:
+
+```python
+#code ommited
+
+username = 'username'
+password = 'password'
+
+crawled_items = []
+
+def add_item(item):
+    crawled_items.append(item)
+
+configure_logging(install_root_handler=False)
+logging.basicConfig(
+    filename='log.txt'
+)
+
+runner = CrawlerRunner()
+
+crawler = Crawler(ProductListSpider, get_project_settings())
+crawler.signals.connect(add_item, signals.item_scraped)
+d = runner.crawl(crawler, username=username, password=password) # keywords works too: **{ 'username' : username, 'senha' : password}
+d.addBoth(lambda _: reactor.stop())
+reactor.run()
+```"
+6661,closed,Json separators added,2642376153,wRAR,2025-02-07T09:15:41Z,"kwargs are already passed to the exporter, so your change is a no-op and your tests pass without your change."
+6661,closed,Json separators added,2643698816,Amin-Eb,2025-02-07T18:32:42Z,"> kwargs are already passed to the exporter, so your change is a no-op and your tests pass without your change.
+
+Thanks for your mention, got it.
+Im not much capable in python and im learning and testing new things."
+6459,closed,get_project_settings() is not working,2281308087,lordsoffallen,2024-08-10T11:57:33Z,"Current workaround that I have found is this:
+
+```
+def get_crawler_process() -> CrawlerProcess:
+    with patch('scrapy.utils.conf.closest_scrapy_cfg') as mocked:
+        mocked.return_value = str(
+            Path(__file__).parent.parent.parent.resolve().joinpath(""scrapy.cfg"")
+        )
+        return CrawlerProcess(settings=get_project_settings())
+```
+
+Basically I manually point to cfg file location and then configuration is being picked up afterwards. "
+6459,closed,get_project_settings() is not working,2281842399,wRAR,2024-08-10T13:42:44Z,Are you trying to report a bug in Scrapy?
+6459,closed,get_project_settings() is not working,2282015877,lordsoffallen,2024-08-10T14:16:41Z,"> Are you trying to report a bug in Scrapy?
+
+Yes, I believe it is bug that `get_project_settings` don't return expected settings depending on which python file the process is invoked."
+6459,closed,get_project_settings() is not working,2282177776,wRAR,2024-08-10T14:54:55Z,"Not 100% sure what do you mean by ""python file there"" but what do you think it's a bug here and why?"
+6459,closed,get_project_settings() is not working,2282220034,lordsoffallen,2024-08-10T17:32:08Z,"Okay so im running a function called `test_my_func` from my tests folder (structure can be seen above). I am invoking `CrawlerProcess` which requires `settings` to be passed. Scrapy provides a util function for this -> from scrapy.utils.project import get_project_settings.
+
+get_project_settings() calls some other functions to correctly create settings object. However, there is an issue with some of the internal function here: https://github.com/scrapy/scrapy/blob/master/scrapy/utils/conf.py#L95
+
+closest_scrapy_cfg() (linked above) is traversing the directory starting from `.` which is a relative path. Considering the folder structure I have shared above, this function can't find the scrapy.cfg because it's only going to upper directories so it tries to check folder `test/scraper/` first to see if there is a scrapy.cfg file. then if not check `tests/` and so on. Since the scrapy.cfg in my structure is under `src` folder it never finds it. This is why I shared the patched solution. User should be able to pass the directory to scrapy to avoid this as right now we can't do it.
+
+I hope this clears it now"
+6459,closed,get_project_settings() is not working,2282220845,wRAR,2024-08-10T17:34:52Z,"> closest_scrapy_cfg() (linked above) is traversing the directory starting from . which is a relative path. Considering the folder structure I have shared above, this function can't find the scrapy.cfg because it's only going to upper directories 
+
+Correct.
+
+What do you consider a bug here?"
+6459,closed,get_project_settings() is not working,2282285170,lordsoffallen,2024-08-10T21:48:15Z,"> > closest_scrapy_cfg() (linked above) is traversing the directory starting from . which is a relative path. Considering the folder structure I have shared above, this function can't find the scrapy.cfg because it's only going to upper directories
+> 
+> Correct.
+> 
+> What do you consider a bug here?
+
+Well, calling a function that invokes the crawling from somewhere else in python breaks the code. Are we expecting user to only do in certain directories? To me this is indeed bug. There should be a way for me to pass scrapy.cfg file path if the underlying code can't find its location properly. 
+
+What I would expect is that the function that invokes scrapy should work wherever I invoke it."
+6459,closed,get_project_settings() is not working,2282294356,wRAR,2024-08-10T22:09:06Z,"> Are we expecting user to only do in certain directories? 
+
+Yes. When we talk about ""running inside a project"" we mean exactly this.
+
+> What I would expect is that the function that invokes scrapy should work wherever I invoke it.
+
+It works as documented, by finding the current project. If there is no current project it obviously can't find it.
+
+> There should be a way for me to pass scrapy.cfg file path if the underlying code can't find its location properly.
+
+""can't find its location properly"" (together with some of the earlier comments and proposed ""solution"") sounds like you expect Scrapy to find some random scrapy.cfg in some unrelated directory. I don't think that's possible to implement.
+
+As for passing it explicitly, you can try reimplementing `get_project_settings()` instead of calling it, but be prepared that some Scrapy code that calls e.g. `inside_project()` will assume there is no active project."
+6459,closed,get_project_settings() is not working,2640672787,sandorkazi,2025-02-06T18:21:54Z,"I did this as a workaround to use the location I wanted to:
+
+```python
+def get_spider_loader() -> SpiderLoader:
+    cwd = os.getcwd()
+    os.chdir(loc)  # the location of the scrapy.cfg I wanted
+    settings = project.get_project_settings()
+    spider_loader = spiderloader.SpiderLoader.from_settings(settings)
+    os.chdir(cwd)
+    return spider_loader
+```"
+6653,closed,Support dark mode in scrapy's documentation,2632981559,codecov[bot],2025-02-04T06:20:44Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6653?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`ba5df62`)](https://app.codecov.io/gh/scrapy/scrapy/commit/ba5df629a2004ca0d919d8b7f0a7f5725448e50a?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`40dd044`)](https://app.codecov.io/gh/scrapy/scrapy/commit/40dd0443fc0e716ffd28b3bd6a8a40f1ed65066c?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 8 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@            Coverage Diff             @@
+##           master    #6653      +/-   ##
+==========================================
++ Coverage   91.34%   91.36%   +0.01%     
+==========================================
+  Files         162      162              
+  Lines       12055    12050       -5     
+  Branches     1550     1551       +1     
+==========================================
+- Hits        11012    11009       -3     
+  Misses        735      735              
++ Partials      308      306       -2     
+```
+
+[see 4 files with indirect coverage changes](https://app.codecov.io/gh/scrapy/scrapy/pull/6653/indirect-changes?src=pr&el=tree-more&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy)
+
+</details>"
+6653,closed,Support dark mode in scrapy's documentation,2639310923,protokoul,2025-02-06T09:43:53Z,I think I should be able to change the style for API objects. Let me see. I also noticed that the toggle button placement can be improved for mobile screens. Will push some changes for that too
+6653,closed,Support dark mode in scrapy's documentation,2640209497,protokoul,2025-02-06T15:50:34Z,"I have raised a PR in the plugin's repo to improve the styles used in API object names. If it gets approved, then I can remove them from custom.css and update the plugin version.
+
+@Gallaecio @wRAR Shall I implement this for any other documentations as well?"
+6653,closed,Support dark mode in scrapy's documentation,2640489614,Gallaecio,2025-02-06T17:06:20Z,"> Shall I implement this for any other documentations as well?
+
+I am tempted to say “That would be awesome!”, but I wonder if it would not be better to get it fixed upstream first, so that applying the change in other repos becomes trivial. But I also suspect the upstream is dead."
+6653,closed,Support dark mode in scrapy's documentation,2640500189,protokoul,2025-02-06T17:10:57Z,Sure. If the plugin gets updated then I can raise new PR and likewise work on implementing this for other documentations if needed
+6605,closed,Fix Crawler.request_fingerprinter typing,2569718697,codecov[bot],2025-01-03T19:33:07Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6605?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 85.56%. Comparing base [(`176ae34`)](https://app.codecov.io/gh/scrapy/scrapy/commit/176ae348c57a536d661ca1b469035e7e1ccbca6a?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`ec18a49`)](https://app.codecov.io/gh/scrapy/scrapy/commit/ec18a49e1266056a615187ab74d5cc1373e29ab1?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 4 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@            Coverage Diff             @@
+##           master    #6605      +/-   ##
+==========================================
++ Coverage   80.92%   85.56%   +4.63%     
+==========================================
+  Files         162      162              
+  Lines       12013    12018       +5     
+  Branches     1543     1543              
+==========================================
++ Hits         9722    10283     +561     
++ Misses       2038     1463     -575     
+- Partials      253      272      +19     
+```
+
+| [Files with missing lines](https://app.codecov.io/gh/scrapy/scrapy/pull/6605?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) | Coverage Δ | |
+|---|---|---|
+| [scrapy/crawler.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6605?src=pr&el=tree&filepath=scrapy%2Fcrawler.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L2NyYXdsZXIucHk=) | `77.47% <100.00%> (ø)` | |
+
+... and [24 files with indirect coverage changes](https://app.codecov.io/gh/scrapy/scrapy/pull/6605/indirect-changes?src=pr&el=tree-more&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy)
+
+</details>"
+6655,closed,Remove deprecated signals,2636248646,codecov[bot],2025-02-05T09:52:42Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6655?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`cc48068`)](https://app.codecov.io/gh/scrapy/scrapy/commit/cc480680d784886bff97cdcdc789238187a56f3a?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`9d35428`)](https://app.codecov.io/gh/scrapy/scrapy/commit/9d35428770326a3e833a2720c4f641fa70b58d29?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 2 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@            Coverage Diff             @@
+##           master    #6655      +/-   ##
+==========================================
+- Coverage   91.36%   91.36%   -0.01%     
+==========================================
+  Files         162      162              
+  Lines       12055    12050       -5     
+  Branches     1550     1550              
+==========================================
+- Hits        11014    11009       -5     
+  Misses        735      735              
+  Partials      306      306              
+```
+
+| [Files with missing lines](https://app.codecov.io/gh/scrapy/scrapy/pull/6655?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) | Coverage Δ | |
+|---|---|---|
+| [scrapy/signals.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6655?src=pr&el=tree&filepath=scrapy%2Fsignals.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L3NpZ25hbHMucHk=) | `100.00% <ø> (ø)` | |
+
+</details>"
+6657,closed,fix: Reactor info logged twice,2638104072,codecov[bot],2025-02-05T21:53:19Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6657?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`02ad6bd`)](https://app.codecov.io/gh/scrapy/scrapy/commit/02ad6bd1f6ab9623ac0c2a2b01c766d36e6c3c43?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`48e6d95`)](https://app.codecov.io/gh/scrapy/scrapy/commit/48e6d95a771683ee73190ce3ceaf1b61c1bd2a9a?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 1 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6657   +/-   ##
+=======================================
+  Coverage   91.36%   91.36%           
+=======================================
+  Files         162      162           
+  Lines       12050    12050           
+  Branches     1550     1551    +1     
+=======================================
+  Hits        11009    11009           
+  Misses        735      735           
+  Partials      306      306           
+```
+
+| [Files with missing lines](https://app.codecov.io/gh/scrapy/scrapy/pull/6657?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) | Coverage Δ | |
+|---|---|---|
+| [scrapy/crawler.py](https://app.codecov.io/gh/scrapy/scrapy/pull/6657?src=pr&el=tree&filepath=scrapy%2Fcrawler.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy#diff-c2NyYXB5L2NyYXdsZXIucHk=) | `97.30% <100.00%> (ø)` | |
+
+</details>"
+6657,closed,fix: Reactor info logged twice,2639467279,wRAR,2025-02-06T10:47:29Z,Thanks!
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2261149230,Gallaecio,2024-07-31T18:24:32Z,Which version of Scrapy are you using? [I thought we addressed this in 2.4](https://github.com/scrapy/scrapy/pull/4165).
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2261288121,jpmckinney,2024-07-31T19:35:52Z,"Using 2.11.2
+
+The deprecated import is here:
+
+https://github.com/scrapy/scrapy/blob/03a15ced4f0a4284c75a917fdfb07c44b21f9ff2/scrapy/core/downloader/webclient.py#L10
+
+Link for default branch: https://github.com/scrapy/scrapy/blob/master/scrapy/core/downloader/webclient.py#L10"
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2614074519,wRAR,2025-01-25T19:28:51Z,"All of this is very old HTTP/1.0 code, which is not used by default for quite some years (you need to change the `DOWNLOAD_HANDLERS` setting for ""http"" from `scrapy.core.downloader.handlers.http.HTTPDownloadHandler` to `scrapy.core.downloader.handlers.http.HTTP10DownloadHandler` to use it, losing HTTP/1.1 support). I don't think it's possible to actually port it, so we can either merge the non-overridden parts of `twisted.web.http.HTTPClient` into `scrapy.core.downloader.webclient.ScrapyHTTPPageGetter` like we did with `twisted.web.client.HTTPClientFactory` in #4165, or deprecate and drop the code.
+
+If we want to drop the code, we could extract it into a separate project but that one won't be maintained. Or we could simply drop it and maybe suggest something to use instead (a custom download handler based on... something? or, more likely, just an older Scrapy version)."
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2615351869,Gallaecio,2025-01-27T10:19:18Z,I think we can just deprecate it and eventually drop it. No need to research into potential recommendations now. We can always try to guide anyone that shows an interest in implementing or maintaining a Scrapy plugin for this in the future.
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2618463089,wRAR,2025-01-28T09:50:52Z,"AFAICS it shouldn't be possible to get the warning without using the HTTP/1.0 code that we just deprecated. If (in the future) someone uses Scrapy that still imports this with Twisted that no longer has this class, they will need to upgrade Scrapy or, easier, downgrade Twisted."
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2638230225,andersk,2025-02-05T23:04:15Z,"@wRAR That is not true, it’s pulled in via `scrapy.core.downloader.handlers.http11` (not `http10`). This affects a totally default Scrapy project, and can be reproduced just by following the [tutorial](https://docs.scrapy.org/en/latest/intro/tutorial.html) with the `PYTHONDEVMODE=1` environment variable set.
+
+Here’s a traceback with `PYTHONWARNINGS=error`:
+
+```pytb
+2025-02-05 15:02:55 [scrapy.core.downloader.handlers] ERROR: Loading ""scrapy.core.downloader.handlers.http.HTTPDownloadHandler"" for scheme ""http""
+Traceback (most recent call last):
+  File ""/tmp/v/lib/python3.12/site-packages/scrapy/core/downloader/handlers/__init__.py"", line 76, in _load_handler
+    dhcls: type[DownloadHandlerProtocol] = load_object(path)
+                                           ^^^^^^^^^^^^^^^^^
+  File ""/tmp/v/lib/python3.12/site-packages/scrapy/utils/misc.py"", line 71, in load_object
+    mod = import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File ""/nix/store/qrc496n6fsqp4p5m5h8wmw5d5jwyw5mr-python3-3.12.8/lib/python3.12/importlib/__init__.py"", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""<frozen importlib._bootstrap>"", line 1387, in _gcd_import
+  File ""<frozen importlib._bootstrap>"", line 1360, in _find_and_load
+  File ""<frozen importlib._bootstrap>"", line 1331, in _find_and_load_unlocked
+  File ""<frozen importlib._bootstrap>"", line 935, in _load_unlocked
+  File ""<frozen importlib._bootstrap_external>"", line 999, in exec_module
+  File ""<frozen importlib._bootstrap>"", line 488, in _call_with_frames_removed
+  File ""/tmp/v/lib/python3.12/site-packages/scrapy/core/downloader/handlers/http.py"", line 2, in <module>
+    from scrapy.core.downloader.handlers.http11 import (
+  File ""/tmp/v/lib/python3.12/site-packages/scrapy/core/downloader/handlers/http11.py"", line 30, in <module>
+    from scrapy.core.downloader.webclient import _parse
+  File ""/tmp/v/lib/python3.12/site-packages/scrapy/core/downloader/webclient.py"", line 10, in <module>
+    from twisted.web.http import HTTPClient
+  File ""/tmp/v/lib/python3.12/site-packages/twisted/python/deprecate.py"", line 483, in __getattribute__
+    value = deprecatedAttribute.get()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/tmp/v/lib/python3.12/site-packages/twisted/python/deprecate.py"", line 538, in get
+    warn(message, DeprecationWarning, stacklevel=3)
+DeprecationWarning: twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0: Use twisted.web.client.Agent instead.
+```
+
+Please reopen this."
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2638934542,wRAR,2025-02-06T06:16:14Z,"@andersk you are testing 2.12.0, not master."
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2638965736,andersk,2025-02-06T06:41:32Z,"My apologies, I assumed from the “quite some years” claim that 2.12.0 was thought to be new enough. I now see that this was fixed in the `http11` and `http2` handlers by #6635."
+6450,closed,"Twisted 24.7.0rc1 deprecation: ""twisted.web.http.HTTPClient was deprecated in Twisted 24.7.0rc1: Use twisted.web.client.Agent instead""",2638979835,wRAR,2025-02-06T06:51:51Z,"Well, both things are true, `_parse()` didn't use the deprecated code, it was just defined in the module that imports `twisted.web.http.HTTPClient`."
+6656,closed,docs: Remove AjaxCrawlMiddleware mention from built-in downloader middleware,2637408586,codecov[bot],2025-02-05T16:23:18Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6656?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`9fd08a9`)](https://app.codecov.io/gh/scrapy/scrapy/commit/9fd08a92a8a112ede765a19d5c29d056b2c7325f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`2eb3c75`)](https://app.codecov.io/gh/scrapy/scrapy/commit/2eb3c75c697685af595b08023b4dc27d49403274?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 2 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6656   +/-   ##
+=======================================
+  Coverage   91.36%   91.36%           
+=======================================
+  Files         162      162           
+  Lines       12050    12050           
+  Branches     1550     1550           
+=======================================
+  Hits        11009    11009           
+  Misses        735      735           
+  Partials      306      306           
+```
+
+</details>"
+6652,closed,Remove the AjaxCrawlMiddleware docs,2636293132,Laerte,2025-02-05T10:11:20Z,"Hey @Gallaecio so for this one we need to remove AjaxCrawlMiddleware from downloader-middleware.rst and only leave the mention on https://docs.scrapy.org/en/latest/news.html#scrapy-1-0-5-2016-02-04 or add a mention to deprecation on `news.rst` for the new release?
+
+Thanks!"
+6652,closed,Remove the AjaxCrawlMiddleware docs,2636822025,Gallaecio,2025-02-05T13:12:35Z,"> for this one we need to remove AjaxCrawlMiddleware from downloader-middleware.rst and only leave the mention on https://docs.scrapy.org/en/latest/news.html#scrapy-1-0-5-2016-02-04
+
+Exactly."
+6654,closed,"Deprecate `stats_spider_*`, `item_passed` and `request_received` signal aliases",2636214191,Laerte,2025-02-05T09:38:45Z,"@wRAR I think is safe to remove altogether: 
+
+- `stats_spider_*` https://docs.scrapy.org/en/latest/news.html#scrapy-0-16-0-released-2012-10-18
+- `item_passed`: https://docs.scrapy.org/en/latest/news.html#code-rearranged-and-removed
+
+Only for `request_received` I did not saw any documentation mention, can I push the removal?"
+6654,closed,"Deprecate `stats_spider_*`, `item_passed` and `request_received` signal aliases",2636227635,wRAR,2025-02-05T09:44:26Z,"Yeah, please remove all of them."
+3852,closed,Got no cookie support when using builtin FilesPipeline,997561213,ngodinhnhien,2021-12-20T03:24:16Z,Is there any update for this?
+3852,closed,Got no cookie support when using builtin FilesPipeline,997838359,rowheel,2021-12-20T11:25:18Z,"> Is there any update for this?
+
+Hmmm, no"
+6644,closed,Unable to use CrawlerProcess to run a spider as a script to debug it at breakpoints,2628891959,wRAR,2025-02-01T10:20:26Z,"Works for me.
+
+In any case this is very unlikely to be a problem in Scrapy."
+6644,closed,Unable to use CrawlerProcess to run a spider as a script to debug it at breakpoints,2628991538,synodriver,2025-02-01T15:16:29Z,"I have exactly the same problem
+
+## Versions
+
+```
+scrapy version --verbose
+Scrapy       : 2.12.0
+lxml         : 4.9.2.0
+libxml2      : 2.9.12
+cssselect    : 1.2.0
+parsel       : 1.8.1
+w3lib        : 2.1.1
+Twisted      : 24.3.0
+Python       : 3.10.12 | packaged by conda-forge | (main, Jun 23 2023, 22:34:57) [MSC v.1936 64 bit (AMD64)]
+pyOpenSSL    : 24.1.0 (OpenSSL 3.2.1 30 Jan 2024)
+cryptography : 42.0.7
+Platform     : Windows-10-10.0.19045-SP0
+```"
+6644,closed,Unable to use CrawlerProcess to run a spider as a script to debug it at breakpoints,2629037800,wRAR,2025-02-01T17:28:27Z,I can't test it on Windows so it may be specific to the Windows version of PyCharm.
+6644,closed,Unable to use CrawlerProcess to run a spider as a script to debug it at breakpoints,2633749836,devfox-se,2025-02-04T12:23:17Z,"oh yeah I see the problem, its `PyCharm2024.3` ! try older PyCharm version, `2024.2.5` should work fine!"
+6644,closed,Unable to use CrawlerProcess to run a spider as a script to debug it at breakpoints,2634290963,RishavDaredevil,2025-02-04T15:19:41Z,"> oh yeah I see the problem, its `PyCharm2024.3` ! try older PyCharm version, `2024.2.5` should work fine!
+
+Ok will try with this "
+2154,closed,response encoding is not utf-8 and impossible to change it,236642347,redapple,2016-08-01T17:04:42Z,"@mayouf , I believe the encoding of the page is ISO-8859-1, close enough to cp1252.
+
+Website response headers contain `Content-Type:text/html; charset=ISO-8859-1`
+and the page itself has `<meta http-equiv=""Content-Type"" content=""text/html; charset=iso-8859-1"" />
+`
+In scrapy shell, you can look for ""plutôt"" and check how it's encoded withing the raw bytes of `response.body`:
+
+```
+$ scrapy shell http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html
+2016-08-01 18:53:02 [scrapy] INFO: Scrapy 1.1.0 started (bot: scrapybot)
+...
+2016-08-01 18:53:02 [scrapy] INFO: Spider opened
+2016-08-01 18:53:03 [scrapy] DEBUG: Crawled (200) <GET http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html> (referer: None)
+...
+In [1]: import re
+
+In [2]: re.search(rb'(plut.{4})', response.body).groups()
+Out[2]: (b'plut\xf4t p',)
+
+In [3]: b'plut\xf4t p'.decode('latin1')
+Out[3]: 'plutôt p'
+
+In [4]: b'plut\xf4t p'.decode('cp1252')
+Out[4]: 'plutôt p'
+
+In [5]: b'plut\xf4t p'.decode('ISO-8859-1')
+Out[5]: 'plutôt p'
+
+In [6]: b'plut\xf4t p'.decode('utf8')
+---------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+<ipython-input-6-f8baa01db51d> in <module>()
+----> 1 b'plut\xf4t p'.decode('utf8')
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf4 in position 4: invalid continuation byte
+In [7]: 
+```
+
+The raw bytes are from latin1/cp1252 encoding, not UTF8.
+
+Back to the `<` question,
+what version of scrapy and lxml/libxml2 are you using? (paste the output of `scrapy version -v)
+
+I'm using this:
+
+```
+$ scrapy version -v
+Scrapy    : 1.1.0
+lxml      : 3.6.0.0
+libxml2   : 2.9.3
+Twisted   : 16.2.0
+Python    : 3.5.1+ (default, Mar 30 2016, 22:46:26) - [GCC 5.3.1 20160330]
+pyOpenSSL : 16.0.0 (OpenSSL 1.0.2g-fips  1 Mar 2016)
+Platform  : Linux-4.4.0-31-generic-x86_64-with-Ubuntu-16.04-xenial
+```
+
+and I am able to get ""Densité de logements"" line:
+
+```
+In [7]: for cell in response.xpath(u'//tr[normalize-space(td[1])=""Densité de logements""]//td'):
+    print(cell.xpath('normalize-space()').extract())
+   ....:     
+['Densité de logements']
+['1 log./ha']
+['']
+['<1 log./ha']
+```
+
+It could be that the libxml version you have on your system is older than mine and having trouble parsing `<`, which should not appear like that in HTML text, rather as `&lt;` (so in theory, there's a bug in the website HTML).
+The page has it correct for `Accueil > Divonne-les-Bains > Habitants - Revenu moyen` though:
+
+```
+          <div class=""fil_ariane"">
+                <a href=""/"">Accueil</a>
+                &gt;<a href=""/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html"">
+                                Divonne-les-Bains               </a>
+                &gt; <a href=""/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html"">Habitants - Revenu moyen</a>
+            </div>
+```
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,236991827,mayouf,2016-08-02T18:11:02Z,"here is my scrapy version:
+
+```
+mic@mic-ordi:~$ scrapy version --verbose
+Scrapy    : 1.1.0
+lxml      : 3.6.0.0
+libxml2   : 2.9.2
+Twisted   : 16.2.0
+Python    : 2.7.11 |Anaconda custom (64-bit)| (default, Jun 15 2016, 15:21:30) - [GCC 4.4.7 20120313 (Red Hat 4.4.7-1)]
+pyOpenSSL : 0.15.1 (OpenSSL 1.0.2h  3 May 2016)
+Platform  : Linux-4.2.0-42-generic-x86_64-with-debian-jessie-sid
+```
+
+I even did a new intstall of libxml2 and it gives me the 2.9.2 version, I can't get the same as you.
+
+```
+mic@mic-ordi:~$ conda install libxml2
+Fetching package metadata .......
+Solving package specifications: ..........
+
+# All requested packages already installed.
+# packages in environment at /home/mic/anaconda2:
+#
+libxml2                   2.9.2                         0 
+```
+
+BUT I saw something in your response: You are using python 3.5 and I do with the 2.7 one.
+
+So here is what I did and unfortunately, it did not show a difference:
+1. I created a python 3.5 environnement in Anaconda (http://conda.pydata.org/docs/py2or3.html)
+
+`conda create -n py35 python=3.5 anaconda
+`
+1. I installed scrapy with the conda command:
+   `conda install scrapy`
+2. I checked the scrapy version as you asked above:
+
+```
+(py35) mic@mic-ordi:~$ scrapy version -v
+Scrapy    : 1.1.1
+lxml      : 3.6.0.0
+libxml2   : 2.9.2
+Twisted   : 16.3.0
+Python    : 3.5.2 |Anaconda 4.1.1 (64-bit)| (default, Jul  2 2016, 17:53:06) - [GCC 4.4.7 20120313 (Red 
+Hat 4.4.7-1)]
+pyOpenSSL : 16.0.0 (OpenSSL 1.0.2h  3 May 2016)
+Platform  : Linux-4.2.0-42-generic-x86_64-with-debian-jessie-sid
+```
+1. I did the same command when I wrote this issue:
+
+`scrapy shell http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html`
+
+```
+In [11]: [i.strip() for i in response.xpath('//tr[@id=""carteNum_12""]//td//text()').extract()]
+Out[11]: ['', 'Densité de logements', '', '1 log./ha', '', '', '']
+```
+
+```
+In [12]: for cell in response.xpath(u'//tr[normalize-space(td[1])=""Densité de logements""]//td'):
+   ....:         print(cell.xpath('normalize-space()').extract())
+   ....:     
+['Densité de logements']
+['1 log./ha']
+['']
+['']
+```
+1. I also check if my ipython was on the right interpreter version:
+
+```
+In [9]: import sys
+In [10]: sys.version_info[0:30]
+Out[10]: (3, 5, 2, 'final', 0)
+```
+
+I don't really see what is wrong here....only the libxml2 library version 2.9.2 instead of 2.9.3 is left to explain this output difference we have...
+
+How did you get the libxml 2.9.3 library please mate because neither my pip install or my conda upgrade provides me this version ?
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,241514909,nyov,2016-08-22T19:00:02Z,"I am not sure this is a bug?
+Usually in HTML/XML, `<` can not occur unescaped, it should be `&laquo;` or entity-encoded, so perhaps the parser considers it an invalid start tag in the code and eats it.
+Maybe @redapple has some version or workaround of `lxml` to relax the parsing there?
+
+Perhaps there is some way to configure `lxml.html.HTMLParser` to handle such issues, or perhaps it's something with debian's packaging of libxml2.
+I don't think that the difference of behavior would be in a minor version of libxml (2 to 3), but I could be wrong.
+
+FWIW, I'm also on debian with libxml 2.9.2
+
+```
+$ scrapy version --verbose
+Scrapy    : 1.1.1
+lxml      : 3.6.0.0
+libxml2   : 2.9.2
+Twisted   : 16.2.0
+Python    : 2.7.12 (default, Jun 29 2016, 08:18:26) - [GCC 5.4.0 20160609]
+pyOpenSSL : 16.0.0 (OpenSSL 1.0.2h  3 May 2016)
+Platform  : Linux-3.16.0-4-amd64-x86_64-with-debian-stretch-sid
+```
+
+and I get the same results:
+
+```
+In [1]: for cell in response.xpath(u'//tr[normalize-space(td[1])=""Densité de logements""]//td'):
+   ...:         print(cell.xpath('normalize-space()').extract())
+   ...:     
+[u'Densit\xe9 de logements']
+[u'1 log./ha']
+[u'']
+[u'']
+```
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,241707452,redapple,2016-08-23T11:53:07Z,"@mayouf, @nyov , I don't know what's different with my setup.
+
+I'm pasting console logs from a fresh Python 2.7 virtualenv creation, pip install of scrapy and scrapy shell session:
+
+```
+$ mkvirtualenv scrapy-gh-2154
+Using real prefix '/usr'
+New python executable in /home/paul/.virtualenvs/scrapy-gh-2154/bin/python2
+Also creating executable in /home/paul/.virtualenvs/scrapy-gh-2154/bin/python
+Installing setuptools, pip, wheel...done.
+virtualenvwrapper.user_scripts creating /home/paul/.virtualenvs/scrapy-gh-2154/bin/predeactivate
+virtualenvwrapper.user_scripts creating /home/paul/.virtualenvs/scrapy-gh-2154/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /home/paul/.virtualenvs/scrapy-gh-2154/bin/preactivate
+virtualenvwrapper.user_scripts creating /home/paul/.virtualenvs/scrapy-gh-2154/bin/postactivate
+virtualenvwrapper.user_scripts creating /home/paul/.virtualenvs/scrapy-gh-2154/bin/get_env_details
+
+(scrapy-gh-2154) paul@laptop:~$ pip install scrapy
+Collecting scrapy
+  Using cached Scrapy-1.1.2-py2.py3-none-any.whl
+Collecting w3lib>=1.14.2 (from scrapy)
+  Using cached w3lib-1.15.0-py2.py3-none-any.whl
+Collecting Twisted>=10.0.0 (from scrapy)
+Collecting pyOpenSSL (from scrapy)
+  Using cached pyOpenSSL-16.0.0-py2.py3-none-any.whl
+Collecting parsel>=0.9.3 (from scrapy)
+  Using cached parsel-1.0.3-py2.py3-none-any.whl
+Collecting PyDispatcher>=2.0.5 (from scrapy)
+Collecting queuelib (from scrapy)
+  Using cached queuelib-1.4.2-py2.py3-none-any.whl
+Collecting cssselect>=0.9 (from scrapy)
+  Using cached cssselect-0.9.2-py2.py3-none-any.whl
+Collecting lxml (from scrapy)
+  Using cached lxml-3.6.4-cp27-cp27mu-manylinux1_x86_64.whl
+Collecting service-identity (from scrapy)
+  Using cached service_identity-16.0.0-py2.py3-none-any.whl
+Collecting six>=1.5.2 (from scrapy)
+  Using cached six-1.10.0-py2.py3-none-any.whl
+Collecting zope.interface>=3.6.0 (from Twisted>=10.0.0->scrapy)
+Collecting cryptography>=1.3 (from pyOpenSSL->scrapy)
+Collecting pyasn1 (from service-identity->scrapy)
+  Using cached pyasn1-0.1.9-py2.py3-none-any.whl
+Collecting attrs (from service-identity->scrapy)
+  Using cached attrs-16.0.0-py2.py3-none-any.whl
+Collecting pyasn1-modules (from service-identity->scrapy)
+  Using cached pyasn1_modules-0.0.8-py2.py3-none-any.whl
+Requirement already satisfied (use --upgrade to upgrade): setuptools in ./.virtualenvs/scrapy-gh-2154/lib/python2.7/site-packages (from zope.interface>=3.6.0->Twisted>=10.0.0->scrapy)
+Collecting cffi>=1.4.1 (from cryptography>=1.3->pyOpenSSL->scrapy)
+  Using cached cffi-1.7.0-cp27-cp27mu-manylinux1_x86_64.whl
+Collecting ipaddress (from cryptography>=1.3->pyOpenSSL->scrapy)
+  Using cached ipaddress-1.0.16-py27-none-any.whl
+Collecting enum34 (from cryptography>=1.3->pyOpenSSL->scrapy)
+  Using cached enum34-1.1.6-py2-none-any.whl
+Collecting idna>=2.0 (from cryptography>=1.3->pyOpenSSL->scrapy)
+  Using cached idna-2.1-py2.py3-none-any.whl
+Collecting pycparser (from cffi>=1.4.1->cryptography>=1.3->pyOpenSSL->scrapy)
+Installing collected packages: six, w3lib, zope.interface, Twisted, pycparser, cffi, ipaddress, enum34, idna, pyasn1, cryptography, pyOpenSSL, lxml, cssselect, parsel, PyDispatcher, queuelib, attrs, pyasn1-modules, service-identity, scrapy
+Successfully installed PyDispatcher-2.0.5 Twisted-16.3.2 attrs-16.0.0 cffi-1.7.0 cryptography-1.4 cssselect-0.9.2 enum34-1.1.6 idna-2.1 ipaddress-1.0.16 lxml-3.6.4 parsel-1.0.3 pyOpenSSL-16.0.0 pyasn1-0.1.9 pyasn1-modules-0.0.8 pycparser-2.14 queuelib-1.4.2 scrapy-1.1.2 service-identity-16.0.0 six-1.10.0 w3lib-1.15.0 zope.interface-4.2.0
+
+(scrapy-gh-2154) paul@laptop:~$ scrapy version -v
+Scrapy    : 1.1.2
+lxml      : 3.6.4.0
+libxml2   : 2.9.4
+Twisted   : 16.3.2
+Python    : 2.7.10 (default, Oct 14 2015, 16:09:02) - [GCC 5.2.1 20151010]
+pyOpenSSL : 16.0.0 (OpenSSL 1.0.2g-fips  1 Mar 2016)
+Platform  : Linux-4.4.0-34-generic-x86_64-with-Ubuntu-16.04-xenial
+
+
+(scrapy-gh-2154) paul@laptop:~$ pip freeze
+attrs==16.0.0
+cffi==1.7.0
+cryptography==1.4
+cssselect==0.9.2
+enum34==1.1.6
+idna==2.1
+ipaddress==1.0.16
+lxml==3.6.4
+parsel==1.0.3
+pyasn1==0.1.9
+pyasn1-modules==0.0.8
+pycparser==2.14
+PyDispatcher==2.0.5
+pyOpenSSL==16.0.0
+queuelib==1.4.2
+Scrapy==1.1.2
+service-identity==16.0.0
+six==1.10.0
+Twisted==16.3.2
+w3lib==1.15.0
+zope.interface==4.2.0
+
+```
+
+```
+(scrapy-gh-2154) paul@laptop:~$ scrapy shell http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html
+2016-08-23 13:38:54 [scrapy] INFO: Scrapy 1.1.2 started (bot: scrapybot)
+2016-08-23 13:38:54 [scrapy] INFO: Overridden settings: {'LOGSTATS_INTERVAL': 0, 'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter'}
+2016-08-23 13:38:54 [scrapy] INFO: Enabled extensions:
+['scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2016-08-23 13:38:54 [scrapy] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downl"
+2154,closed,response encoding is not utf-8 and impossible to change it,241710714,redapple,2016-08-23T12:09:27Z,"@mayouf , another option is to try with [`html5lib`](http://lxml.de/html5parser.html):
+
+```
+$ pip install html5lib
+Collecting html5lib
+Requirement already satisfied (use --upgrade to upgrade): six in ./.virtualenvs/scrapy-gh-2154/lib/python2.7/site-packages (from html5lib)
+Requirement already satisfied (use --upgrade to upgrade): setuptools>=18.5 in ./.virtualenvs/scrapy-gh-2154/lib/python2.7/site-packages (from html5lib)
+Collecting webencodings (from html5lib)
+Installing collected packages: webencodings, html5lib
+Successfully installed html5lib-0.999999999 webencodings-0.5
+
+(scrapy-gh-2154) paul@paul-SATELLITE-R830:~$ scrapy shell http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html
+2016-08-23 13:56:37 [scrapy] INFO: Scrapy 1.1.2 started (bot: scrapybot)
+(...)
+2016-08-23 13:56:39 [scrapy] DEBUG: Crawled (200) <GET http://www.kelquartier.com/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/revenu_moyen.html> (referer: None)
+(...)
+>>> from lxml.html import html5parser
+>>> response.text.find('<1 log')
+127742
+>>> print(response.text[127742-1000:127742+1000])
+
+                                        <td class=""td_B"">
+                                        <a href=""/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/densite_de_logements.html"" onclick=""changeMap('/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/densite_de_logements.html');return false;""> Densité de logements</a>
+                                        </td>
+                                        <td class=""td_B"">1 log./ha</td>
+                                        <td align=""center"" class=""td_B""  style=""width:40px !important"">
+                                                                                                                                            <img src=""../../../images/fr/fleche_nbr_horizontale.png"" width=""13"" height=""14"" />
+                                                                                                                                    </td>
+                                        <td class=""td_B""><1 log./ha</td>
+                                    </tr>
+
+
+
+                                    <tr class=""hoverCarte cursor_pointer"" id=""carteNum_13"" title=""Allez à la carte : Type de maison - Divonne-les-Bains""  onclick=""changeMap('/rhone_alpes_ain_commune_divonne_les_bains_01220-c1143/type_de_maison.html');return false;"">
+
+
+
+                                        <td class=""td_A"">
+
+>>> doc = html5parser.fromstring(response.body)
+>>> doc.xpath('//x:tr[@id=""carteNum_12""]', namespaces={'x': 'http://www.w3.org/1999/xhtml'})
+[<Element {http://www.w3.org/1999/xhtml}tr at 0x7f948ccda7a0>]
+
+>>> doc.xpath('//x:tr[@id=""carteNum_12""]//text()', namespaces={'x': 'http://www.w3.org/1999/xhtml'})
+['\n                                       \n                                                                                                                     \n                                    \t                                    \t                                    \t                                                                                \t\t\t\t\t\t\t\t\t\t\n                                        ', '\n                                        ', u' Densit\xe9 de logements', '\n                                        ', '\n                                        ', '1 log./ha', '\n                                        ', '\n\t\t\t\t\t\t\t\t\t\t\t                                            \t                                                ', '\n                                                                                                                                    ', '\n                                        ', '<1 log./ha', '\n                                    ']
+
+>>> doc.xpath(u'''
+...     //x:tr[normalize-space(x:td[1])=""Densité de logements""]
+...         //x:td''', namespaces={'x': 'http://www.w3.org/1999/xhtml'})
+[<Element {http://www.w3.org/1999/xhtml}td at 0x7f948ccda7e8>, <Element {http://www.w3.org/1999/xhtml}td at 0x7f948ccdac20>, <Element {http://www.w3.org/1999/xhtml}td at 0x7f948ccdae18>, <Element {http://www.w3.org/1999/xhtml}td at 0x7f948ccde098>]
+>>> for cell in doc.xpath(u'''
+...     //x:tr[normalize-space(x:td[1])=""Densité de logements""]
+...         //x:td''', namespaces={'x': 'http://www.w3.org/1999/xhtml'}):
+...     print(cell.xpath('normalize-space()'))
+... 
+Densité de logements
+1 log./ha
+
+<1 log./ha
+>>> 
+```
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,241839147,nyov,2016-08-23T18:55:10Z,"@redapple, the virtualenv version works as you posted it. So I would assume at this point that debian's libxml2 version is responsible.
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,244031628,redapple,2016-09-01T09:52:35Z,"@mayouf , did you manage to get it to work in the end?
+Did you try the html5lib way?
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,247275523,redapple,2016-09-15T09:05:02Z,"hi @mayouf , do you have any updates?
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,247815852,nyov,2016-09-18T00:16:52Z,"Just close it already :p
+They can always reopen when it suits them.
+"
+2154,closed,response encoding is not utf-8 and impossible to change it,247930764,redapple,2016-09-19T07:55:34Z,"Correct.
+"
+6650,closed,Remove a duplicate test.,2629405889,codecov[bot],2025-02-02T13:52:56Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6650?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.36%. Comparing base [(`340819e`)](https://app.codecov.io/gh/scrapy/scrapy/commit/340819eff095a76ca824874dbf1ea9f841716d54?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`df68891`)](https://app.codecov.io/gh/scrapy/scrapy/commit/df688910e0499b0a874d220fe00ed7355a70fce0?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 12 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6650   +/-   ##
+=======================================
+  Coverage   91.35%   91.36%           
+=======================================
+  Files         162      162           
+  Lines       12052    12052           
+  Branches     1550     1550           
+=======================================
++ Hits        11010    11011    +1     
+  Misses        735      735           
++ Partials      307      306    -1     
+```
+
+[see 1 file with indirect coverage changes](https://app.codecov.io/gh/scrapy/scrapy/pull/6650/indirect-changes?src=pr&el=tree-more&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy)
+
+</details>"
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536191304,Gallaecio,2023-05-05T12:30:04Z,"I find it interesting that you were able to use XPath to parse HTML within a JSON structure before.
+
+If you are looking for a workaround, downgrade parsel to <1.8.
+
+As for a long-term solution, I am inclined to say that this is how things should work.
+
+If you have `{""html"": ""<html><title>foo</title></html>""}`, you do not use `response.xpath(""//title"")`, you use `response.selector.jmespath(""html"").xpath(""//tittle"")` (or, starting with the upcoming Scrapy 2.9, `response.jmespath(""html"").xpath(""//tittle"")`)."
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536210143,damodharheadrun,2023-05-05T12:46:18Z,"Thanks for the quick update @Gallaecio 
+
+Is this same for 2.5.0 also?"
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536223212,Gallaecio,2023-05-05T12:57:00Z,It affects any version of Scrapy if your version of Parsel is 1.8.0 or later.
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536534244,damodharheadrun,2023-05-05T17:00:01Z,ohh ok @Gallaecio  i will try above mentioned method and update here
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536589309,GeorgeA92,2023-05-05T17:55:59Z,"> I find it interesting that you were able to use XPath to parse HTML within a JSON structure before.
+
+On parsel 1.6.0 and older - application add extra `<html>><body><p>`  tags that ""make"" it.. possible to use css xpath selectors (attempt to ""get"" valid html as browser does)
+
+```python
+
+from parsel import Selector
+selector_json = Selector(text='{""a"":""1""}')
+
+print(selector_json.getall())
+# parsel 1.6: ['<html><body><p>{""a"":""1""}</p></body></html>']
+# parsel 1.8: [{'a': '1'}] # <-converted to dict, we see ' instead of original "", most likely expected to receive str here""
+
+#print(selector_json.css('*::text').getall())
+print(selector_json.css('p::text').getall())
+
+# parsel 1.6: ['{""a"":""1""}']
+
+# parsel 1.8:
+'''
+    print(selector_json.css('p::text').getall())
+  File ""<redacted>\parsel\parsel\selector.py"", line 680, in css
+    raise ValueError(
+ValueError: Cannot use css on a Selector of type 'json'
+
+Process finished with exit code 1
+
+'''
+```
+
+> If you have {""html"": ""<html><title>foo</title></html>""}, you do not use response.xpath(""//title""), you use response.selector.jmespath(""html"").xpath(""//tittle"") (or, starting with the upcoming Scrapy 2.9, response.jmespath(""html"").xpath(""//tittle"")).
+
+In case if server return json response with.. html inside it's variables - Selector <strike>will be</strike> was able to parse it's html content by xpath/css selectors without any additional data transformations:
+
+```python
+
+text2 = '''{
+""prod_1"": ""<div class=product><div class=price>1$</div></div>"",
+""prod_2"": ""<div class=product><div class=price>2$</div></div>"",
+""prod_3"": ""<div class=product><div class=price>3$</div></div>""}
+'''
+
+selector_html = Selector(text=text2)
+print(selector_html.css('div.price::text').getall())
+# parsel 1.6: ['1$', '2$', '3$']
+# parsel 1.8:
+'''
+    print(selector_html.css('div.price::text').getall())
+  File ""<redacted>\parsel\parsel\selector.py"", line 680, in css
+    raise ValueError(
+ValueError: Cannot use css on a Selector of type 'json'
+'''
+```"
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1536631380,damodharheadrun,2023-05-05T18:37:36Z,"> 
+
+Thanks for the detailed information @GeorgeA92 "
+5923,closed,ValueError: Cannot use xpath on a Selector of type 'json',1619522675,damodharheadrun,2023-07-04T05:34:06Z,"from scrapy.selector import Selector
+response = Selector(text=str(data))
+response.xpath(""//title"")
+
+above soltion also work to avoid the Value error
+
+>>> data = '{""test"": ""verify_xpath"", ""data"": ""<html>test</html>""}'
+>>> from scrapy.selector import Selector
+>>> sel = Selector(text=data)
+>>> sel.xpath('.//text()').extract()
+['{""test"": ""verify_xpath"", ""data"": ""test""}']
+>>> 
+"
+6647,closed,Refactor downloader tests,2629107315,codecov[bot],2025-02-01T20:47:22Z,"## [Codecov](https://app.codecov.io/gh/scrapy/scrapy/pull/6647?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 91.35%. Comparing base [(`340819e`)](https://app.codecov.io/gh/scrapy/scrapy/commit/340819eff095a76ca824874dbf1ea9f841716d54?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy) to head [(`1066e37`)](https://app.codecov.io/gh/scrapy/scrapy/commit/1066e37e52c6fa32d1afa5c6b967e7f310b65c48?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=scrapy).
+> Report is 10 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@           Coverage Diff           @@
+##           master    #6647   +/-   ##
+=======================================
+  Coverage   91.35%   91.35%           
+=======================================
+  Files         162      162           
+  Lines       12052    12052           
+  Branches     1550     1550           
+=======================================
+  Hits        11010    11010           
+  Misses        735      735           
+  Partials      307      307           
+```
+
+</details>"

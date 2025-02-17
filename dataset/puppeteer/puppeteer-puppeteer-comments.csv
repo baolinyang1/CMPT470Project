@@ -1,0 +1,2482 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+13614,closed,[Bug]: run page.screencast with headless:fasle  throw Error:Write EOF,2661002847,OrKoN,2025-02-15T16:55:42Z,"Thanks for reporting. I am not able to reproduce:
+
+```
+import puppeteer from ""puppeteer"";
+
+const browser = await puppeteer.launch({
+    headless: false,
+    defaultViewport: {
+        width: 1080,
+        height: 1024 
+    }
+});
+
+const page = await browser.newPage();
+await page.goto('https://www.google.com/');
+
+const recorder = await page.screencast({ path: 'recorder.webm' });
+
+await new Promise(resolve => setTimeout(resolve, 10000))
+
+await recorder.stop();
+await browser.close();
+
+```
+
+Make sure you have a latest ffmpeg installed and avoid saving the screencast while the process shuts down."
+13591,closed,fix: don't wait for activation if the connection is disconnected,2639026274,OrKoN,2025-02-06T07:23:08Z,This seems to result in some persistent test failures (not sure why).
+13591,closed,fix: don't wait for activation if the connection is disconnected,2639268356,Lightning00Blade,2025-02-06T09:30:02Z,"Those test looked like once that have flaked before, maybe this fixes the flakiness but not the issue? I will investigate."
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1637191346,github-actions[bot],2023-07-16T21:12:51Z,"This issue has an invalid Node.js version: `18`. Versions must follow [SemVer](https://semver.org/) formatting. Please update the form with a valid version.
+
+---
+[Analyzer run](https://github.com/puppeteer/puppeteer/actions/runs/5579868730)"
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1637192647,MylesNeloms,2023-07-16T21:19:47Z,"Apologies for the misguiding link. I grabbed the dependencies from the troubleshooting links in puppeteer docs
+
+https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix"
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1637898566,OrKoN,2023-07-17T11:00:58Z,"Could you please format the issue properly? it's difficult to read. Also, make sure that after you modify the docker image, that you install the app into the folder where Puppeteer is installed and switch back to the same non-root user."
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1638502890,MylesNeloms,2023-07-17T16:44:30Z,"Thanks I will try this and update soon. Apologies for the formatting, I believe markup may have reformatted my issue text."
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1638743933,MylesNeloms,2023-07-17T19:28:14Z,"Hi, I tested a bit and I am able to launch the browser however I am still stuck with the ""waitForSelector"" error.
+
+I will attach a minimum reproduction zip here.
+[MinimumRepro(7:17).zip](https://github.com/puppeteer/puppeteer/files/12073194/MinimumRepro.7.17.zip)
+
+
+Please see the dockerfile below. I am trying move my executable into the ""home/pptruser"" directory then complete the dependency install from the non-root user:
+
+`FROM ghcr.io/puppeteer/puppeteer:20.8.2`
+`COPY --chown=pptruser:pptruser . . `
+`USER root `
+`ADD ./index.js /home/pptruser/ `
+`ADD ./package*.json /home/pptruser/ `
+`ADD ./* /home/pptruser/ `
+`USER pptruser `
+`RUN npm ci `
+`ENTRYPOINT [""node"", ""index.js""]`
+
+
+I am creating the container image with ""gcloud builds submit"" command as noted here[1]. I used the above dockerfile to copy my executable file and package*.json to  ""/home/pptruser"" and install using the ""pptruser"" created by the image.
+
+This seems to work fine as the job is able to connect to the page and launch the browser.(tested from logging, the job is able to get past ""await puppeteer.launch(...)"" and ""await page.goto(...)"")
+
+When it attempts ""await page.waitForSelector"", I receive the following error:
+`TimeoutError: Waiting for selector `.icon-filter` failed: Waiting failed: 30000ms exceeded at Timeout.<anonymous> (/home/pptruser/node_modules/puppeteer-core/lib/cjs/puppeteer/common/WaitTask.js:71:37) at listOnTimeout (node:internal/timers:569:17) at process.processTimers (node:internal/timers:512:7)`
+
+I know that the element "".icon-filter"" exists because I am able to run the script locally. Also, I tried to set the waitforselector  timeout to ""0"" but this resulted in my job timing out after 10 minutes due to my configuration. (I can increase job timeout this but I am not sure if it will make a difference. From local, the element is found in a couple seconds).
+
+Reference:
+[1]https://cloud.google.com/build/docs/build-push-docker-image
+
+"
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,1639549000,OrKoN,2023-07-18T06:07:09Z,"`waitForSelector` is clearly a different issue and the most likely the element does not exist (for example, the  URL you test with is only available locally or if it is a third party website they block/render differently for your server script). Please double check that the content of the page that you expect is actually there."
+10558,closed,[Bug]: Error running puppeteer within GCP Cloud Run jobs,2660792437,wlhong-allo,2025-02-15T07:33:52Z,"I spent 2 days and got it working now, check this out:
+
+https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-google-cloud-run
+
+You need to enable Google Cloud Run to always allocate dedicated CPU for you otherwise the process will exit as soon as a response is returned without waiting for the puppeteer event to come back.
+
+As of current GCP web UI, goto your cloud run service > Edit & Deploy New Revision > under ""Billing"" section, select ""Instance-based"" instead of ""Request-based"" 
+
+Note that it impact your GCP cost because now there are CPU resources always dedicated for your service:
+
+https://cloud.google.com/run/docs/configuring/billing-settings"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,488333896,xse,2019-05-01T16:31:49Z,"Hey, 
+I don't have a way to test that right now but you can inject scripts in page context using [page.evaluateOnNewDocument](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageevaluateonnewdocumentpagefunction-args) or page.evaluate and so on which will inject a script on any page.
+From there you can easily add any script that displays an image or a colored dot where the mouse is.
+This should be ""permanently"" displayed unless puppeteer actually ""moves the mouse outside the page"" when it's not used. 
+
+If you're still having issues i'll try to get an example working, have a good day!"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,499544287,DanielRuf,2019-06-06T15:28:01Z,"> i'll try to get an example working, have a good day!
+
+This would be really helpful."
+4378,closed,Is there a way to show mouse pointer in puppeteer?,499726973,aslushnikov,2019-06-07T01:26:46Z,"I extracted the mouse helper we use in Puppeteer tests and a little bit enhanced it.
+
+Check it out: [`install-mouse-helper.js`](https://gist.github.com/aslushnikov/94108a4094532c7752135c42e12a00eb)
+
+This function will inject an element to the page's DOM that will track mouse position. This should be good-enough for a majority of use cases.
+
+Here's what it takes to use the helper. Consider the helper is saved to the file `install-mouse-helper.js`:
+
+```js
+const puppeteer = require('.');
+const {installMouseHelper} = require('./install-mouse-helper');
+
+(async() => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  // Installs the helper to the page. Mouse will be visible in the subsequent navigation.
+  await installMouseHelper(page);
+  // Here's the navigation. From now on we'll have a mouse cursor on the page.
+  await page.goto('https://example.com');
+  await page.mouse.move(135, 173);
+  await page.mouse.down();
+  await page.mouse.move(400, 225);
+  await page.screenshot({path: 'screenshot.png'});
+  await browser.close();
+})();
+```
+
+The screenshot now has the mouse position and looks like this:
+
+![screenshot](https://user-images.githubusercontent.com/746130/59075903-f7bf9080-8887-11e9-828a-1b7fae1dadba.png)
+
+@bexoss is this good enough for you? "
+4378,closed,Is there a way to show mouse pointer in puppeteer?,667105265,MelMacaluso,2020-07-31T12:55:05Z,"> ```js
+>  await page.mouse.move(135, 173);
+>   await page.mouse.down();
+>   await page.mouse.move(400, 225);
+> ```
+
+Hi @aslushnikov , thanks! It does not work for me, do you think is not compatible with puppeteer latest?
+
+@aslushnikov Ignore me, my linter removed the `;` from the css inline styles 😂 "
+4378,closed,Is there a way to show mouse pointer in puppeteer?,695899859,0x446f6d,2020-09-21T04:59:01Z,"How could you get this working with something like a modal? Right now, the grey circle hides behind the modal and isn't visible in front of modals that pop up. "
+4378,closed,Is there a way to show mouse pointer in puppeteer?,695916406,ccpu,2020-09-21T06:01:04Z,@dominuslabs set [higher  z-index](https://stackoverflow.com/a/1120068/1103757) on `mousemove`
+4378,closed,Is there a way to show mouse pointer in puppeteer?,696264283,0x446f6d,2020-09-21T17:38:43Z,"I set the z-index to the maximum z-index allowed (2,147,483,647) and it still didn't work. Maybe its because the modal is in an iframe?"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,696529623,ccpu,2020-09-22T06:17:11Z,"@dominuslabs difficult to say, as you have mentioned it could be the iframe, im using higher z-index in my [code](https://github.com/ccpu/storybook-addon-playwright/blob/76d492c852ec5fe3caedb08eac8db699818811d4/src/api/server/utils/install-mouse-helper.ts#L13)  with playwright, haven't noticed any problem yet. "
+4378,closed,Is there a way to show mouse pointer in puppeteer?,809699157,nathalizator,2021-03-29T20:41:32Z,"> I extracted the mouse helper we use in Puppeteer tests and a little bit enhanced it.
+> 
+> Check it out: [`install-mouse-helper.js`](https://gist.github.com/aslushnikov/94108a4094532c7752135c42e12a00eb)
+> 
+> This function will inject an element to the page's DOM that will track mouse position. This should be good-enough for a majority of use cases.
+> 
+> Here's what it takes to use the helper. Consider the helper is saved to the file `install-mouse-helper.js`:
+> 
+> ```js
+> const puppeteer = require('.');
+> const {installMouseHelper} = require('./install-mouse-helper');
+> 
+> (async() => {
+>   const browser = await puppeteer.launch();
+>   const page = await browser.newPage();
+>   // Installs the helper to the page. Mouse will be visible in the subsequent navigation.
+>   await installMouseHelper(page);
+>   // Here's the navigation. From now on we'll have a mouse cursor on the page.
+>   await page.goto('https://example.com');
+>   await page.mouse.move(135, 173);
+>   await page.mouse.down();
+>   await page.mouse.move(400, 225);
+>   await page.screenshot({path: 'screenshot.png'});
+>   await browser.close();
+> })();
+> ```
+> 
+> The screenshot now has the mouse position and looks like this:
+> 
+> ![screenshot](https://user-images.githubusercontent.com/746130/59075903-f7bf9080-8887-11e9-828a-1b7fae1dadba.png)
+> 
+> @bexoss is this good enough for you?
+
+Hello ! I try to make it form but i get an error 
+`Error: Cannot find module '.'`
+- I have creat a file name test-mouse-help.js
+- I have added your file ""install-mouse-helper"" in the same directory 
+
+Can you help me define what's wrong ? 
+"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,809953044,DanielRuf,2021-03-30T06:35:14Z,"> ```js
+> const puppeteer = require('.');
+> ```
+
+try this:
+
+> ```js
+> const puppeteer = require('puppeteer');
+> ```
+"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,882629341,Rem0ld,2021-07-19T15:11:31Z,"I'm using this helper to see where the mouse is on the webpage, but I've found something, not sure if it's a bug or if I'm doing something wrong.
+This is automated test, I'm giving list of events that puppeteer will go through.
+At first there is no problem but when scrolling down, but at some point the cursor disappear (basically it's pretty much when scrollY > screenY) and it only shows up when scrolling is back up. 
+I expecting to keep seeing the cursor at any scrollY position.
+So my question is, is it normal behavior, is it a bug?"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,975041960,chaffeqa,2021-11-22T03:38:25Z,"I thought it may be useful to note that we solved this using this [click hijacking hack](https://fdossena.com/?p=html5cool/clickfx/i.frag).
+
+Works great!"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1007318691,ghost,2022-01-07T10:58:22Z,"It should also be possible to use `Overlay.highlightQuad` to draw a cursor anywhere on the page (should work with iframes and any zIndex and doesn't require injecting scripts): https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightQuad
+```
+await Main.MainImpl.sendOverProtocol('Overlay.highlightQuad', {
+ quad: [1, 1, 100, 1, 1, 10, 1, 1], color: {r: 100, g: 200, b: 200}
+});
+```
+"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1018112593,dword-design,2022-01-21T02:38:57Z,"> Check it out: install-mouse-helper.js
+
+@nathalizator You want to put the mouse helper into an npm package? Otherwise I can do it."
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1068769251,Mecanik,2022-03-16T06:05:12Z,"> 
+
+Drawing is one thing, moving it is another thing...
+
+And for the record...
+
+```
+const cdp = await page.target().createCDPSession();
+
+await cdp.send('DOM.enable');
+await cdp.send('Overlay.enable');
+
+const data = await cdp.send('Overlay.highlightQuad', {
+      quad: [1, 1, 100, 1, 1, 10, 1, 1], 
+	  color: {r: 100, g: 200, b: 200},
+    });
+console.log(data);
+```"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1509496521,cenfun,2023-04-15T04:23:18Z,"> > Check it out: install-mouse-helper.js
+> 
+> @nathalizator You want to put the mouse helper into an npm package? Otherwise I can do it.
+
+here is https://www.npmjs.com/package/mouse-helper"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1811764153,obfuscated-loop,2023-11-15T03:46:48Z,"For those using JavaScript, the solution I have found is this:
+```js
+import { createCursor, getRandomPagePoint  } from 'ghost-cursor';
+import installMouseHelper from 'ghost-cursor';
+// the rest of your code
+const page = await browser.newPage();
+await installMouseHelper.installMouseHelper(page);
+```"
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1956858174,storenth,2024-02-21T15:03:01Z,"Guys, just use simplest event listeners to track click like events @aslushnikov talking about: https://github.com/puppeteer/puppeteer/issues/4378#issuecomment-499726973
+I suggest to close the issue."
+4378,closed,Is there a way to show mouse pointer in puppeteer?,1957033259,jrandolf-2,2024-02-21T15:50:14Z,Showing the mouse pointer wouldn't really belong to Puppeteer/Chromium as it's an OS artifact. We recommend using the workarounds listed in this thread.
+4378,closed,Is there a way to show mouse pointer in puppeteer?,2660084703,bvandercar-vt,2025-02-14T19:14:22Z,Recommend using the package [Ghost-Cursor](https://github.com/Xetera/ghost-cursor)
+13594,closed,chore: release main,2658930465,release-please[bot],2025-02-14T10:33:09Z,"🤖 Created releases:
+
+- [puppeteer-v24.2.1](https://github.com/puppeteer/puppeteer/releases/tag/puppeteer-v24.2.1)
+- [puppeteer-core-v24.2.1](https://github.com/puppeteer/puppeteer/releases/tag/puppeteer-core-v24.2.1)
+
+:sunflower:"
+1648,closed,Having trouble with page.type not typing all characters,353875994,ggirodda,2017-12-25T15:30:01Z,"Hello, I have the same issue on a page wich have two inputs text. The last one is incomplete, I often get 7 characters instead of 8"
+1648,closed,Having trouble with page.type not typing all characters,353876699,Nagisan,2017-12-25T15:43:38Z,"A bit more troubleshooting since my initial post, this page is pulling data from a database and Puppeteer is losing focus on the field that doesn't get completed (if I add a chai expect in after each page.type, when it fails to fill out a field completely the screenshot it takes does not have focus on the input field).
+
+I think what may be happening is puppeteer is just running too quickly and it begins filling in the fields, at some point during this the page finishes getting data from the server and refreshes the page (not a browser refresh.....I'm using React & Redux, so the state updates with the fetched data and refreshes the display).
+
+This loss of focus is not ever seen by a user (because they won't select an input as quickly as puppeteer will) so it's only an issue with puppeteer itself, I can force it to work fine if I make puppeteer wait 500ms after landing on the page (which is enough time for DB calls to resolve locally but may not work in my remote environment).
+
+I've also tried waiting for networkidle and what not, but I'm getting to this page with a click action not a network call so I don't think I can easily wait for networkidle.
+
+Any suggestions on how best to work around this issue? I don't like waiting for a static time because it will just introduce test flakiness in different environments."
+1648,closed,Having trouble with page.type not typing all characters,355221286,aslushnikov,2018-01-04T08:06:29Z,"> Any suggestions on how best to work around this issue? I don't like waiting for a static time because it will just introduce test flakiness in different environments.
+
+@Nagisan I'd try a few options here:
+- if the page fetches something over network and you know the url it loads, you can subscribe to the [`requestfinished`](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-requestfinished) event and wait for the request to finish
+- if you have access to the website codebase, you might issue a call to `console.timeStamp` with some label, e.g. `console.timeStamp('mynicelabel')`. In puppeteer, you'll get a related [`metrics`](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-metrics) event with a `'mynicelabel'` title 
+
+"
+1648,closed,Having trouble with page.type not typing all characters,362355249,aficiomaquinas,2018-02-01T18:18:42Z,"Is this the expected behavior? I'm having the same problem. The page I'm trying to type into does not fetch anything over the network, so there is no use in subscribing to anything, afaic. How can I prevent this issue? It seems to me that it does not work as expected."
+1648,closed,Having trouble with page.type not typing all characters,364900895,Tzook,2018-02-12T11:50:32Z,"Here's a patch to overcome this method until it is fixed:
+`    await page.evaluate((text) => {
+        (document.getElementById('my-input')).value = text;
+      }, ""text-to-inject"");`"
+1648,closed,Having trouble with page.type not typing all characters,427016172,UmairTehsin,2018-10-04T13:21:51Z,"In my case below mentioned was solution
+await page.type(""Selector"", ""Value"");
+await page.keyboard.press('Enter');"
+1648,closed,Having trouble with page.type not typing all characters,427073872,slava-lu,2018-10-04T15:59:18Z,still a problem.
+1648,closed,Having trouble with page.type not typing all characters,427254035,UmairTehsin,2018-10-05T05:52:41Z,"you can also check by
+await page.click(Selector);
+await page.keyboard.type('text');
+await page.kyboard.press('Enter');"
+1648,closed,Having trouble with page.type not typing all characters,427313241,slava-lu,2018-10-05T10:09:20Z,"@UmairTehsin I do have workaround as described earlier ` await popup.evaluate((text) => { (document.getElementById('password')).value = text; }, user.password);`
+I just wanted to point out that this issue still exist"
+1648,closed,Having trouble with page.type not typing all characters,427848283,moltar,2018-10-08T14:07:26Z,Having a similar problem. Having 2 consecutive `await page.type(...)` (e.g. username and password). I am seeing that Puppeteer does not change focus from username to password in time. Part of the password is typed into the username field.
+1648,closed,Having trouble with page.type not typing all characters,430754331,RobinNagpal,2018-10-17T19:16:27Z,"> Here's a patch to overcome this method until it is fixed:
+> `await page.evaluate((text) => { (document.getElementById('my-input')).value = text; }, ""text-to-inject"");`
+
+This  is not useful in react project as it doesn't trigger onChange handler"
+1648,closed,Having trouble with page.type not typing all characters,431755748,liorur,2018-10-22T07:04:54Z,"Ran into the same issue, after playing around for a while i discovered this little hack produces a persistent result
+```javascript
+const input = await page.$(`input.inputClass`);
+await input.press('Backspace');
+await input.type(text);
+```
+"
+1648,closed,Having trouble with page.type not typing all characters,433545434,jsilvia721,2018-10-26T21:14:36Z,"> > Here's a patch to overcome this method until it is fixed:
+> > `await page.evaluate((text) => { (document.getElementById('my-input')).value = text; }, ""text-to-inject"");`
+> 
+> This is not useful in react project as it doesn't trigger onChange handler
+
+@RobinNagpal Do you know if there is a way to do this and trigger the onchange handler?"
+1648,closed,Having trouble with page.type not typing all characters,438587158,vchenin,2018-11-14T08:59:45Z,"Hi there!
+
+I think this problem can be solved by waiting for element or attribute which will be created by framework (Angular, jComponent, React, Vue, etc.) engine on browser side.
+
+For example, in my case in authentication form exist button for submit which enabled by default. Component disable this button if there are empty required fields when form initialization and pre-validation finished.
+
+```javascript
+await page.waitFor('button[name=""submit""][disabled]')
+```
+Therefore, when it exists, it means that form elements are ready for input."
+1648,closed,Having trouble with page.type not typing all characters,439470425,vchenin,2018-11-16T17:41:08Z,"And after typing:
+```javascript
+await page.type('#email', 'email@example.com')
+await page.type('#password', 'secret')
+```
+waiting for completion of form validation:
+```javascript
+await page.waitFor('button[name=""submit""]:not([disabled])')
+```
+then process the form:
+```javascript
+await page.click('button[name=""submit""]')
+```"
+1648,closed,Having trouble with page.type not typing all characters,439483004,RobinNagpal,2018-11-16T18:26:41Z,"This works for me.
+
+```
+export async function typeInInputElement(page, inputSelector, text) {
+  await page.evaluate((inputSelector, text) => {
+    // Refer to https://stackoverflow.com/a/46012210/440432 for the below solution/code
+    const inputElement = document.querySelector(inputSelector);
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+    nativeInputValueSetter.call(inputElement, text);
+
+    const ev2 = new Event('input', {bubbles: true});
+    inputElement.dispatchEvent(ev2);
+
+  }, inputSelector, text);
+}
+```"
+1648,closed,Having trouble with page.type not typing all characters,450550381,rienheuver,2018-12-30T10:02:46Z,"I was having trouble with the page not having fully loaded yet. The fix for me was to add this as second parameter to `page.goto`:
+```
+{waitUntil: 'networkidle2'}
+```
+This makes it wait until there have been no more network requests for the last 500ms. So the total `page.goto` looks like this:
+```
+await page.goto('https://example.com', {waitUntil: 'networkidle2'});
+```
+Hope this helps someone out :smile: "
+1648,closed,Having trouble with page.type not typing all characters,450842071,Fetz,2019-01-02T11:33:29Z,"Another thing that can cause issues with the type, is animations.
+
+If you have any animation being done in the input (directly to the input or a parent element) you should wait until the animation is finished before using the `page.type` or `element.type`.
+
+for example a bootstrap modal:
+```javascript
+await page.click('[data-target=""#createUserDialog""]'); // show the modal
+await page.waitForSelector('#createUserDialog', {visible: true})); // wait for the modal to be visible
+
+const animationTime = 800;
+await new Promise((resolve) => setTimeout(resolve, animationTime)); // wait for animation to finish
+await page.type('#message', 'if the message is longer, the easy is to replicate the issue with the input');
+```"
+1648,closed,Having trouble with page.type not typing all characters,451532007,fringd,2019-01-04T18:45:27Z,Seems a lot of people are still seeing this. Can we re-open it?
+1648,closed,Having trouble with page.type not typing all characters,451532320,fringd,2019-01-04T18:46:32Z,^^ @aslushnikov ^^
+1648,closed,Having trouble with page.type not typing all characters,451533745,fringd,2019-01-04T18:51:38Z,"My own test was not making any network connections at all, and I've disable animations, but seems to still be flaking with random characters missing.
+
+I have multiple tests running in multiple tabs, I think this is part of the problem, since I can't reproduce if I run a single test suite in isolation. "
+1648,closed,Having trouble with page.type not typing all characters,451553714,Fetz,2019-01-04T20:04:45Z,@fringd if the inputs are simple input fields (without any fancy behaviours when typing) you can set directly the input value instead of using `type`
+1648,closed,Having trouble with page.type not typing all characters,451554236,Fetz,2019-01-04T20:06:49Z,@fringd as well check if you not forgetting to use await in any `type`
+1648,closed,Having trouble with page.type not typing all characters,451567270,fringd,2019-01-04T21:01:40Z,Okay I'll try to verify this is not a missing await somewhere. Will update
+1648,closed,Having trouble with page.type not typing all characters,451896846,fenilkanjani,2019-01-07T10:52:15Z,"Trying to input same text in two fields with same values (password and confirm password) on a page after `networkidle2`. It does not type all the characters every time making the test flaky. The code looks something like this: 
+
+```
+await page.goto('myurl', {waitUntil: 'networkidle2', ...myOtherOptions})
+await page.waitFor('.js--new-password')
+await page.type('.js--new-password input', 'test@1234')
+await page.type('.js--confirm-password input', 'test@1234')
+```
+
+@aslushnikov ^ Any suggestions?"
+1648,closed,Having trouble with page.type not typing all characters,453346707,fringd,2019-01-11T02:18:02Z,"this looks a lot like the test I have that's failing @fenilkanjani. Mine's a little more complex, so it's harder to isolate."
+1648,closed,Having trouble with page.type not typing all characters,453347001,fringd,2019-01-11T02:18:54Z,@fenilkanjani are you running multiple tests in parallel like me? Multiple tabs and threads in jest?
+1648,closed,Having trouble with page.type not typing all characters,453384999,aslushnikov,2019-01-11T05:41:01Z,"@fringd @fenilkanjani are you guys running headless or headful? If you have a good repro that I can run and debug locally, feel free to file a separate issue. "
+1648,closed,Having trouble with page.type not typing all characters,453392552,fringd,2019-01-11T06:27:57Z,"I'm running headless
+
+On Fri, Jan 11, 2019 at 12:41 AM Andrey Lushnikov <notifications@github.com>
+wrote:
+
+> @fringd <https://github.com/fringd> @fenilkanjani
+> <https://github.com/fenilkanjani> are you guys running headless or
+> headful? If you have a good repro that I can run and debug locally, feel
+> free to file a separate issue.
+>
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/GoogleChrome/puppeteer/issues/1648#issuecomment-453384999>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AAQpRUBSs9W19uDW4Nua5t6su_5eypSzks5vCCQHgaJpZM4RLOeS>
+> .
+>
+"
+1648,closed,Having trouble with page.type not typing all characters,453655198,fringd,2019-01-11T21:01:37Z,"I'm also filling out multiple text inputs in one tab while controlling multiple pages in multiple threads.
+
+I haven't got a ton of time for a minimal repro atm :("
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,530261272,entrptaher,2019-09-11T07:38:13Z,"I don't get any error with your code. Can you try with proxy/vpn? 
+
+![image](https://user-images.githubusercontent.com/8284972/64677424-5a34b800-d499-11e9-8226-70634272fe69.png)
+"
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,530261936,mathiasbynens,2019-09-11T07:40:18Z,"This doesn't seem to be a bug in Puppeteer, but rather with the website which redirect-loops in certain scenarios."
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,530316830,AndrejGajdos,2019-09-11T10:14:57Z,"@entrptaher I tried VPN and US endpoint and it really works.
+
+@mathiasbynens Yes, website does too many redirects for requests from different location. 
+
+I am wondering, why I get this error in Puppeteer but not in desktop browser?
+
+
+"
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,530327623,entrptaher,2019-09-11T10:49:13Z,"It's probably checking some fingerprint or anti bot measurements. You can try https://www.npmjs.com/package/puppeteer-extra-plugin-stealth to see if you have any success. Also, you can try with proxies. "
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,530329905,mathiasbynens,2019-09-11T10:56:44Z,"Closing this as it's not a bug in Puppeteer. Thanks, everyone!"
+4919,closed,net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer,2658385705,jiao1187875445,2025-02-14T06:25:18Z,"@mathiasbynens @entrptaher I encountered the same problem, but strangely, the version 19 I used before was good, but when I upgraded to 24.2, this problem occurred. I tried version 23.11.1 again and it was also good. If it's not related to puppeteer, the effect after switching versions should be consistent."
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,752392373,QAnders,2020-12-30T09:39:02Z,"This is not any ""official"" answer, just trying to help out... :)
+
+This most often has to do with some object is ""spilling over"" to the second page due to margins and/or padding which can't be seen. I often alter my css and draw borders around the objects (`style=""border: 1px solid red;""`) so you can see where the objects ends and what is spilling over.
+
+Most often your local browser (Chrome is of course best to use) agrees with Puppeteer so load your HTML in the browser an select to ""Print..."" (set printer to ""Save as PDF"" or similar) and you'll see in the preview how many pages it's going to print. 
+The alter your css to lessen the height/width of your objects to make sure only one page is printed.
+
+If you are using a header/footer in Puppeteer then you need to make room for those as well so you'd have to lessen your height of the ""page"". There also it helps to add a border around the header and footer to make it visible. **NB!** somethins the footer is added as a tiny small box so make sure you add some ""font-size"" to the header/footer objects.
+
+Sometimes it helps adding this if no obvious object is spilling over:
+```
+        @media print {
+            /* prevent blank page at end */
+            table:last-of-type { page-break-after: auto; }
+            html, body {
+                height: 100%;
+            }
+        }
+```"
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,1166337779,stale[bot],2022-06-25T18:16:55Z,"We're marking this issue as unconfirmed because it has not had recent activity and  we weren't able to confirm it yet. It will be closed if no further activity occurs within the next 30 days.
+"
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,1194495697,stale[bot],2022-07-25T19:06:38Z,"We are closing this issue. If the issue still persists in the latest version of Puppeteer, please reopen the issue and update the description. We will try our best to accomodate it!
+"
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,1658710050,pushmiq,2023-07-31T16:16:36Z,still happens
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,2444317740,Lionberg,2024-10-29T13:51:32Z,And still happening... 
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,2594704267,heytulsiprasad,2025-01-16T07:21:03Z,"No idea if it's my code or puppeteer, but it does happen for me. 
+Tried above fix by adding in css, no result."
+6704,closed,pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.,2655046439,againer,2025-02-12T23:13:23Z,"I was able to remove the extra blank page with `pageRanges` and a little bit of jank. The css solutions I found all over the inet didn't do anything for me.
+```javascript
+
+// metadata.height for us is a mapping between format and pixels based on 96 DPI - Chrome Headless default
+// https://pptr.dev/api/puppeteer.pdfoptions
+// IE: `Letter` -> 1056; `A0` -> 4493; etc.
+const totalPages = await page.evaluate(
+    (height) => Math.round(document.body.scrollHeight / (height || 1056)), metadata.height);
+
+await page.pdf({...params, pageRanges: `1-${totalPages}`});
+```
+
+I support dynamic paper `format` in my system. If you are supporting only `Letter`, then you can probably get away with using:
+```javascript
+const totalPages = await page.evaluate(() => Math.round(document.body.scrollHeight / (1056)));
+await page.pdf({...params, pageRanges: `1-${totalPages}`});
+```"
+13599,closed,Unexpected change in `⁠proxyServer`,2647134073,OrKoN,2025-02-10T07:20:14Z,"I do not see any changes related to the proxy server option in https://github.com/puppeteer/puppeteer/compare/puppeteer-v23.11.1...puppeteer-v24.2.0 Do you have a more specific range when the behavior changed for you?
+
+Could you please provide the proxy server implementation that you are using?"
+13599,closed,Unexpected change in `⁠proxyServer`,2647138026,OrKoN,2025-02-10T07:22:56Z,Our tests pass with a full URL as previously https://github.com/puppeteer/puppeteer/blob/main/test/src/proxy.spec.ts#L186
+13599,closed,Unexpected change in `⁠proxyServer`,2647528008,Kikobeats,2025-02-10T10:13:47Z,"Thanks for clarifying; I wrote a more complete example based in the test, and I'm not seeing proxy server being called:
+
+```js
+'use strict'
+
+import { request, createServer as nodeCreateServer } from 'http'
+import puppeteer from 'puppeteer'
+
+let port = 1337
+
+const endpoint = server => {
+  const { address, port, family } = server.address()
+  const hostname = family === 'IPv6' ? `[${address}]` : address
+  return new URL(`http://${hostname}:${port}`).toString()
+}
+
+const createServer = async handler => {
+  const server = nodeCreateServer(handler)
+
+  server.url = await (async () => {
+    const { promise, resolve } = Promise.withResolvers()
+    server.listen({ host: '127.0.0.1', port: port++ }, () => resolve(endpoint(server)))
+    return promise
+  })()
+
+  const close = server.close.bind(server)
+
+  server.close = () => new Promise(resolve => close(resolve))
+
+  return server
+}
+
+const server = await createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' })
+  res.end('<html><body><h1>This is server 1</h1></body></html>')
+})
+
+const proxiedRequestUrls = []
+
+const proxy =
+  await createServer((originalRequest, originalResponse) => {
+    proxiedRequestUrls.push(originalRequest.url)
+
+    const proxyRequest = request(
+      originalRequest.url,
+      {
+        method: originalRequest.method,
+        headers: originalRequest.headers
+      },
+      proxyResponse => {
+        originalResponse.writeHead(
+          proxyResponse.statusCode,
+          proxyResponse.headers
+        )
+        proxyResponse.pipe(originalResponse, { end: true })
+      }
+    )
+
+    originalRequest.pipe(proxyRequest, { end: true })
+  })
+
+console.log()
+console.log(' Proxy URL:', proxy.url)
+console.log('Server URL:', server.url)
+console.log()
+
+const browser = await puppeteer.launch()
+const context = await browser.createBrowserContext({ proxyServer: proxy.url })
+const page = await context.newPage()
+await page.goto(server.url)
+
+const content = await page.content()
+console.log(content)
+console.log({ proxiedRequestUrls })
+
+await page.screenshot({ path: 'screenshot.png' })
+
+await browser.close()
+await proxy.close()
+await server.close()
+await proxy.close()
+```
+
+The output for me is:
+
+```
+ Proxy URL: http://127.0.0.1:1338/
+Server URL: http://127.0.0.1:1337/
+
+<html><head></head><body><h1>This is server 1</h1></body></html>
+{ proxiedRequestUrls: [] }
+```
+
+Can you help me to understand what's happening?"
+13599,closed,Unexpected change in `⁠proxyServer`,2647636631,OrKoN,2025-02-10T10:57:41Z,"Thanks for providing the code, I will take a look today."
+13599,closed,Unexpected change in `⁠proxyServer`,2647779483,OrKoN,2025-02-10T11:58:57Z,"I have not debugged that code yet but it also does not work with puppeteer@23.11.1:
+
+```
+❯ node proxy.mjs
+
+Proxy URL: http://127.0.0.1:10874/
+Server URL: http://127.0.0.1:10873/
+executable path undefined
+
+<html><head></head><body><h1>This is server 1</h1></body></html>
+{ proxiedRequestUrls: [] }
+file:///Users/alexrudenko/src/pptr-test/proxy.mjs:82
+  throw new Error('not proxied')
+        ^
+
+Error: not proxied
+    at file:///Users/alexrudenko/src/pptr-test/proxy.mjs:82:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+```
+
+does it pass for you with 23.11.1? which OS is it?"
+13599,closed,Unexpected change in `⁠proxyServer`,2647958105,OrKoN,2025-02-10T13:16:06Z,The difference to our test is that our tests picks a non-localhost hostname like 192.0.0.2 as I think Chrome never proxied local requests (https://github.com/puppeteer/puppeteer/blob/main/test/src/proxy.spec.ts#L34). Starting the proxy on `192.0.0.2` (the IP I have in the local network) makes the script work for me (with the latest Chrome + Puppeteer as well).
+13599,closed,Unexpected change in `⁠proxyServer`,2648882354,Kikobeats,2025-02-10T18:22:25Z,"@OrKoN got it although I didn't get it to work as expected.
+
+Even I use `os.hostname()` instead of 127.0.0.1 or a cloudflare tunnel it's failing in the same way ☹️"
+13599,closed,Unexpected change in `⁠proxyServer`,2648900181,OrKoN,2025-02-10T18:30:47Z,"here is a working version:
+
+```
+import { request, createServer as nodeCreateServer } from 'http'
+import os from 'os'
+import puppeteer from 'puppeteer'
+
+let port = 11337
+
+let HOSTNAME = os.hostname();
+
+// Hostname might not be always accessible in environments other than GitHub
+// Actions. Therefore, we try to find an external IPv4 address to be used as a
+// hostname in these tests.
+const networkInterfaces = os.networkInterfaces();
+for (const key of Object.keys(networkInterfaces)) {
+  const interfaces = networkInterfaces[key];
+  for (const net of interfaces || []) {
+    if (net.family === 'IPv4' && !net.internal) {
+      HOSTNAME = net.address;
+      break;
+    }
+  }
+}
+
+console.log('HOSTNAME', HOSTNAME)
+
+const endpoint = server => {
+  const { port } = server.address()
+  return `http://${HOSTNAME}:${port}`;
+}
+
+const createServer = async handler => {
+  const server = nodeCreateServer(handler)
+
+  server.url = await (async () => {
+    const { promise, resolve } = Promise.withResolvers()
+    server.listen({ host: '0.0.0.0', port: port++ }, () => resolve(endpoint(server)))
+    return promise
+  })()
+
+  const close = server.close.bind(server)
+
+  server.close = () => new Promise(resolve => close(resolve))
+
+  return server
+}
+
+const server = await createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' })
+  res.end('<html><body><h1>This is server 1</h1></body></html>')
+})
+
+const proxiedRequestUrls = []
+
+const proxy =
+  await createServer((originalRequest, originalResponse) => {
+    proxiedRequestUrls.push(originalRequest.url)
+
+    const proxyRequest = request(
+      originalRequest.url,
+      {
+        method: originalRequest.method,
+        headers: originalRequest.headers
+      },
+      proxyResponse => {
+        originalResponse.writeHead(
+          proxyResponse.statusCode,
+          proxyResponse.headers
+        )
+        proxyResponse.pipe(originalResponse, { end: true })
+      }
+    )
+
+    originalRequest.pipe(proxyRequest, { end: true })
+  })
+
+console.log()
+console.log(' Proxy URL:', proxy.url)
+console.log('Server URL:', server.url)
+console.log()
+
+const browser = await puppeteer.launch()
+const context = await browser.createBrowserContext({ proxyServer: proxy.url })
+const page = await context.newPage()
+await page.goto(server.url)
+
+const content = await page.content()
+console.log(content)
+console.log({ proxiedRequestUrls })
+
+await page.screenshot({ path: 'screenshot.png' })
+
+await browser.close()
+await proxy.close()
+await server.close()
+await proxy.close()
+```"
+13599,closed,Unexpected change in `⁠proxyServer`,2653285726,Kikobeats,2025-02-12T10:21:41Z,"That explained, thanks a lot!"
+13599,closed,Unexpected change in `⁠proxyServer`,2655015407,Kikobeats,2025-02-12T22:51:35Z,"@OrKoN I'm trying to write an e2e test to verify this, essentially deploying the proxy logic on a remote server.
+
+As much as I tried, the browser can't access the URL when the remote proxy is provided.
+
+![Image](https://github.com/user-attachments/assets/d70cc018-aa0a-4356-817f-78a4234ca913)
+
+This is the only change in your example:
+
+```js
+const browser = await puppeteer.launch({ headless: false })
+const context = await browser.createBrowserContext({ proxyServer: 'https://http-proxy-morning-snowflake-1128.fly.dev' })
+const page = await context.newPage()
+await page.goto('https://example.com')
+```
+
+If I verify the proxy using cURL, it works:
+
+```
+curl -i -x https://http-proxy-morning-snowflake-1128.fly.dev http://example.com
+```
+
+Do you have any idea why? I will keep the remote proxy running in case you want to test it."
+13599,closed,Unexpected change in `⁠proxyServer`,2655698698,OrKoN,2025-02-13T07:01:40Z,Does the curl work if it is https://example.com?
+13599,closed,Unexpected change in `⁠proxyServer`,2655702642,OrKoN,2025-02-13T07:04:19Z,"```
+❯ curl -i -x https://http-proxy-morning-snowflake-1128.fly.dev https://example.com
+HTTP/1.1 502 Bad Gateway
+server: Fly/12401d8b4 (2025-02-12)
+via: 1.1 fly.io
+fly-request-id: 01JKZ1Y8NXT868ME1CYB5V3SSG-arn
+content-length: 0
+date: Thu, 13 Feb 2025 07:04:01 GMT
+
+curl: (56) CONNECT tunnel failed, response 502
+```"
+13599,closed,Unexpected change in `⁠proxyServer`,2655863338,Kikobeats,2025-02-13T08:29:48Z,"@OrKoN, sorry the machine auto-stopped during the night. It's back up now; can you test it? 🙏"
+13599,closed,Unexpected change in `⁠proxyServer`,2655871956,OrKoN,2025-02-13T08:33:57Z,Still the same but I do get the response for http:// like before.
+13599,closed,Unexpected change in `⁠proxyServer`,2655975124,Kikobeats,2025-02-13T09:14:34Z,"@OrKoN, that's probably the issue. Chromium is forcing HTTPS, and the proxy can't handle it. Let me handle it on my side for now 🙂"
+13599,closed,Unexpected change in `⁠proxyServer`,2656188690,OrKoN,2025-02-13T10:40:15Z,"You can turn off the auto-upgrades (there are multiple feature flags for now while the feature is being rolled out to users, IIRC one is --disable-features=HttpsUpgrades). Also, the headless shell would not have the auto-upgrades behavior (since it is not shipping for regular users). "
+13433,closed,[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise,2558146124,timvandermeij,2024-12-21T15:04:48Z,"I think the problem is that the check introduced in https://github.com/GoogleChromeLabs/chromium-bidi/pull/2039/files is not present in `Realm.js` at https://github.com/GoogleChromeLabs/chromium-bidi/blob/main/src/bidiMapper/modules/script/Realm.ts#L122. I tried introducing it locally and that _seems_ to fix the issue, but note that I can't really tell if this is a good fix or not because I don't know the context of this code.
+
+/cc @OrKoN @jrandolf-2 as authors of the original PR since you probably know much more about this code than I do."
+13433,closed,[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise,2558584792,OrKoN,2024-12-22T20:19:28Z,Thanks for filing the issue once again. Indeed it regressed due to the lack of test coverage. I am adding a WPT test and a fix into chromium-bidi. 
+13433,closed,[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise,2592939888,Lightning00Blade,2025-01-15T14:03:13Z,"_This is now fixed in the releases `>=24.0.0`._
+
+It seem the dependency was not updated correctly."
+13433,closed,[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise,2651867286,Lightning00Blade,2025-02-11T19:28:33Z,The issue with dependencies should be resolved in the latest version.
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2631630071,OrKoN,2025-02-03T17:28:56Z,"```
+& 'C:\Program Files\Google\Chrome\Application\chrome.exe' --user-data-dir='C:\{{path_to}}\chrome-data' --profile-directory=profile1
+
+& 'C:\Program Files\Google\Chrome\Application\chrome.exe' --user-data-dir='C:\{{path_to}}\chrome-data' --profile-directory=profile2
+```
+
+this does not actually launch a second browser process. In the second command, you should see the output like `Opening in existing browser session.` indicating that it detected the previously launched process and handled the command there closing the second process. Puppeteer on the hand always launches a new process and the browser instance as alive as long as the process is alive and does not support switching between profiles. Each Chrome browser process wants a singleton lock of the user-data dir, that's why you see a failure. You can start the two profiles via the commands and connect the browser instance using https://pptr.dev/api/puppeteer.puppeteer.connect/  or you can create temporary profiles using https://pptr.dev/api/puppeteer.browser.createbrowsercontext/. For now, we do not have plans on changing this behavior. "
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2631671836,OrKoN,2025-02-03T17:48:28Z,"Forgot to mention that you can achieve the behavior similar to the behavior via direct commands by supplying all args yourself and setting https://pptr.dev/api/puppeteer.launchoptions/#ignoredefaultargs on the launch process but the result will be the same, the commands will be handled by the first process and the second process will be closed.  "
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2631702033,harimayco,2025-02-03T18:02:59Z,"I see now, thanks for the explanation @OrKoN 
+I think I need to find another way to achive this. maybe I can copy entire userDataDir first to temporary folder then launch the puppeteer then delete it after job done.
+is it possible if I copy userDataDir for Browser2 while Browser1 still in running state, then launch with temp userDataDir for Browser2? "
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2631713500,OrKoN,2025-02-03T18:08:19Z,"> is it possible if I copy userDataDir for Browser2 while Browser1 still in running state, then launch with temp userDataDir for Browser2?
+
+I am not sure if it can lead to the corruption of the copy as I do not think the browser ensures atomic updates to the user data. The safest way is to copy a profile ahead of time. Btw, also forgot to mention that `headless: 'shell'` does not have this restriction but it is technically a different browser implementation from Chrome (see https://developer.chrome.com/docs/chromium/headless for details). "
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2649725088,harimayco,2025-02-11T03:25:35Z,"Thanks @OrKoN 
+
+I have another stupid question.
+if I create new **empty** folder for userDataDir & profile path for example:
+
+`C:\Documents\UserDataDirEmpty\ProfileEmpty`
+
+then I use this path for puppeteer
+```
+userDataDir: ""C:\Documents\UserDataDirEmpty"", 
+args: [
+            ...
+            ""--profile-directory=ProfileEmpty"", // using profile 2
+        ]
+```
+
+it can run and the folder will be filled up with some files from chrome. but on finish the userDataDir folder gets deleted entirely including the folder ""ProfileEmpty"".
+I don't know if this behaviour done by puppeteer or chrome itself. is there a way I can keep this userDataDir instead of getting deleted after run ?
+"
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2649972381,OrKoN,2025-02-11T07:00:46Z,"That could be a bug, could you please post a minimal that demonstrates the issue? you could use Node's fs module to create a folder and assert that it still exists after the browser is closed."
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2650350603,harimayco,2025-02-11T10:11:42Z,"> That could be a bug, could you please post a minimal that demonstrates the issue? you could use Node's fs module to create a folder and assert that it still exists after the browser is closed.
+
+Sorry I couldn't replicate it with simple code. 
+I have tried with fresh project using same parameters, it works normally without userdatadir getting deleted.
+but if I run in my project which using electron & puppeteer it gets deleted.
+
+but I have a workaround for this problem, I have to define parameter `--user-data-dir=` in args to avoid the deletion.
+so this is my final code
+
+```
+userDataDir: ""C:\Documents\UserDataDirEmpty"", 
+args: [
+            ...
+            ""--profile-directory=ProfileEmpty"",
+            ""--user-data-dir=C:\Documents\UserDataDirEmpty""
+        ]
+```
+
+if I removed the args ""--user-data-dir"" it launches the browser using the correct userdatadir from userDataDir param but the folder gets deleted once job done.
+maybe electron causing this issue but I'm not really sure."
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2650375869,OrKoN,2025-02-11T10:22:27Z,"If you are running Electron, it might behave differently than Chrome. We do not really support Electron explicitly so I cannot say for sure if it is expected. It is possible that electron cleans the userDataDir. Puppeteer should only delete the user data dir if a custom userDataDir was not provided and Puppeteer generated its own user data dir folder. Duplicating the user-data-dir in the args should not matter because what `userDataDir` does is adding adding that argument."
+13581,closed,[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent),2650530447,harimayco,2025-02-11T11:26:58Z,"I mean I'm running my puppeteer script under electron main proccess but I'm still using chrome as executablePath.
+but it's ok for now, will check if I can find the root cause of this behaviour. 
+
+many thanks @OrKoN "
+11521,closed,Fix ng-schematics release-please,1860508418,Lightning00Blade,2023-12-18T13:31:21Z,Opened https://github.com/googleapis/release-please/issues/2172
+13602,closed,chore(deps-dev): Bump the dev-dependencies group with 9 updates,2647234127,dependabot[bot],2025-02-10T08:17:39Z,"Looks like these dependencies are updatable in another way, so this is no longer needed."
+13600,closed,[Bug]: Zombie Chromium Instances,2647125760,OrKoN,2025-02-10T07:14:45Z,Thanks for reporting! You probably need to use an init process (either as an entrypoint script or the --init flag in docker run). It does not appear that you are using it? Related https://pptr.dev/guides/docker#usage
+13600,closed,[Bug]: Zombie Chromium Instances,2647132618,anschm,2025-02-10T07:19:16Z,Thats for your answer. I fixed this issue by using dump-init in my Dockerfile.
+441,closed,How to set Value for  a Input Element,323750734,jsnanigans,2017-08-21T14:01:25Z,"Hi there,
+I think you should use the `page.focus()` and `page.keyboard.type()` function for this.
+Try this code:
+```javascript
+// ...
+await page.focus('#lst-ib')
+page.keyboard.type('China')
+// ...
+```
+
+edit: updated `page.type()` to `page.keyboard.type()`"
+441,closed,How to set Value for  a Input Element,323843656,hzoo,2017-08-21T20:24:50Z,"You can also use `page.evaluate`:
+
+```js
+    await page.evaluate((a, b) => {
+      document.querySelector('#a').value = a;
+      document.querySelector('#b').value = b;
+      document.querySelector('#c').click();
+    }, a, b);
+```"
+441,closed,How to set Value for  a Input Element,421522237,alexander-elgin,2018-09-15T01:51:10Z,"I like the @jsnanigans 's answer but instead of 
+> page.type('China')
+
+I used
+```
+await page.keyboard.type('China')
+```"
+441,closed,How to set Value for  a Input Element,435735649,hackhat,2018-11-05T02:19:48Z,"The problem with this is that you will prepend this string to the input (if has any value in the input already). You first need to delete the text that is there (as the question asks how to set a value, not how to prepend a value to an input box).
+
+You could use ""CTRL+A"", but that won't work on MAC.
+
+A cross-OS solution could be:
+
+    const setTextInputValue = async (page: puppeteer.Page, selector: string, value: string | number) => {
+      await page.waitFor(selector);
+      await page.evaluate((data) => {
+        return document.querySelector(data.selector).value = data.value
+      }, {selector, value})
+    }
+    await setTextInputValue(page, `.mySelector`, `value`)
+
+
+Or you can set to empty and then use the type function
+
+
+"
+441,closed,How to set Value for  a Input Element,435744396,ParableYields,2018-11-05T03:23:14Z,"I’m just trying to learn it not easy when no one helping
+
+On Sun, Nov 4, 2018 at 9:20 PM Hack Hat <notifications@github.com> wrote:
+
+> The problem with this is that you will prepend this string to the input.
+> You first need to delete the text that is there (as the question asks how
+> to set a value, not how to prepend a value to an input box).
+>
+> You could use ""CTRL+A"", but that won't work on MAC.
+>
+> A cross-OS solution could be:
+>
+> const setTextInputValue = async (page: puppeteer.Page, selector: string, value: string | number) => {
+>   await page.waitFor(selector);
+>   await page.evaluate((data) => {
+>     return document.querySelector(data.selector).value = data.value
+>   }, {selector, value})
+> }
+> await setTextInputValue(page, `.mySelector`, `value`)
+>
+> Or you can set to empty and then use the type function
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/GoogleChrome/puppeteer/issues/441#issuecomment-435735649>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AqjwhxaJDboCRcFa6SGCPTl_yMjjb4VVks5ur6BcgaJpZM4O9HE7>
+> .
+>
+-- 
+Sent from Gmail Mobile
+"
+441,closed,How to set Value for  a Input Element,436048440,jsnanigans,2018-11-05T21:50:22Z,"I don't think its a great idea to set the value with the `.value` method, in my case I rely on other scripts triggering on the `input` event so here are some examples based on hzoo's and my solution:
+
+```javascript
+await page.evaluate((a, b) => {
+    document.querySelector('#a').select();
+}, a, b);
+await page.keyboard.type('China')
+```
+or
+```javascript
+await page.evaluate((a, b) => {
+    document.querySelector('#a').value = '';
+}, a, b);
+await page.keyboard.type('China')
+```
+or something maybe even this, without eval-uate :)
+```javascript
+const foo = await page.$('#a');
+await foo.click({ clickCount: 3 });
+await page.keyboard.type('China')
+```
+but I am assuming that triple click will select text on every system "
+441,closed,How to set Value for  a Input Element,436110980,hackhat,2018-11-06T02:35:27Z,"@jsnanigans yes, I don't like to magically set the `.value`, is hacky. I wouldn't do `await = foo.click({ clickCount: 3 });` because relies on the OS to have this enabled and work everywhere, you don't want to worry about this breaking.
+
+I'm actually doing your second solution right now, but I like your first solution more. I don't feel very comfortable with that because if some script on the page changes your focus between the select and type, it will break. The most robust I still think is the 2nd solution."
+441,closed,How to set Value for  a Input Element,448741921,Xample,2018-12-19T20:59:42Z,"The signature of type is 
+```  type(selector: string, text: string, options?: { delay: number }): Promise<void>;```
+Meaning the usage is as follow
+```typescript
+await page.type('#lst-ib', 'China');
+```
+
+> Hi there,
+> I think you should use the `page.focus()` and `page.type()` function for this.
+> Try this code:
+> 
+> ```js
+> // ...
+> await page.focus('#lst-ib')
+> page.type('China')
+> // ...
+> ```
+
+"
+441,closed,How to set Value for  a Input Element,624886603,haixiangyan,2020-05-06T20:56:12Z,"For me, I will recommend @jsnanigans solution, using
+
+```js
+  await page.focus(usernameInput)
+  await page.keyboard.type(username)
+```
+
+Using @hzoo solution is OK for small script, but is not very maintainable for big project. The main problem of this solution is that you are actually injecting a JavaScript code in the website. That means it will not work for TypeScript, async/await, external variables. For example
+
+```js
+  const myVar = 'hello'
+  await page.evaluate(() => {
+    const a: string = 'hello' -> Syntax Error, not work for TypeScript.
+    
+    console.log(myVar) -> Variable myVar is not defined
+
+    async a() {} -> Some browser hasn't support await/async syntax yet
+  })
+```"
+2089,closed,Ability to prevent header/footer on certain pages,368127277,aslushnikov,2018-02-23T20:18:06Z,"@mjschranz you can issue `print` command multiple times with different page ranges, specifying the header/footer options differently for each range.
+
+Would it work? "
+2089,closed,Ability to prevent header/footer on certain pages,368129098,mjschranz,2018-02-23T20:25:57Z,"So you're suggesting running the `.pdf` call multiple times with different `pageRanges` values and then combine the buffer data of each one? I suppose that could work but I would need to give it a try.
+
+On that note, how does one specify from ""page 2 until the end"". Is it just `2-`?
+
+Thanks
+
+EDIT:
+
+Thusfar that idea works on paper but my script winds up hanging when trying to implement it in practice. The meat and potatoes.....
+
+```javascript
+generate(query) {
+    return new Promise(async function(resolve, reject) {
+      const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+      const page = await browser.newPage();
+      const baseUrl = query.baseUrl;
+      const url = query.portfolioUrl;
+      const token = query.token;
+
+      try {
+        await page.goto(baseUrl, {waitUntil: 'domcontentloaded'});
+      } catch(e) {
+        reject('Failed on navigation to first page');
+      }
+
+      try {
+        await page.evaluate((loginToken) => {
+          localStorage.setItem('access_token', loginToken);
+        }, token);
+      } catch(e) {
+        reject('Failed on localStorage step');
+      }
+
+      page.close();
+
+      const finalPage = await browser.newPage();
+
+      await finalPage.setExtraHTTPHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      try {
+        await finalPage.goto(url, {waitUntil: 'networkidle0'});
+      } catch(e) {
+        reject('Failed on navigation to second page');
+      }
+
+      const year = new Date().getFullYear();
+      const date = new Date();
+
+      const HEADER_TEMPLATE = `
+        Actual content removed because work.
+      `;
+
+      const FOOTER_TEMPLATE = `
+        Actual content removed because work.
+      `;
+
+      finalPage.pdf({
+        format: 'A4',
+        pageRanges: '1'
+      }).then((bufferOne) => {
+
+        finalPage.pdf({
+          format: 'A4',
+          printBackground: true,
+          displayHeaderFooter: true,
+          headerTemplate: HEADER_TEMPLATE,
+          footerTemplate: FOOTER_TEMPLATE,
+          margin: {
+            top: '29mm',
+            bottom: '20mm'
+          },
+          pageRanges: '2-'
+        }).then((bufferTwo) => {
+          let buffer = Buffer.concat([bufferOne, bufferTwo], bufferOne.length + bufferTwo.length);
+
+          finalPage.evaluate(() => {
+            localStorage.clear();
+          }).then(() => {
+            browser.close().then(() => {       
+              resolve(buffer);
+            });
+          });
+        }).catch((e) => {
+          reject('Failed on generation of remaining pages');
+        });
+      }).catch((e) => {
+        reject('Failed on PDF generation page one');
+      });
+    });
+  }
+```"
+2089,closed,Ability to prevent header/footer on certain pages,368155683,mjschranz,2018-02-23T22:23:01Z,"Specifically the error I am having at this point with the following approach is that the second buffer seems to ""overwrite"" the first and I only have the results of the second."
+2089,closed,Ability to prevent header/footer on certain pages,371585527,chrisjpatty,2018-03-08T18:51:08Z,"I don't know this for sure, but I suspect you can't just combine PDFs by combining their buffers. I would assume that would just smush two pdf files together without properly encoding them into a single pdf. You might need to run some kind of tool that would combine them after they're generated."
+2089,closed,Ability to prevent header/footer on certain pages,371591071,astefanutti,2018-03-08T19:09:50Z,"Just in case that may help, I implemented PDF buffers merging from Puppeteer in https://github.com/astefanutti/decktape."
+2089,closed,Ability to prevent header/footer on certain pages,371594946,chrisjpatty,2018-03-08T19:22:46Z,@astefanutti Oh nice! Where in your code might I find your specific implementation?
+2089,closed,Ability to prevent header/footer on certain pages,371602932,astefanutti,2018-03-08T19:49:23Z,"@chrisjpatty main loop is here: https://github.com/astefanutti/decktape/blob/1ee6449885daacc2a8167d7bb747e7c79efc9649/decktape.js#L298-L307.
+
+It factorises duplicated images and consolidate font definitions, hence the complexity."
+2089,closed,Ability to prevent header/footer on certain pages,374886481,pragyandas,2018-03-21T10:05:20Z,"```
+const firstPage = await page.pdf({
+        format: 'A4',
+        pageRanges: '1',
+      });
+      const restPages = await page.pdf({
+        format: 'A4',
+        headerTemplate: '<p></p>',
+        footerTemplate:
+          '<div class=""footer"" style=""font-size: 10px;color: #000; margin: 10px auto;clear:both; position: relative;""><span class=""pageNumber""></span></div>',
+        displayHeaderFooter: true,
+        pageRanges: '2-',
+        margin: {
+          bottom: '100px',
+        },
+      });
+      const totalLength = firstPage.length + restPages.length;
+      const result = Buffer.concat([firstPage, restPages], totalLength);
+```
+
+This works for me without any error but it chops off the 1st page. The generated PDF starts from page 2. 
+Any pointers appreciated."
+2089,closed,Ability to prevent header/footer on certain pages,374930553,Janpot,2018-03-21T13:09:28Z,@pragyandas You can't just append two binary blobs like this to concatenate pdfs. The resulting blob is not in the right format. You'd rather want to parse them first and concatenate the pages in a new file e.g. with [`hummus.js`](https://github.com/galkahana/HummusJS/wiki/Embedding-pdf#basic-page-appending). Or use [a library](https://www.npmjs.com/package/pdf-merge) that does this for you if you don't mind writing to disk.
+2089,closed,Ability to prevent header/footer on certain pages,374931783,mjschranz,2018-03-21T13:13:49Z,Yes as discovered we can't unfortunately. Libraries like the above mentioned do help. I wound up using `pdf-merge` but it would still be nice to have this feature baked in if possible.
+2089,closed,Ability to prevent header/footer on certain pages,379429203,aslushnikov,2018-04-07T03:39:22Z,"@mjschranz There's a technical possibility to evaluate js inside `headerTemplate` and `footerTemplate`. However, this requires engineering effort and spawns a lot of concerns that should be thought through.
+
+Closing this since there's a workable solution for the issue. We can reconsider supporting script execution inside `headerTemplate` and `footerTemplate` if this is justified by other valid usecases and there's strong interest from the community."
+2089,closed,Ability to prevent header/footer on certain pages,379934407,tradiff,2018-04-10T00:21:14Z,"I hope this solution helps someone, even though it's super hacky.
+
+I had a need to remove the header on page 1 (a cover letter).  The following puppeteer code solved my problem.  It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin).  It then adds a margin-top to the body, to put a visible margin back into place.
+
+```
+await page.addStyleTag({
+    content: ""@page:first {margin-top: 0;} body {margin-top: 1cm;}""
+});
+```
+
+That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates.  There are a lot of use cases for this (alternating pages for binders would be another example).
+"
+2089,closed,Ability to prevent header/footer on certain pages,379935375,mjschranz,2018-04-10T00:27:47Z,"I wound up using the `evaluate` method to execute JavaScript that would
+toggle display on the pages/sections of my PDF.
+
+On Mon, Apr 9, 2018, 8:21 PM Travis Collins, <notifications@github.com>
+wrote:
+
+> I hope this solution helps someone, even though it's super hacky.
+>
+> I had a need to remove the header on page 1 (a cover letter). The
+> following puppeteer code solved my problem. It adds a style tag which
+> collapses the margin-top on the first page (effectively hiding the margin).
+> It then adds a margin-top to the body, to put a visible margin back into
+> 0place.
+>
+> await page.addStyleTag({
+>     content: ""@page:first {margin-top: 0;} body {margin-top: 1cm;}""
+> });
+>
+> That being said, I do think puppeteer should add the ability to execute
+> javascript to manipulate header and footer templates. There are a lot of
+> use cases for this (alternating pages for binders would be another example).
+>
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/GoogleChrome/puppeteer/issues/2089#issuecomment-379934407>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AA255cb3wGIsscO2mIOGZ4ReR1MumWwyks5tm_sMgaJpZM4SRUBc>
+> .
+>
+"
+2089,closed,Ability to prevent header/footer on certain pages,380142425,tradiff,2018-04-10T15:27:01Z,"@mjschranz I've been trying to replicate your solution, and I'm having trouble manipulating the header with javascript.  Can you provide further details?"
+2089,closed,Ability to prevent header/footer on certain pages,380144134,mjschranz,2018-04-10T15:31:45Z,"@TravisTX I basically would run code like the following to hide/show various HTML of the page I was making a PDF out of. For our use case, we explicitly always broke for specific sections/areas which made it easier for us.
+
+```javascript
+        await finalPage.evaluate(() => {
+          document.querySelectorAll('.pdf-body').forEach((elem) => {
+            elem.style.display = 'none';
+          });
+          document.getElementById('summary-block').style.display = 'none';
+          document.getElementById('report-cover').style.display = 'block';
+          document.getElementById('d-page').style.display = 'none';
+        });
+```"
+2089,closed,Ability to prevent header/footer on certain pages,380159311,aslushnikov,2018-04-10T16:13:50Z,For the reference: there's a designated issue about running js in `footerTemplate` and `headerTemplate`: #2167.
+2089,closed,Ability to prevent header/footer on certain pages,405437229,Narigo,2018-07-17T02:14:08Z,"I tried @TravisTX workaround which works okay in the sense of hiding the header on the first page. But having a second and third page, their bottom(!) margin *may* run into a `footerTemplate`. 😞 Looks like Chrome PDF export does not interpret the `margin-bottom` for other pages anymore after using the hack..."
+2089,closed,Ability to prevent header/footer on certain pages,441337164,ghost,2018-11-24T02:03:13Z,"@Narigo  That's right, I'm having the same issue. "
+2089,closed,Ability to prevent header/footer on certain pages,483461808,SlashBin,2019-04-16T00:02:51Z,"@Narigo @gostavee same... did either of you ever find a solution for that workaround? I can get the first page to work fine, but the footer doesn't appear on subsequent pages (other than the last page given that the content doesn't run 100% of the last page)"
+2089,closed,Ability to prevent header/footer on certain pages,483463727,Narigo,2019-04-16T00:12:48Z,"Sorry @SlashBin I don't think I did find a proper workaround for that issue. I could come up with a different solution to my initial problem. (That means, I did not have to use multiple pages / templates at all, so I did not need to investigate any further...)"
+2089,closed,Ability to prevent header/footer on certain pages,483465474,SlashBin,2019-04-16T00:22:20Z,"Thanks @Narigo for the followup. I'm actually looking into just generating two PDFs and merging. So far seems viable:
+Just stumbled across this: https://stackoverflow.com/questions/55470714/trying-to-hide-first-footer-header-on-pdf-generated-with-puppeteer"
+2089,closed,Ability to prevent header/footer on certain pages,577761056,saurabh147sharma,2020-01-23T16:32:38Z,"@pragyandas @mjschranz 
+I'm using the following solution:
+`await page.pdf({ format: 'A3', printBackground: true, pageRanges: '2-' })`
+I'm getting following error: Protocol error (Page.printToPDF): Page range syntax error.
+In my case, I needed to show the header and footer on the first page only not on the others.
+I was able to create the first-page buffer successfully 
+The above problem has occurred because there was only 1 page. Now problem is that how can I determine how many pages are there at runtime?
+"
+2089,closed,Ability to prevent header/footer on certain pages,578158642,matrunchyk,2020-01-24T14:43:30Z,"@saurabh147sharma I had the same issue. I generate the first page, then use '2-' page ranges and then merge them into a single PDF using hummusJS. But when it's just one page, it was throwing the error you mentioned. I fixed that just using try/catch call."
+2089,closed,Ability to prevent header/footer on certain pages,627153525,hanrok,2020-05-12T07:01:55Z,"> I hope this solution helps someone, even though it's super hacky.
+> 
+> I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.
+> 
+> ```
+> await page.addStyleTag({
+>     content: ""@page:first {margin-top: 0;} body {margin-top: 1cm;}""
+> });
+> ```
+> 
+> That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).
+
+For any of you who tried this and had issues with the footer in other pages - try to add `margin-bottom`
+```
+await page.addStyleTag({
+	content: ""@page:first {margin-top: 0; margin-bottom: 150px;}""
+});
+```"
+2089,closed,Ability to prevent header/footer on certain pages,635477333,sriramgroot,2020-05-28T17:07:07Z,"> I hope this solution helps someone, even though it's super hacky.
+> 
+> I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.
+> 
+> ```
+> await page.addStyleTag({
+>     content: ""@page:first {margin-top: 0;} body {margin-top: 1cm;}""
+> });
+> ```
+> 
+> That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).
+
+Hi @TravisTX
+Thanks this solution solved my problem in generating PDF"
+2089,closed,Ability to prevent header/footer on certain pages,818390236,Venryx,2021-04-13T02:43:56Z,"> `await page.addStyleTag({content: ""@page:first {margin-top: 0; margin-bottom: 150px;}""});`
+
+This worked for me. However, I had to change the `margin-bottom` to `100px`, otherwise it was creating too much padding at the bottom of all the pages (more than the original). So you may need to fiddle with the value to get the margins/paddings exactly as you want."
+2089,closed,Ability to prevent header/footer on certain pages,948632458,andersonfurlantr,2021-10-21T13:44:28Z,"> > I hope this solution helps someone, even though it's super hacky.
+> > I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.
+> > ```
+> > await page.addStyleTag({
+> >     content: ""@page:first {margin-top: 0;} body {margin-top: 1cm;}""
+> > });
+> > ```
+> > 
+> > 
+> >     
+> >       
+> >     
+> > 
+> >       
+> >     
+> > 
+> >     
+> >   
+> > That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).
+> 
+> For any of you who tried this and had issues with the footer in other pages - try to add `margin-bottom`
+> 
+> ```
+> await page.addStyleTag({
+> 	content: ""@page:first {margin-top: 0; margin-bottom: 150px;}""
+> });
+> ```
+
+How to hide footer in the last page?"
+2089,closed,Ability to prevent header/footer on certain pages,949409986,sanderha,2021-10-22T08:37:13Z,"To solve this problem we ended up generating multiple pdf's and merging them with https://www.npmjs.com/package/pdf-merger-js 
+
+Would be nice to have some more options in Puppeteer though"
+2089,closed,Ability to prevent header/footer on certain pages,1253788355,deepakageeru,2022-09-21T14:24:07Z,"> ```
+> const firstPage = await page.pdf({
+>         format: 'A4',
+>         pageRanges: '1',
+>       });
+>       const restPages = await page.pdf({
+>         format: 'A4',
+>         headerTemplate: '<p></p>',
+>         footerTemplate:
+>           '<div class=""footer"" style=""font-size: 10px;color: #000; margin: 10px auto;clear:both; position: relative;""><span class=""pageNumber""></span></div>',
+>         displayHeaderFooter: true,
+>         pageRanges: '2-',
+>         margin: {
+>           bottom: '100px',
+>         },
+>       });
+>       const totalLength = firstPage.length + restPages.length;
+>       const result = Buffer.concat([firstPage, restPages], totalLength);
+> ```
+> 
+> This works for me without any error but it chops off the 1st page. The generated PDF starts from page 2. Any pointers appreciated.
+
+I tried similar thing using C# package of puppeteer, merging two buffers may work for text files but not pdfs as the way pdfs are encoded is different."
+2089,closed,Ability to prevent header/footer on certain pages,1265059510,felegy-norbert,2022-10-03T07:45:36Z,So 4 years passed and no proper solution yet?
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1676355013,itsmekingtiger,2023-08-13T13:06:19Z,"I've just solve same problem with running:
+
+```bash
+$ node node_modules/puppeteer/install.js
+
+# Downloading chrome r115.0.5790.170 - 121.5 MB [====================] 100% 0.0s 
+# Chrome (115.0.5790.170) downloaded to /Users/nomicon/.cache/puppeteer/chrome/mac_arm-115.0.5790.170
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1676410931,AeShevch,2023-08-13T16:51:27Z,"> I've just solve same problem with running:
+> 
+> ```shell
+> $ node node_modules/puppeteer/install.js
+> 
+> # Downloading chrome r115.0.5790.170 - 121.5 MB [====================] 100% 0.0s 
+> # Chrome (115.0.5790.170) downloaded to /Users/nomicon/.cache/puppeteer/chrome/mac_arm-115.0.5790.170
+> ```
+
+Thnx for your answer. I updated my Dockerfile, but nothing changes
+```
+# Install dependencies only when needed
+FROM node:16.3.0-alpine AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk update && apk add --no-cache libc6-compat && apk add git
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+RUN node node_modules/puppeteer/install.js
+
+# Rebuild the source code only when needed
+FROM node:alpine AS builder
+# add environment variables to client code
+ARG NEXT_PUBLIC_BACKEND_URL
+
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+
+WORKDIR /app
+
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+ARG NODE_ENV=production
+RUN echo ${NODE_ENV}
+RUN NODE_ENV=${NODE_ENV} npm run build
+
+# Production image, copy all the files and run next
+FROM node:alpine AS runner
+WORKDIR /app
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# You only need to copy next.config.js if you are NOT using the default configuration.
+# Copy all necessary files used by nex.config as well otherwise the build will fail
+
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pages ./pages
+COPY --from=builder /app/themes ./themes
+COPY --from=builder /app/.env ./.env
+
+USER nextjs
+
+# Expose
+EXPOSE 3000
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry.
+ENV NEXT_TELEMETRY_DISABLED 1
+CMD [""node"", ""node_modules/puppeteer/install.js""]
+CMD [""npm"", ""start""]
+
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1676414383,aleksandr-shevchenko-0,2023-08-13T17:06:27Z,"> ```shell
+> node node_modules/puppeteer/install.js
+> ```
+
+<img width=""1207"" alt=""Screenshot 2023-08-13 at 21 07 57"" src=""https://github.com/puppeteer/puppeteer/assets/134926474/2286c9f1-554b-4f83-aad9-9ddbb5e55fa5"">
+Run it directly inside my docker container on production and now I have new error:
+
+```
+Failed to launch the browser process! spawn /home/nextjs/.cache/puppeteer/chrome/linux-115.0.5790.170/chrome-linux64/chrome ENOENT\n\n\nTROUBLESHOOTING: https://pptr.dev/troubleshooting\n
+```
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1676418207,aleksandr-shevchenko-0,2023-08-13T17:24:01Z,"New try
+
+DockerFile:
+```
+FROM node:16.3.0-alpine AS deps
+RUN apk update && apk add --no-cache libc6-compat && apk add git && apk add chromium
+```
+
+nodejs
+```
+  const browser = await puppeteer.launch({
+    executablePath: `/usr/bin/chromium-browser`,
+    args: [`--disable-gpu`, `--disable-setuid-sandbox`, `--no-sandbox`, `--no-zygote`],
+  });
+```
+
+and... new error:
+```
+Failed to launch the browser process! spawn /usr/bin/chromium-browser ENOENT\n\n\nTROUBLESHOOTING: https://pptr.dev/troubleshooting\n
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1676451661,aleksandr-shevchenko-0,2023-08-13T20:07:23Z,"I did it! 
+
+```
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: `/usr/bin/google-chrome`,
+    args: [`--no-sandbox`, `--headless`, `--disable-gpu`, `--disable-dev-shm-usage`],
+  });
+```
+
+```
+# Install dependencies only when needed
+FROM node:slim AS deps
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+RUN apt-get update && \
+    apt-get install -y libc6 && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+
+# Rebuild the source code only when needed
+FROM node:slim AS builder
+# add environment variables to client code
+ARG NEXT_PUBLIC_BACKEND_URL
+
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+
+WORKDIR /app
+
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+ARG NODE_ENV=production
+RUN echo ${NODE_ENV}
+RUN NODE_ENV=${NODE_ENV} npm run build
+
+# Production image, copy all the files and run next
+FROM node:slim AS runner
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+WORKDIR /app
+
+# Create a non-root user
+RUN useradd -m nextjs -u 1001
+
+RUN apt-get update && apt-get install -y gnupg wget && \
+  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+  echo ""deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"" > /etc/apt/sources.list.d/google-chrome.list && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable --no-install-recommends && \
+  rm -rf /var/lib/apt/lists/*
+
+# You only need to copy next.config.js if you are NOT using the default configuration.
+# Copy all necessary files used by nex.config as well otherwise the build will fail
+
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pages ./pages
+COPY --from=builder /app/themes ./themes
+COPY --from=builder /app/.env ./.env
+
+USER nextjs
+
+# Expose
+EXPOSE 3000
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry.
+ENV NEXT_TELEMETRY_DISABLED 1
+CMD [""npm"", ""start""]
+
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1694583626,ShinanTc,2023-08-27T06:24:58Z,"> 
+
+Hey @AeShevch,
+
+Instead of headless=true, use headless=""new"". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).
+
+Also, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?
+
+Thank you 💓"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1744108676,Shreehar01,2023-10-03T03:31:16Z,"The following steps worked for me:
+In the node_modules/puppeteer directory, `sudo node install.mjs` (This installs the required chrome version)
+Then:
+```
+sudo apt-get install libgbm1
+sudo apt-get install libasound2
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1786687896,Stekmo,2023-10-31T07:56:09Z,"We encountered the same issue when we redeployed our service to Google Cloud App Engine after bumping the node version from 16 to 20. What solved it for us was adding the [--no-cache](https://cloud.google.com/appengine/docs/standard/php-gen2/specifying-dependencies) option when deploying.
+
+> > 
+> 
+> Hey @AeShevch,
+> 
+> Instead of headless=true, use headless=""new"". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).
+> 
+> Also, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?
+> 
+> Thank you 💓
+
+`headless: true` is not going away. It is a way to opt in now, but in a future release specifying `headless: true` will simply use the new headless mode instead of the old one. https://github.com/puppeteer/puppeteer/blob/0d4aab828ac92f6269d6af1dad923fc9daa4158c/packages/puppeteer-core/src/node/LaunchOptions.ts#L26-L36"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1794737259,deepakPococare,2023-11-06T12:44:11Z,"Every time I am getting the below error can anyone just what to do? 
+
+Dockerfile:56
+--------------------
+  55 |     
+  56 | >>> RUN apt-get update && apt-get install -y gnupg wget && \
+  57 | >>>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+  58 | >>>   echo ""deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main"" > /etc/apt/sources.list.d/google-chrome.list && \
+  59 | >>>   apt-get update && \
+  60 | >>>   apt-get install -y google-chrome-stable --no-install-recommends && \
+  61 | >>>   rm -rf /var/lib/apt/lists/*
+  62 |     
+--------------------
+ERROR: failed to solve: process ""/dev/.buildkit_qemu_emulator /bin/sh -c apt-get update && apt-get install -y gnupg wget &&   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg &&   echo \""deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main\"" > /etc/apt/sources.list.d/google-chrome.list &&   apt-get update &&   apt-get install -y google-chrome-stable --no-install-recommends &&   rm -rf /var/lib/apt/lists/*"" did not complete successfully: exit code: 100
+Error: Process completed with exit code 1.
+
+This is my Dockerfile. 
+
+###################
+# BUILD FOR LOCAL DEVELOPMENT
+###################
+
+FROM node:slim As development
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+RUN apt-get update && \
+    apt-get install -y libc6 && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node package*.json .env ./ 
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+USER node
+
+###################
+# BUILD FOR PRODUCTION START
+###################
+
+FROM node:slim As build
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node nest-cli.json tsconfig*.json package*.json .env ./ 
+
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
+RUN npm run build
+
+ENV NODE_ENV production
+
+RUN npm ci --only=production && npm cache clean --force
+
+USER node
+
+###################
+# PRODUCTION
+###################
+
+FROM node:slim  As production
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y gnupg wget && \
+  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+  echo ""deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main"" > /etc/apt/sources.list.d/google-chrome.list && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable --no-install-recommends && \
+  rm -rf /var/lib/apt/lists/*
+
+COPY --chown=node:node --from=build /usr/src/app/node_modules  ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/.env  .
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+
+CMD [ ""node"", ""dist/main.js"" ]
+
+
+Note: I am using arch=arm64 architecture. 
+I have been struggling with it for 2 days not getting resolved can anyone help me, or just something? 
+
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1975241470,prakhart111,2024-03-03T17:42:23Z,"I'm getting this error on Vercel, 
+I've tried PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true and headless: true.
+
+```
+Error generating invoice Error: Could not find Chrome (ver. 122.0.6261.69). This can occur if either
+ 1. you did not perform an installation before running the script (e.g. `npx puppeteer browsers install chrome`) or
+ 2. your cache path is incorrectly configured (which is: /home/sbx_user1051/.cache/puppeteer).
+```
+
+Any suggestions guys?"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1977963162,deepakPococare,2024-03-05T04:50:03Z,"
+Hey : Prakhar if you are using node refer this I have also faced issue initially finally below file worked for me.
+
+###################
+# BUILD FOR LOCAL DEVELOPMENT
+###################
+
+FROM node:lts-alpine As development
+
+RUN apk update && apk add --no-cache nmap && \
+    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
+      chromium \
+      harfbuzz \
+      ""freetype>2.8"" \
+      ttf-freefont \
+      nss 
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node package*.json .env ./ 
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+USER node
+
+###################
+# BUILD FOR PRODUCTION START
+###################
+
+FROM node:lts-alpine As build
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node nest-cli.json tsconfig*.json package*.json .env ./ 
+
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
+RUN npm run build
+
+ENV NODE_ENV production
+
+RUN npm ci --only=production && npm cache clean --force
+
+USER node
+
+###################
+# PRODUCTION
+###################
+
+FROM node:lts-alpine As production
+
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+WORKDIR /usr/src/app
+
+RUN apk update && apk add --no-cache nmap && \
+    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
+      chromium \
+      harfbuzz \
+      ""freetype>2.8"" \
+      ttf-freefont \
+      nss 
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+COPY --chown=node:node --from=build /usr/src/app/node_modules  ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/.env  .
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+
+CMD [ ""node"", ""dist/main.js"" ]"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),1979479351,prakhart111,2024-03-05T19:23:24Z,"Thanks @deepakPococare, I am not using node right now, but I think I'll probably have to migrate this to an EC2. Thanks for this, will be helpful when I do it."
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2109507694,0xcuonghx,2024-05-14T07:47:26Z,"> RUN apt-get update && apt-get install -y gnupg wget && \
+>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+>   echo ""deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"" > /etc/apt/sources.list.d/google-chrome.list && \
+>   apt-get update && \
+>   apt-get install -y google-chrome-stable --no-install-recommends && \
+>   rm -rf /var/lib/apt/lists/*
+
+ If you are in an ARM-based CPU like Apple M1, you should use the --platform argument when you build the Docker image.
+``` bash
+docker build --platform linux/amd64 -t image-name .
+
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2125636545,horsemedia,2024-05-22T19:53:48Z,"Im getting same error like:
+Could not find Chrome (ver. 125.0.6422.60). This can occur if either\n 1. you did not perform an installation before running the script (e.g. `npx puppeteer browsers install chrome`) or\n 2. your cache path is incorrectly configured (which is: /home/sbx_user1051/.cache/puppeteer).\nFor (2), check out our guide on configuring puppeteer at https://pptr.dev/guides/configuration.
+
+
+Im using nextjs 14. its working perfectly fine in local but its giving me an error on production. i have deployed my nextjs app on aws Amplify."
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2185622529,Gingaaa,2024-06-24T05:14:36Z,"![image](https://github.com/puppeteer/puppeteer/assets/93460183/0b58ed76-190e-4fc2-940a-d16252b29e8d)
+
+
+I am also facing chrome version problem.
+
+I am using Nextjs for my website and for hosting Aws Amplify. 
+Can any one please help me with this. 
+i want to solve this problem because in my project every thing is working except this one.
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2245234651,geri777,2024-07-23T13:19:07Z,"It looks like Google has removed Chrome from http://dl.google.com/linux/chrome/deb/
+I have found it at this mirror: http://mirror.cs.uchicago.edu/google-chrome/dists/ however it doesn't work when I add this url to /etc/apt/sources.list.d
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2249726029,yashcfg,2024-07-25T08:11:44Z,"> ![image](https://private-user-images.githubusercontent.com/93460183/342209417-0b58ed76-190e-4fc2-940a-d16252b29e8d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjE4OTQxMTQsIm5iZiI6MTcyMTg5MzgxNCwicGF0aCI6Ii85MzQ2MDE4My8zNDIyMDk0MTctMGI1OGVkNzYtMTkwZS00ZmMyLTk0MGEtZDE2MjUyYjI5ZThkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA3MjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNzI1VDA3NTAxNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY1MmNjYmY0MmM0YzMwYWYwOGY5NTU2NDkyMDFmYzUyZGU5ZmI3M2U2MTg0OWFkOTE2NGI1ZmNmMDdkMDdkMjUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HJiEEqHRL7oqrQ5N0-UOoy-voKAeuCOCHzvNZc5_KAo)
+> 
+> I am also facing chrome version problem.
+> 
+> I am using Nextjs for my website and for hosting Aws Amplify. Can any one please help me with this. i want to solve this problem because in my project every thing is working except this one.
+
+I resolved it by adding `executablePath` in puppeteer launch options like - 
+
+`const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], executablePath: '/usr/bin/google-chrome'});`
+
+I already had chrome installed inside my docker container, adding `executablePath` fixed the issue.
+
+
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2251938406,gregorvand,2024-07-26T04:14:47Z,"+1 to above, adding `excutablePath: '/usr/bin/google-chrome'` also fixed this, that suddenly stopped working
+
+for ref. this is using `timbru31/node-chrome` image"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2270158977,Sonicof,2024-08-06T00:46:38Z,"> > 
+> 
+> Hey @AeShevch,
+> 
+> Instead of headless=true, use headless=""new"". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).
+> 
+> Also, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?
+> 
+> Thank you 💓
+
+This video is very helpful for any problem like yours : https://www.youtube.com/watch?v=6cm6G78ZDmM"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2307898735,lowzyyy,2024-08-23T22:48:55Z,"In node:22-alpine3.18 image i installed it:
+```
+RUN apk add --no-cache \
+      chromium 
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+```
+and removed .puppeteerrc.cjs file from my root folder so puppeteer can now envoke chrome normally "
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2325050785,GoodnessEzeokafor,2024-09-02T16:13:55Z,"> I did it!
+> 
+> ```
+>   const browser = await puppeteer.launch({
+>     headless: true,
+>     executablePath: `/usr/bin/google-chrome`,
+>     args: [`--no-sandbox`, `--headless`, `--disable-gpu`, `--disable-dev-shm-usage`],
+>   });
+> ```
+> 
+> ```
+> # Install dependencies only when needed
+> FROM node:slim AS deps
+> ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+> 
+> RUN apt-get update && \
+>     apt-get install -y libc6 && \
+>     apt-get install -y git && \
+>     rm -rf /var/lib/apt/lists/*
+> 
+> WORKDIR /app
+> 
+> COPY package.json package-lock.json ./
+> RUN npm ci --legacy-peer-deps
+> 
+> # Rebuild the source code only when needed
+> FROM node:slim AS builder
+> # add environment variables to client code
+> ARG NEXT_PUBLIC_BACKEND_URL
+> 
+> ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+> 
+> WORKDIR /app
+> 
+> COPY . .
+> COPY --from=deps /app/node_modules ./node_modules
+> ARG NODE_ENV=production
+> RUN echo ${NODE_ENV}
+> RUN NODE_ENV=${NODE_ENV} npm run build
+> 
+> # Production image, copy all the files and run next
+> FROM node:slim AS runner
+> ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+> 
+> WORKDIR /app
+> 
+> # Create a non-root user
+> RUN useradd -m nextjs -u 1001
+> 
+> RUN apt-get update && apt-get install -y gnupg wget && \
+>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
+>   echo ""deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"" > /etc/apt/sources.list.d/google-chrome.list && \
+>   apt-get update && \
+>   apt-get install -y google-chrome-stable --no-install-recommends && \
+>   rm -rf /var/lib/apt/lists/*
+> 
+> # You only need to copy next.config.js if you are NOT using the default configuration.
+> # Copy all necessary files used by nex.config as well otherwise the build will fail
+> 
+> COPY --from=builder /app/next.config.js ./next.config.js
+> COPY --from=builder /app/public ./public
+> COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+> COPY --from=builder /app/node_modules ./node_modules
+> COPY --from=builder /app/package.json ./package.json
+> COPY --from=builder /app/pages ./pages
+> COPY --from=builder /app/themes ./themes
+> COPY --from=builder /app/.env ./.env
+> 
+> USER nextjs
+> 
+> # Expose
+> EXPOSE 3000
+> 
+> # Next.js collects completely anonymous telemetry data about general usage.
+> # Learn more here: https://nextjs.org/telemetry
+> # Uncomment the following line in case you want to disable telemetry.
+> ENV NEXT_TELEMETRY_DISABLED 1
+> CMD [""npm"", ""start""]
+> ```
+
+its September 2nd 2024  and this solution just saved my job
+if you are using `alphine` you might want to do it this way
+```
+
+# Builder stage
+FROM node:18-alpine as builder
+
+USER root
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+# RUN apk update && \
+#     apk install -y libc6 && \
+#     apk install -y git && \
+#     rm -rf /var/lib/apt/lists/*
+
+RUN apk update && \
+    apk add --no-cache \
+    libc6-compat \
+    git \
+    gnupg \
+    wget \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont && \
+    rm -rf /var/cache/apk/*
+
+
+USER node
+WORKDIR /home/node
+
+COPY package*.json ./
+RUN npm ci
+
+COPY --chown=node:node . .
+RUN npm run build \
+    && npm prune --production
+
+# Production stage
+FROM node:18-alpine
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+RUN apk update && \
+    apk add --no-cache \
+    libc6-compat \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont && \
+    rm -rf /var/cache/apk/*
+
+# Set environment variables for Chromium
+ENV CHROMIUM_PATH=/usr/bin/chromium-browser
+USER node
+WORKDIR /home/node
+
+# Copy the application files from the builder stage
+COPY --from=builder --chown=node:node /home/node/package*.json ./
+COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
+COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
+
+EXPOSE 4560
+
+CMD [""node"", ""dist/main.js""]
+
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2346321268,Himanshu-Agg12,2024-09-12T13:40:49Z,"Please HELP someone?
+@GoodnessEzeokafor , i am still facing some issue. I got the chromium at container inside usr/bin/chromium-browser path, but i get error as target closed everytime. I have written the sequential calls with await statements. Can you please help me if you know the fix?
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2370188706,rachelhnik,2024-09-24T05:16:06Z,"Do u still use .puppeteerrc.cjs file ?
+"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2504797536,arsalansadiq,2024-11-27T21:29:43Z,"I am using node's alpine image and its Nov, 2024 and none of the changes above worked for me to install chromium and puppeteer. I kept getting the same error so this is what I did to resolve the error:
+- update the docker base image to be `FROM zenika/alpine-chrome:with-puppeteer AS base`. Information on the docker image is [here](https://github.com/jlandure/alpine-chrome).
+- removed the `apk add` line because I didnt need anything since the image has nodejs too
+- remove any puppeteer envs
+
+This worked at the cost of a heavy docker image ~450MB but was able to make this work."
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2625586348,b1ew,2025-01-30T21:01:23Z,"> I am using node's alpine image and its Nov, 2024 and none of the changes above worked for me to install chromium and puppeteer. I kept getting the same error so this is what I did to resolve the error:
+> 
+> * update the docker base image to be `FROM zenika/alpine-chrome:with-puppeteer AS base`. Information on the docker image is [here](https://github.com/jlandure/alpine-chrome).
+> * removed the `apk add` line because I didnt need anything since the image has nodejs too
+> * remove any puppeteer envs
+> 
+> This worked at the cost of a heavy docker image ~450MB but was able to make this work.
+
+this is the only one that's working for me on alpine nextjs, huge thanks! 🍺
+
+```
+FROM zenika/alpine-chrome:with-puppeteer AS base
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
+
+USER root
+
+# 1. Install dependencies only when needed
+FROM base AS deps
+
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \
+  else echo ""Lockfile not found."" && exit 1; \
+  fi
+
+
+# 2. Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+COPY .env.local
+RUN npm run build
+
+# 3. Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV PORT 3000
+ENV NODE_ENV=production
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+COPY --from=builder /app/public ./public
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE $PORT
+
+CMD [""node"", ""server.js""]
+```"
+10729,closed,Could not find Chrome (ver. 115.0.5790.170),2643737104,Bencute,2025-02-07T18:56:27Z,"I used pieces from the official docker image https://github.com/puppeteer/puppeteer/blob/main/docker/Dockerfile and the official documentation https://pptr.dev/guides/docker. The following minimal Dockerfile configuration was obtained. It should download all dependencies for the browser
+
+```
+FROM node:20
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-khmeros \
+    fonts-kacst fonts-freefont-ttf dbus dbus-x11
+
+RUN npx puppeteer browsers install chrome --install-deps
+```
+It should be noted that the script will be run from the root user. Pupiter must be run with the following parameter --no-sandbox
+
+```
+const browser = await puppeteer.launch({
+   headless: true,
+   args: ['--no-sandbox'],
+});
+```"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1592643627,github-actions[bot],2023-06-15T08:57:14Z,"This issue has an invalid Node.js version: `18`. Versions must follow [SemVer](https://semver.org/) formatting. Please update the form with a valid version.
+
+---
+[Analyzer run](https://github.com/puppeteer/puppeteer/actions/runs/5276806673)"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1592938975,OrKoN,2023-06-15T12:20:37Z,"The browser is downloaded during the installation of Puppeteer when running `npm install`. Is Puppeteer part of your package.json and package-lock.json? Do you have the verbose log for `npm i` and the image build process? Probably, download fails or the puppeteer is not installed as part of `npm install`."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1593556850,ThomasLarge,2023-06-15T18:42:03Z,"I'm seeing this too, was working fine but just stopped working on a fresh install. Does this always pull the latest chrome? Seen issues with this and Cypress before"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594025086,lifosmin,2023-06-16T03:06:56Z,"my package json looks like this, I'm sure the Puppeteer is installed
+
+`{
+    ""name"": ""api"",
+    ""version"": ""1.0.0"",
+    ""description"": """",
+    ""main"": ""server.js"",
+    ""type"": ""module"",
+    ""scripts"": {
+      ""dev"": ""nodemon server.js""
+    },
+    ""keywords"": [],
+    ""author"": """",
+    ""license"": ""ISC"",
+    ""dependencies"": {
+      ""body-parser"": ""^1.20.2"",
+      ""cheerio"": ""^1.0.0-rc.12"",
+      ""dotenv"": ""^16.1.4"",
+      ""express"": ""^4.18.2"",
+      ""firebase-admin"": ""^11.9.0"",
+      ""mysql"": ""^2.18.1"",
+      ""nodemon"": ""^2.0.22"",
+      ""puppeteer"": ""^20.6.0"",
+      ""puppeteer-core"": ""^20.7.1"",
+      ""random-useragent"": ""^0.5.0""
+    }
+  }
+  
+`"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594229464,OrKoN,2023-06-16T07:20:17Z,We had no changes here recently. Puppeteer always pulls the pinned version of Chrome. Could you please share a reduced reproduction for this? Our official docker image builds and tests without issue https://github.com/puppeteer/puppeteer/pkgs/container/puppeteer  
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594520888,OrKoN,2023-06-16T11:19:46Z,"Update here: it might be that there is some problem with the server where the browser is downloaded from. Today we see occasional ECONNREFUSED errors, you should see it in the npm install log if the installation fails: https://github.com/puppeteer/puppeteer/actions/runs/5288559932/jobs/9570469267?pr=10396 "
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594603273,lifosmin,2023-06-16T12:30:51Z,"the bug happened when i was trying to connect browser const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  });
+  
+  I configured docker file to install all dependencies that was needed to run at cloud."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594887917,yoursunny,2023-06-16T15:40:23Z,"I'm seeing Chromium download failure too.
+https://github.com/yoursunny/NDNts/actions/runs/5291639615/jobs/9577451367#step:6:94
+
+The server is refusing connection from GitHub Actions.
+However, I can connect to it from local desktop."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1594890949,lifosmin,2023-06-16T15:42:53Z,"can i know how to resolve this?
+
+On Fri, 16 Jun 2023 at 22.40 Junxiao Shi ***@***.***> wrote:
+
+> I'm seeing Chromium download failure too.
+>
+> https://github.com/yoursunny/NDNts/actions/runs/5291639615/jobs/9577451367#step:6:94
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/puppeteer/puppeteer/issues/10388#issuecomment-1594887917>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/APU4JK5UEG5AQFW6OFCNCJ3XLR47FANCNFSM6AAAAAAZHQPK4I>
+> .
+> You are receiving this because you authored the thread.Message ID:
+> ***@***.***>
+>
+"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1595335224,andyMrtnzP,2023-06-16T21:27:11Z,"Seems like the default server the `browsers` package pulls Chrome from is not serving r`114.0.5735.133`. Has no issue serving, say [112.0.5615.49](https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip), but trying to download [114.0.5735.133](https://chromedriver.storage.googleapis.com/114.0.5735.133/chromedriver_linux64.zip) will fail.
+
+"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1598172671,OrKoN,2023-06-20T06:11:25Z,It seems the server is healthy again and I could not see any failures in the last two days. 
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1600383551,abdalem,2023-06-21T08:07:28Z,@lifosmin HI ! Did you resolved your issue ?
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1601324713,AdwaitMaidaan,2023-06-21T17:57:32Z,"Having the same issue. I did all the steps from creating the config file to adding the launch parameters to puppeteer, but nothing seems to be working. 
+I have the .cache directory with the chrome version inside it, but I still get the error ""Error: Could not find Chrome (ver. 114.0.5735.133)""
+Any help would be appreciated."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1604331435,mauricio-gg,2023-06-23T14:03:24Z,I'm having the same issue. Why is this closed?
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609176892,sorinfratila,2023-06-27T09:57:03Z,still experiencing this as well: `Could not find Chrome (ver. 114.0.5735.90)`
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609208213,cc-thingo,2023-06-27T10:13:49Z,I'm having the same issue. `Could not find Chrome (ver. 114.0.5735.133)`
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609241688,mauricio-gg,2023-06-27T10:36:26Z,I was able to fix this by placing `.pupeteerrc.cjs` in my project's root directory
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609254342,OrKoN,2023-06-27T10:45:16Z,"Please read the documentation and make sure when you deploy to the server that you install the browser binaries for the server operating system. If you believe there is a bug, please open a new issue with reproduction steps demonstrating that the browser is not downloaded to the cache directory after an `npm install` is run. 
+
+- https://pptr.dev/#installation
+- https://pptr.dev/guides/configuration"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609319279,sorinfratila,2023-06-27T11:32:02Z,"> I was able to fix this by placing .pupeteerrc.cjs in my project's root directory
+
+@mauricio-gg could you tell me what does that file contain exactly ?
+also what version of puppeteer are you using ? are you importing from puppeteer or puppeteer-core ?"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609320139,sorinfratila,2023-06-27T11:32:43Z,"~~locally this thing works for me, it's in Docker that it doesn't work.~~
+it seems to work now after I have made the build supporting mac M1 chip."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1609680181,cc-thingo,2023-06-27T14:59:02Z,"I already add `.pupeteerrc.cjs` in project. Locally this thing works for me, but it doesn't work in digital ocean server."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1610975356,sk8killer,2023-06-28T08:19:29Z,"Same error for me with Firebase Hosting after deploying since yesterday : `Could not find Chrome (ver. 114.0.5735.133)`
+I tried everything, but nothing works : 
+- operating a clean install of all packages with :
+`npm clean-install`
+- cleaning the npm cahe with : 
+`npm cache clean --force`
+- adding a gcp-build script to install chrome after deployment on Firebase Hosting with this : 
+`""gcp-build"": ""node node_modules/puppeteer/install.js""` (doens't work because node_modules doesn't seem to be accessible from the root hosting directory...)
+- adding a `puppeteer.config.js` as detailed in the puppeteer docs : 
+[https://pptr.dev/guides/configuration/#changing-the-default-cache-directory](https://pptr.dev/guides/configuration/#changing-the-default-cache-directory)
+
+Unfortunately, i tried to downgrade puppeteer to the previews working version for me on Firebase Hosting wich was 10.4.0
+and it still doesn't work.
+
+This is very frustrating and urgent for me as part of the website i need to deploy is currently out of service !
+
+I noticed that when I try to install puppeteer in local, the `.cache/puppeteer` folder does not install every time. On ten tries, the `.cache/puppeteer` directory has only been installed once.
+
+So I don't think that it is a problem with Firebase Hosting but rather with Puppeteer or the Chrome install server.
+
+This issue needs to be reopenned."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1612466381,besnikh,2023-06-29T05:49:52Z,"I have been awake last 3 days with this :( 
+Even ChatGPT couldn't help me :) 
+
+These are my files that I managed to run Puppeteer on Docker and Google Cloud Run
+
+Dockerfile
+
+```
+FROM node:latest
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
+COPY . .
+
+# Install puppeteer dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gconf-service \
+    libasound2 \
+    libatk1.0-0 \
+    libcairo2 \
+    libcups2 \
+    libfontconfig1 \
+    libgdk-pixbuf2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libpango-1.0-0 \
+    libxss1 \
+    fonts-liberation \
+    libappindicator1 \
+    libnss3 \
+    lsb-release \
+    xdg-utils
+
+ENV PUPPETEER_DOWNLOAD_PATH=/usr/local/chromium
+
+RUN yarn add puppeteer
+
+EXPOSE 4000
+
+CMD [""yarn"", ""start""]
+```
+
+Some parts of index.js 
+
+```
+const browser = await puppeteer.launch({
+    headless: ""new"",
+    args: [
+      '--no-sandbox',
+      '--disable-dev-shm-usage'
+    ],
+  });
+
+await page.goto(url, { waitUntil: 'domcontentloaded' });
+```
+
+Hope this helps someone but I don't know what happened with that Chromium it killed me "
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1612644907,sk8killer,2023-06-29T08:44:03Z,"> Same error for me with Firebase Hosting after deploying since yesterday : `Could not find Chrome (ver. 114.0.5735.133)` I tried everything, but nothing works :
+> 
+> * operating a clean install of all packages with :
+>   `npm clean-install`
+> * cleaning the npm cahe with :
+>   `npm cache clean --force`
+> * adding a gcp-build script to install chrome after deployment on Firebase Hosting with this :
+>   `""gcp-build"": ""node node_modules/puppeteer/install.js""` (doens't work because node_modules doesn't seem to be accessible from the root hosting directory...)
+> * adding a `puppeteer.config.js` as detailed in the puppeteer docs :
+>   https://pptr.dev/guides/configuration/#changing-the-default-cache-directory
+> 
+> Unfortunately, i tried to downgrade puppeteer to the previews working version for me on Firebase Hosting wich was 10.4.0 and it still doesn't work.
+> 
+> This is very frustrating and urgent for me as part of the website i need to deploy is currently out of service !
+> 
+> I noticed that when I try to install puppeteer in local, the `.cache/puppeteer` folder does not install every time. On ten tries, the `.cache/puppeteer` directory has only been installed once.
+> 
+> So I don't think that it is a problem with Firebase Hosting but rather with Puppeteer or the Chrome install server.
+> 
+> This issue needs to be reopenned.
+
+UPDATE 29/06/2023 : Everything works now like a charm today... I don't know why !"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1612647240,sorinfratila,2023-06-29T08:45:57Z,"> I don't know why !
+
+@sk8killer some people have commented that there might (have been/) be some issues with the server chrome binary is being downloaded from."
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1614005261,tungvtrelipasoft,2023-06-30T01:51:49Z,Run node_modules/puppeteer/install.js to download the binary
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1618903375,odebroqueville,2023-07-03T17:11:13Z,"I have the same problem:
+
+> error: ""Could not find Chrome (ver. 114.0.5735.133). This can occur if either\n 1. you did not perform an installation before running the script (e.g. `npm install`) or\n 2. your cache path is incorrectly configured (which is: /root/.cache/puppeteer).\nFor (2), check out our guide on configuring puppeteer at https://pptr.dev/guides/configuration.""
+
+I also tried all of the measures below:
+
+- operating a clean install of all packages with :
+npm clean-install
+- cleaning the npm cahe with :
+npm cache clean --force
+- adding a gcp-build script in package.json to install chrome after deployment on Firebase Hosting with this :
+""gcp-build"": ""node node_modules/puppeteer/install.js"" (doens't seem to do anything!)
+- increasing the allocated memory to 1024M
+- adding a puppeteer.config.js as detailed in the puppeteer docs :
+https://pptr.dev/guides/configuration/#changing-the-default-cache-directory
+
+but nothing worked! 
+
+I'm not sure if the .puppeteer.config.cjs file should be placed in the root directory or in the functions folder:
+
+![Screenshot 2023-07-03 at 19 08 29](https://github.com/puppeteer/puppeteer/assets/4818315/dbdb747f-fad5-481d-93ce-5e1a1a350412)
+
+EDIT: I changed the filename to puppeteer.config.cjs and placed it in the functions folder. After deploying, a .cache folder was created with a very large number of files. `firebase deploy` ended with:
+
+> ⚠  functions: Upload Error: HTTP Error: 400, <?xml version='1.0' encoding='UTF-8'?><Error><Code>EntityTooLarge</Code><Message>Your proposed upload is larger than the maximum object size specified in your Policy Document.</Message><Details>Content-length exceeds upper bound on range</Details></Error>"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1619012026,joel-ghats,2023-07-03T18:57:43Z,"@besnikh 
+
+> I have been awake last 3 days with this :( Even ChatGPT couldn't help me :)
+> 
+> These are my files that I managed to run Puppeteer on Docker and Google Cloud Run
+> 
+> Dockerfile
+> 
+> ```
+> FROM node:latest
+> 
+> WORKDIR /app
+> 
+> COPY package.json yarn.lock ./
+> 
+> RUN yarn install
+> 
+> COPY . .
+> 
+> # Install puppeteer dependencies
+> RUN apt-get update && apt-get install -y \
+>     wget \
+>     gconf-service \
+>     libasound2 \
+>     libatk1.0-0 \
+>     libcairo2 \
+>     libcups2 \
+>     libfontconfig1 \
+>     libgdk-pixbuf2.0-0 \
+>     libgtk-3-0 \
+>     libnspr4 \
+>     libpango-1.0-0 \
+>     libxss1 \
+>     fonts-liberation \
+>     libappindicator1 \
+>     libnss3 \
+>     lsb-release \
+>     xdg-utils
+> 
+> ENV PUPPETEER_DOWNLOAD_PATH=/usr/local/chromium
+> 
+> RUN yarn add puppeteer
+> 
+> EXPOSE 4000
+> 
+> CMD [""yarn"", ""start""]
+> ```
+> 
+> Some parts of index.js
+> 
+> ```
+> const browser = await puppeteer.launch({
+>     headless: ""new"",
+>     args: [
+>       '--no-sandbox',
+>       '--disable-dev-shm-usage'
+>     ],
+>   });
+> 
+> await page.goto(url, { waitUntil: 'domcontentloaded' });
+> ```
+> 
+> Hope this helps someone but I don't know what happened with that Chromium it killed me
+
+
+ this worked for me 
+ 
+ ```
+FROM node:18
+
+WORKDIR app
+
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+
+# Install necessary dependencies for Puppeteer
+RUN apt-get update \
+    && apt-get install -y wget gnupg \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo ""deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"" >> /etc/apt/sources.list.d/google.list' \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable libxss1 \
+    libx11-xcb1 \
+    libxtst6 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [""npm"", ""start""]
+
+```
+
+
+"
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1625078091,geminiyellow,2023-07-07T08:51:07Z,I'm having the same issue. `error Could not find Chrome (ver. 114.0.5735.133). `
+10388,closed,[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90),1625127087,slochten,2023-07-07T09:27:43Z,Same issue here: `Could not find Chrome (ver. 114.0.5735.133)`
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,813761769,mattparlane,2021-04-06T01:40:57Z,"You can't call `page.setCookie` with an array of cookies, it needs to be called separately for each cookie. Try:
+
+```
+for (let i = 0; i < cookieJSON.length; i++) {
+  await page.setCookie(cookieJSON[i]);
+}
+```"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1165588791,stale[bot],2022-06-24T13:42:19Z,"We're marking this issue as unconfirmed because it has not had recent activity and  we weren't able to confirm it yet. It will be closed if no further activity occurs within the next 30 days.
+"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1193339312,stale[bot],2022-07-24T15:24:26Z,"We are closing this issue. If the issue still persists in the latest version of Puppeteer, please reopen the issue and update the description. We will try our best to accomodate it!
+"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1330659416,droplet-js,2022-11-29T13:33:19Z,"any news update?
+
+```javascript
+// get cookie from chrome devtools console
+await cookieStore.getAll();
+```
+
+```typescript
+// and try set cookies
+    const cookiesJson = `[
+        {""domain"":""www.example.cn"",""expires"":1670313927089,""name"":""gfsitesid"",""path"":""/ad/"",""sameSite"":""none"",""secure"":true,""value"":""xxxx""},
+        {""domain"":null,""expires"":null,""name"":""csrf_session_id"",""path"":""/"",""sameSite"":""none"",""secure"":true,""value"":""xxxx""},
+        {""domain"":null,""expires"":1701166533374,""name"":""csrftoken"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":""example.cn"",""expires"":1701252933374,""name"":""tt_webid"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":""example.cn"",""expires"":1701245082000,""name"":""Hm_lvt_5d77c979053345c4bd8db63329f818ec"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":""example.cn"",""expires"":null,""name"":""Hm_lpvt_5d77c979053345c4bd8db63329f818ec"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":null,""expires"":1670313918000,""name"":""ttcid"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":null,""expires"":1670313918000,""name"":""tt_scid"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":null,""expires"":1674893119000,""name"":""s_v_web_id"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":""example.cn"",""expires"":1674893126018,""name"":""passport_csrf_token"",""path"":""/"",""sameSite"":""none"",""secure"":true,""value"":""xxxx""},
+        {""domain"":""example.cn"",""expires"":1674893126018,""name"":""passport_csrf_token_default"",""path"":""/"",""sameSite"":""lax"",""secure"":false,""value"":""xxxx""},
+        {""domain"":""www.example.cn"",""expires"":1670313927089,""name"":""gftoken"",""path"":""/"",""sameSite"":""none"",""secure"":true,""value"":""xxxx""}
+    ]`;
+
+const cookies: Array<Protocol.Network.CookieParam> = JSON.parse(cookiesJson).map((value: any) => value as Protocol.Network.CookieParam);
+                    for (let i = 0; i < cookies.length; i++) {
+                        await page.setCookie(cookies[i]);
+                    }
+```
+
+```shell
+ProtocolError: Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.domain - BINDINGS: string value expected at position 15
+```"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1411594730,weigu123,2023-02-01T07:41:56Z,The problem is still there
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1763175586,juan-manuel-rodriguez,2023-10-14T20:41:32Z,"> You can't call `page.setCookie` with an array of cookies, it needs to be called separately for each cookie. Try:
+> 
+> ```
+> for (let i = 0; i < cookieJSON.length; i++) {
+>   await page.setCookie(cookieJSON[i]);
+> }
+> ```
+
+Worked for me, thank you"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,1934693742,svtxvt,2024-02-08T18:18:43Z,`await page.setCookie(...cookies);`
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,2395794916,randybastian777,2024-10-07T03:03:49Z,"i already try all of above.
+
+still error:
+ProtocolError: Protocol error (Network.setCookies): Invalid parameters Failed to deserialize params.cookies.expires - BINDINGS: double value expected at position 222.
+
+any update?"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,2532077914,filippopassalacqua,2024-12-10T15:34:16Z,"Same error
+
+Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.partitionKey - BINDINGS: string value expected at position 262
+
+"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,2534715925,GuillaumeDievart,2024-12-11T08:13:24Z,"UP I have the same issue too, even used in the for iteration"
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,2638808914,taukirsheikh,2025-02-06T04:40:37Z,"@filippopassalacqua  @randybastian777 @droplet-js @GuillaumeDievart  
+This problem occurs when you have `""expires"":null` in your cookies, which the whole cookies as invalid, so remove that field "
+7029,closed,Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544,2643179660,moeinrahimi1,2025-02-07T14:59:12Z,"simply use like below:
+cookies is a array of objects like this:
+``` javascript
+const cookies = [
+{
+        ""name"": ""night_mode"",
+        ""domain"":"".x.com"",
+        ""path"":""/"",
+        ""value"": ""2""
+    }
+]
+browser.setCookie(...cookies)
+```"
+13560,closed,[Bug]: Dblclick events can get dropped when using WebDriver BiDi with Chrome,2642976038,OrKoN,2025-02-07T13:39:24Z,Fixed via https://github.com/puppeteer/puppeteer/pull/13596 and will be available in the next release.
+4059,closed,page.evaluate() is leaking memory,467213806,jpgklassen,2019-02-25T22:41:11Z,"**Update:** I edited my code so that it catches the TimeoutError and sends me an email to let me know. But when the program attempts to email me, it fails. This is what I saw in the log file:
+
+```
+Mon Feb 25 2019 11:15:10 GMT-0800 (Pacific Standard Time) Error: Failed to deliver email to undefined: Error: spawn ENOMEM
+    at transporter.sendMail (/var/www/scraper/middleware/send-email.js:30:18)
+    at transporter.send.args (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:226:21)
+    at callback (/var/www/scraper/node_modules/nodemailer/lib/sendmail-transport/index.js:88:28)
+    at SendmailTransport.send (/var/www/scraper/node_modules/nodemailer/lib/sendmail-transport/index.js:111:20)
+    at _processPlugins.err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:214:34)
+    at Mail._processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:262:20)
+    at _processPlugins.err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:184:18)
+    at processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:275:28)
+    at err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:283:17)
+    at Mail._convertDataImages (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:387:20)
+    at Mail._defaultPlugins.compile.args (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:31:41)
+    at processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:279:13)
+    at Mail._processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:287:9)
+    at Mail.sendMail (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:164:14)
+    at /var/www/scraper/middleware/send-email.js:28:19
+    at new Promise (<anonymous>)
+```
+
+Based on the ENOMEM, it looks like the program has run out of memory and that's why it timed out. I have the server monitoring memory usage every minute, and memory usage is slowly increasing over time as the program runs. This indicates a memory leak, however I have scoured my code for memory leaks and found none (maybe you guys can find one?)"
+4059,closed,page.evaluate() is leaking memory,467882435,jpgklassen,2019-02-27T14:29:40Z,"**Update:** After a ton of troubleshooting, I've determined that the memory leak is happening in `page.evaluate()`. When this function returns, every variable declared within the function remains in memory. The callback function that was passed to `page.evaluate()` is also stored in memory, in the form of a string! It makes no difference if I call `page.close()` and `browser.close()` after every single `page.evaluate()`... the variables still continue to accumulate in memory until the program runs out of memory and crashes. I've even tried manually running the garbage collector after every `page.evaluate()`, but it doesn't get rid of the variables.
+
+**This is a big problem for those of us who are using puppeteer for web scraping!!**"
+4059,closed,page.evaluate() is leaking memory,468812651,aslushnikov,2019-03-01T21:09:58Z,"> I've determined that the memory leak is happening in `page.evaluate()`
+
+@jpgklassen TL;DR: I didn't find a leak here.
+
+I ran DevTools allocation profiler against a simple script:
+
+```js
+const puppeteer = require('puppeteer');
+
+(async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    for (let i = 0; i < 10000; ++i) {
+      await page.evaluate(i => console.log(i), i);
+    }
+})();
+```
+The result **does look** like there's a leak:
+
+![image](https://user-images.githubusercontent.com/746130/53665740-22fb6980-3c21-11e9-96eb-332ba4425855.png)
+
+However, if you run this with a new-enough node (I ran node 11), you'll notice that the retainer is a DevTools debugger.
+
+![image](https://user-images.githubusercontent.com/746130/53665830-65bd4180-3c21-11e9-8523-438b0a4bdcca.png)
+
+This is actually a DevTools bug: `page.evaluate` creates a function object to validate input, and DevTools debugger retains the script source to provide debugging capabilities.We should either disable a debugger or filter out devtools-specific GC roots.
+
+Running the script with a quick fix yields the following trace:
+![image](https://user-images.githubusercontent.com/746130/53666193-4ffc4c00-3c22-11e9-979a-375a8e870b22.png)
+
+There are some weird memory allocations here and there, but they have nothing to do with Puppeteer's evaluate.
+
+---
+
+To sum up:
+- there's no leak in `page.evaluate()`
+- there *is* a bug in DevTools allocation profiler. We'll get it fixed soon (cc @a1ph), thanks for bringing this up!
+- you're running out of memory for some other reason; it could be your page re-use policy. It is very important to close the page and create a new one every once in a while; otherwise, Chromium will slowly grow render area for the page's renderer over time.
+- can you please check if you have the same behavior on older Puppeteer versions?"
+4059,closed,page.evaluate() is leaking memory,471818925,jpgklassen,2019-03-12T02:02:43Z,"Thanks so much for your reply @aslushnikov. I _was_ using DevTools in development, so that would explain the many copies of the `page.evaluate()` callback function I was seeing in memory. However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the `page.evaluate()` callback is saved in memory, every time `page.evaluate()` is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.
+
+Also, I am not using DevTools in production and there is a memory leak there as well.
+
+Regarding your suggestion to close the page and create a new one every once in a while - I have tried this, and it does slow down the memory leak a bit, but does not fix it unfortunately.
+
+Something else I've noticed is that when the program crashes due to this error, and PM2 restarts it, it often restarts with WAY higher memory usage... even though the Page object, Browser object, and Mongoose connection were closed (in the `catch{}` block) before the program ended! (see below, around 4am)
+![memory-usage](https://user-images.githubusercontent.com/10780140/54169835-9ecf9000-4431-11e9-9411-1254458a4cb6.png)
+"
+4059,closed,page.evaluate() is leaking memory,473386456,aslushnikov,2019-03-15T17:59:37Z,"> Regarding your suggestion to close the page and create a new one every once in a while - I have tried this, and it does slow down the memory leak a bit, but does not fix it unfortunately.
+
+@jpgklassen IIUC your chart reports total memory allocation for your VM. Can you have a chart with a breakdown of memory allocations between processes? Since there are many parties involved, I wonder who's fault is this: node's, chrome's, or mongo's. "
+4059,closed,page.evaluate() is leaking memory,473525387,jpgklassen,2019-03-16T12:19:50Z,"@aslushnikov Yes, my chart shows total memory usage for the VM. Unfortunately I don't know of a way to chart memory usage for Chrome or Mongo, but I can use PM2 Plus to track memory usage for the Node program I think. I have just set it up and I'll let it run for a while..."
+4059,closed,page.evaluate() is leaking memory,473898920,jpgklassen,2019-03-18T12:57:26Z,"**Update:** I turned off PM2 temporarily in order to allow the program to crash, so that I could examine memory usage after the crash. Sure enough, the baseline memory usage after the crash is much higher:
+![memory-usage2](https://user-images.githubusercontent.com/10780140/54531328-3c4f2600-4942-11e9-9f78-6ef8c19d7925.png)
+
+After the program crashed, when I examine the process list with the `top` command, there were no processes to account for the additional memory usage:
+![top](https://user-images.githubusercontent.com/10780140/54531426-7ae4e080-4942-11e9-8103-e837de70f162.png)
+
+This leads me to believe that the program left behind some stuff in memory. The longer I leave it running with PM2, the closer together the crashes get (because it keeps leaving stuff in memory so it runs out of memory faster and faster). You would think that memory would be cleared when the Node program crashes, but for some reason it isn't... any ideas why?"
+4059,closed,page.evaluate() is leaking memory,474052313,aslushnikov,2019-03-18T18:48:15Z,"> You would think that memory would be cleared when the Node program crashes, but for some reason it isn't... any ideas why?
+
+@jpgklassen This should never be the case. 
+
+> After the program crashed, when I examine the process list with the top command
+
+This is an in-direct way to inspect system. These observations *might* or *might not* help to determine the root issue. There are [ways](https://unix.stackexchange.com/questions/554/how-to-monitor-cpu-memory-usage-of-a-single-process) to track memory usage per-process in Linux; I'd try using some of these to get a name of a misbehaving service and then file a bug against it to the bugtracker.
+
+I'll close this for now since I didn't find any leak in Puppeteer code per se."
+4059,closed,page.evaluate() is leaking memory,486976270,jpgklassen,2019-04-26T08:35:57Z,"@aslushnikov, would you mind commenting on this statement I made earlier:
+
+> However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the page.evaluate() callback is saved in memory, every time page.evaluate() is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.
+
+Do you think this could be the cause of the memory leak?"
+4059,closed,page.evaluate() is leaking memory,512889722,ghost,2019-07-18T16:28:24Z,"I have the same problem.
+
+So far I’m thinking of restarting the nodejs every hour .... but what to do .... if even browser.close does not solve the leak problem"
+4059,closed,page.evaluate() is leaking memory,559972467,cartene,2019-11-30T14:10:54Z,"Hi! I have the same problem. I have to launch a different chrome for each webpage I am scraping, because I am using a different proxy for each page. Since I am using docker container I am unable to force the OS (Ubuntu LTS) to clean up the cache or residual memory. Any updates?"
+4059,closed,page.evaluate() is leaking memory,566135218,hatemalimam,2019-12-16T16:26:55Z,Same issue here...
+4059,closed,page.evaluate() is leaking memory,609379676,HoseinGhanbari,2020-04-05T08:34:36Z,Same issue here...
+4059,closed,page.evaluate() is leaking memory,614191623,olegthelilfix,2020-04-15T18:02:33Z,Same issue here... 
+4059,closed,page.evaluate() is leaking memory,645095812,ingsuniki,2020-06-17T01:37:32Z,"I encountered a problem about time scheduling in a repeat for several url pages once or alternately, but he could not run as it should be, various methods have been taken and finally can run only by using an import and export module function and then running with the cron node , but a new problem arises because he cannot use the browser.close () function, but can only use page.close which results in a memory leak because when I use browser.close () then the next process he will not be able to open the browser in next process, is there anyone who can help "
+4059,closed,page.evaluate() is leaking memory,818678676,patryk-zielinski93,2021-04-13T11:59:01Z,"I have the same problem in Puppeteer 8.0.0. Evaluate function is kept in memory as strings.
+![image](https://user-images.githubusercontent.com/19761334/114548328-e869b500-9c5f-11eb-9f27-8e8e6635150f.png)
+
+> We should either disable a debugger or filter out devtools-specific GC roots.
+
+I run page.evaluate a lot of times. How to disable debugger to prevent that strange behavior? "
+4059,closed,page.evaluate() is leaking memory,847120127,Phviana,2021-05-24T15:25:59Z,"Same issue here...
+ Any updates?"
+4059,closed,page.evaluate() is leaking memory,885014112,teo523,2021-07-22T15:40:21Z,same issue here...why has this issue been closed?
+4059,closed,page.evaluate() is leaking memory,891381562,vdkkia,2021-08-02T22:43:10Z,+1
+4059,closed,page.evaluate() is leaking memory,895162732,teo523,2021-08-09T11:57:54Z,"Hi @aslushnikov, it seems @jpgklassen is right in her comment. Could you please address this?
+
+> @aslushnikov, would you mind commenting on this statement I made earlier:
+> 
+> > However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the page.evaluate() callback is saved in memory, every time page.evaluate() is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.
+> 
+> Do you think this could be the cause of the memory leak?
+
+"
+4059,closed,page.evaluate() is leaking memory,953671400,garcia-marco,2021-10-28T09:26:28Z,+1
+4059,closed,page.evaluate() is leaking memory,968155429,Nou4r,2021-11-13T22:10:39Z,+
+4059,closed,page.evaluate() is leaking memory,1041935654,plungarini,2022-02-16T17:55:15Z,+1
+4059,closed,page.evaluate() is leaking memory,1173253739,falkenbach,2022-07-04T01:55:40Z,"> **Solution:** I've written a self-contained javascript file that visibly shows a simplified cause and resolution of this memory leak. https://gist.github.com/david-littlefield/b9006cc236aaf67f25bfe54b34182805
+
+Not relevant, you not doing any page.eval's so yours case is not a solution"
+4059,closed,page.evaluate() is leaking memory,1173254270,falkenbach,2022-07-04T01:56:50Z,+1
+4059,closed,page.evaluate() is leaking memory,1538814071,haryelramalho,2023-05-08T18:07:05Z,+1
+4059,closed,page.evaluate() is leaking memory,1578181703,mikejackowski,2023-06-06T08:30:29Z,why was this ticket closed?
+4059,closed,page.evaluate() is leaking memory,1630416000,shirser121,2023-07-11T08:51:06Z,Did someone find a solution?
+4059,closed,page.evaluate() is leaking memory,1808111146,musabgultekin,2023-11-13T12:53:39Z,"I observed a similar leak in playwright. Which makes me wonder that it might not be specific to puppeteer. It might not be the exact same thing though, not exactly sure."

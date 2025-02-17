@@ -1,0 +1,65 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+2545,closed,add fastbots,1937376779,VascoSch92,2024-02-11T00:55:29Z,Change the name of the pr. For example add 'package name'
+2514,closed,Add PDM to Package Management,1708488190,deronnax,2023-09-06T14:30:59Z,We started using it in my company and it's dope. Poetry is good but PDM is more modern and more respectful of standard. +1 for inclusion.
+2514,closed,Add PDM to Package Management,1709426275,shifenhutu,2023-09-07T03:34:38Z,its cool  
+2514,closed,Add PDM to Package Management,1906027566,deronnax,2024-01-23T13:08:45Z,"it's used by, amongst others, [hyperscan](https://github.com/darvid/python-hyperscan) and [pydantic](https://github.com/pydantic/pydantic). It reached 6K stars on Github few days ago.
+Can we get a merge, @vinta 🙃 ?"
+2514,closed,Add PDM to Package Management,2024499593,sventec,2024-03-28T06:36:06Z,"The PDM docs URL has since changed to <https://pdm-project.org/latest/> (though the current link in this PR still redirects to the new one). +1 for merge, I switched from Poetry for PEP 621 compliance and it's awesome."
+2514,closed,Add PDM to Package Management,2025021964,pawamoy,2024-03-28T12:04:36Z,"Thanks @sventec, link updated :slightly_smiling_face: "
+2514,closed,Add PDM to Package Management,2126681976,pawamoy,2024-05-23T09:45:29Z,"Unfortunately it doesn't look like @vinta has the capacity to groom the backlog of PRs. There are many no-brainers like this PR and [the one that adds Ruff](https://github.com/vinta/awesome-python/pull/2292) that are waiting for a long time, with many upvotes, without being merged. PRs then [go stale](https://github.com/vinta/awesome-python/pull/1412) (yay stale bots), are [re-opened](https://github.com/vinta/awesome-python/pull/2551), and, strangely, sometimes [merged immediately with 0 upvote](https://github.com/vinta/awesome-python/pull/2578), while they are a duplicate of an older PR with more upvotes.
+
+I'm not sure what the process is here, or if there's even one. It would be much more engaging if it was documented somewhere :thinking: I'm actually thinking about just closing this one for clean up.
+
+Also, I invite everyone here to have a look at https://github.com/ml-tooling/best-of-python. Best-of lists are much more detailed than Awesome ones, and rank projects with a scoring algorithm. It could be nice to add PDM there too :man_shrugging: "
+2514,closed,Add PDM to Package Management,2126697690,pawamoy,2024-05-23T09:53:37Z,"If @vinta ever adds a collaborator on the repository to help them with maintenance, someone please let me know, and I'll reopen (if needed).
+
+(By the way I'm willing to help with maintenance. Not for eternity, but I can seriously groom the backlog in a short period. I'm well versed in the Python ecosystem. I'd merge the no-brainers, and close duplicate quickly. I won't blindly merge something I don't know just because of upvotes, which in some cases seem fake)"
+1694,closed,Add pdfminer.six,2169154863,howiezhao,2024-06-15T06:15:06Z,Hi @vinta Could you please help take a look at this change? Any insights?
+1475,closed,Add dephell,2509674143,jhermann,2024-12-01T10:21:43Z,> THE PROJECT IS ARCHIVED
+1565,closed,Add tg (terminal telegram client),716030394,paul-nameless,2020-10-24T17:48:13Z,Approve
+1565,closed,Add tg (terminal telegram client),2485884832,Yogesh-shahji,2024-11-19T14:33:26Z,"Ok
+
+
+On Tue, Nov 19, 2024, 13:27 Nameless ***@***.***> wrote:
+
+> Closed #1565 <https://github.com/vinta/awesome-python/pull/1565>.
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/vinta/awesome-python/pull/1565#event-15344888513>, or
+> unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/BMQ7ESXPWXQUAQQNXOFN75D2BLTXXAVCNFSM6AAAAABSBNGSSKVHI2DSMVQWIX3LMV45UABCJFZXG5LFIV3GK3TUJZXXI2LGNFRWC5DJN5XDWMJVGM2DIOBYHA2TCMY>
+> .
+> You are receiving this because you are subscribed to this thread.Message
+> ID: ***@***.***>
+>
+"
+2505,closed,Added Django-Jazzmin for customizing admin interface,1676221004,CreateGenius,2023-08-13T04:25:45Z,Pull request 
+2505,closed,Added Django-Jazzmin for customizing admin interface,1686111750,thoth2357,2023-08-21T11:01:06Z,"> * [project-name](http://example.com/) - A short description ends with a period.
+
+Thanks @F-a-r-m-a-n, i i would add the period "
+2505,closed,Added Django-Jazzmin for customizing admin interface,1815969932,L-uz,2023-11-17T08:55:43Z,Html is way better  ig?
+2575,closed,Add stable-baselines3,2233315647,R055A,2024-07-17T13:22:57Z,@vinta 
+2575,closed,Add stable-baselines3,2387220453,Mitchmck3,2024-10-01T22:50:45Z,"> ## What is this Python project?
+> 
+> Stable Baselines 3 is a PyTorch version of Stable Baselines for reliable implementations of (deep) reinforcement learning algorithms. 
+> 
+> ## What's the difference between this Python project and similar ones?
+> 
+> Stable Baselines 3 is a significant improvement from previous Stable Baseline versions providing: 
+> - state-of-the-art PyTorch algorithms for (deep) reinforcement learning with
+>   - observation space and Tensorboard support
+>   - custom environments, policies, callbacks and interface
+>   - can integrate with other libraries
+> - [a full list of features can be found using this link](https://github.com/DLR-RM/stable-baselines3#main-features)
+> 
+> Anyone who agrees with this pull request could submit an *Approve* review to it.
+> 
+
+"
+2607,closed,python-nostr,2322768558,Steffin-php,2024-08-31T04:41:53Z,Good
+1617,closed,Add ipychart,695361968,FerdiHr,2020-09-19T22:21:39Z,Tested and approved !! ;)
+2196,closed,Add refurb.,1273443351,igordertigor,2022-10-10T14:56:51Z,"Looks great, but seems to need a bit more time. I hit my first bug within less then 5 minutes with refurb."
+2196,closed,Add refurb.,1274909505,jdevera,2022-10-11T15:45:32Z,"Thanks for checking. I saw the bug reported 💪. What is your usual policy for revisiting a project?
+"
+2196,closed,Add refurb.,1275746076,igordertigor,2022-10-12T07:55:39Z,"I'm not deciding on policies, I'm just voting and sometimes commenting. I should also mention that the bug I reported took only 3 hours to be fixed."

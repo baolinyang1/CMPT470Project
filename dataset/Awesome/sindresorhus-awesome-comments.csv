@@ -1,0 +1,519 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+1269,closed,Add flat badges to gh-pages branch,1030709811,0566616453,2022-02-05T22:41:40Z,Leave a comment 
+1269,closed,Add flat badges to gh-pages branch,1097583756,nassarjjjj,2022-04-13T05:47:08Z,السلام 
+1269,closed,Add flat badges to gh-pages branch,1541010739,Porpasad,2023-05-09T23:21:55Z,awesome.re
+1269,closed,Add flat badges to gh-pages branch,2561649852,30031987Ya,2024-12-25T06:23:56Z,"> Related to #1268
+
+"
+1269,closed,Add flat badges to gh-pages branch,2561658487,Tester1234537,2024-12-25T06:43:11Z,"Nao.. is what the men intehliveru en the bak.and pss the
+ Visión is esy.. O we an the kill
+
+
+El mié, 25 dic 2024, 1:31 a. m., 30031987Ya ***@***.***>
+escribió:
+
+> Related to #1268 <https://github.com/sindresorhus/awesome/pull/1268>
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/sindresorhus/awesome/pull/1269#issuecomment-2561649852>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/A7TCOKOUUO52CVS3RPMI4VL2HJGNNAVCNFSM6AAAAABRWO4PUOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKNRRGY2DSOBVGI>
+> .
+> You are receiving this because you are subscribed to this thread.Message
+> ID: ***@***.***>
+>
+"
+1269,closed,Add flat badges to gh-pages branch,2645842050,AngSolids,2025-02-08T16:54:08Z,Solid project
+878,closed,Add No-Login Web Apps,277684554,sindresorhus,2017-02-06T13:44:22Z,"> It is a curated list of awesome web apps that work without requesting you to create an account. This list will help users to do common tasks without having to download a software or create web accounts.
+
+What problem does it solve though? I honestly rather create an account in a great web app then use a crappy one without login (Not saying this is the case every time, but very often)."
+878,closed,Add No-Login Web Apps,277698447,aviaryan,2017-02-06T14:31:24Z,"The main motivation for this is like suppose you want to do a certain task, let's say plot a graph for a function to see its behaviour. You come to no-login-web-apps repo, look up the index and quickly find something that works for you, out of the box. No logins, no registrations. Of course, if you will be doing this too often, you might want to create an account on that site.
+
+> I honestly rather create an account in a great web app then use a crappy one without login
+
+**From README:** Most of the apps mentioned here do provide some kind of a user account feature to save history and progress. But as already stated before, a user account is not necessary to use the main features of these apps.
+
+Maybe I should add a marker for sites that allow logins ?
+
+----
+
+Considering the above explanation, I think my PR is suitable for this project. @sindresorhus What do you think? "
+878,closed,Add No-Login Web Apps,277723395,jedahan,2017-02-06T15:51:06Z,"I also see this list as a great resource on finding applications that have the potential to be easily distributed, offline first, generally (though not always) small codebase... "
+878,closed,Add No-Login Web Apps,280865698,sindresorhus,2017-02-18T18:36:27Z,"> @sindresorhus What do you think?
+
+:+1:
+
+> only has awesome items with descriptions
+
+Noticed a few items are missing description.
+
+> Each link description starts with an uppercase character and ends with a period.
+
+Not followed.
+
+> Drop all the A / An prefixes in the descriptions.
+
+Not followed.
+
+> Consistent naming. For example, Node.js, not NodeJS or node.js.
+
+For example, I see both `Youtube` and `youtube` used, but neither are correct. It's `YouTube`."
+878,closed,Add No-Login Web Apps,280991022,aviaryan,2017-02-20T05:24:38Z,@sindresorhus I have updated the list with the improvements you suggested. Can you please have a look. Thanks 😊
+878,closed,Add No-Login Web Apps,2645840067,AngSolids,2025-02-08T16:49:47Z,Can you forget to stroger you're talking bullet
+3019,closed,Meta tweaks,2105632784,OR3Omimi,2024-05-11T08:26:32Z,"> <!-- Congrats on creating an Awesome list! 🎉 -->
+> 
+> <!-- Please fill in the below placeholders -->
+> 
+> ### By submitting this pull request I confirm I've read and complied with the below requirements 🖖
+> 
+> This is a typo fix pull request, which is not related to the awesome list itself. :-)
+
+前排队等服务是否要在这个角色总动员们看过来# 看到这里了**快来买贵族和我们要****~~民国~~"
+3312,closed,Add Large Language Model,2558267710,sindresorhus,2024-12-21T23:32:07Z,"Thanks for making an Awesome list! 🙌
+
+It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+3312,closed,Add Large Language Model,2558865577,donBarbos,2024-12-23T04:04:35Z,"hi @zhiyuan8, your list is really awesome but it doesn't meet any of the requirements :disappointed:
+
+first of all I would advise you to start with a linter (it showed me 210 errors):
+`npx awesome-lint https://github.com/NexaAI/Awesome-LLMs-on-device`
+your list is almost entirely made up of different tables, although the guidelines says that the list should look like this:
+`- [Item](link) - Description.`
+I think this is the main thing you should start with.
+
+**and of course read all the requirements!**"
+3312,closed,Add Large Language Model,2558916560,NewAlexandria,2024-12-23T05:05:18Z,"@zhiyuan8 , I hope you'll revise it.  This looks like a great list. "
+1354,closed,"Would anyone be interested: ""Awesome list of hardware for Kali Linux""?",405025738,ghost,2018-07-14T14:04:45Z,Also idk how to add labels to issues in this tracker. Can someone add the `list request` and `help wanted` labels for me?
+1354,closed,"Would anyone be interested: ""Awesome list of hardware for Kali Linux""?",408619551,sindresorhus,2018-07-28T16:33:24Z,"The requirements for a list is listed here: https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md
+
+Usually, you start a list when you know a topic very well and want to share the resources and knowledge you have gathered. It doesn't really work to create an empty list and hope that people will come by and help out.
+
+Instead, try to find some people in the Kali Linux community to start the list with."
+1354,closed,"Would anyone be interested: ""Awesome list of hardware for Kali Linux""?",408679763,ghost,2018-07-29T14:00:53Z," >  It doesn't really work to create an empty list and hope that people will come by and help out.
+
+Okay yeah that makes sense, and I am in full agreement with the point. I have neither the experience nor expert knowledge to contribute to my own list meaningfully so I guess I will delete the repo for now. Thank you."
+1354,closed,"Would anyone be interested: ""Awesome list of hardware for Kali Linux""?",2626200967,Jrmufunwa,2025-01-31T03:03:34Z,How do I install Kali Linux on Samsung A05s..?
+3151,closed,Add Japanese list,2290001694,sindresorhus,2024-08-14T22:06:38Z,https://github.com/sindresorhus/awesome/blob/main/create-list.md
+3151,closed,Add Japanese list,2614160774,CiCi2019-cu,2025-01-26T01:15:08Z,Delete
+3154,closed,Add Machine Learning section,2325394682,oguzhan18,2024-09-03T00:00:08Z,This is an automated response to help you with this issue. Please let us know if you need further assistance.
+3154,closed,Add Machine Learning section,2327568358,ghost,2024-09-03T22:45:24Z,"I’m sorry. Is this how you treat?
+I have no clue on coding and I don’t have any interests on it! Government
+forced me to die and my google map record got changed by somebody. I don’t
+seriously like the way your company supervised at all! I’m dying through
+these 2 months.
+The world is full of miserable. Why should I live?
+
+Oğuzhan ÇART ***@***.***>於 2024年9月3日 週二，08:07寫道：
+
+> This is an automated response to help you with this issue. Please let us
+> know if you need further assistance.
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/sindresorhus/awesome/issues/3154#issuecomment-2325394682>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ASM7JGOTEEAB65PUBRORGA3ZUT4TJAVCNFSM6AAAAABMUEBPC2VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDGMRVGM4TINRYGI>
+> .
+> You are receiving this because you are subscribed to this thread.Message
+> ID: ***@***.***>
+>
+"
+3154,closed,Add Machine Learning section,2614160621,CiCi2019-cu,2025-01-26T01:14:20Z,Delete 
+3216,closed,create-list.md not clear about license and contributing in footernote,2614160294,CiCi2019-cu,2025-01-26T01:12:52Z,"Delete 
+"
+3241,closed,Awesome Windows link is dead,2455808441,ForNeVeR,2024-11-04T22:13:33Z,This is being addressed by #3227.
+3241,closed,Awesome Windows link is dead,2463231224,msbegee,2024-11-07T21:16:54Z,diable
+3241,closed,Awesome Windows link is dead,2495680189,0PandaDEV,2024-11-23T22:57:32Z,"Finally, after 2 months #3227 was merged and with this the windows link is fixed. This issue can be closed now @abhy-kumar "
+3241,closed,Awesome Windows link is dead,2614160051,CiCi2019-cu,2025-01-26T01:11:41Z,Close and delete 
+3266,closed,Handbrake Web is listed twice,2466451502,RonnyAL,2024-11-09T20:32:01Z,Accidentally opened issue in wrong repo!
+3266,closed,Handbrake Web is listed twice,2614159737,CiCi2019-cu,2025-01-26T01:10:16Z,Close 
+3302,closed,What Are the Criteria for “No Blockchain-Related Lists” in Pull Request Guidelines?,2532931084,sindresorhus,2024-12-10T21:29:44Z,"There are too many blockchain projects that are pure scam and I don't want to spend a lot of time investigation whether the submissions are such projects.
+
+---
+
+> There are already some “blockchain-related” items on the existing awesome list
+
+The work was already done with those."
+3302,closed,What Are the Criteria for “No Blockchain-Related Lists” in Pull Request Guidelines?,2614159603,CiCi2019-cu,2025-01-26T01:09:35Z,Clear all
+3282,closed,Add PostgreSQL hacking,2495512845,sindresorhus,2024-11-23T15:23:44Z,"Thanks for making an Awesome list! 🙌
+
+It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+3282,closed,Add PostgreSQL hacking,2498088581,zhjwpku,2024-11-25T13:55:38Z,"> Thanks for making an Awesome list! 🙌
+> 
+> It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome.
+
+I've edit the repo conform to awesome-lint, there is one requirement that not satisfied,
+since I am adding an entry related to Postgres, I think it will be better that this
+entry be listed below the Postgres entry."
+3282,closed,Add PostgreSQL hacking,2499495157,zhjwpku,2024-11-26T02:14:27Z,"> There is no issue with `npx awesome-lint https://github.com/pghacking/awesome-postgres-hacking`; it is now `✅ Linting` successfully.
+> 
+> It would be better to add it to the README.md file of the Awesome repository as follows because other projects have added it this way.
+> 
+> * [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.
+>   
+>   * [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - PostgreSQL hacking resources.
+> 
+> There is also a description of “PostgreSQL hacking resources.” It should not start with the title.
+
+Changed as a subentry.
+Non english native speaker, what do you mean by saying ""It should not start with the title""?
+Can you be specific which part should be changed?"
+3282,closed,Add PostgreSQL hacking,2500317668,bozaci,2024-11-26T11:05:19Z,"Your Description: **PostgreSQL hacking resources.**
+PostgreSQL, present at the beginning of the description, should not be at the beginning. It would be best if you corrected the description accordingly, other pull requests are requested this way.
+
+Example:
+
+- [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.
+  - [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - Resources for PostgreSQL hacking."
+3282,closed,Add PostgreSQL hacking,2500554974,zhjwpku,2024-11-26T12:05:43Z,"> Your Description: **PostgreSQL hacking resources.** PostgreSQL, present at the beginning of the description, should not be at the beginning. It would be best if you corrected the description accordingly, other pull requests are requested this way.
+> 
+> Example:
+> 
+> * [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.
+>   
+>   * [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - Resources for PostgreSQL hacking.
+
+Changed accordingly, thanks"
+3282,closed,Add PostgreSQL hacking,2502684393,zhjwpku,2024-11-27T04:12:02Z,"> Finally, as far as I can see you have added a pull request review, but no ‘approved’, ‘request changes’ or any comments.
+
+I don't remember I add a pull request review, I just do quote reply. I had re-requested your review after I did some change, I'm not sure if mean that."
+3282,closed,Add PostgreSQL hacking,2503613896,bozaci,2024-11-27T11:20:06Z,"**The one you added**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen).
+I have reviewed https://github.com/sindresorhus/awesome/pull/3247 and https://github.com/sindresorhus/awesome/pull/3256
+
+**Checklist request**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen).
+Try to prioritise unreviewed PRs, but you can also add more comments to reviewed PRs. Review the following list when reviewing. This requirement is to help the Awesome project become self-sustaining. Leave a comment here about which PRs you have reviewed. You are expected to make a good effort and be thorough. Look at previous PR reviews for inspiration. Just commenting ‘looks good’ or just marking the pull request as approved doesn't count! You really need to point out errors or suggestions for improvement. Comments pointing out a lint violation are allowed, but do not count as a review.
+
+---
+
+I think there has been a slight misunderstanding here. It is not enough to say ‘I have reviewed these PRs’. The checklist expects you to do a detailed review and share any shortcomings or suggestions for improvement. For example, you can look at previous reviews and get inspired. So it would be best if you made a more in-depth evaluation."
+3282,closed,Add PostgreSQL hacking,2503684813,zhjwpku,2024-11-27T11:55:10Z,"> **The one you added**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen). I have reviewed #3247 and #3256
+> 
+> **Checklist request**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen). Try to prioritise unreviewed PRs, but you can also add more comments to reviewed PRs. Review the following list when reviewing. This requirement is to help the Awesome project become self-sustaining. Leave a comment here about which PRs you have reviewed. You are expected to make a good effort and be thorough. Look at previous PR reviews for inspiration. Just commenting ‘looks good’ or just marking the pull request as approved doesn't count! You really need to point out errors or suggestions for improvement. Comments pointing out a lint violation are allowed, but do not count as a review.
+> 
+> I think there has been a slight misunderstanding here. It is not enough to say ‘I have reviewed these PRs’. The checklist expects you to do a detailed review and share any shortcomings or suggestions for improvement. For example, you can look at previous reviews and get inspired. So it would be best if you made a more in-depth evaluation.
+
+OK, I just reviewed #3283 and #3247 and left a LGTM approve message."
+3282,closed,Add PostgreSQL hacking,2506297605,zhjwpku,2024-11-28T14:51:35Z,"> Thanks for creating the list!
+> 
+> Please note in the guidelines:
+> 
+> > Entries have a description, unless the title is descriptive enough by itself. It rarely is though.
+> 
+> In your list, most of the entries have none. Only the books, the first two mailing lists, and the tools have them.
+> 
+TBH, I think the titles are descriptive enough by themselves.
+
+> Also, there's an empty section ""Parser"".
+
+I just add for entry for parser section.
+"
+3282,closed,Add PostgreSQL hacking,2608127718,DanailMinchev,2025-01-22T19:48:03Z,"Please have a look at these linting errors, mainly missing dots:
+<img width=""715"" alt=""image"" src=""https://github.com/user-attachments/assets/0f08b6d5-0757-4adb-b274-f085aa6189dc"" />
+"
+3341,closed,Add missing period for consistency in the Code-of-Conduct.md section,2609191815,sindresorhus,2025-01-23T08:49:34Z,You have to fix the source if so: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
+3110,closed,Add Xiangqi,2229468457,lucaferranti,2024-07-15T21:25:21Z,unicorn
+3110,closed,Add Xiangqi,2236179760,lucaferranti,2024-07-18T10:36:22Z,@TupleType can you elaborate what you mean?
+3110,closed,Add Xiangqi,2236189457,TupleType,2024-07-18T10:42:07Z,"> @TupleType can you elaborate what you mean?
+
+Includes a succinct description of the project/theme at the top of the readme. [(Example)](https://github.com/willempienaar/awesome-quantified-self)
+✅ Mobile operating system for Apple phones and tablets.
+✅ Prototyping interactive UI designs.
+❌ Resources and tools for iOS development.
+❌ Awesome Framer packages and tools.
+
+"
+3110,closed,Add Xiangqi,2236194892,lucaferranti,2024-07-18T10:45:30Z,"@TupleType I think the sentence I have
+
+> Xiangqi, also known as Chinese chess, is a two-players abstract strategy board-game from China, with a long history of tradition, theory and tactics.
+
+is a pretty succint description of what xiangqi is.
+
+Could you clarify why you think it does not fit the guidelines? If you have a better wording in mind, of course happy to receive feedback :)
+"
+3110,closed,Add Xiangqi,2236198960,TupleType,2024-07-18T10:47:48Z,I mean the first line of the readme should be second
+3110,closed,Add Xiangqi,2236231488,lucaferranti,2024-07-18T11:06:25Z,"@TupleType  Do you mean that I should move the sentence
+
+> A curated list of xiangqi related resources.
+
+after the description? I don't mind the change, but why do you think it's against the guidelines? I took as model the example repository linked in the guidelines: https://github.com/woop/awesome-quantified-self and that also starts with
+
+> Carefully curated list of awesome Quantified Self resources.
+
+before the description. Similarly other lists: https://github.com/sindresorhus/awesome-electron , so I don't think it's against the guidelines for that to come before the topic description :thinking: As far as I can tell, I don't think it's required to be quoted (with `>` ) either."
+3110,closed,Add Xiangqi,2242372697,lucaferranti,2024-07-22T08:22:47Z,"Hi @sindresorhus 🖖 ,
+
+I think this PR is ready, let me know if you think otherwise."
+3110,closed,Add Xiangqi,2250629206,lucaferranti,2024-07-25T15:10:13Z,@sindresorhus friendly ping :)
+3110,closed,Add Xiangqi,2261507610,jackaubone,2024-07-31T21:39:43Z,__k 
+3110,closed,Add Xiangqi,2262153216,lucaferranti,2024-08-01T06:28:25Z,"@sindresorhus world's gentlest ping :) 
+
+Please let me know if this is good to go"
+3110,closed,Add Xiangqi,2276025252,lucaferranti,2024-08-08T14:51:18Z,@sindresorhus weekly ping :peace_symbol:
+3110,closed,Add Xiangqi,2276558465,sindresorhus,2024-08-08T20:01:31Z,@lucaferranti Please stop pinging. All it does is move it to the bottom of my review list. Getting a list merged generally takes time.
+3110,closed,Add Xiangqi,2276588857,lucaferranti,2024-08-08T20:21:36Z,"I understand and apologize for bothering.
+
+You are running a great open project here on your free time and this is great! I am sorry I broke the etiquette by pinging you and I did not mean to sound rude or pushy. Now that I know the rules, I am happy with your answer and happy to wait as long as it takes. Thanks for informing me and again, sorry for the inconvenience
+"
+3110,closed,Add Xiangqi,2429933324,sindresorhus,2024-10-22T18:10:11Z,"`Xiangqi` in `Xiangqi, also known as Chinese chess, is a two-players abstract strategy board-game from China, with a long history of tradition, theory and tactics.` should be linkified to https://en.wikipedia.org/wiki/Xiangqi
+
+---
+
+> `https://www.chessdb.cn/query/ - Interactive board to search positions and statistics about their outcomes and continuations.`
+
+Should be:
+
+> `[ChessDB](https://www.chessdb.cn/query/) - Interactive board to search positions and statistics about their outcomes and continuations.`
+
+Same everywhere.
+
+---
+
+Run the list through ChatGPT to fix typos."
+3110,closed,Add Xiangqi,2430331616,lucaferranti,2024-10-22T21:19:24Z,"TIL, the correct spelling is dynasty and not dinasty :sweat_smile: 
+
+Thank you very much for the review! The points raised should be fixed now"
+3110,closed,Add Xiangqi,2525211707,theodorosploumis,2024-12-07T15:36:09Z,"I do believe that adding the **Chinese** words on the list beside the English titles does not give added value. This is the case on the [Opening](https://github.com/lucaferranti/awesome-xiangqi#opening) section.
+"
+3332,closed,Create  Birthday Countdown,2595419009,0543597595,2025-01-16T12:19:01Z," Please review the link: [Birthday Countdown Online](https://www.birthday-countdown.online)
+- Ensure that the project description matches the intended purpose and that all necessary features are highlighted."
+3332,closed,Create  Birthday Countdown,2595425341,0543597595,2025-01-16T12:20:24Z,"@0543597595  (the maintainer's GitHub handle), the pull request is ready to be merged. Please review and merge when possible."
+3332,closed,Create  Birthday Countdown,2595441741,DanailMinchev,2025-01-16T12:24:27Z,"@0543597595 please rename your pull request to ""Add Birthday Countdown"" and looks like you are not supplying Awesome list repository, please read the guidelines for contributing"
+3308,closed,Add Free Apps,2543850905,Axorax,2024-12-15T12:17:24Z,unicorn
+3308,closed,Add Free Apps,2543852801,Axorax,2024-12-15T12:23:22Z,"not sure on why the linter in the github actions failed but heres a screenshot of me running awesome linter on it:
+
+![image](https://github.com/user-attachments/assets/15d185a3-040a-41b5-bd56-f9c4bf73ef3b)
+"
+3308,closed,Add Free Apps,2549223948,donBarbos,2024-12-17T18:07:35Z,"linter show me next problems:
+```bash
+✖ Linting
+
+  README.md:158:77
+  ✖  158:77  List item description must end with proper punctuation  remark-lint:awesome-list-item
+  ✖  163:99  List item description must end with proper punctuation  remark-lint:awesome-list-item
+  ✖  184:41  List item description must end with proper punctuation  remark-lint:awesome-list-item
+  ✖  186:67  List item description must end with proper punctuation  remark-lint:awesome-list-item
+
+  4 errors
+```
+anyway you need to fix your `README.md`,
+and it's linter output from workflow (you always can check github actions logs):
+```bash
+warning: url contains a newline in its path component: https://github.com/Axorax/awesome-free-apps
+https://github.com/Axorax/awesome-free-apps
+https://github.com/Axorax/awesome-free-apps/
+fatal: credential url cannot be parsed: https://github.com/Axorax/awesome-free-apps
+https://github.com/Axorax/awesome-free-apps
+https://github.com/Axorax/awesome-free-apps/
+fatal: remote helper 'https' aborted session
+```
+
+these're similar awesome lists i found:
+- https://github.com/RunaCapital/awesome-oss-alternatives
+- https://github.com/diegoleme/awesome-open-source-alternatives
+
+but you can explain how your list is different and what you mean by ___free___ apps?
+(I didn't find any explanation in your readme)
+
+and I also don't think it's worth adding your list to several topics"
+3308,closed,Add Free Apps,2549272909,Axorax,2024-12-17T18:24:40Z,"Hey! So, I added more apps and messed up some punctuations. Should be fixed now.
+
+How is my list different?
+Well, there are open source app lists. My list is for free apps that means the app can be open-source or closed source. The listen only contains the best free apps that can have their source code public or private.
+
+I put it in three topics as the list covers windows, mac and linux. There are no free app lists currently, so I made one."
+3308,closed,Add Free Apps,2549469055,Mo-way,2024-12-17T19:48:40Z,"@Axorax 
+The free needs more clear, because (software) people differentiate `free as in freedom` and `free as in free beer`. 
+See: https://en.wikipedia.org/wiki/Gratis_versus_libre
+
+Awesome to see the resonance to your list! It seems there's definitely a desire for a ""gratis"" apps list, regardless the freedom of the source code. Still, I think adding it in one category only suffices.. All other ""free apps"" related lists are in `Miscellaneous` (apart from the macOS one, for obvious reasons)."
+3308,closed,Add Free Apps,2549531321,Jogai,2024-12-17T20:18:54Z,"Was dissapointed when looking at the games category. No free games listed, mostly launchers of big for-profit corpos."
+3308,closed,Add Free Apps,2550527624,Axorax,2024-12-18T07:09:46Z,@Mo-way Thanks for the feedback! What category should I list it in?
+3308,closed,Add Free Apps,2550701869,Mo-way,2024-12-18T08:42:25Z,@Axorax  Miscellaneous
+3308,closed,Add Free Apps,2553002925,Axorax,2024-12-19T07:54:53Z,"> Another nitpick: if yo ask me, the ""⭐ recommended by us"" category makes no sense on an awesome list - if you don't recommend it, remove it from the list
+
+ofc we recommend all the apps but the star ones are the apps in that category with the best UI and functionality like best all together"
+3308,closed,Add Free Apps,2553286360,Mo-way,2024-12-19T09:56:55Z,"> ofc we recommend all the apps but the star ones are the apps in that category with the best UI and functionality like best all together
+
+Okay, sounds sensible to me. I agree, there are many very long awesome lists, where some prioritization would help. 
+Let's see what others say"
+3308,closed,Add Free Apps,2567454717,yijun-lee,2025-01-02T09:02:30Z,"Thank you so much for creating such an excellent list!
+
+Although it overlaps a bit with what you mentioned earlier, here are my thoughts:
+
+1. Regarding “⭐ recommended by us,” I think it would be better to either clarify the criteria for recommendation or remove it altogether if there aren’t any explicit standards. The awesome list itself is already about listing only ‘awesome’ things. Of course, if you want to highlight the most awesome among the awesome ones, then it could still make sense to include it.
+2. What is the criteria for labeling something as a free app? Platforms like Steam or Xbox seem a bit ambiguous to be categorized as “free apps.”
+
+Hope this feedback helps!"
+3308,closed,Add Free Apps,2567669529,Axorax,2025-01-02T12:00:35Z,"> Thank you so much for creating such an excellent list!
+> 
+> Although it overlaps a bit with what you mentioned earlier, here are my thoughts:
+> 
+> 1. Regarding “⭐ recommended by us,” I think it would be better to either clarify the criteria for recommendation or remove it altogether if there aren’t any explicit standards. The awesome list itself is already about listing only ‘awesome’ things. Of course, if you want to highlight the most awesome among the awesome ones, then it could still make sense to include it.
+> 2. What is the criteria for labeling something as a free app? Platforms like Steam or Xbox seem a bit ambiguous to be categorized as “free apps.”
+> 
+> Hope this feedback helps!
+
+1. > yup, it'll highlight only the most awesome ones in that category.
+2. > the launcher is free and there are a lot of free games on there that u can play"
+3308,closed,Add Free Apps,2585954226,jsp-mx,2025-01-12T23:01:50Z,looks good
+3326,closed,C# is a language I don't seem to find,2573944521,Jogai,2025-01-06T21:18:48Z,"Not how it works. Its a community effort. If you have a c# list, make a PR. But maybe for you search with the term "".NET"""
+3256,closed,"Add ""FOSS Alternatives""",2452339402,sindresorhus,2024-11-01T18:04:21Z,"Thanks for making an Awesome list! 🙌
+
+It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+3256,closed,"Add ""FOSS Alternatives""",2452904898,hardBSDk,2024-11-02T07:23:15Z,"@sindresorhus I spent some minutes reading the guidelines with attention, if something was not followed is because I didn't understood.
+
+Can you say what parts aren't followed?"
+3256,closed,"Add ""FOSS Alternatives""",2452910879,hardBSDk,2024-11-02T07:50:54Z,"I also know that the repository must have more than 1 month of life, thus I will left this PR open until the date."
+3256,closed,"Add ""FOSS Alternatives""",2453485823,tangrames,2024-11-03T16:26:17Z,"
+
+      谢谢，您的邮件我已经收到，看到邮件后，我会第一时间回复您！
+      祝一切顺利！"
+3256,closed,"Add ""FOSS Alternatives""",2453966124,Jogai,2024-11-04T07:17:09Z,"> I also know that the repository must have more than 1 month of life, thus I will left this PR open until the date.
+
+Rule 1 of the guidelines: Don't open a Draft / WIP pull request while you work on the guidelines. A pull request should be 100% ready and should adhere to all the guidelines when you open it
+
+So it doesnt seem like you actually read it. When reading, also follow the links the guidelines contain."
+3256,closed,"Add ""FOSS Alternatives""",2525223929,theodorosploumis,2024-12-07T16:00:14Z,"My comments on this PR:
+
+1) I do not think that this is an ""Awesome"" list. I mean that creating a single repository to include all the FOSS Alternatives is somehow a ""utopia"". In fact all of the Awesome lists included on this project are (kind of) FOSS related.
+2) Even if the No1 is not correct the list is too poor to be an ""awesome"". It misses known entries.
+3) The sections are too generic. This is due to No1 above. For example the section ""System Services"" (where you mention Mobile App repository services) should be named ""Digital software distribution platform"".
+4) The sections are not in alphabetical order so navigating through them is too hard to accomplish.
+5) There are already similar Awesome lists (some of them are also included on this project): 
+ - https://github.com/RunaCapital/awesome-oss-alternatives
+ - https://github.com/tvvocold/FOSS-for-Dev
+ - https://github.com/sfermigier/awesome-foss-alternatives
+"
+3256,closed,"Add ""FOSS Alternatives""",2585648249,hardBSDk,2025-01-12T08:57:14Z,"As some rules are boring for me and maybe I disagree with some of them, I will close this PR and maybe send a new PR later.
+
+If someone want to do that for me, feel free to do.
+
+My motivation is low."
+3278,closed,Update readme.md,2568725148,Nathan090a,2025-01-03T05:53:50Z,"Right so show me
+
+￼
+
+Nathoskid35Ogbonge green warrior from Naija
+***@***.***://heylink.me/nathoskid35/
+
+On Fri, Jan 3, 2025, 6:52 AM K-HOJA ***@***.***> wrote:
+
+> ***@***.**** commented on this pull request.
+>
+> Hi bro I think I have found this issue
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/sindresorhus/awesome/pull/3278#pullrequestreview-2528575741>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/BNRIS5LXESKHZ2WXJ5AFSTD2IYQR7AVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZDKMRYGU3TKNZUGE>
+> .
+> You are receiving this because you are subscribed to this thread.Message
+> ID: ***@***.***>
+>
+"
+3278,closed,Update readme.md,2568729452,KHOJA5865,2025-01-03T06:01:06Z,"Can you share me your code
+
+Android uchun Outlook<https://aka.ms/AAb9ysg> oling
+________________________________
+From: Nathan090a ***@***.***>
+Sent: Friday, January 3, 2025 10:54:17 AM
+To: sindresorhus/awesome ***@***.***>
+Cc: K-HOJA ***@***.***>; Comment ***@***.***>
+Subject: Re: [sindresorhus/awesome] Update readme.md (PR #3278)
+
+
+Right so show me
+
+￼
+
+Nathoskid35Ogbonge green warrior from Naija
+***@***.***://heylink.me/nathoskid35/
+
+On Fri, Jan 3, 2025, 6:52 AM K-HOJA ***@***.***> wrote:
+
+> ***@***.**** commented on this pull request.
+>
+> Hi bro I think I have found this issue
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/sindresorhus/awesome/pull/3278#pullrequestreview-2528575741>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/BNRIS5LXESKHZ2WXJ5AFSTD2IYQR7AVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZDKMRYGU3TKNZUGE>
+> .
+> You are receiving this because you are subscribed to this thread.Message
+> ID: ***@***.***>
+>
+
+—
+Reply to this email directly, view it on GitHub<https://github.com/sindresorhus/awesome/pull/3278#issuecomment-2568725148>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/BNNGCRLJHG6XELB5FT3OFMD2IYQYTAVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKNRYG4ZDKMJUHA>.
+You are receiving this because you commented.Message ID: ***@***.***>
+"
+3316,closed,Update readme.md,2564413237,donBarbos,2024-12-28T19:29:05Z,"You first need to complete all the requirements and then send PR.
+
+It seems you haven't fulfilled any of the requirements at all. I advise you to close the PR now and open it when everything is ready, especially since at least a month must pass from the date of the repository creation, and your repository only has two days.
+
+and please read the documentation before doing anything"
+3316,closed,Update readme.md,2564415894,sindresorhus,2024-12-28T19:42:04Z,Awesome lists require a lot more effort than this.
+2895,closed,Add PocketBase,1842767837,sindresorhus,2023-12-06T12:27:09Z,"Thanks for making an Awesome list! 🙌
+
+It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+2895,closed,Add PocketBase,1844634082,benallfree,2023-12-07T05:58:29Z,"@sindresorhus Could you please direct us to a more detailed analysis of what was missing or not followed? Two of us have reviewed each of the points and can't spot anything, so there might be something we are misinterpreting. Thank you for any help you can provide."
+2895,closed,Add PocketBase,1856637385,Mobin965500,2023-12-14T21:24:40Z,vless://d7321fa1-20c3-4388-be9f-f53291bd79cc@discord.com:443?type=grpc&serviceName=31520094&security=tls&fp=&alpn=http%2F1.1%2Ch2&sni=1469688760.behmusic.store#vip-ktdb2liy
+2895,closed,Add PocketBase,1869700295,philipp2525,2023-12-26T18:14:21Z,"yes hello.. I am neither. I am a professional and have a lot to do with computers. I was sent to this app by okx. I'm trying to open my reserves or so... I've only been doing it for a few days... ...I don't understand a word. Although I translate... and hardly anyone works as hard as you do..., only sndrrs... don't have to be offended. I should do it quickly. but I'm not that good with everything. well and Christmas is here too.. I've been logged in to apps for 3 days.. 🤗🤗
+"
+2895,closed,Add PocketBase,1869702104,philipp2525,2023-12-26T18:18:21Z,"Ich meine habe nicht viel mit pc tap und co zu tun . Nur das übliche . Bei okx war es anders .  Ich will es gerne lernen . 
+ "
+2895,closed,Add PocketBase,1869703740,philipp2525,2023-12-26T18:21:58Z,Und hier gibt es viel zu lesen . Das muss ich 2 -3 mal lesen .ich will von niemanden Zeit verschwenden.. hab überhaupt nicht geähnt was diese darstellt .. wollte keine zu nahe treten .  Nur diese die Reserven . Weil ich Angst hatte die laufe. Ab. Oder so .. 
+2895,closed,Add PocketBase,1869705874,philipp2525,2023-12-26T18:27:02Z,but when I came here to the spp. I found it interesting.. and started reading. But I'm probably an inhuman. Because I'm playing with my daughter on Christmas too... well... I'll read on now
+2895,closed,Add PocketBase,1870769472,KFCMULLBANK,2023-12-28T02:38:49Z,"I cant log in on my microsoft.com
+
+Den tis 26 dec. 2023 19:27PHILIPP BÖGE ***@***.***> skrev:
+
+> but when I came here to the spp. I found it interesting.. and started
+> reading. But I'm probably an inhuman. Because I'm playing with my daughter
+> on Christmas too... well... I'll read on now
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/sindresorhus/awesome/pull/2895#issuecomment-1869705874>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/A42O56QZ3PZCLXOLAWXSZBDYLMJIPAVCNFSM6AAAAABAI2MEUGVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQNRZG4YDKOBXGQ>
+> .
+> You are receiving this because you commented.Message ID:
+> ***@***.***>
+>
+"
+2895,closed,Add PocketBase,1871820159,hannibalfishkop,2023-12-29T07:56:06Z,Nice
+2895,closed,Add PocketBase,1871824835,benallfree,2023-12-29T08:05:30Z,"@sindresorhus This issue is getting spammed, can we please merge & close? What else needs to be done?"
+2895,closed,Add PocketBase,1872495695,svilupp,2023-12-30T09:58:28Z,"Hi @benallfree ,
+
+I ran your list through the linter (`npx awesome-lint https://github.com/benallfree/awesome-pocketbase`) and I'm getting the following errors:
+> ✖  33:1  Marker style should be -  remark-lint:unordered-list-marker-style
+
+Would you mind reviewing the Svelte section? I believe it uses an asterisk instead of a dash as a marker.
+"
+2895,closed,Add PocketBase,1872500771,benallfree,2023-12-30T10:30:15Z,@jorgoose see above
+2895,closed,Add PocketBase,1943368824,sindresorhus,2024-02-14T09:24:27Z,> The description starts with an uppercase character and ends with a period.
+2895,closed,Add PocketBase,1943369015,sindresorhus,2024-02-14T09:24:34Z,Descriptions should not be title-cased.
+2895,closed,Add PocketBase,1943370112,sindresorhus,2024-02-14T09:25:17Z,> Includes a succinct description of the project/theme at the top of the readme. [(Example)](https://github.com/willempienaar/awesome-quantified-self)
+2895,closed,Add PocketBase,1943370957,sindresorhus,2024-02-14T09:25:49Z,"> Consistent and correct naming. For example, Node.js, not NodeJS or node.js."
+2895,closed,Add PocketBase,1959916855,benallfree,2024-02-22T17:23:19Z,"@jorgoose Please see https://github.com/benallfree/awesome-pocketbase/pull/36 and pull from upstream. I believe we have addressed @sindresorhus 's comments, but since this PR is from your branch I was hoping you could do an upstream pull to refresh it."
+2895,closed,Add PocketBase,2131318073,sindresorhus,2024-05-25T16:03:57Z,Tweet: https://x.com/awesome__re/status/1794398728352141554
+208,closed,Add Crystal programming language,115642008,sindresorhus,2015-06-26T10:49:04Z,"https://github.com/sindresorhus/awesome/blob/master/contributing.md
+"
+208,closed,Add Crystal programming language,115655072,veelenga,2015-06-26T11:53:35Z,"Bottom of the category of something else ?
+"
+208,closed,Add Crystal programming language,115656071,sindresorhus,2015-06-26T12:02:01Z,"> Bottom of the category
+
+Yes
+"
+208,closed,Add Crystal programming language,116027781,sindresorhus,2015-06-27T12:12:36Z,"@n1trux git squash if there are multiple commits so not to litter the changelog with tweak commits ;)
+"
+208,closed,Add Crystal programming language,116144144,n1trux,2015-06-27T21:13:21Z,"ok, sorry. Still new to Git after a year or so :p
+"
+208,closed,Add Crystal programming language,117232351,sindresorhus,2015-06-30T15:39:47Z,"@veelenga Would be awesome if you could link back here in your list so users can easily discover more awesome lists ;)
+"
+208,closed,Add Crystal programming language,117436493,veelenga,2015-07-01T05:08:07Z,":+1: [Done](https://github.com/veelenga/awesome-crystal/commit/13d05eb70017f2dd481818ddef53e82ece4c9426)!
+"

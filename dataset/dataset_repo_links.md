@@ -1,0 +1,16 @@
+# Dataset Repositories Links
+- https://github.com/axios/axios
+- https://github.com/microsoft/PowerToys
+- https://github.com/excalidraw/excalidraw
+- https://github.com/rustdesk/rustdesk
+- https://github.com/gitextensions/gitextensions
+- https://github.com/996icu/996.ICU
+- https://github.com/Significant-Gravitas/AutoGPT
+- https://github.com/vinta/awesome-python
+- https://github.com/jwasham/coding-interview-university
+- https://github.com/sindresorhus/awesome
+- https://github.com/starship/starship
+- https://github.com/netdata/netdata
+- https://github.com/moment/moment
+- https://github.com/redis/redis
+- https://github.com/puppeteer/puppeteer

@@ -14,3 +14,8 @@
 - https://github.com/moment/moment
 - https://github.com/scrapy/scrapy
 - https://github.com/puppeteer/puppeteer
+- https://github.com/nodejs/node
+- https://github.com/ethereum/go-ethereum
+- https://github.com/pytorch/pytorch
+- https://github.com/microsoft/TypeScript
+- https://github.com/angular/angular

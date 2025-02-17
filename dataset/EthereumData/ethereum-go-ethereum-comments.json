@@ -1,0 +1,974 @@
+[
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1113344233,
+        "Author": "holiman",
+        "Created At": "2022-04-29T13:59:19Z",
+        "Comment Body": "Ok fixing the context can be done here\r\n```diff\r\ndiff --git a/cmd/clef/main.go b/cmd/clef/main.go\r\nindex f7c3adebc4..de528982c7 100644\r\n--- a/cmd/clef/main.go\r\n+++ b/cmd/clef/main.go\r\n@@ -819,9 +819,9 @@ func confirm(text string) bool {\r\n \r\n func testExternalUI(api *core.SignerAPI) {\r\n \r\n-\tctx := context.WithValue(context.Background(), \"remote\", \"clef binary\")\r\n-\tctx = context.WithValue(ctx, \"scheme\", \"in-proc\")\r\n-\tctx = context.WithValue(ctx, \"local\", \"main\")\r\n+\tconnInfo := rpc.PeerInfo{Transport: \"in-proc\", RemoteAddr: \"localhost\"}\r\n+\tctx = context.WithValue(context.Background(), peerInfoContextKey{}, connInfo)\r\n+\r\n \terrs := make([]string, 0)\r\n \r\n \ta := common.HexToAddress(\"0xdeadbeef000000000000000000000000deadbeef\")\r\n@@ -952,7 +952,11 @@ func testExternalUI(api *core.SignerAPI) {\r\n \t{ // Metadata\r\n \t\tapi.UI.ShowInfo(\"Please check if you see the Origin in next listing (approve or deny)\")\r\n \t\ttime.Sleep(delay)\r\n-\t\tapi.List(context.WithValue(ctx, \"Origin\", \"origin.com\"))\r\n+\r\n+\t\tconnInfo := rpc.PeerInfo{Transport: \"http\"}\r\n+\t\tconnInfo.HTTP.Origin = \"origin.com\"\r\n+\r\n+\t\tapi.List(context.WithValue(ctx, peerInfoContextKey{}, connInfo))\r\n \t\texpectResponse(\"metadata - origin\", \"Did you see origin (origin.com)? [yes/no] \", \"yes\")\r\n \t}\r\n \r\n```\r\nHowever, there are also a couple of these\r\n```\r\n\t\t\tctx = context.WithValue(ctx, \"node\", node)\r\n```\r\nin `p2p/simulations/http.go`"
+    },
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1113631473,
+        "Author": "fjl",
+        "Created At": "2022-04-29T19:00:23Z",
+        "Comment Body": "Damn, I did not consider unit testing when adding `rpc.PeerInfo`. I guess we need to export `func WithPeerInfo(context.Context, PeerInfo) context.Context` in package rpc."
+    },
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1113632069,
+        "Author": "fjl",
+        "Created At": "2022-04-29T19:01:14Z",
+        "Comment Body": "I now think you are right, we should disable the warning for now and deal with it in another PR."
+    },
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1114898681,
+        "Author": "holiman",
+        "Created At": "2022-05-02T13:42:15Z",
+        "Comment Body": "> I now think you are right, we should disable the warning for now and deal with it in another PR.\r\n\r\nThen we should be good to go with this PR"
+    },
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1115869012,
+        "Author": "karalabe",
+        "Created At": "2022-05-03T08:48:09Z",
+        "Comment Body": "Wrt the unused stuff, it's a \"regression\" from a refactor from last year https://github.com/ethereum/go-ethereum/pull/22163/files. I guess @rjl493456442 wantd to split my mega test method into more digestible chunks or variations and some were not necessary at the end.\r\n\r\nI'm all for double checking and getting rid of all dead code there, just let's make sure nothing was lost in translation."
+    },
+    {
+        "Issue ID": 24783,
+        "Issue State": "closed",
+        "Issue Title": "all: more linters",
+        "Comment ID": 1148782542,
+        "Author": "holiman",
+        "Created At": "2022-06-07T14:52:06Z",
+        "Comment Body": "Rebased. It found that  these two unexported methods were actually unused, so I commented them out. @rjl493456442 should they have been used? Is that an error? \r\n```\r\n// onRead tracks the newly loaded trie node and caches the rlp-encoded blob internally.\r\n// Don't change the value outside of function since it's not deep-copied.\r\nfunc (t *tracer) onRead(key []byte, val []byte) {\r\n...\r\n\r\n// getPrev returns the cached original value of the specified node.\r\nfunc (t *tracer) getPrev(key []byte) []byte {\r\n```"
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2343324550,
+        "Author": "holiman",
+        "Created At": "2024-09-11T11:03:03Z",
+        "Comment Body": "Added benchmarks, based on some of the worst-cases from the consensus-tests + fuzzing vectors. \r\n```\r\ngoos: linux\r\ngoarch: amd64\r\npkg: github.com/ethereum/go-ethereum/cmd/eofdump\r\ncpu: 12th Gen Intel(R) Core(TM) i7-1270P\r\nBenchmarkEofParse\r\nBenchmarkEofParse/test-1\r\nBenchmarkEofParse/test-1-8               1043824              1145 ns/op          17.47 MB/s         352 B/op          9 allocs/op\r\nBenchmarkEofParse/test-2\r\nBenchmarkEofParse/test-2-8                717020              1526 ns/op          13.77 MB/s         416 B/op         12 allocs/op\r\nBenchmarkEofParse/test-3\r\nBenchmarkEofParse/test-3-8                645865              1830 ns/op          12.56 MB/s         464 B/op         16 allocs/op\r\nBenchmarkEofParse/test-4\r\nBenchmarkEofParse/test-4-8                666870              1875 ns/op          12.27 MB/s         464 B/op         16 allocs/op\r\nBenchmarkEofParse/test-5\r\nBenchmarkEofParse/test-5-8                614787              2180 ns/op          11.01 MB/s         488 B/op         18 allocs/op\r\nBenchmarkEofParse/test-6\r\nBenchmarkEofParse/test-6-8                337408              3773 ns/op          21.20 MB/s        1064 B/op         35 allocs/op\r\nBenchmarkEofParse/test-7\r\nBenchmarkEofParse/test-7-8                   282           4462357 ns/op          11.00 MB/s     1058652 B/op      38282 allocs/op\r\nBenchmarkEofParse/test-8\r\nBenchmarkEofParse/test-8-8                342518              4078 ns/op          15.69 MB/s         934 B/op         35 allocs/op\r\nBenchmarkEofParse/test-9\r\nBenchmarkEofParse/test-9-8                301110              3716 ns/op          17.22 MB/s         934 B/op         35 allocs/op\r\nBenchmarkEofParse/test-10\r\nBenchmarkEofParse/test-10-8               288266              4832 ns/op           6.83 MB/s        1031 B/op         37 allocs/op\r\nBenchmarkEofParse/test-11\r\nBenchmarkEofParse/test-11-8               277754              4582 ns/op           7.20 MB/s        1031 B/op         37 allocs/op\r\nBenchmarkEofParse/test-12\r\nBenchmarkEofParse/test-12-8                  632           1874380 ns/op          13.11 MB/s      453325 B/op      18881 allocs/op\r\nBenchmarkEofParse/test-13\r\nBenchmarkEofParse/test-13-8               185851              6186 ns/op           5.50 MB/s        1696 B/op         40 allocs/op\r\nBenchmarkEofParse/test-14\r\nBenchmarkEofParse/test-14-8                97939             13215 ns/op           4.09 MB/s        3557 B/op         80 allocs/op\r\nBenchmarkEofParse/test-15\r\nBenchmarkEofParse/test-15-8               104028             13065 ns/op          11.48 MB/s        3557 B/op         80 allocs/op\r\nBenchmarkEofParse/test-16\r\nBenchmarkEofParse/test-16-8                36811             36740 ns/op          14.59 MB/s       12777 B/op        279 allocs/op\r\nBenchmarkEofParse/test-17\r\nBenchmarkEofParse/test-17-8                 9140            117813 ns/op           6.25 MB/s       30370 B/op        739 allocs/op\r\nBenchmarkEofParse/test-18\r\nBenchmarkEofParse/test-18-8                 3262            368707 ns/op           2.83 MB/s      110391 B/op       2091 allocs/op\r\nBenchmarkEofParse/test-19\r\nBenchmarkEofParse/test-19-8               720025              1415 ns/op          22.62 MB/s         408 B/op         12 allocs/op\r\nPASS\r\nok      github.com/ethereum/go-ethereum/cmd/eofdump     31.290s\r\n```\r\n"
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2343618558,
+        "Author": "holiman",
+        "Created At": "2024-09-11T13:04:50Z",
+        "Comment Body": "Sped it up quite a bit, the slowest vector is now improved by a factor of 10 :) \r\n```\r\ngoos: linux\r\ngoarch: amd64\r\npkg: github.com/ethereum/go-ethereum/cmd/eofdump\r\ncpu: 12th Gen Intel(R) Core(TM) i7-1270P\r\n                   \u2502  eof.bench.1  \u2502             eof.bench.2             \u2502\r\n                   \u2502    sec/op     \u2502    sec/op     vs base               \u2502\r\nEofParse/test-1-8     1.062\u00b5 \u00b1 \u221e \u00b9   1.105\u00b5 \u00b1 \u221e \u00b9        ~ (p=0.151 n=5)\r\nEofParse/test-2-8     1.451\u00b5 \u00b1 \u221e \u00b9   1.442\u00b5 \u00b1 \u221e \u00b9        ~ (p=0.151 n=5)\r\nEofParse/test-3-8     1.770\u00b5 \u00b1 \u221e \u00b9   1.533\u00b5 \u00b1 \u221e \u00b9  -13.39% (p=0.008 n=5)\r\nEofParse/test-4-8     1.775\u00b5 \u00b1 \u221e \u00b9   1.550\u00b5 \u00b1 \u221e \u00b9  -12.68% (p=0.008 n=5)\r\nEofParse/test-5-8     2.035\u00b5 \u00b1 \u221e \u00b9   1.631\u00b5 \u00b1 \u221e \u00b9  -19.85% (p=0.008 n=5)\r\nEofParse/test-6-8     3.484\u00b5 \u00b1 \u221e \u00b9   3.039\u00b5 \u00b1 \u221e \u00b9  -12.77% (p=0.008 n=5)\r\nEofParse/test-7-8     3.990m \u00b1 \u221e \u00b9   2.896m \u00b1 \u221e \u00b9  -27.43% (p=0.008 n=5)\r\nEofParse/test-8-8     3.868\u00b5 \u00b1 \u221e \u00b9   1.225\u00b5 \u00b1 \u221e \u00b9  -68.33% (p=0.008 n=5)\r\nEofParse/test-9-8     3.765\u00b5 \u00b1 \u221e \u00b9   1.170\u00b5 \u00b1 \u221e \u00b9  -68.92% (p=0.008 n=5)\r\nEofParse/test-10-8    4.252\u00b5 \u00b1 \u221e \u00b9   1.838\u00b5 \u00b1 \u221e \u00b9  -56.77% (p=0.008 n=5)\r\nEofParse/test-11-8    4.727\u00b5 \u00b1 \u221e \u00b9   1.829\u00b5 \u00b1 \u221e \u00b9  -61.31% (p=0.008 n=5)\r\nEofParse/test-12-8    1.745m \u00b1 \u221e \u00b9   1.106m \u00b1 \u221e \u00b9  -36.63% (p=0.008 n=5)\r\nEofParse/test-13-8    5.778\u00b5 \u00b1 \u221e \u00b9   1.836\u00b5 \u00b1 \u221e \u00b9  -68.22% (p=0.008 n=5)\r\nEofParse/test-14-8   12.637\u00b5 \u00b1 \u221e \u00b9   2.335\u00b5 \u00b1 \u221e \u00b9  -81.52% (p=0.008 n=5)\r\nEofParse/test-15-8   12.224\u00b5 \u00b1 \u221e \u00b9   2.856\u00b5 \u00b1 \u221e \u00b9  -76.64% (p=0.008 n=5)\r\nEofParse/test-16-8    33.30\u00b5 \u00b1 \u221e \u00b9   15.61\u00b5 \u00b1 \u221e \u00b9  -53.12% (p=0.008 n=5)\r\nEofParse/test-17-8   106.47\u00b5 \u00b1 \u221e \u00b9   11.42\u00b5 \u00b1 \u221e \u00b9  -89.27% (p=0.008 n=5)\r\nEofParse/test-18-8   337.85\u00b5 \u00b1 \u221e \u00b9   27.20\u00b5 \u00b1 \u221e \u00b9  -91.95% (p=0.008 n=5)\r\nEofParse/test-19-8    1.368\u00b5 \u00b1 \u221e \u00b9   1.365\u00b5 \u00b1 \u221e \u00b9        ~ (p=0.889 n=5)\r\ngeomean               11.30\u00b5         5.055\u00b5        -55.27%\r\n\u00b9 need >= 6 samples for confidence interval at level 0.95\r\n\r\n                   \u2502  eof.bench.1  \u2502               eof.bench.2               \u2502\r\n                   \u2502      B/s      \u2502      B/s        vs base                 \u2502\r\nEofParse/test-1-8    17.96Mi \u00b1 \u221e \u00b9    17.27Mi \u00b1 \u221e \u00b9          ~ (p=0.151 n=5)\r\nEofParse/test-2-8    13.80Mi \u00b1 \u221e \u00b9    13.89Mi \u00b1 \u221e \u00b9          ~ (p=0.151 n=5)\r\nEofParse/test-3-8    12.39Mi \u00b1 \u221e \u00b9    14.31Mi \u00b1 \u221e \u00b9    +15.47% (p=0.008 n=5)\r\nEofParse/test-4-8    12.36Mi \u00b1 \u221e \u00b9    14.15Mi \u00b1 \u221e \u00b9    +14.51% (p=0.008 n=5)\r\nEofParse/test-5-8    11.24Mi \u00b1 \u221e \u00b9    14.04Mi \u00b1 \u221e \u00b9    +24.85% (p=0.008 n=5)\r\nEofParse/test-6-8    21.90Mi \u00b1 \u221e \u00b9    25.11Mi \u00b1 \u221e \u00b9    +14.68% (p=0.008 n=5)\r\nEofParse/test-7-8    11.74Mi \u00b1 \u221e \u00b9    16.17Mi \u00b1 \u221e \u00b9    +37.77% (p=0.008 n=5)\r\nEofParse/test-8-8    15.78Mi \u00b1 \u221e \u00b9    49.84Mi \u00b1 \u221e \u00b9   +215.77% (p=0.008 n=5)\r\nEofParse/test-9-8    16.21Mi \u00b1 \u221e \u00b9    52.18Mi \u00b1 \u221e \u00b9   +221.82% (p=0.008 n=5)\r\nEofParse/test-10-8   7.401Mi \u00b1 \u221e \u00b9   17.118Mi \u00b1 \u221e \u00b9   +131.31% (p=0.008 n=5)\r\nEofParse/test-11-8   6.657Mi \u00b1 \u221e \u00b9   17.204Mi \u00b1 \u221e \u00b9   +158.45% (p=0.008 n=5)\r\nEofParse/test-12-8   13.43Mi \u00b1 \u221e \u00b9    21.20Mi \u00b1 \u221e \u00b9    +57.88% (p=0.008 n=5)\r\nEofParse/test-13-8   5.608Mi \u00b1 \u221e \u00b9   17.662Mi \u00b1 \u221e \u00b9   +214.97% (p=0.008 n=5)\r\nEofParse/test-14-8   4.072Mi \u00b1 \u221e \u00b9   22.058Mi \u00b1 \u221e \u00b9   +441.69% (p=0.008 n=5)\r\nEofParse/test-15-8   11.70Mi \u00b1 \u221e \u00b9    50.09Mi \u00b1 \u221e \u00b9   +328.04% (p=0.008 n=5)\r\nEofParse/test-16-8   15.35Mi \u00b1 \u221e \u00b9    32.74Mi \u00b1 \u221e \u00b9   +113.23% (p=0.008 n=5)\r\nEofParse/test-17-8   6.590Mi \u00b1 \u221e \u00b9   61.455Mi \u00b1 \u221e \u00b9   +832.56% (p=0.008 n=5)\r\nEofParse/test-18-8   2.947Mi \u00b1 \u221e \u00b9   36.602Mi \u00b1 \u221e \u00b9  +1142.07% (p=0.008 n=5)\r\nEofParse/test-19-8   22.31Mi \u00b1 \u221e \u00b9    22.36Mi \u00b1 \u221e \u00b9          ~ (p=0.841 n=5)\r\ngeomean              10.65Mi          23.81Mi         +123.64%\r\n\u00b9 need >= 6 samples for confidence interval at level 0.95\r\n\r\n                   \u2502   eof.bench.1   \u2502              eof.bench.2               \u2502\r\n                   \u2502      B/op       \u2502     B/op       vs base                 \u2502\r\nEofParse/test-1-8        352.0 \u00b1 \u221e \u00b9     352.0 \u00b1 \u221e \u00b9        ~ (p=1.000 n=5) \u00b2\r\nEofParse/test-2-8        416.0 \u00b1 \u221e \u00b9     416.0 \u00b1 \u221e \u00b9        ~ (p=1.000 n=5) \u00b2\r\nEofParse/test-3-8        464.0 \u00b1 \u221e \u00b9     424.0 \u00b1 \u221e \u00b9   -8.62% (p=0.008 n=5)\r\nEofParse/test-4-8        464.0 \u00b1 \u221e \u00b9     424.0 \u00b1 \u221e \u00b9   -8.62% (p=0.008 n=5)\r\nEofParse/test-5-8        488.0 \u00b1 \u221e \u00b9     440.0 \u00b1 \u221e \u00b9   -9.84% (p=0.008 n=5)\r\nEofParse/test-6-8       1064.0 \u00b1 \u221e \u00b9    1016.0 \u00b1 \u221e \u00b9   -4.51% (p=0.008 n=5)\r\nEofParse/test-7-8     1033.8Ki \u00b1 \u221e \u00b9   910.3Ki \u00b1 \u221e \u00b9  -11.95% (p=0.008 n=5)\r\nEofParse/test-8-8        934.0 \u00b1 \u221e \u00b9     368.0 \u00b1 \u221e \u00b9  -60.60% (p=0.008 n=5)\r\nEofParse/test-9-8        934.0 \u00b1 \u221e \u00b9     368.0 \u00b1 \u221e \u00b9  -60.60% (p=0.008 n=5)\r\nEofParse/test-10-8      1031.0 \u00b1 \u221e \u00b9     472.0 \u00b1 \u221e \u00b9  -54.22% (p=0.008 n=5)\r\nEofParse/test-11-8      1031.0 \u00b1 \u221e \u00b9     472.0 \u00b1 \u221e \u00b9  -54.22% (p=0.008 n=5)\r\nEofParse/test-12-8     442.7Ki \u00b1 \u221e \u00b9   369.0Ki \u00b1 \u221e \u00b9  -16.64% (p=0.008 n=5)\r\nEofParse/test-13-8      1697.0 \u00b1 \u221e \u00b9     472.0 \u00b1 \u221e \u00b9  -72.19% (p=0.008 n=5)\r\nEofParse/test-14-8      3557.0 \u00b1 \u221e \u00b9     568.0 \u00b1 \u221e \u00b9  -84.03% (p=0.008 n=5)\r\nEofParse/test-15-8      3557.0 \u00b1 \u221e \u00b9     984.0 \u00b1 \u221e \u00b9  -72.34% (p=0.008 n=5)\r\nEofParse/test-16-8     12."
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2376389242,
+        "Author": "fjl",
+        "Created At": "2024-09-26T09:09:55Z",
+        "Comment Body": "Let's move the new utility commands into cmd/evm. It's better to use an existing command."
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2376392919,
+        "Author": "fjl",
+        "Created At": "2024-09-26T09:11:36Z",
+        "Comment Body": "Would also be nice to remove some complexity in the validation code by moving statements out of `if`\r\n\r\n```go\r\nif have, want := currentStackMax, int(metadata[section].outputs)+int(newSection.inputs)-int(newSection.outputs); have != want {\r\n```\r\n\r\nshould become\r\n\r\n```go\r\nwantStack := int(metadata[section].outputs)+int(newSection.inputs)-int(newSection.outputs)\r\nif currentStackMax != wantStack {\r\n```\r\n\r\nAnd perhaps we can find a way to reduce conversions."
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2376846439,
+        "Author": "holiman",
+        "Created At": "2024-09-26T12:42:12Z",
+        "Comment Body": "> Let's move the new utility commands into cmd/evm. It's better to use an existing command.\r\n\r\nDone\r\n\r\n> Would also be nice to remove some complexity in the validation\r\n\r\nDone\r\n\r\nAlso fixed up the `eofdump` command to print nicer output, and read from stdin if `--hex` is not given. Also made the commands use the std logging facilities more, not `fmt.Printf` so much (Note though: for `eofparse` it's part of the spec that it prints out \"OK\" or \"err...\" on stdout, so it can be used to compare across clients)"
+    },
+    {
+        "Issue ID": 30418,
+        "Issue State": "closed",
+        "Issue Title": "core/vm, cmd/evm: implement eof validation",
+        "Comment ID": 2376873695,
+        "Author": "holiman",
+        "Created At": "2024-09-26T12:54:24Z",
+        "Comment Body": "### `evm eofdump`\r\n\r\nExample invocations of eofdump:\r\n\r\n```\r\n$ go run ./cmd/evm/ eofdump  --hex 0xef000101000402000100010400020000800000feaabb \r\nHeader\r\n  - EOFMagic: ef00\r\n  - EOFVersion: 01\r\n  - KindType: 01\r\n  - TypesSize: 0004\r\n  - KindCode: 02\r\n  - KindData: 04\r\n  - DataSize: 0002\r\n  - Number of code sections: 1\r\n    - Code section 0 length: 0001\r\n  - Number of subcontainers: 0\r\nBody\r\n  - Type 0: 00800000\r\n  - Code section 0: 0xfe\r\n  - Data: 0xaabb\r\n```\r\n```\r\n$ yes \"0xef000101000402000100010400020000800000feaabb\" | head -n2 | go run ./cmd/evm/ eofdump  \r\nHeader\r\n  - EOFMagic: ef00\r\n  - EOFVersion: 01\r\n  - KindType: 01\r\n  - TypesSize: 0004\r\n  - KindCode: 02\r\n  - KindData: 04\r\n  - DataSize: 0002\r\n  - Number of code sections: 1\r\n    - Code section 0 length: 0001\r\n  - Number of subcontainers: 0\r\nBody\r\n  - Type 0: 00800000\r\n  - Code section 0: 0xfe\r\n  - Data: 0xaabb\r\n\r\nHeader\r\n  - EOFMagic: ef00\r\n  - EOFVersion: 01\r\n  - KindType: 01\r\n  - TypesSize: 0004\r\n  - KindCode: 02\r\n  - KindData: 04\r\n  - DataSize: 0002\r\n  - Number of code sections: 1\r\n    - Code section 0 length: 0001\r\n  - Number of subcontainers: 0\r\nBody\r\n  - Type 0: 00800000\r\n  - Code section 0: 0xfe\r\n  - Data: 0xaabb\r\n\r\n```\r\n### `evm eofparse` \r\n\r\nExample invocation of `eofparse`\r\n```\r\n$ cat ./cmd/evm/testdata/eof/eof_corpus_1.txt | head -n10 | go run ./cmd/evm eofparse \r\nerr: invalid container size: have 24, want 23\r\nerr: invalid container size: have 21, want 20\r\nerr: invalid container size: have 22, want 21\r\nerr: invalid max stack height in code section 0: have 0, want 48\r\nerr: invalid max stack height in code section 0: have 0, want 48\r\nerr: invalid container size: have 53, want 52\r\nerr: truncated immediate: op PUSH2, pos 1\r\nerr: invalid container size: have 38, want 37\r\nerr: invalid container size: have 48, want 47\r\nerr: invalid container size: have 48, want 47\r\n\r\n```\r\n"
+    },
+    {
+        "Issue ID": 31137,
+        "Issue State": "closed",
+        "Issue Title": "cmd/devp2p/internal/ethtest: remove TD from status validation",
+        "Comment ID": 2639622619,
+        "Author": "LukaszRozmej",
+        "Created At": "2025-02-06T11:57:13Z",
+        "Comment Body": "Maybe there should be validation that this field exists, but not it's value?"
+    },
+    {
+        "Issue ID": 31137,
+        "Issue State": "closed",
+        "Issue Title": "cmd/devp2p/internal/ethtest: remove TD from status validation",
+        "Comment ID": 2641742725,
+        "Author": "rjl493456442",
+        "Created At": "2025-02-07T01:55:42Z",
+        "Comment Body": "@LukaszRozmej RLP-decoding will fail if this field is not present."
+    },
+    {
+        "Issue ID": 31140,
+        "Issue State": "closed",
+        "Issue Title": "0xE8E12C1A60c11E8E75724656D74fc6f6f78B3324",
+        "Comment ID": 2641012978,
+        "Author": "surewire1920",
+        "Created At": "2025-02-06T21:02:06Z",
+        "Comment Body": "I want to exchange with naira "
+    },
+    {
+        "Issue ID": 31140,
+        "Issue State": "closed",
+        "Issue Title": "0xE8E12C1A60c11E8E75724656D74fc6f6f78B3324",
+        "Comment ID": 2641017557,
+        "Author": "surewire1920",
+        "Created At": "2025-02-06T21:04:37Z",
+        "Comment Body": "0x498Dbe753741583f89d1Cd96E2969a43B3daD1DF"
+    },
+    {
+        "Issue ID": 31140,
+        "Issue State": "closed",
+        "Issue Title": "0xE8E12C1A60c11E8E75724656D74fc6f6f78B3324",
+        "Comment ID": 2641022014,
+        "Author": "surewire1920",
+        "Created At": "2025-02-06T21:07:16Z",
+        "Comment Body": "Anthony Godsgift \n2034265101\nKuda "
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2620023220,
+        "Author": "jwasinger",
+        "Created At": "2025-01-28T20:46:29Z",
+        "Comment Body": "From EIP-161:\r\n> An account is considered empty when it has no code and zero nonce and zero balance.\r\n> At the end of the transaction, any account touched by the execution of that transaction which is now empty SHALL instead become non-existent (i.e. deleted).\r\n\r\nIf we remove the balance from precompiled contracts, and a call executes a precompile without sending any balance:  the precompiled contract will be deleted.  A subsequent call to the precompile in a separate transaction will recreate the account (and execute the precompile). see https://github.com/ethereum/go-ethereum/blob/master/core/vm/evm.go#L191-L212 .\r\n\r\nThe change in this PR could cause deviation from mainnet behavior for operations that are priced based on the existence of an account (iirc EXTCODEHASH, EXTCODECOPY and perhaps others).\r\n\r\n> The test case it enables is to send eth eth to a previously \"empty account\" precompiles.\r\n\r\nFrom this description, I would guess that you are talking about a test case that sends a balance to a non-existent precompile which is later instantiated at a fork.  Although it's not clear from the description you have given.\r\n\r\nOverall, I'd opt not to merge as this appears broken and it's not clear what the practical benefit is."
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2620058240,
+        "Author": "maoueh",
+        "Created At": "2025-01-28T21:07:32Z",
+        "Comment Body": "> If we remove the balance from precompiled contracts, and a call executes a precompile without sending any balance: the precompiled contract will be deleted. A subsequent call to the precompile in a separate transaction will recreate the account (and execute the precompile). see https://github.com/ethereum/go-ethereum/blob/master/core/vm/evm.go#L191-L212 .\r\n\r\nThat is correct and is the behavior that was happening on Mainnet ... before someone sent eth to precompile address(es). The genesis allocation for Mainnet has nothing set for precompiled addresses. This seems to me a fair argument that `--dev` also does not set those.\r\n\r\n> The change in this PR could cause deviation from mainnet behavior for operations that are priced based on the existence of an account (iirc EXTCODEHASH, EXTCODECOPY and perhaps others).\r\n\r\nI disagree with that assertion. If there is a difference, it's because people sent eth to precompiles addresses. There would be no differences against mainnet otherwise since they were not specified in the genesis allocation initially. \r\n\r\n> From this description, I would guess that you are talking about a test case that sends a balance to a non-existent precompile which is later instantiated at a fork. Although it's not clear from the description you have given.\r\n\r\nI'm testing there first transaction on Mainnet that sent eth to a precompiles. Without the precompiles in genesis, you can test both cases easily, just send eth to a precompile to keep its account active.\r\n\r\nOtherwise if always set, you cannot test the first case. "
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2620156238,
+        "Author": "jwasinger",
+        "Created At": "2025-01-28T22:08:41Z",
+        "Comment Body": "> I disagree with that assertion. If there is a difference, it's because people sent eth to precompiles addresses. There would be no differences against mainnet otherwise since they were not specified in the genesis allocation initially.\r\n\r\nIf I remove a precompile address from the genesis configuration, create a transaction where it is touched and deleted, create a subsequent transaction that `CALL`s the precompile, the second transaction will pay an additional cost to access a non-existent account and then execute the precompile.  This is behavior that can't happen on mainnet so clearly we shouldn't adopt it in dev mode.\r\n\r\nIMO the proper approach to test the behavior of tracing of blocks/txs in historical forks would be to generate a test chain, import it and then reexecute/trace the historical blocks.  Would anything prevent you from using that approach to achieve what you are trying to do?"
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2620166624,
+        "Author": "jwasinger",
+        "Created At": "2025-01-28T22:15:20Z",
+        "Comment Body": "I think `core/chain_makers.go` contains utilities you can use to generate a test chain."
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2630947892,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-03T13:02:10Z",
+        "Comment Body": "I agree with @jwasinger's reasoning here. The behavior would change if we did not fund the precompile address. Since we want to mimic the behavior of mainnet as much as possible, it makes sense for prefunding the precompiles.\r\n\r\nI will close this for now, thank you for your submission!"
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2631778520,
+        "Author": "maoueh",
+        "Created At": "2025-02-03T18:40:38Z",
+        "Comment Body": "Thanks for the review.\r\n\r\nI would like still to better understand why this isn't considered closer to Mainnet actually. Not saying it isn't true/accurate, more that I do not clearly understand it.\r\n\r\nWe have:\r\n\r\n- Genesis block (G)\r\n- EIP-161 block (E)\r\n- Future blocks (E+N)\r\n\r\nLet's assume there was never a transaction sending eth to a precompile P never. That means that in E+N blocks, the account would indeed be created than deleted right away as it would be empty.\r\n\r\nHow is aligning the genesis allocations closer to Mainnet isn't in the spirit of being close to Mainnet. \r\n\r\nI understand that today, all precompiles are funded and thus, would diverge from Mainnet. But new precompiles for example, they would be initially funded, until someone decide to send eth there, most probably by mistake. It means there would be a timeframe where `--dev` would misalign with Mainnet.\r\n\r\nAll in all, I will comply with your decision of course. I'm genuinely curious about understanding the reasoning here and ensure I fully understand the overall Ethereum spec.\r\n\r\n> I think core/chain_makers.go contains utilities you can use to generate a test chain.\r\n\r\nThat I 100% agree, it's the best place to test those behavior. I'm trying to port our old test suite which was using `geth + clique engine` to test \"real\" scenarios.\r\n\r\nIt's a fixture that we encountered on Mainnet, but I wasn't able to replicate it with `geth --dev`, hence my PR here. Hence why I'm of the opinion of not having the funded precompiles more closely align with Mainnet, at least in the genesis and not in state."
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2633455025,
+        "Author": "s1na",
+        "Created At": "2025-02-04T10:16:38Z",
+        "Comment Body": "@maoueh I understand your use-case. Let's see if we can find an alternative solution for you. First thing I thought of was seeding the --dev mode with a custom genesis. I am facing an issue here tho. I tried to do `geth --dev --datadir mydir dumpgenesis` and what I get is:\r\n\r\n```\r\n\u276f ./build/bin/geth --dev --datadir mydir dumpgenesis\r\nINFO [02-04|11:13:31.346] Maximum peer count                       ETH=50 total=50\r\nINFO [02-04|11:13:31.352] Set global gas cap                       cap=50,000,000\r\nINFO [02-04|11:13:31.452] Using developer account                  address=0xCd63a1A5bF5407dD90897B691C35aE248be03B3a\r\nINFO [02-04|11:13:31.452] Defaulting to pebble as the backing database\r\nINFO [02-04|11:13:31.452] Allocated cache and file handles         database=/Users/sina/dev/go/src/github.com/ethereum/go-ethereum/mydir/geth/chaindata cache=512.00MiB handles=5120\r\nINFO [02-04|11:13:31.538] Opened ancient database                  database=/Users/sina/dev/go/src/github.com/ethereum/go-ethereum/mydir/geth/chaindata/ancient/chain readonly=false\r\nINFO [02-04|11:13:31.538] Freezer shutting down\r\nINFO [02-04|11:13:31.543] Initializing the KZG library             backend=gokzg\r\nINFO [02-04|11:13:31.567] Using pebble as the backing database\r\nINFO [02-04|11:13:31.567] Allocated cache and file handles         database=/Users/sina/dev/go/src/github.com/ethereum/go-ethereum/mydir/geth/chaindata cache=16.00MiB handles=16\r\nFatal: failed to read genesis: invalid genesis hash in database: 0000000000000000000000000000000000000000000000000000000000000000\r\n```\r\n\r\nThe idea was to dump the genesis, modify the precompile balances and do `init` after that."
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2633493301,
+        "Author": "s1na",
+        "Created At": "2025-02-04T10:30:18Z",
+        "Comment Body": "Ok it works. My mistake was first I have to run the dev node so it persists the genesis block. The flow is:\r\n\r\n- `geth --dev --datadir mydir`\r\n- Stop\r\n- `geth --dev --datadir mydir dumpgenesis`\r\n- Remove precompile balances store it in file\r\n- `geth --dev --datadir mydir2 init genesis.json`\r\n\r\nSeems to do the trick."
+    },
+    {
+        "Issue ID": 31085,
+        "Issue State": "closed",
+        "Issue Title": "Removed `--dev` precompiles genesis balances",
+        "Comment ID": 2639960940,
+        "Author": "maoueh",
+        "Created At": "2025-02-06T14:20:16Z",
+        "Comment Body": "@s1na Thank you very much, that is perfect for me indeed, I didn't know it was possible to pass a custom genesis to a dev env."
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1126006960,
+        "Author": "lispc",
+        "Created At": "2022-05-13T12:31:53Z",
+        "Comment Body": "another approach is to add a flag named \"MemoryTraceMode\".  \r\n\r\nMemoryTraceMode == 0: snapshot full memory every step; \r\nMemoryTraceMode == 1: snapshot full memory when updated;\r\nMemoryTraceMode == 2: snapshot memory diff"
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1128804683,
+        "Author": "s1na",
+        "Created At": "2022-05-17T12:25:26Z",
+        "Comment Body": "I agree this would be nice as traces are usually pretty heavy. We can deprecate `EnableMemory` and set `MemoryTraceMode` by default to a value that implies memory tracing is disabled for backwards-compatibility.\r\n\r\nI'll mark it for triage to see what others think."
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1128904805,
+        "Author": "s1na",
+        "Created At": "2022-05-17T13:56:44Z",
+        "Comment Body": "Can you please try this [patch](https://github.com/s1na/go-ethereum/tree/logger/mem-dedup) on the mainnet block you mentioned and see if it makes a big difference?"
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1129059211,
+        "Author": "s1na",
+        "Created At": "2022-05-17T16:11:03Z",
+        "Comment Body": "This PR might also be of interest: https://github.com/ethereum/go-ethereum/pull/24895. By streaming the traces geth shouldn't blow up but it comes with some networking overhead. I'm curious how it performs on a big tx."
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1132389318,
+        "Author": "lispc",
+        "Created At": "2022-05-20T02:25:28Z",
+        "Comment Body": "I analyzed(traced with mem trace enabled) every tx inside the mentioned block. There are 94 txs in total, 93 of them can be traced successfully(the biggest trace is of ~300MiB size, summing all is about ~900MiB), [the failed one(always makes geth OOM) is an Arbitrum Sequencer tx](https://etherscan.io/tx/0x0ef22f22aa244bdbf2e6b49b6b36f71717f9d18c2a3d7b24be52ff26abd1a220), having calldata of ~100KiB. In the Arbitrum contract, the calldata are copied to memory and hashed. So snapshots of mem for every step will be HUGE.."
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1157402971,
+        "Author": "holiman",
+        "Created At": "2022-06-16T08:50:06Z",
+        "Comment Body": "Triage discussion: an alternate variant would be to\r\n\r\n> If memory changes between step N and N+1, then output the full memory at N+1. \r\n\r\n\r\nThis means that at any scope-changing operation (revert, return, call-variants) at N, step N+1 would output the memory (unless it was empty in the old and new scope). And also output it at MSTORE/MSTORE8 ops. \r\n\r\nSuch format change would bring down the output size __a lot__, but still make it pretty easy to build a non-intelligent traceviewer. I want to avoid forcing a traceviewer to become a mini-evm."
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 1210794414,
+        "Author": "s1na",
+        "Created At": "2022-08-10T14:56:40Z",
+        "Comment Body": "cc @yann300"
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 2639561638,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-06T11:28:23Z",
+        "Comment Body": "The StructLogger recently was made streamable in https://github.com/ethereum/go-ethereum/pull/30806 which should make it use way less memory"
+    },
+    {
+        "Issue ID": 24873,
+        "Issue State": "closed",
+        "Issue Title": "proposal: optimize the memory usage when EnableMemory = true for StructLogger ",
+        "Comment ID": 2639664572,
+        "Author": "holiman",
+        "Created At": "2025-02-06T12:15:35Z",
+        "Comment Body": "Anything returned over http (at least our http rpc implementation) is inherently un-streamable. So this is still relevant."
+    },
+    {
+        "Issue ID": 24129,
+        "Issue State": "closed",
+        "Issue Title": "Unpacking output of multicall abi ",
+        "Comment ID": 997311606,
+        "Author": "fomotrader",
+        "Created At": "2021-12-19T01:21:56Z",
+        "Comment Body": "Hopefully I've provided enough information in this ticket for others that are more familiar with GETH to help me look into it and either correct my understanding or we can fix GETH."
+    },
+    {
+        "Issue ID": 24129,
+        "Issue State": "closed",
+        "Issue Title": "Unpacking output of multicall abi ",
+        "Comment ID": 1011982202,
+        "Author": "ligi",
+        "Created At": "2022-01-13T10:05:48Z",
+        "Comment Body": "Can you provide more details like the ABI, tx and all that is needed to reproduce the issue?"
+    },
+    {
+        "Issue ID": 24129,
+        "Issue State": "closed",
+        "Issue Title": "Unpacking output of multicall abi ",
+        "Comment ID": 1048590869,
+        "Author": "WayneLiang",
+        "Created At": "2022-02-23T09:29:09Z",
+        "Comment Body": "> Can you provide more details like the ABI, tx and all that is needed to reproduce the issue?\r\n\r\nlike this Transaction https://etherscan.io/tx/0xbfb3415b5f949519abfee01388ab0fb56edf5e4ac3f949086de6907f2387e64e.\r\nabi Method is multicall, when unpacking the input data, it will return abi: cannot marshal in to go slice: offset 78063394979094799799290440606367866824566315126099565707416874105828244717600 would go over slice boundary (len=580)\r\n"
+    },
+    {
+        "Issue ID": 24129,
+        "Issue State": "closed",
+        "Issue Title": "Unpacking output of multicall abi ",
+        "Comment ID": 2639581712,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-06T11:37:42Z",
+        "Comment Body": "As stated here, we decided not to enshrine a contract as stated here: https://github.com/ethereum/go-ethereum/pull/30416#issuecomment-2340665134\nHowever unmarshalling output from Multicall abi should be pretty easy, especially with abigen v2 coming up which will make it easier to unmarshal single outputs, splitting the multicall output into multiple outputs of single calls should be pretty easy by the caller."
+    },
+    {
+        "Issue ID": 31088,
+        "Issue State": "closed",
+        "Issue Title": "build: update EEST fixtures to prague devnet-6",
+        "Comment ID": 2636826396,
+        "Author": "s1na",
+        "Created At": "2025-02-05T13:14:37Z",
+        "Comment Body": "Hm we have a failing transaction test:\r\n\r\n```\r\n--- FAIL: TestExecutionSpecTransaction (0.00s)\r\n    --- FAIL: TestExecutionSpecTransaction/prague/eip7702_set_code_tx/invalid_tx/empty_authorization_list.json (0.00s)\r\n        transaction_test.go:75: expected error TransactionException.TYPE_4_EMPTY_AUTHORIZATION_LIST, got none (<nil>)\r\nFAIL\r\nFAIL\tgithub.com/ethereum/go-ethereum/tests\t509.565s\r\nok  \tgithub.com/ethereum/go-ethereum/tests/fuzzers/bls12381\t0.021s\r\n```"
+    },
+    {
+        "Issue ID": 31088,
+        "Issue State": "closed",
+        "Issue Title": "build: update EEST fixtures to prague devnet-6",
+        "Comment ID": 2637296938,
+        "Author": "s1na",
+        "Created At": "2025-02-05T15:46:21Z",
+        "Comment Body": "@MariusVanDerWijden please take another look"
+    },
+    {
+        "Issue ID": 31088,
+        "Issue State": "closed",
+        "Issue Title": "build: update EEST fixtures to prague devnet-6",
+        "Comment ID": 2638110136,
+        "Author": "lightclient",
+        "Created At": "2025-02-05T21:56:52Z",
+        "Comment Body": "~~A little confused why CI didn't fail on the EEST transaction tests for 7702? Locally ran it and it failed on the empty auth list test which makes sense because we only check that during the state transition.~~\r\n\r\nSorry I accidentally pulled a stale version. I still think it is more correct to skip the test because aren't actually testing anything with it. We're just testing that the transaction test checker notices the auth list is empty. Better to eventually put all the prechecks in an exportable function and run it here like we can with `IntrinsicGas`."
+    },
+    {
+        "Issue ID": 31088,
+        "Issue State": "closed",
+        "Issue Title": "build: update EEST fixtures to prague devnet-6",
+        "Comment ID": 2638121302,
+        "Author": "lightclient",
+        "Created At": "2025-02-05T22:00:59Z",
+        "Comment Body": "Feel free to revert if you disagree."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2171039737,
+        "Author": "Bitwise0x",
+        "Created At": "2024-06-16T04:20:00Z",
+        "Comment Body": "@karalabe @rjl493456442 @holiman"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2173682796,
+        "Author": "s1na",
+        "Created At": "2024-06-17T15:14:02Z",
+        "Comment Body": "The gas returned is how much gas was used during the simulation. It is not necessarily a good estimate for submitting the tx. For that you should rather use `eth_estimateGas`.\r\n\r\nOtherwise if it is inaccurate it helps if you demonstrate what you expect and what is returned."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2175706132,
+        "Author": "Bitwise0x",
+        "Created At": "2024-06-18T10:01:52Z",
+        "Comment Body": "@s1na \r\nWhy is **debug_traceCall** not accurate when both **stateOverrides** and **blockOverrides** are used within the same call? I am trying to simulate my transaction beneath another transaction, and was expecting an accurate gasUsed.\r\n\r\ndebug_traceCall with just **blockOverrides** works perfectly. however, when combined with stateOverrides, it overestimates gas usage by approximately 5-15k.\r\n"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2184950091,
+        "Author": "s1na",
+        "Created At": "2024-06-23T11:23:16Z",
+        "Comment Body": "@Bitwise0x This is a difficult question to answer. You are modifying the state, that can change the flow of execution and require a different amount of gas. When submitting on chain the state might not be the same as in your override though.\r\n\r\nIdeally you give me something to reproduce."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2295169924,
+        "Author": "Otto-AA",
+        "Created At": "2024-08-18T08:08:33Z",
+        "Comment Body": "I'm not sure if this is the same issue the OP described, but here's a minimal example at Erigon: https://github.com/erigontech/erigon/issues/11254\r\n\r\nI've tested it with Quicknode (Geth/v1.14.5-stable-0dd173a7/linux-amd64/go1.22.4) and it reports the same issue."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2301556267,
+        "Author": "s1na",
+        "Created At": "2024-08-21T09:11:06Z",
+        "Comment Body": "> debug_traceCall shows a lower gasCost for addresses, that were modified by the stateOverrides.\r\n\r\nBased on this I thought maybe we consider the overridden storage as a dirty slot (in EIP-2200 terms). But that seems not to be the case.\r\n\r\nI have this contract deployed:\r\n\r\n```go\r\ncommon.BytesToAddress([]byte{32}): {Code: common.Hex2Bytes(\"600260055500\"), Nonce: 1, Storage: map[common.Hash]common.Hash{common.BytesToHash([]byte{0x5}): common.BytesToHash([]byte{0x1})}}\r\n```\r\n\r\nThen do the following traceCall:\r\n\r\n```\r\n> debug.traceCall({ to: '0x0000000000000000000000000000000000000020', gas: '0x186a0' }, 'latest', { stateOverrides: { '0x0000000000000000000000000000000000000020': { stateDiff: { '0x0000000000000000000000000000000000000000000000000000000000000005': '0x0000000000000000000000000000000000000000000000000000000000000000' } } }})\r\n```\r\n\r\nI.e. the \"original\" value for the slot is 0x1. I change the \"current\" to 0x0. The code will write the value of 0x2 to the slot. So that should try to deduct some of the refund (and fail). But instead I get the \"correct\" gas cost for the SSTORE:\r\n\r\n```js\r\n{\r\n      depth: 1,\r\n      gas: 78994,\r\n      gasCost: 22100,\r\n      op: \"SSTORE\",\r\n      pc: 4,\r\n      stack: [\"0x2\", \"0x5\"],\r\n      storage: {\r\n        0000000000000000000000000000000000000000000000000000000000000005: \"0000000000000000000000000000000000000000000000000000000000000002\"\r\n      }\r\n  }\r\n```"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2301586900,
+        "Author": "s1na",
+        "Created At": "2024-08-21T09:26:22Z",
+        "Comment Body": "This clause commits the overrides so they are not considered dirty. And I'm pretty sure we don't add them to the access list either. So I can't think why addresses modified by stateOverrides should have a different gas cost.\r\n\r\nhttps://github.com/ethereum/go-ethereum/blob/733fcbbc65bca69e28480f624e2aeb170c97cb3e/internal/ethapi/api.go#L1014-L1017"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2304074227,
+        "Author": "fjl",
+        "Created At": "2024-08-22T08:25:00Z",
+        "Comment Body": "@Bitwise0x again, could you please provide an example so we can reproduce and see the expected gas usage ourself?"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2308493992,
+        "Author": "Bitwise0x",
+        "Created At": "2024-08-24T18:49:36Z",
+        "Comment Body": "@fjl @s1na  when I tried to simulate the backrun transaction with stateoverrides, gas usage was significantly higher \r\n\r\nSignal: 0xfa64ed459ec08a373cb1555e4f11672da415d5e7562b768207b23bc225ae77f7\r\nBackrun: 0x772bd92cf60fbcd76cffb27a04a141e8275a16bb483a8f7b6596552c70fad6e5"
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2334009038,
+        "Author": "Otto-AA",
+        "Created At": "2024-09-06T13:05:41Z",
+        "Comment Body": "@s1na After spending some more hours on this issue, I think the issue I reported occurs only with Erigon. It seems that my provider transparently switches the used node based on the block number, which made me think I also reproduced it on Geth :(\r\n\r\nDid you test the python script from the linked Erigon issue (repro.py.txt)? If you run it against a Geth instance and there is no \"Found first step with differences\" printed to the console, then it should be an Erigon-only issue and you can ignore my comments above. I can't find a public Geth instance to test it against."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2345660604,
+        "Author": "gballet",
+        "Created At": "2024-09-12T08:49:14Z",
+        "Comment Body": "@Bitwise0x any update on this? We need your input, and will close this issue otherwise. To be clear, your last response does not help us, we would like to know of a way to reproduce this issue. There's not much we can do otherwise."
+    },
+    {
+        "Issue ID": 29996,
+        "Issue State": "closed",
+        "Issue Title": "debug_traceCall returning inaccurate gasUsed when both blockOverrides and stateOverrides are used",
+        "Comment ID": 2639558200,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-06T11:26:49Z",
+        "Comment Body": "We have decided to close this as we can not replicate the issue unfortunately. Thank you for submitting"
+    },
+    {
+        "Issue ID": 30878,
+        "Issue State": "closed",
+        "Issue Title": "block import is broken with verkle",
+        "Comment ID": 2528475651,
+        "Author": "gballet",
+        "Created At": "2024-12-09T15:51:56Z",
+        "Comment Body": "@holiman you wanted to have a way to reproduce the issue:\r\n\r\n * Get the kaustinen genesis block \r\n[genesis_kaustinen7.json](https://github.com/user-attachments/files/18064058/genesis_kaustinen7.json)\r\n * Run `go run ./cmd/geth --datadir=<dir> --cache.preimages --override.verkle=1730214000 init genesis.json`\r\n * Run `go run ./cmd/geth --datadir=<dir> --cache.preimages --override.verkle=1730214000 --bootnodes \"enode://548ff025abb1522c5257f50765abd21754b7ea7159a176a9b96c738ee6456fc378a11c09a62d55d92684634cd32a9cad498f5649256caf693dab77f961a169f6@167.235.68.89:30303?discport=30303,enode://7a46b1126d2c602e2d567a75aa3cc2577d93ea2bfcc524d115f985689516159c94a339f3984bbce28eb8b35d49494d1ec7be55f361c7768ae43993bc5b88eb77@128.140.104.94:30303?discport=30303,enode://a21d8ecaaea7a199a479672ae11b11afc1b55dce4851d278cae11fd4cf5452866f40890cb7262c3430f9f249d7091ebab39f148740c267f3f3b505c6d27391fe@128.140.104.96:30303?discport=30303,enode://145e00c57c837fe19d431bb33cb964b747616cc6be57e350936f13fe51ab4fab5bb167fb38c8399d9b0d687d317466d2c4d0bff2c83068ffa77c4ed16f5f7b28@195.201.139.113:30303?discport=30303,enode://9ceb22af386b10ba283cd60f7e83772585e47946e7dddc6029e9acd79730095ea8e5e6ba8619c30149e002084b9bb83ef62e0765cd30c9626667b29ea8f3389e@49.13.196.169:30303?discport=30303,enode://e1157ce974bd103852a6df269a772dbcf308f628b185e6fc2774f8eddc127c1309a7f023dfaae922dfe32c5170aa7085245dbe4b88931b21d3ee4bb290b77418@195.201.36.62:30303?discport=30303\" --authrpc.jwtsecret <secret> --syncmode full`\r\n \r\n Notice that it complains about the genesis hash being incorrect.\r\n"
+    },
+    {
+        "Issue ID": 30878,
+        "Issue State": "closed",
+        "Issue Title": "block import is broken with verkle",
+        "Comment ID": 2528536309,
+        "Author": "gballet",
+        "Created At": "2024-12-09T16:15:20Z",
+        "Comment Body": "The above comment points out that there is a much bigger issue than just block import: using a `nil` genesis block is no longer a workeable solution.\r\n\r\nThis causes [this line](https://github.com/ethereum/go-ethereum/blob/master/core/blockchain.go#L272) to consider that we are not in verkle mode, even when we are. But even if we could somehow set this flag properly, it will still be missing important information like the state root hash.\r\n\r\nThe inescapable conclusion, in my view is:\r\n * the whole genesis block needs to be loaded from the db each time the block is created. If it's in the DB, it should be assumed to be correct.\r\n * If  some compatibility checks are needed when \"updating\" the kernel, _then_ peform the checks in this very context."
+    },
+    {
+        "Issue ID": 30878,
+        "Issue State": "closed",
+        "Issue Title": "block import is broken with verkle",
+        "Comment ID": 2538076601,
+        "Author": "rjl493456442",
+        "Created At": "2024-12-12T08:04:56Z",
+        "Comment Body": "I can repro the issue and can confirm guillaume's analysis is correct"
+    },
+    {
+        "Issue ID": 30878,
+        "Issue State": "closed",
+        "Issue Title": "block import is broken with verkle",
+        "Comment ID": 2601786197,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-01-20T08:51:06Z",
+        "Comment Body": "Was this fixed by https://github.com/ethereum/go-ethereum/pull/30907 ?"
+    },
+    {
+        "Issue ID": 30878,
+        "Issue State": "closed",
+        "Issue Title": "block import is broken with verkle",
+        "Comment ID": 2639318593,
+        "Author": "gballet",
+        "Created At": "2025-02-06T09:47:23Z",
+        "Comment Body": "Seems to be fixed, I was able to import a few blocks from the testnet."
+    },
+    {
+        "Issue ID": 30892,
+        "Issue State": "closed",
+        "Issue Title": "Intermittent Time Decrement Issue in Geth 1.12 Smart Contract Calls",
+        "Comment ID": 2565822118,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2024-12-30T19:03:24Z",
+        "Comment Body": "Interesting, do you have some code for us to try to repro it better? On what kind of network are you running? Maybe in the case of a reorg where the miner mines a block a second earlier or with a bit of clock skew this might happen. \r\n\r\nSorry for replying so late to this, but it would be really interesting to understand your setup!"
+    },
+    {
+        "Issue ID": 30892,
+        "Issue State": "closed",
+        "Issue Title": "Intermittent Time Decrement Issue in Geth 1.12 Smart Contract Calls",
+        "Comment ID": 2579641002,
+        "Author": "holiman",
+        "Created At": "2025-01-09T09:56:14Z",
+        "Comment Body": "I sincerely don't understand this report. `setTime()` -- on what? Are we talking about a contract with a method so named? Please be specific, provide solidity-code of any contracts you refer to, and also how the contract is invoked when you detect the error. "
+    },
+    {
+        "Issue ID": 30892,
+        "Issue State": "closed",
+        "Issue Title": "Intermittent Time Decrement Issue in Geth 1.12 Smart Contract Calls",
+        "Comment ID": 2639318386,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-06T09:47:18Z",
+        "Comment Body": "Thank you for submitting this issue, please come back with more information. I will close this for now"
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2527108872,
+        "Author": "holiman",
+        "Created At": "2024-12-09T07:07:29Z",
+        "Comment Body": "try `geth snapshot dump`. Much faster, if it works, since it uses the snapshot flat data instead of iterating the trie. \r\nAlso, if you're willing to provide the output from the failed command, that'd be good, maybe we can spot some error"
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2532354029,
+        "Author": "rllola",
+        "Created At": "2024-12-10T17:28:02Z",
+        "Comment Body": "Thanks for your answer.\r\n\r\nThe error that I have using `geth dump` is\r\n```\r\nmissing trie node 6a9286d49a985db2aa2d5c2dc38ca7f2c69d27e7dd016ab88db1aa79f2acddd9 (path ) state 0x6a9286d49a985db2aa2d5c2dc38ca7f2c69d27e7dd016ab88db1aa79f2acddd9 is not available\r\n```\r\n\r\nEverytime it is a different trie and I tried specifying block numbers but always missing a trie.\r\n\r\nI tried the `geth snapshot dump` and this time it is saying it is missing the header\r\n\r\nfull logs\r\n```\r\nlola@R320-Lola:~$ ./geth-linux-amd64-1.14.12-293a300d/geth snapshot dump --nostorage 21373450\r\nINFO [12-10|12:23:13.939] Maximum peer count                       ETH=50 total=50\r\nINFO [12-10|12:23:13.942] Smartcard socket not found, disabling    err=\"stat /run/pcscd/pcscd.comm: no such file or directory\"\r\nINFO [12-10|12:23:13.945] Set global gas cap                       cap=50,000,000\r\nINFO [12-10|12:23:13.946] Initializing the KZG library             backend=gokzg\r\nINFO [12-10|12:23:13.987] Using pebble as the backing database\r\nINFO [12-10|12:23:13.987] Allocated cache and file handles         database=/home/lola/.ethereum/geth/chaindata cache=512.00MiB handles=524,288\r\nINFO [12-10|12:23:14.343] Opened ancient database                  database=/home/lola/.ethereum/geth/chaindata/ancient/chain readonly=true\r\nheader for block 21373450 not found\r\n```\r\nI setup this node this week end. I will try on 2 others see if I have the same result."
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2532601843,
+        "Author": "tskoyo",
+        "Created At": "2024-12-10T18:46:22Z",
+        "Comment Body": "Do you have your node synced with the latest state? The `missing trie node` and `header not found` errors usually mean that the node hasn\u2019t fully synced up to that block or hasn\u2019t retained the necessary historical state data."
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2535524015,
+        "Author": "rllola",
+        "Created At": "2024-12-11T10:58:02Z",
+        "Comment Body": "I have 2 nodes that are not synced because I believe they cant catch up. And everytime I stop the state healing start from 0.\r\n\r\nHere the log of one of them \r\n```\r\nDec 11 05:54:25 R320-Lola geth[2876943]: INFO [12-11|05:54:25.448] Forkchoice requested sync to new head    number=21,378,799 hash=24a4ce..6f003d finalized=21,378,713\r\nDec 11 05:54:26 R320-Lola geth[2876943]: INFO [12-11|05:54:26.066] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,799@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m18.563s\r\nDec 11 05:54:29 R320-Lola geth[2876943]: INFO [12-11|05:54:29.822] Syncing: state healing in progress       accounts=297,072@15.04MiB slots=512,762@39.01MiB codes=393@1.97MiB    nodes=4,881,385@1.40GiB    pending=24756\r\nDec 11 05:54:34 R320-Lola geth[2876943]: INFO [12-11|05:54:34.070] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,799@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m18.720s\r\nDec 11 05:54:37 R320-Lola geth[2876943]: INFO [12-11|05:54:37.113] Forkchoice requested sync to new head    number=21,378,800 hash=151f70..2a2bdf finalized=21,378,713\r\nDec 11 05:54:38 R320-Lola geth[2876943]: INFO [12-11|05:54:38.154] Syncing: state healing in progress       accounts=297,099@15.04MiB slots=512,840@39.01MiB codes=393@1.97MiB    nodes=4,881,837@1.40GiB    pending=25089\r\nDec 11 05:54:42 R320-Lola geth[2876943]: INFO [12-11|05:54:42.075] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,800@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m30.826s\r\nDec 11 05:54:46 R320-Lola geth[2876943]: INFO [12-11|05:54:46.629] Syncing: state healing in progress       accounts=297,201@15.04MiB slots=512,929@39.02MiB codes=393@1.97MiB    nodes=4,882,415@1.40GiB    pending=25241\r\nDec 11 05:54:49 R320-Lola geth[2876943]: INFO [12-11|05:54:49.029] Forkchoice requested sync to new head    number=21,378,801 hash=99dcfc..17fbbc finalized=21,378,713\r\nDec 11 05:54:50 R320-Lola geth[2876943]: INFO [12-11|05:54:50.079] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,801@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m42.936s\r\nDec 11 05:54:56 R320-Lola geth[2876943]: INFO [12-11|05:54:56.036] Syncing: state healing in progress       accounts=297,300@15.05MiB slots=513,003@39.03MiB codes=393@1.97MiB    nodes=4,883,048@1.40GiB    pending=25418\r\nDec 11 05:54:58 R320-Lola geth[2876943]: INFO [12-11|05:54:58.083] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,801@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m43.095s\r\nDec 11 05:55:01 R320-Lola geth[2876943]: INFO [12-11|05:55:01.197] Forkchoice requested sync to new head    number=21,378,802 hash=4617c7..b5f4a4 finalized=21,378,713\r\nDec 11 05:55:04 R320-Lola geth[2876943]: INFO [12-11|05:55:04.036] Syncing: state healing in progress       accounts=297,354@15.05MiB slots=513,081@39.03MiB codes=393@1.97MiB    nodes=4,883,533@1.40GiB    pending=25488\r\nDec 11 05:55:06 R320-Lola geth[2876943]: INFO [12-11|05:55:06.089] Syncing: chain download in progress      synced=100.00% chain=832.40GiB headers=21,378,802@10.13GiB bodies=21,378,697@601.58GiB receipts=21,378,697@220.69GiB eta=20m55.209s\r\n```\r\n\r\nThe other node is one of a friend and yes it is synced. Also I have to stop the node to do a dump so it is annoying.\r\nBut same result I have missing tries or when doing snapshot I have missing headers message."
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2579630123,
+        "Author": "holiman",
+        "Created At": "2025-01-09T09:50:58Z",
+        "Comment Body": "> The other node is one of a friend and yes it is synced.\r\n\r\nIt's not worth trying to dump from the nodes that are not synced, so let's ignore those. On this node which has finished syncing, what happens when you attempt a dump? \r\n\r\n"
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2579637537,
+        "Author": "rllola",
+        "Created At": "2025-01-09T09:54:34Z",
+        "Comment Body": "I have the same message as the others which was some like this :\r\n```\r\nmissing trie node 6a9286d49a985db2aa2d5c2dc38ca7f2c69d27e7dd016ab88db1aa79f2acddd9 (path ) state 0x6a9286d49a985db2aa2d5c2dc38ca7f2c69d27e7dd016ab88db1aa79f2acddd9 is not available\r\n```\r\n\r\nI am curious to know if anyone has tried and successfully dumped snapshot with the current version ? "
+    },
+    {
+        "Issue ID": 30873,
+        "Issue State": "closed",
+        "Issue Title": "Unsuccessfull `geth dump`",
+        "Comment ID": 2639314642,
+        "Author": "rjl493456442",
+        "Created At": "2025-02-06T09:45:34Z",
+        "Comment Body": "> lola@R320-Lola:~$ ./geth-linux-amd64-1.14.12-293a300d/geth snapshot dump --nostorage 21373450\n\nYour node is not fully synced. Please wait until you see the logs like `Imported new chain segment`"
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2565313471,
+        "Author": "ronething-bot",
+        "Created At": "2024-12-30T10:46:31Z",
+        "Comment Body": "> We don't update the year in the license header.\r\n\r\n@MariusVanDerWijden Hi, thanks for your review comment.\r\n\r\nThe year modification of the license header is due to this section of logic processing, ref: https://github.com/ethereum/go-ethereum/blob/25aa8f6d7fe82e313f4bab0a6a6f834ee7315ce6/build/update-license.go#L362-L364\r\n\r\nRunning `build/update-license.go` will automatically modify it, and I will revert the modified year of the license header later, or only keep the modifications to the `AUTHORS` file.\r\n"
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2567267556,
+        "Author": "ronething-bot",
+        "Created At": "2025-01-02T04:06:12Z",
+        "Comment Body": "@rjl493456442 PTAL, thanks."
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2571274281,
+        "Author": "fjl",
+        "Created At": "2025-01-04T12:29:44Z",
+        "Comment Body": "It's good to update, but the AUTHORS file requires some manual review. Specifically, we need to ensure that entries are unique. There are two kinds of entries in the file: name + email, and github users. When people contribute via GitHub, it usually uses their GitHub username as the committer. However, some people also push commits with their own email address, and this can lead to duplicates in AUTHORS. The way to resolve that is adding entries into the `.mailmap` file. I usually update this file whenever we update AUTHORS to ensure there are no obvious duplicates.\r\n"
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2571279437,
+        "Author": "ronething-bot",
+        "Created At": "2025-01-04T12:50:28Z",
+        "Comment Body": "> The way to resolve that is adding entries into the .mailmap file. I usually update this file whenever we update AUTHORS to ensure there are no obvious duplicates.\r\n\r\n@fjl I have updated the duplicate items to `.mailmap` file, please review the latest commit, thanks\r\n\r\nref: https://github.com/ethereum/go-ethereum/pull/30948/commits/7cd59414a355cf94656cd65a901117ac5db22c6a"
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2571284815,
+        "Author": "fjl",
+        "Created At": "2025-01-04T13:12:44Z",
+        "Comment Body": "Thanks. I will do another pass myself later."
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2579113584,
+        "Author": "ronething-bot",
+        "Created At": "2025-01-09T03:32:03Z",
+        "Comment Body": "@fjl May I ask if this PR can be continued to be pushed forward, thanks?"
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2607759660,
+        "Author": "ronething-bot",
+        "Created At": "2025-01-22T16:50:34Z",
+        "Comment Body": "Hi, just checking in to see if there\u2019s any update on this PR. Let me know if there\u2019s anything I can help with. Thanks."
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2608054604,
+        "Author": "fjl",
+        "Created At": "2025-01-22T19:09:28Z",
+        "Comment Body": "@ronething-bot I will get to it shortly."
+    },
+    {
+        "Issue ID": 30948,
+        "Issue State": "closed",
+        "Issue Title": "all: update license headers and AUTHORS",
+        "Comment ID": 2638079064,
+        "Author": "fjl",
+        "Created At": "2025-02-05T21:37:40Z",
+        "Comment Body": "I have resubmitted this as https://github.com/ethereum/go-ethereum/pull/31133. It was easier to just run the script again than trying to rebase this."
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2400315196,
+        "Author": "s1na",
+        "Created At": "2024-10-08T16:21:14Z",
+        "Comment Body": "Ah seems like the journal has a crasher:\r\n\r\n```\r\nrevisions: [{0 2} {1 4} {2 4} {3 4} {4 6} {5 6} {6 9} {7 11} {8 12} {9 18} {10 18} {11 20} {12 22} {13 24} {14 24} {18 27}]\r\npanic: revision id 17 cannot be reverted\r\n\r\ngoroutine 10470 [running]:\r\ngithub.com/ethereum/go-ethereum/core/tracing.(*journal).revertToSnapshot(0xc050c41c70, 0x11, 0xc0570360e0)\r\n        github.com/ethereum/go-ethereum/core/tracing/journal.go:170 +0x185\r\ngithub.com/ethereum/go-ethereum/core/tracing.(*journal).OnExit(0xc050c41c70, 0x0, {0xc13a87fe30, 0x64, 0x64}, 0x48dc9, {0x203f680, 0xc018bcc978}, 0x1)\r\n        github.com/ethereum/go-ethereum/core/tracing/journal.go:206 +0x6f\r\ngithub.com/ethereum/go-ethereum/core/vm.(*EVM).captureEnd(0xc13a9e0780?, 0x0, 0x12e208, 0xe543f, {0xc13a87fe30, 0x64, 0x64}, {0x203da40, 0x2e05070})\r\n```"
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2405009796,
+        "Author": "daleksov",
+        "Created At": "2024-10-10T12:53:37Z",
+        "Comment Body": "> I don't see any need for these: `OnBalanceRead` etc. It adds non-generic handlers for certain opcodes, but a more generic solution already exists, using the per-opcode step function.\r\n> \r\n> Here's the old prestate tracer js:\r\n> \r\n> ```js\r\n> \t// step is invoked for every opcode that the VM executes.\r\n> \tstep: function(log, db) {\r\n> \t\t// Add the current account if we just started tracing\r\n> \t\tif (this.prestate === null){\r\n> \t\t\tthis.prestate = {};\r\n> \t\t\t// Balance will potentially be wrong here, since this will include the value\r\n> \t\t\t// sent along with the message. We fix that in 'result()'.\r\n> \t\t\tthis.lookupAccount(log.contract.getAddress(), db);\r\n> \t\t}\r\n> \t\t// Whenever new state is accessed, add it to the prestate\r\n> \t\tswitch (log.op.toString()) {\r\n> \t\t\tcase \"EXTCODECOPY\": case \"EXTCODESIZE\": case \"EXTCODEHASH\": case \"BALANCE\":\r\n> \t\t\t\tthis.lookupAccount(toAddress(log.stack.peek(0).toString(16)), db);\r\n> \t\t\t\tbreak;\r\n> \t\t\tcase \"CREATE\":\r\n> \t\t\t\tvar from = log.contract.getAddress();\r\n> \t\t\t\tthis.lookupAccount(toContract(from, db.getNonce(from)), db);\r\n> ```\r\n> \r\n> The existing way to it is arguably slower, since it's on the hot-path and invoked on every opcode. We could mitigate that, if e.g. tracers declare a whitelist of ops that they are interested in (e.g. optionally expose a method which spits out a list).\r\n> \r\n> The existing way is perhaps a bit clunky, in that it's up to the tracer to make sense of the stack arguments, but otoh the stack arguments are not something that is changed frequently, since it's consensus-critical, and can only be changed in hardforks.\r\n> \r\n> It's also a bit clunky to see the poststate: for op `X`, you see the stack prior to the execution of `X`. In order to see the stack _after_ , you need to check on the next op too. Which might be difficult, especially if we have whitelisted `X` only -- but we could improve this too, e.g. by using a returnvalue saying `hey I want to be notified about the next op too`.\r\n> \r\n> All in all, I think we should iterate on the existing generic solution, and not litter the code with these hooks.\r\n\r\nHi @holiman,\r\n\r\nWe're really excited about the live tracing feature and see immense value in it, especially for our specific use case. Currently, we fetch blocks from nodes (clients) in a polling fashion and re-execute them using a customized EVM that performs more detailed tracing. By utilizing live tracing directly on the node (client), we can significantly boost both performance and correctness, and it would allow us to completely remove the re-execution and re-processing logic from our pipeline. This is why having more explicit hooks, like OnBalanceRead and others, is crucial for us. These hooks would allow us to optimize our tracing workflow, making it more efficient and accurate, which is why we strongly favor this approach and would love to keep it in place.\r\n\r\nHere are some of the key benefits we see in favor of keeping the more explicit hooks:\r\n\r\n**Accurate State Tracking**\r\nExplicit read hooks ensure immediate and precise state initialization (like balances and nonces) during live tracing. Without them, we'd have to manually infer state access from opcodes, adding complexity and increasing the chance of errors.\r\n\r\n**Separation of Concerns**\r\nBy using explicit read hooks, we separate state management from opcode handling, keeping the code cleaner, more modular, and easier to maintain. This avoids cluttering the opcode logic and reduces the risk of introducing bugs.\r\n\r\n**State Consistency**\r\nThese hooks capture essential pre-state information (before any changes happen), which is crucial for our use case, ensuring accurate comparisons between pre- and post-execution states, especially for debugging and analysis which is essential for us and all our customers.\r\n\r\n**Performance Optimization**\r\nExplicit read hooks allow us to focus on relevant state interactions without needing to manually parse the stack for every opcode. This simplifies the logic and reduces performance overhead on our tracer side by handling only the necessary state accesses.\r\n\r\n**Future-Proofing:**\r\nAs Ethereum evolves, explicit read hooks for fundamental state elements like account balances and nonces provide the flexibility to handle new state access patterns, even in the event of **future hard forks**. This ensures that the tracer can adapt without requiring major changes to the code, allowing it to remain compatible with protocol updates and any state access modifications introduced through hard forks.\r\nAdditionally, maintaining this pattern helps ensure consistency across different Go-Ethereum forks, forcing them to support live-tracing without breaking its functionality, thereby preserving compatibility across ecosystems.\r\n\r\n**Transition from Full Archive to Full Node**\r\nThe most beneficial aspect for us is the ability to move from a full archive node to a full node. Through live tracing, we can store state information and re-execute transactions that are older than 128 block"
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2405058194,
+        "Author": "holiman",
+        "Created At": "2024-10-10T13:12:30Z",
+        "Comment Body": "> Explicit read hooks ensure immediate and precise state initialization (like balances and nonces) during live tracing. Without them, we'd have to manually infer state access from opcodes, adding complexity and increasing the chance of errors.\r\n\r\nFor `nonce`, a `nonce` is opaque from the evm execution (it is implicitly visible whenever a contract is created via `CREATE`, where the address depends on the nonce). Why do you want a read access for that? It is only ever modified during contract-creation or during state processing, when the transaction sender nonce is increased. \r\n\r\nFor `balance`, there's `SELFBALANCE` and `EXTBALANCE` (a.k.a `BALANCE`). These take an address on the stack, and leave the balance on the stack. It's pretty straight-forward, with the caveat that you'd want to capture both the pre-exec (inputs) and post-exec (outputs). Alternativly, you can ignore the post-exec, and simply fetch the balance at this point, which would fulfill the requirement: \"essential pre-state information (before any changes happen), which is crucial for our use case,\"\r\n"
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2405121942,
+        "Author": "holiman",
+        "Created At": "2024-10-10T13:38:34Z",
+        "Comment Body": "Note, if we can get something like this to work, then I'm a lot more open to having all sorts of hooks: https://github.com/ethereum/go-ethereum/pull/30569\n\nI don't like the deep integration, but if it's possible via a separate layer then \"let's go wild\" imo\n\n"
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2409939903,
+        "Author": "s1na",
+        "Created At": "2024-10-14T04:49:47Z",
+        "Comment Body": "@fjl regarding the backwards-compatibility I have for now added a `OnSystemCallStartV2` in the same hooks object. What do you think?"
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2419021596,
+        "Author": "s1na",
+        "Created At": "2024-10-17T09:25:42Z",
+        "Comment Body": "I dropped OnReorg and merged in changes from master."
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2434259393,
+        "Author": "s1na",
+        "Created At": "2024-10-24T04:29:42Z",
+        "Comment Body": "I have pulled in the latest master changes and moved the state read hooks over to the hooked statedb.\r\n\r\nOne thing to know about the state read hooks: They will not give you the full prestate by themselves. You will need also the previous values emitted as part of state change hooks. This is because e.g. statedb.AddBalance does not do statedb.GetBalance internally."
+    },
+    {
+        "Issue ID": 30441,
+        "Issue State": "closed",
+        "Issue Title": "core/tracing: state journal wrapper",
+        "Comment ID": 2501119157,
+        "Author": "s1na",
+        "Created At": "2024-11-26T15:19:59Z",
+        "Comment Body": "Copying from the chat with @nebojsa94:\r\n\r\n> Also, regarding jorunaling logic on your branch tracing V1.1, there\u2019s an edge case with failed contract creation where the nonce is reverted, but it shouldn\u2019t be. This happens because CaptureEnter is triggered before the nonce is incremented for contract creation prior to state snapshotting."
+    },
+    {
+        "Issue ID": 31101,
+        "Issue State": "closed",
+        "Issue Title": "consensus/misc/eip4844: use head's target blobs, not parent",
+        "Comment ID": 2630739171,
+        "Author": "s1na",
+        "Created At": "2025-02-03T11:55:53Z",
+        "Comment Body": "The diff to #31002 looks good!"
+    },
+    {
+        "Issue ID": 31101,
+        "Issue State": "closed",
+        "Issue Title": "consensus/misc/eip4844: use head's target blobs, not parent",
+        "Comment ID": 2634743132,
+        "Author": "lightclient",
+        "Created At": "2025-02-04T18:23:57Z",
+        "Comment Body": "Fixed up based on review comments, thx."
+    },
+    {
+        "Issue ID": 31067,
+        "Issue State": "closed",
+        "Issue Title": "core: assign default difficulty to zero for chain without ethash",
+        "Comment ID": 2609878638,
+        "Author": "rjl493456442",
+        "Created At": "2025-01-23T13:58:15Z",
+        "Comment Body": "CI is failing"
+    },
+    {
+        "Issue ID": 31067,
+        "Issue State": "closed",
+        "Issue Title": "core: assign default difficulty to zero for chain without ethash",
+        "Comment ID": 2633850336,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-04T13:05:57Z",
+        "Comment Body": "Ah looks like there is a test failing with this"
+    },
+    {
+        "Issue ID": 31067,
+        "Issue State": "closed",
+        "Issue Title": "core: assign default difficulty to zero for chain without ethash",
+        "Comment ID": 2634446553,
+        "Author": "fjl",
+        "Created At": "2025-02-04T16:15:26Z",
+        "Comment Body": "I think that #31123 wasn't too bad and we should reconsider making a more fundamental change. In this PR I just tried to make a minimally-invasive fix for my issue, but the logic is very unintuitive."
+    },
+    {
+        "Issue ID": 31096,
+        "Issue State": "closed",
+        "Issue Title": ".travis.yml: change arch for Docker build to arm64",
+        "Comment ID": 2624028355,
+        "Author": "fjl",
+        "Created At": "2025-01-30T09:59:20Z",
+        "Comment Body": "This will likely not fix the issue we are seeing. It's also reported here: https://gitlab.alpinelinux.org/groups/alpine/-/issues/?sort=created_date&state=opened&search=gcc&first_page_size=20"
+    },
+    {
+        "Issue ID": 31113,
+        "Issue State": "closed",
+        "Issue Title": "tests/fuzzers/bls12381: fix error message in fuzzCrossG2Add",
+        "Comment ID": 2630808149,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-03T12:26:56Z",
+        "Comment Body": "Looks like you fixed it in the wrong place, you fixed it in `fuzzCrossG1Add`"
+    },
+    {
+        "Issue ID": 31113,
+        "Issue State": "closed",
+        "Issue Title": "tests/fuzzers/bls12381: fix error message in fuzzCrossG2Add",
+        "Comment ID": 2631977780,
+        "Author": "0xkazak",
+        "Created At": "2025-02-03T20:15:15Z",
+        "Comment Body": "> Looks like you fixed it in the wrong place, you fixed it in `fuzzCrossG1Add`\r\n\r\n[MariusVanDerWijden](https://github.com/MariusVanDerWijden), fixed. "
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2440729213,
+        "Author": "rjl493456442",
+        "Created At": "2024-10-28T07:16:52Z",
+        "Comment Body": "I think the general idea is good and it's a good direction to \"distribute the complexity\" of txpool graduately."
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2454178669,
+        "Author": "holiman",
+        "Created At": "2024-11-04T09:17:26Z",
+        "Comment Body": "`TestUnderpricing` is flaky in this PR. Not sure why"
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2539159802,
+        "Author": "holiman",
+        "Created At": "2024-12-12T14:47:05Z",
+        "Comment Body": "> `TestUnderpricing` is flaky in this PR. Not sure why\r\n\r\nFixed (crosses fingers)"
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2568185048,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-01-02T18:21:18Z",
+        "Comment Body": "I'm wondering whether we should save users from shooting themselves in the foot by only allowing non-blob transactions in the tracker"
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2568990112,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-01-03T10:14:36Z",
+        "Comment Body": "Overall this PR looks very good to me. I love the concept and implementing it as an additional service is genius. I added some minor comments where this PR changes the behavior of the transaction pool, they boil down to the following:\r\n\r\n- previously local blob transactions were not tracked, now they are tracked and journalled\r\n- Invalid transactions might make it into the tracker, previously only txs that passed the basic validation would be tracked\r\n- Only addresses that are configured on startup will get priority, previously all txs from accounts that were sent via RPC got prio\r\n- Remote txs from a sender that once sent via the RPC were still considered local and tracked, now they are not anymore\r\n\r\nI'm not saying that all of those are issues that need to be fixed necessarily, I think we should discuss them though before merging this PR to make sure we don't rug users"
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2569219012,
+        "Author": "holiman",
+        "Created At": "2025-01-03T13:25:20Z",
+        "Comment Body": "Thanks. Re the last two points, they are described fully in the PR description. \nThe first two points should probably be undone"
+    },
+    {
+        "Issue ID": 30559,
+        "Issue State": "closed",
+        "Issue Title": "core/txpool: remove locals-tracking from pools (part 2) ",
+        "Comment ID": 2574723467,
+        "Author": "holiman",
+        "Created At": "2025-01-07T08:54:01Z",
+        "Comment Body": "Thanks @MariusVanDerWijden, I have addressed the points you raised. Also rebased on master"
+    },
+    {
+        "Issue ID": 31002,
+        "Issue State": "closed",
+        "Issue Title": "params,core: add max and target value to chain config",
+        "Comment ID": 2583035276,
+        "Author": "lightclient",
+        "Created At": "2025-01-10T15:54:45Z",
+        "Comment Body": "Made the updates from your review, Marius. Thanks!"
+    },
+    {
+        "Issue ID": 31002,
+        "Issue State": "closed",
+        "Issue Title": "params,core: add max and target value to chain config",
+        "Comment ID": 2622757283,
+        "Author": "lightclient",
+        "Created At": "2025-01-29T20:20:05Z",
+        "Comment Body": "PTAL"
+    },
+    {
+        "Issue ID": 31120,
+        "Issue State": "closed",
+        "Issue Title": "rpc: fix go-routine leaks in client handler",
+        "Comment ID": 2630591270,
+        "Author": "ilia-tsyplenkov",
+        "Created At": "2025-02-03T10:47:57Z",
+        "Comment Body": "it doesn't break any other tests:\r\n```\r\ni-tsyplenkov@Ilias-MacBook-Air rpc % go test ./...\r\nok  \tgithub.com/ethereum/go-ethereum/rpc\t10.783s\r\ni-tsyplenkov@Ilias-MacBook-Air rpc % echo $?\r\n0\r\n```"
+    },
+    {
+        "Issue ID": 31120,
+        "Issue State": "closed",
+        "Issue Title": "rpc: fix go-routine leaks in client handler",
+        "Comment ID": 2631989653,
+        "Author": "ilia-tsyplenkov",
+        "Created At": "2025-02-03T20:20:19Z",
+        "Comment Body": "wrong solution. it breaks server logic. I provide an update if I'll find the correct solution"
+    },
+    {
+        "Issue ID": 31120,
+        "Issue State": "closed",
+        "Issue Title": "rpc: fix go-routine leaks in client handler",
+        "Comment ID": 2632107927,
+        "Author": "fjl",
+        "Created At": "2025-02-03T21:24:06Z",
+        "Comment Body": "Let be known that we don't really care about minor resource leaks in tests. We have the general rule that code that will be used as a library has to clean up after itself. RPC client and server do not leave goroutines behind when they terminate. But tests run as a short-lived process, and it can sometimes be easier to not add all necessary synchronization to ensure all goroutines are fully ended with the test."
+    },
+    {
+        "Issue ID": 31120,
+        "Issue State": "closed",
+        "Issue Title": "rpc: fix go-routine leaks in client handler",
+        "Comment ID": 2633984756,
+        "Author": "MariusVanDerWijden",
+        "Created At": "2025-02-04T13:38:43Z",
+        "Comment Body": "We've discussed this a bit internally and decided not to go forward with this, because of the reasons outlined by @fjl. \r\nThank you for submitting this anyway @ilia-tsyplenkov!"
+    }
+]

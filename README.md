@@ -24,5 +24,5 @@ likelihood of acceptance?
 - https://www.worldscientific.com/doi/abs/10.1142/S0218194021400192
 
 ## **Folder Descriptions** 
-- codes: Contains all codes used in the project
-- dataset: Contains all the dataset to be analyzed
+- codes: Contains all the codes used in the project
+- dataset: Contains the dataset to be analyzed

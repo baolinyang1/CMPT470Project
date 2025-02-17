@@ -1,0 +1,200 @@
+[
+    {
+        "Issue ID": 2545,
+        "Issue State": "closed",
+        "Issue Title": "add fastbots",
+        "Comment ID": 1937376779,
+        "Author": "VascoSch92",
+        "Created At": "2024-02-11T00:55:29Z",
+        "Comment Body": "Change the name of the pr. For example add 'package name'"
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 1708488190,
+        "Author": "deronnax",
+        "Created At": "2023-09-06T14:30:59Z",
+        "Comment Body": "We started using it in my company and it's dope. Poetry is good but PDM is more modern and more respectful of standard. +1 for inclusion."
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 1709426275,
+        "Author": "shifenhutu",
+        "Created At": "2023-09-07T03:34:38Z",
+        "Comment Body": "its cool  "
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 1906027566,
+        "Author": "deronnax",
+        "Created At": "2024-01-23T13:08:45Z",
+        "Comment Body": "it's used by, amongst others, [hyperscan](https://github.com/darvid/python-hyperscan) and [pydantic](https://github.com/pydantic/pydantic). It reached 6K stars on Github few days ago.\r\nCan we get a merge, @vinta \ud83d\ude43 ?"
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 2024499593,
+        "Author": "sventec",
+        "Created At": "2024-03-28T06:36:06Z",
+        "Comment Body": "The PDM docs URL has since changed to <https://pdm-project.org/latest/> (though the current link in this PR still redirects to the new one). +1 for merge, I switched from Poetry for PEP 621 compliance and it's awesome."
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 2025021964,
+        "Author": "pawamoy",
+        "Created At": "2024-03-28T12:04:36Z",
+        "Comment Body": "Thanks @sventec, link updated :slightly_smiling_face: "
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 2126681976,
+        "Author": "pawamoy",
+        "Created At": "2024-05-23T09:45:29Z",
+        "Comment Body": "Unfortunately it doesn't look like @vinta has the capacity to groom the backlog of PRs. There are many no-brainers like this PR and [the one that adds Ruff](https://github.com/vinta/awesome-python/pull/2292) that are waiting for a long time, with many upvotes, without being merged. PRs then [go stale](https://github.com/vinta/awesome-python/pull/1412) (yay stale bots), are [re-opened](https://github.com/vinta/awesome-python/pull/2551), and, strangely, sometimes [merged immediately with 0 upvote](https://github.com/vinta/awesome-python/pull/2578), while they are a duplicate of an older PR with more upvotes.\r\n\r\nI'm not sure what the process is here, or if there's even one. It would be much more engaging if it was documented somewhere :thinking: I'm actually thinking about just closing this one for clean up.\r\n\r\nAlso, I invite everyone here to have a look at https://github.com/ml-tooling/best-of-python. Best-of lists are much more detailed than Awesome ones, and rank projects with a scoring algorithm. It could be nice to add PDM there too :man_shrugging: "
+    },
+    {
+        "Issue ID": 2514,
+        "Issue State": "closed",
+        "Issue Title": "Add PDM to Package Management",
+        "Comment ID": 2126697690,
+        "Author": "pawamoy",
+        "Created At": "2024-05-23T09:53:37Z",
+        "Comment Body": "If @vinta ever adds a collaborator on the repository to help them with maintenance, someone please let me know, and I'll reopen (if needed).\r\n\r\n(By the way I'm willing to help with maintenance. Not for eternity, but I can seriously groom the backlog in a short period. I'm well versed in the Python ecosystem. I'd merge the no-brainers, and close duplicate quickly. I won't blindly merge something I don't know just because of upvotes, which in some cases seem fake)"
+    },
+    {
+        "Issue ID": 1694,
+        "Issue State": "closed",
+        "Issue Title": "Add pdfminer.six",
+        "Comment ID": 2169154863,
+        "Author": "howiezhao",
+        "Created At": "2024-06-15T06:15:06Z",
+        "Comment Body": "Hi @vinta Could you please help take a look at this change? Any insights?"
+    },
+    {
+        "Issue ID": 1475,
+        "Issue State": "closed",
+        "Issue Title": "Add dephell",
+        "Comment ID": 2509674143,
+        "Author": "jhermann",
+        "Created At": "2024-12-01T10:21:43Z",
+        "Comment Body": "> THE PROJECT IS ARCHIVED"
+    },
+    {
+        "Issue ID": 1565,
+        "Issue State": "closed",
+        "Issue Title": "Add tg (terminal telegram client)",
+        "Comment ID": 716030394,
+        "Author": "paul-nameless",
+        "Created At": "2020-10-24T17:48:13Z",
+        "Comment Body": "Approve"
+    },
+    {
+        "Issue ID": 1565,
+        "Issue State": "closed",
+        "Issue Title": "Add tg (terminal telegram client)",
+        "Comment ID": 2485884832,
+        "Author": "Yogesh-shahji",
+        "Created At": "2024-11-19T14:33:26Z",
+        "Comment Body": "Ok\r\n\r\n\r\nOn Tue, Nov 19, 2024, 13:27 Nameless ***@***.***> wrote:\r\n\r\n> Closed #1565 <https://github.com/vinta/awesome-python/pull/1565>.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/vinta/awesome-python/pull/1565#event-15344888513>, or\r\n> unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BMQ7ESXPWXQUAQQNXOFN75D2BLTXXAVCNFSM6AAAAABSBNGSSKVHI2DSMVQWIX3LMV45UABCJFZXG5LFIV3GK3TUJZXXI2LGNFRWC5DJN5XDWMJVGM2DIOBYHA2TCMY>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 2505,
+        "Issue State": "closed",
+        "Issue Title": "Added Django-Jazzmin for customizing admin interface",
+        "Comment ID": 1676221004,
+        "Author": "CreateGenius",
+        "Created At": "2023-08-13T04:25:45Z",
+        "Comment Body": "Pull request "
+    },
+    {
+        "Issue ID": 2505,
+        "Issue State": "closed",
+        "Issue Title": "Added Django-Jazzmin for customizing admin interface",
+        "Comment ID": 1686111750,
+        "Author": "thoth2357",
+        "Created At": "2023-08-21T11:01:06Z",
+        "Comment Body": "> * [project-name](http://example.com/) - A short description ends with a period.\r\n\r\nThanks @F-a-r-m-a-n, i i would add the period "
+    },
+    {
+        "Issue ID": 2505,
+        "Issue State": "closed",
+        "Issue Title": "Added Django-Jazzmin for customizing admin interface",
+        "Comment ID": 1815969932,
+        "Author": "L-uz",
+        "Created At": "2023-11-17T08:55:43Z",
+        "Comment Body": "Html is way better  ig?"
+    },
+    {
+        "Issue ID": 2575,
+        "Issue State": "closed",
+        "Issue Title": "Add stable-baselines3",
+        "Comment ID": 2233315647,
+        "Author": "R055A",
+        "Created At": "2024-07-17T13:22:57Z",
+        "Comment Body": "@vinta "
+    },
+    {
+        "Issue ID": 2575,
+        "Issue State": "closed",
+        "Issue Title": "Add stable-baselines3",
+        "Comment ID": 2387220453,
+        "Author": "Mitchmck3",
+        "Created At": "2024-10-01T22:50:45Z",
+        "Comment Body": "> ## What is this Python project?\n> \n> Stable Baselines 3 is a PyTorch version of Stable Baselines for reliable implementations of (deep) reinforcement learning algorithms. \n> \n> ## What's the difference between this Python project and similar ones?\n> \n> Stable Baselines 3 is a significant improvement from previous Stable Baseline versions providing: \n> - state-of-the-art PyTorch algorithms for (deep) reinforcement learning with\n>   - observation space and Tensorboard support\n>   - custom environments, policies, callbacks and interface\n>   - can integrate with other libraries\n> - [a full list of features can be found using this link](https://github.com/DLR-RM/stable-baselines3#main-features)\n> \n> Anyone who agrees with this pull request could submit an *Approve* review to it.\n> \n\n"
+    },
+    {
+        "Issue ID": 2607,
+        "Issue State": "closed",
+        "Issue Title": "python-nostr",
+        "Comment ID": 2322768558,
+        "Author": "Steffin-php",
+        "Created At": "2024-08-31T04:41:53Z",
+        "Comment Body": "Good"
+    },
+    {
+        "Issue ID": 1617,
+        "Issue State": "closed",
+        "Issue Title": "Add ipychart",
+        "Comment ID": 695361968,
+        "Author": "FerdiHr",
+        "Created At": "2020-09-19T22:21:39Z",
+        "Comment Body": "Tested and approved !! ;)"
+    },
+    {
+        "Issue ID": 2196,
+        "Issue State": "closed",
+        "Issue Title": "Add refurb.",
+        "Comment ID": 1273443351,
+        "Author": "igordertigor",
+        "Created At": "2022-10-10T14:56:51Z",
+        "Comment Body": "Looks great, but seems to need a bit more time. I hit my first bug within less then 5 minutes with refurb."
+    },
+    {
+        "Issue ID": 2196,
+        "Issue State": "closed",
+        "Issue Title": "Add refurb.",
+        "Comment ID": 1274909505,
+        "Author": "jdevera",
+        "Created At": "2022-10-11T15:45:32Z",
+        "Comment Body": "Thanks for checking. I saw the bug reported \ud83d\udcaa. What is your usual policy for revisiting a project?\n"
+    },
+    {
+        "Issue ID": 2196,
+        "Issue State": "closed",
+        "Issue Title": "Add refurb.",
+        "Comment ID": 1275746076,
+        "Author": "igordertigor",
+        "Created At": "2022-10-12T07:55:39Z",
+        "Comment Body": "I'm not deciding on policies, I'm just voting and sometimes commenting. I should also mention that the bug I reported took only 3 hours to be fixed."
+    }
+]

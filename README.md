@@ -22,3 +22,7 @@ likelihood of acceptance?
 - https://ieeexplore.ieee.org/abstract/document/9117137
 - https://ieeexplore.ieee.org/abstract/document/10123507
 - https://www.worldscientific.com/doi/abs/10.1142/S0218194021400192
+
+## **Folders Descriptions** 
+- codes: Contains all codes used in the project
+- dataset: Contains all the dataset to be analyzed

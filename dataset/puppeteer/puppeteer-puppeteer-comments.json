@@ -1,0 +1,2198 @@
+[
+    {
+        "Issue ID": 13614,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: run page.screencast with headless:fasle  throw Error:Write EOF",
+        "Comment ID": 2661002847,
+        "Author": "OrKoN",
+        "Created At": "2025-02-15T16:55:42Z",
+        "Comment Body": "Thanks for reporting. I am not able to reproduce:\n\n```\nimport puppeteer from \"puppeteer\";\n\nconst browser = await puppeteer.launch({\n    headless: false,\n    defaultViewport: {\n        width: 1080,\n        height: 1024 \n    }\n});\n\nconst page = await browser.newPage();\nawait page.goto('https://www.google.com/');\n\nconst recorder = await page.screencast({ path: 'recorder.webm' });\n\nawait new Promise(resolve => setTimeout(resolve, 10000))\n\nawait recorder.stop();\nawait browser.close();\n\n```\n\nMake sure you have a latest ffmpeg installed and avoid saving the screencast while the process shuts down."
+    },
+    {
+        "Issue ID": 13591,
+        "Issue State": "closed",
+        "Issue Title": "fix: don't wait for activation if the connection is disconnected",
+        "Comment ID": 2639026274,
+        "Author": "OrKoN",
+        "Created At": "2025-02-06T07:23:08Z",
+        "Comment Body": "This seems to result in some persistent test failures (not sure why)."
+    },
+    {
+        "Issue ID": 13591,
+        "Issue State": "closed",
+        "Issue Title": "fix: don't wait for activation if the connection is disconnected",
+        "Comment ID": 2639268356,
+        "Author": "Lightning00Blade",
+        "Created At": "2025-02-06T09:30:02Z",
+        "Comment Body": "Those test looked like once that have flaked before, maybe this fixes the flakiness but not the issue? I will investigate."
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1637191346,
+        "Author": "github-actions[bot]",
+        "Created At": "2023-07-16T21:12:51Z",
+        "Comment Body": "This issue has an invalid Node.js version: `18`. Versions must follow [SemVer](https://semver.org/) formatting. Please update the form with a valid version.\n\n---\n[Analyzer run](https://github.com/puppeteer/puppeteer/actions/runs/5579868730)"
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1637192647,
+        "Author": "MylesNeloms",
+        "Created At": "2023-07-16T21:19:47Z",
+        "Comment Body": "Apologies for the misguiding link. I grabbed the dependencies from the troubleshooting links in puppeteer docs\r\n\r\nhttps://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix"
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1637898566,
+        "Author": "OrKoN",
+        "Created At": "2023-07-17T11:00:58Z",
+        "Comment Body": "Could you please format the issue properly? it's difficult to read. Also, make sure that after you modify the docker image, that you install the app into the folder where Puppeteer is installed and switch back to the same non-root user."
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1638502890,
+        "Author": "MylesNeloms",
+        "Created At": "2023-07-17T16:44:30Z",
+        "Comment Body": "Thanks I will try this and update soon. Apologies for the formatting, I believe markup may have reformatted my issue text."
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1638743933,
+        "Author": "MylesNeloms",
+        "Created At": "2023-07-17T19:28:14Z",
+        "Comment Body": "Hi, I tested a bit and I am able to launch the browser however I am still stuck with the \"waitForSelector\" error.\r\n\r\nI will attach a minimum reproduction zip here.\r\n[MinimumRepro(7:17).zip](https://github.com/puppeteer/puppeteer/files/12073194/MinimumRepro.7.17.zip)\r\n\r\n\r\nPlease see the dockerfile below. I am trying move my executable into the \"home/pptruser\" directory then complete the dependency install from the non-root user:\r\n\r\n`FROM ghcr.io/puppeteer/puppeteer:20.8.2`\r\n`COPY --chown=pptruser:pptruser . . `\r\n`USER root `\r\n`ADD ./index.js /home/pptruser/ `\r\n`ADD ./package*.json /home/pptruser/ `\r\n`ADD ./* /home/pptruser/ `\r\n`USER pptruser `\r\n`RUN npm ci `\r\n`ENTRYPOINT [\"node\", \"index.js\"]`\r\n\r\n\r\nI am creating the container image with \"gcloud builds submit\" command as noted here[1]. I used the above dockerfile to copy my executable file and package*.json to  \"/home/pptruser\" and install using the \"pptruser\" created by the image.\r\n\r\nThis seems to work fine as the job is able to connect to the page and launch the browser.(tested from logging, the job is able to get past \"await puppeteer.launch(...)\" and \"await page.goto(...)\")\r\n\r\nWhen it attempts \"await page.waitForSelector\", I receive the following error:\r\n`TimeoutError: Waiting for selector `.icon-filter` failed: Waiting failed: 30000ms exceeded at Timeout.<anonymous> (/home/pptruser/node_modules/puppeteer-core/lib/cjs/puppeteer/common/WaitTask.js:71:37) at listOnTimeout (node:internal/timers:569:17) at process.processTimers (node:internal/timers:512:7)`\r\n\r\nI know that the element \".icon-filter\" exists because I am able to run the script locally. Also, I tried to set the waitforselector  timeout to \"0\" but this resulted in my job timing out after 10 minutes due to my configuration. (I can increase job timeout this but I am not sure if it will make a difference. From local, the element is found in a couple seconds).\r\n\r\nReference:\r\n[1]https://cloud.google.com/build/docs/build-push-docker-image\r\n\r\n"
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 1639549000,
+        "Author": "OrKoN",
+        "Created At": "2023-07-18T06:07:09Z",
+        "Comment Body": "`waitForSelector` is clearly a different issue and the most likely the element does not exist (for example, the  URL you test with is only available locally or if it is a third party website they block/render differently for your server script). Please double check that the content of the page that you expect is actually there."
+    },
+    {
+        "Issue ID": 10558,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error running puppeteer within GCP Cloud Run jobs",
+        "Comment ID": 2660792437,
+        "Author": "wlhong-allo",
+        "Created At": "2025-02-15T07:33:52Z",
+        "Comment Body": "I spent 2 days and got it working now, check this out:\n\nhttps://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-google-cloud-run\n\nYou need to enable Google Cloud Run to always allocate dedicated CPU for you otherwise the process will exit as soon as a response is returned without waiting for the puppeteer event to come back.\n\nAs of current GCP web UI, goto your cloud run service > Edit & Deploy New Revision > under \"Billing\" section, select \"Instance-based\" instead of \"Request-based\" \n\nNote that it impact your GCP cost because now there are CPU resources always dedicated for your service:\n\nhttps://cloud.google.com/run/docs/configuring/billing-settings"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 488333896,
+        "Author": "xse",
+        "Created At": "2019-05-01T16:31:49Z",
+        "Comment Body": "Hey, \r\nI don't have a way to test that right now but you can inject scripts in page context using [page.evaluateOnNewDocument](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageevaluateonnewdocumentpagefunction-args) or page.evaluate and so on which will inject a script on any page.\r\nFrom there you can easily add any script that displays an image or a colored dot where the mouse is.\r\nThis should be \"permanently\" displayed unless puppeteer actually \"moves the mouse outside the page\" when it's not used. \r\n\r\nIf you're still having issues i'll try to get an example working, have a good day!"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 499544287,
+        "Author": "DanielRuf",
+        "Created At": "2019-06-06T15:28:01Z",
+        "Comment Body": "> i'll try to get an example working, have a good day!\r\n\r\nThis would be really helpful."
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 499726973,
+        "Author": "aslushnikov",
+        "Created At": "2019-06-07T01:26:46Z",
+        "Comment Body": "I extracted the mouse helper we use in Puppeteer tests and a little bit enhanced it.\r\n\r\nCheck it out: [`install-mouse-helper.js`](https://gist.github.com/aslushnikov/94108a4094532c7752135c42e12a00eb)\r\n\r\nThis function will inject an element to the page's DOM that will track mouse position. This should be good-enough for a majority of use cases.\r\n\r\nHere's what it takes to use the helper. Consider the helper is saved to the file `install-mouse-helper.js`:\r\n\r\n```js\r\nconst puppeteer = require('.');\r\nconst {installMouseHelper} = require('./install-mouse-helper');\r\n\r\n(async() => {\r\n  const browser = await puppeteer.launch();\r\n  const page = await browser.newPage();\r\n  // Installs the helper to the page. Mouse will be visible in the subsequent navigation.\r\n  await installMouseHelper(page);\r\n  // Here's the navigation. From now on we'll have a mouse cursor on the page.\r\n  await page.goto('https://example.com');\r\n  await page.mouse.move(135, 173);\r\n  await page.mouse.down();\r\n  await page.mouse.move(400, 225);\r\n  await page.screenshot({path: 'screenshot.png'});\r\n  await browser.close();\r\n})();\r\n```\r\n\r\nThe screenshot now has the mouse position and looks like this:\r\n\r\n![screenshot](https://user-images.githubusercontent.com/746130/59075903-f7bf9080-8887-11e9-828a-1b7fae1dadba.png)\r\n\r\n@bexoss is this good enough for you? "
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 667105265,
+        "Author": "MelMacaluso",
+        "Created At": "2020-07-31T12:55:05Z",
+        "Comment Body": "> ```js\r\n>  await page.mouse.move(135, 173);\r\n>   await page.mouse.down();\r\n>   await page.mouse.move(400, 225);\r\n> ```\r\n\r\nHi @aslushnikov , thanks! It does not work for me, do you think is not compatible with puppeteer latest?\r\n\r\n@aslushnikov Ignore me, my linter removed the `;` from the css inline styles \ud83d\ude02 "
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 695899859,
+        "Author": "0x446f6d",
+        "Created At": "2020-09-21T04:59:01Z",
+        "Comment Body": "How could you get this working with something like a modal? Right now, the grey circle hides behind the modal and isn't visible in front of modals that pop up. "
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 695916406,
+        "Author": "ccpu",
+        "Created At": "2020-09-21T06:01:04Z",
+        "Comment Body": "@dominuslabs set [higher  z-index](https://stackoverflow.com/a/1120068/1103757) on `mousemove`"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 696264283,
+        "Author": "0x446f6d",
+        "Created At": "2020-09-21T17:38:43Z",
+        "Comment Body": "I set the z-index to the maximum z-index allowed (2,147,483,647) and it still didn't work. Maybe its because the modal is in an iframe?"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 696529623,
+        "Author": "ccpu",
+        "Created At": "2020-09-22T06:17:11Z",
+        "Comment Body": "@dominuslabs difficult to say, as you have mentioned it could be the iframe, im using higher z-index in my [code](https://github.com/ccpu/storybook-addon-playwright/blob/76d492c852ec5fe3caedb08eac8db699818811d4/src/api/server/utils/install-mouse-helper.ts#L13)  with playwright, haven't noticed any problem yet. "
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 809699157,
+        "Author": "nathalizator",
+        "Created At": "2021-03-29T20:41:32Z",
+        "Comment Body": "> I extracted the mouse helper we use in Puppeteer tests and a little bit enhanced it.\r\n> \r\n> Check it out: [`install-mouse-helper.js`](https://gist.github.com/aslushnikov/94108a4094532c7752135c42e12a00eb)\r\n> \r\n> This function will inject an element to the page's DOM that will track mouse position. This should be good-enough for a majority of use cases.\r\n> \r\n> Here's what it takes to use the helper. Consider the helper is saved to the file `install-mouse-helper.js`:\r\n> \r\n> ```js\r\n> const puppeteer = require('.');\r\n> const {installMouseHelper} = require('./install-mouse-helper');\r\n> \r\n> (async() => {\r\n>   const browser = await puppeteer.launch();\r\n>   const page = await browser.newPage();\r\n>   // Installs the helper to the page. Mouse will be visible in the subsequent navigation.\r\n>   await installMouseHelper(page);\r\n>   // Here's the navigation. From now on we'll have a mouse cursor on the page.\r\n>   await page.goto('https://example.com');\r\n>   await page.mouse.move(135, 173);\r\n>   await page.mouse.down();\r\n>   await page.mouse.move(400, 225);\r\n>   await page.screenshot({path: 'screenshot.png'});\r\n>   await browser.close();\r\n> })();\r\n> ```\r\n> \r\n> The screenshot now has the mouse position and looks like this:\r\n> \r\n> ![screenshot](https://user-images.githubusercontent.com/746130/59075903-f7bf9080-8887-11e9-828a-1b7fae1dadba.png)\r\n> \r\n> @bexoss is this good enough for you?\r\n\r\nHello ! I try to make it form but i get an error \r\n`Error: Cannot find module '.'`\r\n- I have creat a file name test-mouse-help.js\r\n- I have added your file \"install-mouse-helper\" in the same directory \r\n\r\nCan you help me define what's wrong ? \r\n"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 809953044,
+        "Author": "DanielRuf",
+        "Created At": "2021-03-30T06:35:14Z",
+        "Comment Body": "> ```js\r\n> const puppeteer = require('.');\r\n> ```\r\n\r\ntry this:\r\n\r\n> ```js\r\n> const puppeteer = require('puppeteer');\r\n> ```\r\n"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 882629341,
+        "Author": "Rem0ld",
+        "Created At": "2021-07-19T15:11:31Z",
+        "Comment Body": "I'm using this helper to see where the mouse is on the webpage, but I've found something, not sure if it's a bug or if I'm doing something wrong.\r\nThis is automated test, I'm giving list of events that puppeteer will go through.\r\nAt first there is no problem but when scrolling down, but at some point the cursor disappear (basically it's pretty much when scrollY > screenY) and it only shows up when scrolling is back up. \r\nI expecting to keep seeing the cursor at any scrollY position.\r\nSo my question is, is it normal behavior, is it a bug?"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 975041960,
+        "Author": "chaffeqa",
+        "Created At": "2021-11-22T03:38:25Z",
+        "Comment Body": "I thought it may be useful to note that we solved this using this [click hijacking hack](https://fdossena.com/?p=html5cool/clickfx/i.frag).\r\n\r\nWorks great!"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1007318691,
+        "Author": "ghost",
+        "Created At": "2022-01-07T10:58:22Z",
+        "Comment Body": "It should also be possible to use `Overlay.highlightQuad` to draw a cursor anywhere on the page (should work with iframes and any zIndex and doesn't require injecting scripts): https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightQuad\r\n```\r\nawait Main.MainImpl.sendOverProtocol('Overlay.highlightQuad', {\r\n quad: [1, 1, 100, 1, 1, 10, 1, 1], color: {r: 100, g: 200, b: 200}\r\n});\r\n```\r\n"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1018112593,
+        "Author": "dword-design",
+        "Created At": "2022-01-21T02:38:57Z",
+        "Comment Body": "> Check it out: install-mouse-helper.js\r\n\r\n@nathalizator You want to put the mouse helper into an npm package? Otherwise I can do it."
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1068769251,
+        "Author": "Mecanik",
+        "Created At": "2022-03-16T06:05:12Z",
+        "Comment Body": "> \r\n\r\nDrawing is one thing, moving it is another thing...\r\n\r\nAnd for the record...\r\n\r\n```\r\nconst cdp = await page.target().createCDPSession();\r\n\r\nawait cdp.send('DOM.enable');\r\nawait cdp.send('Overlay.enable');\r\n\r\nconst data = await cdp.send('Overlay.highlightQuad', {\r\n      quad: [1, 1, 100, 1, 1, 10, 1, 1], \r\n\t  color: {r: 100, g: 200, b: 200},\r\n    });\r\nconsole.log(data);\r\n```"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1509496521,
+        "Author": "cenfun",
+        "Created At": "2023-04-15T04:23:18Z",
+        "Comment Body": "> > Check it out: install-mouse-helper.js\r\n> \r\n> @nathalizator You want to put the mouse helper into an npm package? Otherwise I can do it.\r\n\r\nhere is https://www.npmjs.com/package/mouse-helper"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1811764153,
+        "Author": "obfuscated-loop",
+        "Created At": "2023-11-15T03:46:48Z",
+        "Comment Body": "For those using JavaScript, the solution I have found is this:\r\n```js\r\nimport { createCursor, getRandomPagePoint  } from 'ghost-cursor';\r\nimport installMouseHelper from 'ghost-cursor';\r\n// the rest of your code\r\nconst page = await browser.newPage();\r\nawait installMouseHelper.installMouseHelper(page);\r\n```"
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1956858174,
+        "Author": "storenth",
+        "Created At": "2024-02-21T15:03:01Z",
+        "Comment Body": "Guys, just use simplest event listeners to track click like events @aslushnikov talking about: https://github.com/puppeteer/puppeteer/issues/4378#issuecomment-499726973\r\nI suggest to close the issue."
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 1957033259,
+        "Author": "jrandolf-2",
+        "Created At": "2024-02-21T15:50:14Z",
+        "Comment Body": "Showing the mouse pointer wouldn't really belong to Puppeteer/Chromium as it's an OS artifact. We recommend using the workarounds listed in this thread."
+    },
+    {
+        "Issue ID": 4378,
+        "Issue State": "closed",
+        "Issue Title": "Is there a way to show mouse pointer in puppeteer?",
+        "Comment ID": 2660084703,
+        "Author": "bvandercar-vt",
+        "Created At": "2025-02-14T19:14:22Z",
+        "Comment Body": "Recommend using the package [Ghost-Cursor](https://github.com/Xetera/ghost-cursor)"
+    },
+    {
+        "Issue ID": 13594,
+        "Issue State": "closed",
+        "Issue Title": "chore: release main",
+        "Comment ID": 2658930465,
+        "Author": "release-please[bot]",
+        "Created At": "2025-02-14T10:33:09Z",
+        "Comment Body": "\ud83e\udd16 Created releases:\n\n- [puppeteer-v24.2.1](https://github.com/puppeteer/puppeteer/releases/tag/puppeteer-v24.2.1)\n- [puppeteer-core-v24.2.1](https://github.com/puppeteer/puppeteer/releases/tag/puppeteer-core-v24.2.1)\n\n:sunflower:"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 353875994,
+        "Author": "ggirodda",
+        "Created At": "2017-12-25T15:30:01Z",
+        "Comment Body": "Hello, I have the same issue on a page wich have two inputs text. The last one is incomplete, I often get 7 characters instead of 8"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 353876699,
+        "Author": "Nagisan",
+        "Created At": "2017-12-25T15:43:38Z",
+        "Comment Body": "A bit more troubleshooting since my initial post, this page is pulling data from a database and Puppeteer is losing focus on the field that doesn't get completed (if I add a chai expect in after each page.type, when it fails to fill out a field completely the screenshot it takes does not have focus on the input field).\r\n\r\nI think what may be happening is puppeteer is just running too quickly and it begins filling in the fields, at some point during this the page finishes getting data from the server and refreshes the page (not a browser refresh.....I'm using React & Redux, so the state updates with the fetched data and refreshes the display).\r\n\r\nThis loss of focus is not ever seen by a user (because they won't select an input as quickly as puppeteer will) so it's only an issue with puppeteer itself, I can force it to work fine if I make puppeteer wait 500ms after landing on the page (which is enough time for DB calls to resolve locally but may not work in my remote environment).\r\n\r\nI've also tried waiting for networkidle and what not, but I'm getting to this page with a click action not a network call so I don't think I can easily wait for networkidle.\r\n\r\nAny suggestions on how best to work around this issue? I don't like waiting for a static time because it will just introduce test flakiness in different environments."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 355221286,
+        "Author": "aslushnikov",
+        "Created At": "2018-01-04T08:06:29Z",
+        "Comment Body": "> Any suggestions on how best to work around this issue? I don't like waiting for a static time because it will just introduce test flakiness in different environments.\r\n\r\n@Nagisan I'd try a few options here:\r\n- if the page fetches something over network and you know the url it loads, you can subscribe to the [`requestfinished`](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-requestfinished) event and wait for the request to finish\r\n- if you have access to the website codebase, you might issue a call to `console.timeStamp` with some label, e.g. `console.timeStamp('mynicelabel')`. In puppeteer, you'll get a related [`metrics`](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-metrics) event with a `'mynicelabel'` title \r\n\r\n"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 362355249,
+        "Author": "aficiomaquinas",
+        "Created At": "2018-02-01T18:18:42Z",
+        "Comment Body": "Is this the expected behavior? I'm having the same problem. The page I'm trying to type into does not fetch anything over the network, so there is no use in subscribing to anything, afaic. How can I prevent this issue? It seems to me that it does not work as expected."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 364900895,
+        "Author": "Tzook",
+        "Created At": "2018-02-12T11:50:32Z",
+        "Comment Body": "Here's a patch to overcome this method until it is fixed:\r\n`    await page.evaluate((text) => {\r\n        (document.getElementById('my-input')).value = text;\r\n      }, \"text-to-inject\");`"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 427016172,
+        "Author": "UmairTehsin",
+        "Created At": "2018-10-04T13:21:51Z",
+        "Comment Body": "In my case below mentioned was solution\r\nawait page.type(\"Selector\", \"Value\");\r\nawait page.keyboard.press('Enter');"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 427073872,
+        "Author": "slava-lu",
+        "Created At": "2018-10-04T15:59:18Z",
+        "Comment Body": "still a problem."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 427254035,
+        "Author": "UmairTehsin",
+        "Created At": "2018-10-05T05:52:41Z",
+        "Comment Body": "you can also check by\r\nawait page.click(Selector);\r\nawait page.keyboard.type('text');\r\nawait page.kyboard.press('Enter');"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 427313241,
+        "Author": "slava-lu",
+        "Created At": "2018-10-05T10:09:20Z",
+        "Comment Body": "@UmairTehsin I do have workaround as described earlier ` await popup.evaluate((text) => { (document.getElementById('password')).value = text; }, user.password);`\r\nI just wanted to point out that this issue still exist"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 427848283,
+        "Author": "moltar",
+        "Created At": "2018-10-08T14:07:26Z",
+        "Comment Body": "Having a similar problem. Having 2 consecutive `await page.type(...)` (e.g. username and password). I am seeing that Puppeteer does not change focus from username to password in time. Part of the password is typed into the username field."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 430754331,
+        "Author": "RobinNagpal",
+        "Created At": "2018-10-17T19:16:27Z",
+        "Comment Body": "> Here's a patch to overcome this method until it is fixed:\r\n> `await page.evaluate((text) => { (document.getElementById('my-input')).value = text; }, \"text-to-inject\");`\r\n\r\nThis  is not useful in react project as it doesn't trigger onChange handler"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 431755748,
+        "Author": "liorur",
+        "Created At": "2018-10-22T07:04:54Z",
+        "Comment Body": "Ran into the same issue, after playing around for a while i discovered this little hack produces a persistent result\r\n```javascript\r\nconst input = await page.$(`input.inputClass`);\r\nawait input.press('Backspace');\r\nawait input.type(text);\r\n```\r\n"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 433545434,
+        "Author": "jsilvia721",
+        "Created At": "2018-10-26T21:14:36Z",
+        "Comment Body": "> > Here's a patch to overcome this method until it is fixed:\r\n> > `await page.evaluate((text) => { (document.getElementById('my-input')).value = text; }, \"text-to-inject\");`\r\n> \r\n> This is not useful in react project as it doesn't trigger onChange handler\r\n\r\n@RobinNagpal Do you know if there is a way to do this and trigger the onchange handler?"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 438587158,
+        "Author": "vchenin",
+        "Created At": "2018-11-14T08:59:45Z",
+        "Comment Body": "Hi there!\r\n\r\nI think this problem can be solved by waiting for element or attribute which will be created by framework (Angular, jComponent, React, Vue, etc.) engine on browser side.\r\n\r\nFor example, in my case in authentication form exist button for submit which enabled by default. Component disable this button if there are empty required fields when form initialization and pre-validation finished.\r\n\r\n```javascript\r\nawait page.waitFor('button[name=\"submit\"][disabled]')\r\n```\r\nTherefore, when it exists, it means that form elements are ready for input."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 439470425,
+        "Author": "vchenin",
+        "Created At": "2018-11-16T17:41:08Z",
+        "Comment Body": "And after typing:\r\n```javascript\r\nawait page.type('#email', 'email@example.com')\r\nawait page.type('#password', 'secret')\r\n```\r\nwaiting for completion of form validation:\r\n```javascript\r\nawait page.waitFor('button[name=\"submit\"]:not([disabled])')\r\n```\r\nthen process the form:\r\n```javascript\r\nawait page.click('button[name=\"submit\"]')\r\n```"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 439483004,
+        "Author": "RobinNagpal",
+        "Created At": "2018-11-16T18:26:41Z",
+        "Comment Body": "This works for me.\r\n\r\n```\r\nexport async function typeInInputElement(page, inputSelector, text) {\r\n  await page.evaluate((inputSelector, text) => {\r\n    // Refer to https://stackoverflow.com/a/46012210/440432 for the below solution/code\r\n    const inputElement = document.querySelector(inputSelector);\r\n    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;\r\n    nativeInputValueSetter.call(inputElement, text);\r\n\r\n    const ev2 = new Event('input', {bubbles: true});\r\n    inputElement.dispatchEvent(ev2);\r\n\r\n  }, inputSelector, text);\r\n}\r\n```"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 450550381,
+        "Author": "rienheuver",
+        "Created At": "2018-12-30T10:02:46Z",
+        "Comment Body": "I was having trouble with the page not having fully loaded yet. The fix for me was to add this as second parameter to `page.goto`:\r\n```\r\n{waitUntil: 'networkidle2'}\r\n```\r\nThis makes it wait until there have been no more network requests for the last 500ms. So the total `page.goto` looks like this:\r\n```\r\nawait page.goto('https://example.com', {waitUntil: 'networkidle2'});\r\n```\r\nHope this helps someone out :smile: "
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 450842071,
+        "Author": "Fetz",
+        "Created At": "2019-01-02T11:33:29Z",
+        "Comment Body": "Another thing that can cause issues with the type, is animations.\r\n\r\nIf you have any animation being done in the input (directly to the input or a parent element) you should wait until the animation is finished before using the `page.type` or `element.type`.\r\n\r\nfor example a bootstrap modal:\r\n```javascript\r\nawait page.click('[data-target=\"#createUserDialog\"]'); // show the modal\r\nawait page.waitForSelector('#createUserDialog', {visible: true})); // wait for the modal to be visible\r\n\r\nconst animationTime = 800;\r\nawait new Promise((resolve) => setTimeout(resolve, animationTime)); // wait for animation to finish\r\nawait page.type('#message', 'if the message is longer, the easy is to replicate the issue with the input');\r\n```"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451532007,
+        "Author": "fringd",
+        "Created At": "2019-01-04T18:45:27Z",
+        "Comment Body": "Seems a lot of people are still seeing this. Can we re-open it?"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451532320,
+        "Author": "fringd",
+        "Created At": "2019-01-04T18:46:32Z",
+        "Comment Body": "^^ @aslushnikov ^^"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451533745,
+        "Author": "fringd",
+        "Created At": "2019-01-04T18:51:38Z",
+        "Comment Body": "My own test was not making any network connections at all, and I've disable animations, but seems to still be flaking with random characters missing.\r\n\r\nI have multiple tests running in multiple tabs, I think this is part of the problem, since I can't reproduce if I run a single test suite in isolation. "
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451553714,
+        "Author": "Fetz",
+        "Created At": "2019-01-04T20:04:45Z",
+        "Comment Body": "@fringd if the inputs are simple input fields (without any fancy behaviours when typing) you can set directly the input value instead of using `type`"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451554236,
+        "Author": "Fetz",
+        "Created At": "2019-01-04T20:06:49Z",
+        "Comment Body": "@fringd as well check if you not forgetting to use await in any `type`"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451567270,
+        "Author": "fringd",
+        "Created At": "2019-01-04T21:01:40Z",
+        "Comment Body": "Okay I'll try to verify this is not a missing await somewhere. Will update"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 451896846,
+        "Author": "fenilkanjani",
+        "Created At": "2019-01-07T10:52:15Z",
+        "Comment Body": "Trying to input same text in two fields with same values (password and confirm password) on a page after `networkidle2`. It does not type all the characters every time making the test flaky. The code looks something like this: \r\n\r\n```\r\nawait page.goto('myurl', {waitUntil: 'networkidle2', ...myOtherOptions})\r\nawait page.waitFor('.js--new-password')\r\nawait page.type('.js--new-password input', 'test@1234')\r\nawait page.type('.js--confirm-password input', 'test@1234')\r\n```\r\n\r\n@aslushnikov ^ Any suggestions?"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 453346707,
+        "Author": "fringd",
+        "Created At": "2019-01-11T02:18:02Z",
+        "Comment Body": "this looks a lot like the test I have that's failing @fenilkanjani. Mine's a little more complex, so it's harder to isolate."
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 453347001,
+        "Author": "fringd",
+        "Created At": "2019-01-11T02:18:54Z",
+        "Comment Body": "@fenilkanjani are you running multiple tests in parallel like me? Multiple tabs and threads in jest?"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 453384999,
+        "Author": "aslushnikov",
+        "Created At": "2019-01-11T05:41:01Z",
+        "Comment Body": "@fringd @fenilkanjani are you guys running headless or headful? If you have a good repro that I can run and debug locally, feel free to file a separate issue. "
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 453392552,
+        "Author": "fringd",
+        "Created At": "2019-01-11T06:27:57Z",
+        "Comment Body": "I'm running headless\n\nOn Fri, Jan 11, 2019 at 12:41 AM Andrey Lushnikov <notifications@github.com>\nwrote:\n\n> @fringd <https://github.com/fringd> @fenilkanjani\n> <https://github.com/fenilkanjani> are you guys running headless or\n> headful? If you have a good repro that I can run and debug locally, feel\n> free to file a separate issue.\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/GoogleChrome/puppeteer/issues/1648#issuecomment-453384999>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AAQpRUBSs9W19uDW4Nua5t6su_5eypSzks5vCCQHgaJpZM4RLOeS>\n> .\n>\n"
+    },
+    {
+        "Issue ID": 1648,
+        "Issue State": "closed",
+        "Issue Title": "Having trouble with page.type not typing all characters",
+        "Comment ID": 453655198,
+        "Author": "fringd",
+        "Created At": "2019-01-11T21:01:37Z",
+        "Comment Body": "I'm also filling out multiple text inputs in one tab while controlling multiple pages in multiple threads.\r\n\r\nI haven't got a ton of time for a minimal repro atm :("
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 530261272,
+        "Author": "entrptaher",
+        "Created At": "2019-09-11T07:38:13Z",
+        "Comment Body": "I don't get any error with your code. Can you try with proxy/vpn? \r\n\r\n![image](https://user-images.githubusercontent.com/8284972/64677424-5a34b800-d499-11e9-8226-70634272fe69.png)\r\n"
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 530261936,
+        "Author": "mathiasbynens",
+        "Created At": "2019-09-11T07:40:18Z",
+        "Comment Body": "This doesn't seem to be a bug in Puppeteer, but rather with the website which redirect-loops in certain scenarios."
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 530316830,
+        "Author": "AndrejGajdos",
+        "Created At": "2019-09-11T10:14:57Z",
+        "Comment Body": "@entrptaher I tried VPN and US endpoint and it really works.\r\n\r\n@mathiasbynens Yes, website does too many redirects for requests from different location. \r\n\r\nI am wondering, why I get this error in Puppeteer but not in desktop browser?\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 530327623,
+        "Author": "entrptaher",
+        "Created At": "2019-09-11T10:49:13Z",
+        "Comment Body": "It's probably checking some fingerprint or anti bot measurements. You can try https://www.npmjs.com/package/puppeteer-extra-plugin-stealth to see if you have any success. Also, you can try with proxies. "
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 530329905,
+        "Author": "mathiasbynens",
+        "Created At": "2019-09-11T10:56:44Z",
+        "Comment Body": "Closing this as it's not a bug in Puppeteer. Thanks, everyone!"
+    },
+    {
+        "Issue ID": 4919,
+        "Issue State": "closed",
+        "Issue Title": "net::ERR_TOO_MANY_REDIRECTS if I want to open website in puppeteer",
+        "Comment ID": 2658385705,
+        "Author": "jiao1187875445",
+        "Created At": "2025-02-14T06:25:18Z",
+        "Comment Body": "@mathiasbynens @entrptaher I encountered the same problem, but strangely, the version 19 I used before was good, but when I upgraded to 24.2, this problem occurred. I tried version 23.11.1 again and it was also good. If it's not related to puppeteer, the effect after switching versions should be consistent."
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 752392373,
+        "Author": "QAnders",
+        "Created At": "2020-12-30T09:39:02Z",
+        "Comment Body": "This is not any \"official\" answer, just trying to help out... :)\r\n\r\nThis most often has to do with some object is \"spilling over\" to the second page due to margins and/or padding which can't be seen. I often alter my css and draw borders around the objects (`style=\"border: 1px solid red;\"`) so you can see where the objects ends and what is spilling over.\r\n\r\nMost often your local browser (Chrome is of course best to use) agrees with Puppeteer so load your HTML in the browser an select to \"Print...\" (set printer to \"Save as PDF\" or similar) and you'll see in the preview how many pages it's going to print. \r\nThe alter your css to lessen the height/width of your objects to make sure only one page is printed.\r\n\r\nIf you are using a header/footer in Puppeteer then you need to make room for those as well so you'd have to lessen your height of the \"page\". There also it helps to add a border around the header and footer to make it visible. **NB!** somethins the footer is added as a tiny small box so make sure you add some \"font-size\" to the header/footer objects.\r\n\r\nSometimes it helps adding this if no obvious object is spilling over:\r\n```\r\n        @media print {\r\n            /* prevent blank page at end */\r\n            table:last-of-type { page-break-after: auto; }\r\n            html, body {\r\n                height: 100%;\r\n            }\r\n        }\r\n```"
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 1166337779,
+        "Author": "stale[bot]",
+        "Created At": "2022-06-25T18:16:55Z",
+        "Comment Body": "We're marking this issue as unconfirmed because it has not had recent activity and  we weren't able to confirm it yet. It will be closed if no further activity occurs within the next 30 days.\n"
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 1194495697,
+        "Author": "stale[bot]",
+        "Created At": "2022-07-25T19:06:38Z",
+        "Comment Body": "We are closing this issue. If the issue still persists in the latest version of Puppeteer, please reopen the issue and update the description. We will try our best to accomodate it!\n"
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 1658710050,
+        "Author": "pushmiq",
+        "Created At": "2023-07-31T16:16:36Z",
+        "Comment Body": "still happens"
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 2444317740,
+        "Author": "Lionberg",
+        "Created At": "2024-10-29T13:51:32Z",
+        "Comment Body": "And still happening... "
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 2594704267,
+        "Author": "heytulsiprasad",
+        "Created At": "2025-01-16T07:21:03Z",
+        "Comment Body": "No idea if it's my code or puppeteer, but it does happen for me. \r\nTried above fix by adding in css, no result."
+    },
+    {
+        "Issue ID": 6704,
+        "Issue State": "closed",
+        "Issue Title": "pdf always print an extra page. last page always blank. Unexpected white footer in last 2nd page.",
+        "Comment ID": 2655046439,
+        "Author": "againer",
+        "Created At": "2025-02-12T23:13:23Z",
+        "Comment Body": "I was able to remove the extra blank page with `pageRanges` and a little bit of jank. The css solutions I found all over the inet didn't do anything for me.\n```javascript\n\n// metadata.height for us is a mapping between format and pixels based on 96 DPI - Chrome Headless default\n// https://pptr.dev/api/puppeteer.pdfoptions\n// IE: `Letter` -> 1056; `A0` -> 4493; etc.\nconst totalPages = await page.evaluate(\n    (height) => Math.round(document.body.scrollHeight / (height || 1056)), metadata.height);\n\nawait page.pdf({...params, pageRanges: `1-${totalPages}`});\n```\n\nI support dynamic paper `format` in my system. If you are supporting only `Letter`, then you can probably get away with using:\n```javascript\nconst totalPages = await page.evaluate(() => Math.round(document.body.scrollHeight / (1056)));\nawait page.pdf({...params, pageRanges: `1-${totalPages}`});\n```"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647134073,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T07:20:14Z",
+        "Comment Body": "I do not see any changes related to the proxy server option in https://github.com/puppeteer/puppeteer/compare/puppeteer-v23.11.1...puppeteer-v24.2.0 Do you have a more specific range when the behavior changed for you?\n\nCould you please provide the proxy server implementation that you are using?"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647138026,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T07:22:56Z",
+        "Comment Body": "Our tests pass with a full URL as previously https://github.com/puppeteer/puppeteer/blob/main/test/src/proxy.spec.ts#L186"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647528008,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-10T10:13:47Z",
+        "Comment Body": "Thanks for clarifying; I wrote a more complete example based in the test, and I'm not seeing proxy server being called:\n\n```js\n'use strict'\n\nimport { request, createServer as nodeCreateServer } from 'http'\nimport puppeteer from 'puppeteer'\n\nlet port = 1337\n\nconst endpoint = server => {\n  const { address, port, family } = server.address()\n  const hostname = family === 'IPv6' ? `[${address}]` : address\n  return new URL(`http://${hostname}:${port}`).toString()\n}\n\nconst createServer = async handler => {\n  const server = nodeCreateServer(handler)\n\n  server.url = await (async () => {\n    const { promise, resolve } = Promise.withResolvers()\n    server.listen({ host: '127.0.0.1', port: port++ }, () => resolve(endpoint(server)))\n    return promise\n  })()\n\n  const close = server.close.bind(server)\n\n  server.close = () => new Promise(resolve => close(resolve))\n\n  return server\n}\n\nconst server = await createServer((_, res) => {\n  res.writeHead(200, { 'Content-Type': 'text/html' })\n  res.end('<html><body><h1>This is server 1</h1></body></html>')\n})\n\nconst proxiedRequestUrls = []\n\nconst proxy =\n  await createServer((originalRequest, originalResponse) => {\n    proxiedRequestUrls.push(originalRequest.url)\n\n    const proxyRequest = request(\n      originalRequest.url,\n      {\n        method: originalRequest.method,\n        headers: originalRequest.headers\n      },\n      proxyResponse => {\n        originalResponse.writeHead(\n          proxyResponse.statusCode,\n          proxyResponse.headers\n        )\n        proxyResponse.pipe(originalResponse, { end: true })\n      }\n    )\n\n    originalRequest.pipe(proxyRequest, { end: true })\n  })\n\nconsole.log()\nconsole.log(' Proxy URL:', proxy.url)\nconsole.log('Server URL:', server.url)\nconsole.log()\n\nconst browser = await puppeteer.launch()\nconst context = await browser.createBrowserContext({ proxyServer: proxy.url })\nconst page = await context.newPage()\nawait page.goto(server.url)\n\nconst content = await page.content()\nconsole.log(content)\nconsole.log({ proxiedRequestUrls })\n\nawait page.screenshot({ path: 'screenshot.png' })\n\nawait browser.close()\nawait proxy.close()\nawait server.close()\nawait proxy.close()\n```\n\nThe output for me is:\n\n```\n Proxy URL: http://127.0.0.1:1338/\nServer URL: http://127.0.0.1:1337/\n\n<html><head></head><body><h1>This is server 1</h1></body></html>\n{ proxiedRequestUrls: [] }\n```\n\nCan you help me to understand what's happening?"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647636631,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T10:57:41Z",
+        "Comment Body": "Thanks for providing the code, I will take a look today."
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647779483,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T11:58:57Z",
+        "Comment Body": "I have not debugged that code yet but it also does not work with puppeteer@23.11.1:\n\n```\n\u276f node proxy.mjs\n\nProxy URL: http://127.0.0.1:10874/\nServer URL: http://127.0.0.1:10873/\nexecutable path undefined\n\n<html><head></head><body><h1>This is server 1</h1></body></html>\n{ proxiedRequestUrls: [] }\nfile:///Users/alexrudenko/src/pptr-test/proxy.mjs:82\n  throw new Error('not proxied')\n        ^\n\nError: not proxied\n    at file:///Users/alexrudenko/src/pptr-test/proxy.mjs:82:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n```\n\ndoes it pass for you with 23.11.1? which OS is it?"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2647958105,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T13:16:06Z",
+        "Comment Body": "The difference to our test is that our tests picks a non-localhost hostname like 192.0.0.2 as I think Chrome never proxied local requests (https://github.com/puppeteer/puppeteer/blob/main/test/src/proxy.spec.ts#L34). Starting the proxy on `192.0.0.2` (the IP I have in the local network) makes the script work for me (with the latest Chrome + Puppeteer as well)."
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2648882354,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-10T18:22:25Z",
+        "Comment Body": "@OrKoN got it although I didn't get it to work as expected.\n\nEven I use `os.hostname()` instead of 127.0.0.1 or a cloudflare tunnel it's failing in the same way \u2639\ufe0f"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2648900181,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T18:30:47Z",
+        "Comment Body": "here is a working version:\n\n```\nimport { request, createServer as nodeCreateServer } from 'http'\nimport os from 'os'\nimport puppeteer from 'puppeteer'\n\nlet port = 11337\n\nlet HOSTNAME = os.hostname();\n\n// Hostname might not be always accessible in environments other than GitHub\n// Actions. Therefore, we try to find an external IPv4 address to be used as a\n// hostname in these tests.\nconst networkInterfaces = os.networkInterfaces();\nfor (const key of Object.keys(networkInterfaces)) {\n  const interfaces = networkInterfaces[key];\n  for (const net of interfaces || []) {\n    if (net.family === 'IPv4' && !net.internal) {\n      HOSTNAME = net.address;\n      break;\n    }\n  }\n}\n\nconsole.log('HOSTNAME', HOSTNAME)\n\nconst endpoint = server => {\n  const { port } = server.address()\n  return `http://${HOSTNAME}:${port}`;\n}\n\nconst createServer = async handler => {\n  const server = nodeCreateServer(handler)\n\n  server.url = await (async () => {\n    const { promise, resolve } = Promise.withResolvers()\n    server.listen({ host: '0.0.0.0', port: port++ }, () => resolve(endpoint(server)))\n    return promise\n  })()\n\n  const close = server.close.bind(server)\n\n  server.close = () => new Promise(resolve => close(resolve))\n\n  return server\n}\n\nconst server = await createServer((_, res) => {\n  res.writeHead(200, { 'Content-Type': 'text/html' })\n  res.end('<html><body><h1>This is server 1</h1></body></html>')\n})\n\nconst proxiedRequestUrls = []\n\nconst proxy =\n  await createServer((originalRequest, originalResponse) => {\n    proxiedRequestUrls.push(originalRequest.url)\n\n    const proxyRequest = request(\n      originalRequest.url,\n      {\n        method: originalRequest.method,\n        headers: originalRequest.headers\n      },\n      proxyResponse => {\n        originalResponse.writeHead(\n          proxyResponse.statusCode,\n          proxyResponse.headers\n        )\n        proxyResponse.pipe(originalResponse, { end: true })\n      }\n    )\n\n    originalRequest.pipe(proxyRequest, { end: true })\n  })\n\nconsole.log()\nconsole.log(' Proxy URL:', proxy.url)\nconsole.log('Server URL:', server.url)\nconsole.log()\n\nconst browser = await puppeteer.launch()\nconst context = await browser.createBrowserContext({ proxyServer: proxy.url })\nconst page = await context.newPage()\nawait page.goto(server.url)\n\nconst content = await page.content()\nconsole.log(content)\nconsole.log({ proxiedRequestUrls })\n\nawait page.screenshot({ path: 'screenshot.png' })\n\nawait browser.close()\nawait proxy.close()\nawait server.close()\nawait proxy.close()\n```"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2653285726,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-12T10:21:41Z",
+        "Comment Body": "That explained, thanks a lot!"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655015407,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-12T22:51:35Z",
+        "Comment Body": "@OrKoN I'm trying to write an e2e test to verify this, essentially deploying the proxy logic on a remote server.\n\nAs much as I tried, the browser can't access the URL when the remote proxy is provided.\n\n![Image](https://github.com/user-attachments/assets/d70cc018-aa0a-4356-817f-78a4234ca913)\n\nThis is the only change in your example:\n\n```js\nconst browser = await puppeteer.launch({ headless: false })\nconst context = await browser.createBrowserContext({ proxyServer: 'https://http-proxy-morning-snowflake-1128.fly.dev' })\nconst page = await context.newPage()\nawait page.goto('https://example.com')\n```\n\nIf I verify the proxy using cURL, it works:\n\n```\ncurl -i -x https://http-proxy-morning-snowflake-1128.fly.dev http://example.com\n```\n\nDo you have any idea why? I will keep the remote proxy running in case you want to test it."
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655698698,
+        "Author": "OrKoN",
+        "Created At": "2025-02-13T07:01:40Z",
+        "Comment Body": "Does the curl work if it is https://example.com?"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655702642,
+        "Author": "OrKoN",
+        "Created At": "2025-02-13T07:04:19Z",
+        "Comment Body": "```\n\u276f curl -i -x https://http-proxy-morning-snowflake-1128.fly.dev https://example.com\nHTTP/1.1 502 Bad Gateway\nserver: Fly/12401d8b4 (2025-02-12)\nvia: 1.1 fly.io\nfly-request-id: 01JKZ1Y8NXT868ME1CYB5V3SSG-arn\ncontent-length: 0\ndate: Thu, 13 Feb 2025 07:04:01 GMT\n\ncurl: (56) CONNECT tunnel failed, response 502\n```"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655863338,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-13T08:29:48Z",
+        "Comment Body": "@OrKoN, sorry the machine auto-stopped during the night. It's back up now; can you test it? \ud83d\ude4f"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655871956,
+        "Author": "OrKoN",
+        "Created At": "2025-02-13T08:33:57Z",
+        "Comment Body": "Still the same but I do get the response for http:// like before."
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2655975124,
+        "Author": "Kikobeats",
+        "Created At": "2025-02-13T09:14:34Z",
+        "Comment Body": "@OrKoN, that's probably the issue. Chromium is forcing HTTPS, and the proxy can't handle it. Let me handle it on my side for now \ud83d\ude42"
+    },
+    {
+        "Issue ID": 13599,
+        "Issue State": "closed",
+        "Issue Title": "Unexpected change in `\u2060proxyServer`",
+        "Comment ID": 2656188690,
+        "Author": "OrKoN",
+        "Created At": "2025-02-13T10:40:15Z",
+        "Comment Body": "You can turn off the auto-upgrades (there are multiple feature flags for now while the feature is being rolled out to users, IIRC one is --disable-features=HttpsUpgrades). Also, the headless shell would not have the auto-upgrades behavior (since it is not shipping for regular users). "
+    },
+    {
+        "Issue ID": 13433,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise",
+        "Comment ID": 2558146124,
+        "Author": "timvandermeij",
+        "Created At": "2024-12-21T15:04:48Z",
+        "Comment Body": "I think the problem is that the check introduced in https://github.com/GoogleChromeLabs/chromium-bidi/pull/2039/files is not present in `Realm.js` at https://github.com/GoogleChromeLabs/chromium-bidi/blob/main/src/bidiMapper/modules/script/Realm.ts#L122. I tried introducing it locally and that _seems_ to fix the issue, but note that I can't really tell if this is a good fix or not because I don't know the context of this code.\r\n\r\n/cc @OrKoN @jrandolf-2 as authors of the original PR since you probably know much more about this code than I do."
+    },
+    {
+        "Issue ID": 13433,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise",
+        "Comment ID": 2558584792,
+        "Author": "OrKoN",
+        "Created At": "2024-12-22T20:19:28Z",
+        "Comment Body": "Thanks for filing the issue once again. Indeed it regressed due to the lack of test coverage. I am adding a WPT test and a fix into chromium-bidi. "
+    },
+    {
+        "Issue ID": 13433,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise",
+        "Comment ID": 2592939888,
+        "Author": "Lightning00Blade",
+        "Created At": "2025-01-15T14:03:13Z",
+        "Comment Body": "_This is now fixed in the releases `>=24.0.0`._\r\n\r\nIt seem the dependency was not updated correctly."
+    },
+    {
+        "Issue ID": 13433,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: `TypeError: Cannot convert undefined or null to object` with resolve argument of a Promise",
+        "Comment ID": 2651867286,
+        "Author": "Lightning00Blade",
+        "Created At": "2025-02-11T19:28:33Z",
+        "Comment Body": "The issue with dependencies should be resolved in the latest version."
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2631630071,
+        "Author": "OrKoN",
+        "Created At": "2025-02-03T17:28:56Z",
+        "Comment Body": "```\n& 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' --user-data-dir='C:\\{{path_to}}\\chrome-data' --profile-directory=profile1\n\n& 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' --user-data-dir='C:\\{{path_to}}\\chrome-data' --profile-directory=profile2\n```\n\nthis does not actually launch a second browser process. In the second command, you should see the output like `Opening in existing browser session.` indicating that it detected the previously launched process and handled the command there closing the second process. Puppeteer on the hand always launches a new process and the browser instance as alive as long as the process is alive and does not support switching between profiles. Each Chrome browser process wants a singleton lock of the user-data dir, that's why you see a failure. You can start the two profiles via the commands and connect the browser instance using https://pptr.dev/api/puppeteer.puppeteer.connect/  or you can create temporary profiles using https://pptr.dev/api/puppeteer.browser.createbrowsercontext/. For now, we do not have plans on changing this behavior. "
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2631671836,
+        "Author": "OrKoN",
+        "Created At": "2025-02-03T17:48:28Z",
+        "Comment Body": "Forgot to mention that you can achieve the behavior similar to the behavior via direct commands by supplying all args yourself and setting https://pptr.dev/api/puppeteer.launchoptions/#ignoredefaultargs on the launch process but the result will be the same, the commands will be handled by the first process and the second process will be closed.  "
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2631702033,
+        "Author": "harimayco",
+        "Created At": "2025-02-03T18:02:59Z",
+        "Comment Body": "I see now, thanks for the explanation @OrKoN \nI think I need to find another way to achive this. maybe I can copy entire userDataDir first to temporary folder then launch the puppeteer then delete it after job done.\nis it possible if I copy userDataDir for Browser2 while Browser1 still in running state, then launch with temp userDataDir for Browser2? "
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2631713500,
+        "Author": "OrKoN",
+        "Created At": "2025-02-03T18:08:19Z",
+        "Comment Body": "> is it possible if I copy userDataDir for Browser2 while Browser1 still in running state, then launch with temp userDataDir for Browser2?\n\nI am not sure if it can lead to the corruption of the copy as I do not think the browser ensures atomic updates to the user data. The safest way is to copy a profile ahead of time. Btw, also forgot to mention that `headless: 'shell'` does not have this restriction but it is technically a different browser implementation from Chrome (see https://developer.chrome.com/docs/chromium/headless for details). "
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2649725088,
+        "Author": "harimayco",
+        "Created At": "2025-02-11T03:25:35Z",
+        "Comment Body": "Thanks @OrKoN \n\nI have another stupid question.\nif I create new **empty** folder for userDataDir & profile path for example:\n\n`C:\\Documents\\UserDataDirEmpty\\ProfileEmpty`\n\nthen I use this path for puppeteer\n```\nuserDataDir: \"C:\\Documents\\UserDataDirEmpty\", \nargs: [\n            ...\n            \"--profile-directory=ProfileEmpty\", // using profile 2\n        ]\n```\n\nit can run and the folder will be filled up with some files from chrome. but on finish the userDataDir folder gets deleted entirely including the folder \"ProfileEmpty\".\nI don't know if this behaviour done by puppeteer or chrome itself. is there a way I can keep this userDataDir instead of getting deleted after run ?\n"
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2649972381,
+        "Author": "OrKoN",
+        "Created At": "2025-02-11T07:00:46Z",
+        "Comment Body": "That could be a bug, could you please post a minimal that demonstrates the issue? you could use Node's fs module to create a folder and assert that it still exists after the browser is closed."
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2650350603,
+        "Author": "harimayco",
+        "Created At": "2025-02-11T10:11:42Z",
+        "Comment Body": "> That could be a bug, could you please post a minimal that demonstrates the issue? you could use Node's fs module to create a folder and assert that it still exists after the browser is closed.\n\nSorry I couldn't replicate it with simple code. \nI have tried with fresh project using same parameters, it works normally without userdatadir getting deleted.\nbut if I run in my project which using electron & puppeteer it gets deleted.\n\nbut I have a workaround for this problem, I have to define parameter `--user-data-dir=` in args to avoid the deletion.\nso this is my final code\n\n```\nuserDataDir: \"C:\\Documents\\UserDataDirEmpty\", \nargs: [\n            ...\n            \"--profile-directory=ProfileEmpty\",\n            \"--user-data-dir=C:\\Documents\\UserDataDirEmpty\"\n        ]\n```\n\nif I removed the args \"--user-data-dir\" it launches the browser using the correct userdatadir from userDataDir param but the folder gets deleted once job done.\nmaybe electron causing this issue but I'm not really sure."
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2650375869,
+        "Author": "OrKoN",
+        "Created At": "2025-02-11T10:22:27Z",
+        "Comment Body": "If you are running Electron, it might behave differently than Chrome. We do not really support Electron explicitly so I cannot say for sure if it is expected. It is possible that electron cleans the userDataDir. Puppeteer should only delete the user data dir if a custom userDataDir was not provided and Puppeteer generated its own user data dir folder. Duplicating the user-data-dir in the args should not matter because what `userDataDir` does is adding adding that argument."
+    },
+    {
+        "Issue ID": 13581,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Failed to launch the browser proccess using Same userDataDir & Different Profile Directory (concurrent)",
+        "Comment ID": 2650530447,
+        "Author": "harimayco",
+        "Created At": "2025-02-11T11:26:58Z",
+        "Comment Body": "I mean I'm running my puppeteer script under electron main proccess but I'm still using chrome as executablePath.\nbut it's ok for now, will check if I can find the root cause of this behaviour. \n\nmany thanks @OrKoN "
+    },
+    {
+        "Issue ID": 11521,
+        "Issue State": "closed",
+        "Issue Title": "Fix ng-schematics release-please",
+        "Comment ID": 1860508418,
+        "Author": "Lightning00Blade",
+        "Created At": "2023-12-18T13:31:21Z",
+        "Comment Body": "Opened https://github.com/googleapis/release-please/issues/2172"
+    },
+    {
+        "Issue ID": 13602,
+        "Issue State": "closed",
+        "Issue Title": "chore(deps-dev): Bump the dev-dependencies group with 9 updates",
+        "Comment ID": 2647234127,
+        "Author": "dependabot[bot]",
+        "Created At": "2025-02-10T08:17:39Z",
+        "Comment Body": "Looks like these dependencies are updatable in another way, so this is no longer needed."
+    },
+    {
+        "Issue ID": 13600,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Zombie Chromium Instances",
+        "Comment ID": 2647125760,
+        "Author": "OrKoN",
+        "Created At": "2025-02-10T07:14:45Z",
+        "Comment Body": "Thanks for reporting! You probably need to use an init process (either as an entrypoint script or the --init flag in docker run). It does not appear that you are using it? Related https://pptr.dev/guides/docker#usage"
+    },
+    {
+        "Issue ID": 13600,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Zombie Chromium Instances",
+        "Comment ID": 2647132618,
+        "Author": "anschm",
+        "Created At": "2025-02-10T07:19:16Z",
+        "Comment Body": "Thats for your answer. I fixed this issue by using dump-init in my Dockerfile."
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 323750734,
+        "Author": "jsnanigans",
+        "Created At": "2017-08-21T14:01:25Z",
+        "Comment Body": "Hi there,\r\nI think you should use the `page.focus()` and `page.keyboard.type()` function for this.\r\nTry this code:\r\n```javascript\r\n// ...\r\nawait page.focus('#lst-ib')\r\npage.keyboard.type('China')\r\n// ...\r\n```\r\n\r\nedit: updated `page.type()` to `page.keyboard.type()`"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 323843656,
+        "Author": "hzoo",
+        "Created At": "2017-08-21T20:24:50Z",
+        "Comment Body": "You can also use `page.evaluate`:\r\n\r\n```js\r\n    await page.evaluate((a, b) => {\r\n      document.querySelector('#a').value = a;\r\n      document.querySelector('#b').value = b;\r\n      document.querySelector('#c').click();\r\n    }, a, b);\r\n```"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 421522237,
+        "Author": "alexander-elgin",
+        "Created At": "2018-09-15T01:51:10Z",
+        "Comment Body": "I like the @jsnanigans 's answer but instead of \r\n> page.type('China')\r\n\r\nI used\r\n```\r\nawait page.keyboard.type('China')\r\n```"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 435735649,
+        "Author": "hackhat",
+        "Created At": "2018-11-05T02:19:48Z",
+        "Comment Body": "The problem with this is that you will prepend this string to the input (if has any value in the input already). You first need to delete the text that is there (as the question asks how to set a value, not how to prepend a value to an input box).\r\n\r\nYou could use \"CTRL+A\", but that won't work on MAC.\r\n\r\nA cross-OS solution could be:\r\n\r\n    const setTextInputValue = async (page: puppeteer.Page, selector: string, value: string | number) => {\r\n      await page.waitFor(selector);\r\n      await page.evaluate((data) => {\r\n        return document.querySelector(data.selector).value = data.value\r\n      }, {selector, value})\r\n    }\r\n    await setTextInputValue(page, `.mySelector`, `value`)\r\n\r\n\r\nOr you can set to empty and then use the type function\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 435744396,
+        "Author": "ParableYields",
+        "Created At": "2018-11-05T03:23:14Z",
+        "Comment Body": "I\u2019m just trying to learn it not easy when no one helping\n\nOn Sun, Nov 4, 2018 at 9:20 PM Hack Hat <notifications@github.com> wrote:\n\n> The problem with this is that you will prepend this string to the input.\n> You first need to delete the text that is there (as the question asks how\n> to set a value, not how to prepend a value to an input box).\n>\n> You could use \"CTRL+A\", but that won't work on MAC.\n>\n> A cross-OS solution could be:\n>\n> const setTextInputValue = async (page: puppeteer.Page, selector: string, value: string | number) => {\n>   await page.waitFor(selector);\n>   await page.evaluate((data) => {\n>     return document.querySelector(data.selector).value = data.value\n>   }, {selector, value})\n> }\n> await setTextInputValue(page, `.mySelector`, `value`)\n>\n> Or you can set to empty and then use the type function\n>\n> \u2014\n> You are receiving this because you are subscribed to this thread.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/GoogleChrome/puppeteer/issues/441#issuecomment-435735649>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AqjwhxaJDboCRcFa6SGCPTl_yMjjb4VVks5ur6BcgaJpZM4O9HE7>\n> .\n>\n-- \nSent from Gmail Mobile\n"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 436048440,
+        "Author": "jsnanigans",
+        "Created At": "2018-11-05T21:50:22Z",
+        "Comment Body": "I don't think its a great idea to set the value with the `.value` method, in my case I rely on other scripts triggering on the `input` event so here are some examples based on hzoo's and my solution:\r\n\r\n```javascript\r\nawait page.evaluate((a, b) => {\r\n    document.querySelector('#a').select();\r\n}, a, b);\r\nawait page.keyboard.type('China')\r\n```\r\nor\r\n```javascript\r\nawait page.evaluate((a, b) => {\r\n    document.querySelector('#a').value = '';\r\n}, a, b);\r\nawait page.keyboard.type('China')\r\n```\r\nor something maybe even this, without eval-uate :)\r\n```javascript\r\nconst foo = await page.$('#a');\r\nawait foo.click({ clickCount: 3 });\r\nawait page.keyboard.type('China')\r\n```\r\nbut I am assuming that triple click will select text on every system "
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 436110980,
+        "Author": "hackhat",
+        "Created At": "2018-11-06T02:35:27Z",
+        "Comment Body": "@jsnanigans yes, I don't like to magically set the `.value`, is hacky. I wouldn't do `await = foo.click({ clickCount: 3 });` because relies on the OS to have this enabled and work everywhere, you don't want to worry about this breaking.\r\n\r\nI'm actually doing your second solution right now, but I like your first solution more. I don't feel very comfortable with that because if some script on the page changes your focus between the select and type, it will break. The most robust I still think is the 2nd solution."
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 448741921,
+        "Author": "Xample",
+        "Created At": "2018-12-19T20:59:42Z",
+        "Comment Body": "The signature of type is \r\n```  type(selector: string, text: string, options?: { delay: number }): Promise<void>;```\r\nMeaning the usage is as follow\r\n```typescript\r\nawait page.type('#lst-ib', 'China');\r\n```\r\n\r\n> Hi there,\r\n> I think you should use the `page.focus()` and `page.type()` function for this.\r\n> Try this code:\r\n> \r\n> ```js\r\n> // ...\r\n> await page.focus('#lst-ib')\r\n> page.type('China')\r\n> // ...\r\n> ```\r\n\r\n"
+    },
+    {
+        "Issue ID": 441,
+        "Issue State": "closed",
+        "Issue Title": "How to set Value for  a Input Element",
+        "Comment ID": 624886603,
+        "Author": "haixiangyan",
+        "Created At": "2020-05-06T20:56:12Z",
+        "Comment Body": "For me, I will recommend @jsnanigans solution, using\r\n\r\n```js\r\n  await page.focus(usernameInput)\r\n  await page.keyboard.type(username)\r\n```\r\n\r\nUsing @hzoo solution is OK for small script, but is not very maintainable for big project. The main problem of this solution is that you are actually injecting a JavaScript code in the website. That means it will not work for TypeScript, async/await, external variables. For example\r\n\r\n```js\r\n  const myVar = 'hello'\r\n  await page.evaluate(() => {\r\n    const a: string = 'hello' -> Syntax Error, not work for TypeScript.\r\n    \r\n    console.log(myVar) -> Variable myVar is not defined\r\n\r\n    async a() {} -> Some browser hasn't support await/async syntax yet\r\n  })\r\n```"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 368127277,
+        "Author": "aslushnikov",
+        "Created At": "2018-02-23T20:18:06Z",
+        "Comment Body": "@mjschranz you can issue `print` command multiple times with different page ranges, specifying the header/footer options differently for each range.\r\n\r\nWould it work? "
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 368129098,
+        "Author": "mjschranz",
+        "Created At": "2018-02-23T20:25:57Z",
+        "Comment Body": "So you're suggesting running the `.pdf` call multiple times with different `pageRanges` values and then combine the buffer data of each one? I suppose that could work but I would need to give it a try.\r\n\r\nOn that note, how does one specify from \"page 2 until the end\". Is it just `2-`?\r\n\r\nThanks\r\n\r\nEDIT:\r\n\r\nThusfar that idea works on paper but my script winds up hanging when trying to implement it in practice. The meat and potatoes.....\r\n\r\n```javascript\r\ngenerate(query) {\r\n    return new Promise(async function(resolve, reject) {\r\n      const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});\r\n      const page = await browser.newPage();\r\n      const baseUrl = query.baseUrl;\r\n      const url = query.portfolioUrl;\r\n      const token = query.token;\r\n\r\n      try {\r\n        await page.goto(baseUrl, {waitUntil: 'domcontentloaded'});\r\n      } catch(e) {\r\n        reject('Failed on navigation to first page');\r\n      }\r\n\r\n      try {\r\n        await page.evaluate((loginToken) => {\r\n          localStorage.setItem('access_token', loginToken);\r\n        }, token);\r\n      } catch(e) {\r\n        reject('Failed on localStorage step');\r\n      }\r\n\r\n      page.close();\r\n\r\n      const finalPage = await browser.newPage();\r\n\r\n      await finalPage.setExtraHTTPHeaders({\r\n        'Authorization': `Bearer ${token}`\r\n      });\r\n\r\n      try {\r\n        await finalPage.goto(url, {waitUntil: 'networkidle0'});\r\n      } catch(e) {\r\n        reject('Failed on navigation to second page');\r\n      }\r\n\r\n      const year = new Date().getFullYear();\r\n      const date = new Date();\r\n\r\n      const HEADER_TEMPLATE = `\r\n        Actual content removed because work.\r\n      `;\r\n\r\n      const FOOTER_TEMPLATE = `\r\n        Actual content removed because work.\r\n      `;\r\n\r\n      finalPage.pdf({\r\n        format: 'A4',\r\n        pageRanges: '1'\r\n      }).then((bufferOne) => {\r\n\r\n        finalPage.pdf({\r\n          format: 'A4',\r\n          printBackground: true,\r\n          displayHeaderFooter: true,\r\n          headerTemplate: HEADER_TEMPLATE,\r\n          footerTemplate: FOOTER_TEMPLATE,\r\n          margin: {\r\n            top: '29mm',\r\n            bottom: '20mm'\r\n          },\r\n          pageRanges: '2-'\r\n        }).then((bufferTwo) => {\r\n          let buffer = Buffer.concat([bufferOne, bufferTwo], bufferOne.length + bufferTwo.length);\r\n\r\n          finalPage.evaluate(() => {\r\n            localStorage.clear();\r\n          }).then(() => {\r\n            browser.close().then(() => {       \r\n              resolve(buffer);\r\n            });\r\n          });\r\n        }).catch((e) => {\r\n          reject('Failed on generation of remaining pages');\r\n        });\r\n      }).catch((e) => {\r\n        reject('Failed on PDF generation page one');\r\n      });\r\n    });\r\n  }\r\n```"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 368155683,
+        "Author": "mjschranz",
+        "Created At": "2018-02-23T22:23:01Z",
+        "Comment Body": "Specifically the error I am having at this point with the following approach is that the second buffer seems to \"overwrite\" the first and I only have the results of the second."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 371585527,
+        "Author": "chrisjpatty",
+        "Created At": "2018-03-08T18:51:08Z",
+        "Comment Body": "I don't know this for sure, but I suspect you can't just combine PDFs by combining their buffers. I would assume that would just smush two pdf files together without properly encoding them into a single pdf. You might need to run some kind of tool that would combine them after they're generated."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 371591071,
+        "Author": "astefanutti",
+        "Created At": "2018-03-08T19:09:50Z",
+        "Comment Body": "Just in case that may help, I implemented PDF buffers merging from Puppeteer in https://github.com/astefanutti/decktape."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 371594946,
+        "Author": "chrisjpatty",
+        "Created At": "2018-03-08T19:22:46Z",
+        "Comment Body": "@astefanutti Oh nice! Where in your code might I find your specific implementation?"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 371602932,
+        "Author": "astefanutti",
+        "Created At": "2018-03-08T19:49:23Z",
+        "Comment Body": "@chrisjpatty main loop is here: https://github.com/astefanutti/decktape/blob/1ee6449885daacc2a8167d7bb747e7c79efc9649/decktape.js#L298-L307.\r\n\r\nIt factorises duplicated images and consolidate font definitions, hence the complexity."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 374886481,
+        "Author": "pragyandas",
+        "Created At": "2018-03-21T10:05:20Z",
+        "Comment Body": "```\r\nconst firstPage = await page.pdf({\r\n        format: 'A4',\r\n        pageRanges: '1',\r\n      });\r\n      const restPages = await page.pdf({\r\n        format: 'A4',\r\n        headerTemplate: '<p></p>',\r\n        footerTemplate:\r\n          '<div class=\"footer\" style=\"font-size: 10px;color: #000; margin: 10px auto;clear:both; position: relative;\"><span class=\"pageNumber\"></span></div>',\r\n        displayHeaderFooter: true,\r\n        pageRanges: '2-',\r\n        margin: {\r\n          bottom: '100px',\r\n        },\r\n      });\r\n      const totalLength = firstPage.length + restPages.length;\r\n      const result = Buffer.concat([firstPage, restPages], totalLength);\r\n```\r\n\r\nThis works for me without any error but it chops off the 1st page. The generated PDF starts from page 2. \r\nAny pointers appreciated."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 374930553,
+        "Author": "Janpot",
+        "Created At": "2018-03-21T13:09:28Z",
+        "Comment Body": "@pragyandas You can't just append two binary blobs like this to concatenate pdfs. The resulting blob is not in the right format. You'd rather want to parse them first and concatenate the pages in a new file e.g. with [`hummus.js`](https://github.com/galkahana/HummusJS/wiki/Embedding-pdf#basic-page-appending). Or use [a library](https://www.npmjs.com/package/pdf-merge) that does this for you if you don't mind writing to disk."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 374931783,
+        "Author": "mjschranz",
+        "Created At": "2018-03-21T13:13:49Z",
+        "Comment Body": "Yes as discovered we can't unfortunately. Libraries like the above mentioned do help. I wound up using `pdf-merge` but it would still be nice to have this feature baked in if possible."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 379429203,
+        "Author": "aslushnikov",
+        "Created At": "2018-04-07T03:39:22Z",
+        "Comment Body": "@mjschranz There's a technical possibility to evaluate js inside `headerTemplate` and `footerTemplate`. However, this requires engineering effort and spawns a lot of concerns that should be thought through.\r\n\r\nClosing this since there's a workable solution for the issue. We can reconsider supporting script execution inside `headerTemplate` and `footerTemplate` if this is justified by other valid usecases and there's strong interest from the community."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 379934407,
+        "Author": "tradiff",
+        "Created At": "2018-04-10T00:21:14Z",
+        "Comment Body": "I hope this solution helps someone, even though it's super hacky.\r\n\r\nI had a need to remove the header on page 1 (a cover letter).  The following puppeteer code solved my problem.  It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin).  It then adds a margin-top to the body, to put a visible margin back into place.\r\n\r\n```\r\nawait page.addStyleTag({\r\n    content: \"@page:first {margin-top: 0;} body {margin-top: 1cm;}\"\r\n});\r\n```\r\n\r\nThat being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates.  There are a lot of use cases for this (alternating pages for binders would be another example).\r\n"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 379935375,
+        "Author": "mjschranz",
+        "Created At": "2018-04-10T00:27:47Z",
+        "Comment Body": "I wound up using the `evaluate` method to execute JavaScript that would\ntoggle display on the pages/sections of my PDF.\n\nOn Mon, Apr 9, 2018, 8:21 PM Travis Collins, <notifications@github.com>\nwrote:\n\n> I hope this solution helps someone, even though it's super hacky.\n>\n> I had a need to remove the header on page 1 (a cover letter). The\n> following puppeteer code solved my problem. It adds a style tag which\n> collapses the margin-top on the first page (effectively hiding the margin).\n> It then adds a margin-top to the body, to put a visible margin back into\n> 0place.\n>\n> await page.addStyleTag({\n>     content: \"@page:first {margin-top: 0;} body {margin-top: 1cm;}\"\n> });\n>\n> That being said, I do think puppeteer should add the ability to execute\n> javascript to manipulate header and footer templates. There are a lot of\n> use cases for this (alternating pages for binders would be another example).\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/GoogleChrome/puppeteer/issues/2089#issuecomment-379934407>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AA255cb3wGIsscO2mIOGZ4ReR1MumWwyks5tm_sMgaJpZM4SRUBc>\n> .\n>\n"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 380142425,
+        "Author": "tradiff",
+        "Created At": "2018-04-10T15:27:01Z",
+        "Comment Body": "@mjschranz I've been trying to replicate your solution, and I'm having trouble manipulating the header with javascript.  Can you provide further details?"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 380144134,
+        "Author": "mjschranz",
+        "Created At": "2018-04-10T15:31:45Z",
+        "Comment Body": "@TravisTX I basically would run code like the following to hide/show various HTML of the page I was making a PDF out of. For our use case, we explicitly always broke for specific sections/areas which made it easier for us.\r\n\r\n```javascript\r\n        await finalPage.evaluate(() => {\r\n          document.querySelectorAll('.pdf-body').forEach((elem) => {\r\n            elem.style.display = 'none';\r\n          });\r\n          document.getElementById('summary-block').style.display = 'none';\r\n          document.getElementById('report-cover').style.display = 'block';\r\n          document.getElementById('d-page').style.display = 'none';\r\n        });\r\n```"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 380159311,
+        "Author": "aslushnikov",
+        "Created At": "2018-04-10T16:13:50Z",
+        "Comment Body": "For the reference: there's a designated issue about running js in `footerTemplate` and `headerTemplate`: #2167."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 405437229,
+        "Author": "Narigo",
+        "Created At": "2018-07-17T02:14:08Z",
+        "Comment Body": "I tried @TravisTX workaround which works okay in the sense of hiding the header on the first page. But having a second and third page, their bottom(!) margin *may* run into a `footerTemplate`. \ud83d\ude1e Looks like Chrome PDF export does not interpret the `margin-bottom` for other pages anymore after using the hack..."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 441337164,
+        "Author": "ghost",
+        "Created At": "2018-11-24T02:03:13Z",
+        "Comment Body": "@Narigo  That's right, I'm having the same issue. "
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 483461808,
+        "Author": "SlashBin",
+        "Created At": "2019-04-16T00:02:51Z",
+        "Comment Body": "@Narigo @gostavee same... did either of you ever find a solution for that workaround? I can get the first page to work fine, but the footer doesn't appear on subsequent pages (other than the last page given that the content doesn't run 100% of the last page)"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 483463727,
+        "Author": "Narigo",
+        "Created At": "2019-04-16T00:12:48Z",
+        "Comment Body": "Sorry @SlashBin I don't think I did find a proper workaround for that issue. I could come up with a different solution to my initial problem. (That means, I did not have to use multiple pages / templates at all, so I did not need to investigate any further...)"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 483465474,
+        "Author": "SlashBin",
+        "Created At": "2019-04-16T00:22:20Z",
+        "Comment Body": "Thanks @Narigo for the followup. I'm actually looking into just generating two PDFs and merging. So far seems viable:\r\nJust stumbled across this: https://stackoverflow.com/questions/55470714/trying-to-hide-first-footer-header-on-pdf-generated-with-puppeteer"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 577761056,
+        "Author": "saurabh147sharma",
+        "Created At": "2020-01-23T16:32:38Z",
+        "Comment Body": "@pragyandas @mjschranz \r\nI'm using the following solution:\r\n`await page.pdf({ format: 'A3', printBackground: true, pageRanges: '2-' })`\r\nI'm getting following error: Protocol error (Page.printToPDF): Page range syntax error.\r\nIn my case, I needed to show the header and footer on the first page only not on the others.\r\nI was able to create the first-page buffer successfully \r\nThe above problem has occurred because there was only 1 page. Now problem is that how can I determine how many pages are there at runtime?\r\n"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 578158642,
+        "Author": "matrunchyk",
+        "Created At": "2020-01-24T14:43:30Z",
+        "Comment Body": "@saurabh147sharma I had the same issue. I generate the first page, then use '2-' page ranges and then merge them into a single PDF using hummusJS. But when it's just one page, it was throwing the error you mentioned. I fixed that just using try/catch call."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 627153525,
+        "Author": "hanrok",
+        "Created At": "2020-05-12T07:01:55Z",
+        "Comment Body": "> I hope this solution helps someone, even though it's super hacky.\r\n> \r\n> I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.\r\n> \r\n> ```\r\n> await page.addStyleTag({\r\n>     content: \"@page:first {margin-top: 0;} body {margin-top: 1cm;}\"\r\n> });\r\n> ```\r\n> \r\n> That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).\r\n\r\nFor any of you who tried this and had issues with the footer in other pages - try to add `margin-bottom`\r\n```\r\nawait page.addStyleTag({\r\n\tcontent: \"@page:first {margin-top: 0; margin-bottom: 150px;}\"\r\n});\r\n```"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 635477333,
+        "Author": "sriramgroot",
+        "Created At": "2020-05-28T17:07:07Z",
+        "Comment Body": "> I hope this solution helps someone, even though it's super hacky.\r\n> \r\n> I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.\r\n> \r\n> ```\r\n> await page.addStyleTag({\r\n>     content: \"@page:first {margin-top: 0;} body {margin-top: 1cm;}\"\r\n> });\r\n> ```\r\n> \r\n> That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).\r\n\r\nHi @TravisTX\r\nThanks this solution solved my problem in generating PDF"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 818390236,
+        "Author": "Venryx",
+        "Created At": "2021-04-13T02:43:56Z",
+        "Comment Body": "> `await page.addStyleTag({content: \"@page:first {margin-top: 0; margin-bottom: 150px;}\"});`\r\n\r\nThis worked for me. However, I had to change the `margin-bottom` to `100px`, otherwise it was creating too much padding at the bottom of all the pages (more than the original). So you may need to fiddle with the value to get the margins/paddings exactly as you want."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 948632458,
+        "Author": "andersonfurlantr",
+        "Created At": "2021-10-21T13:44:28Z",
+        "Comment Body": "> > I hope this solution helps someone, even though it's super hacky.\r\n> > I had a need to remove the header on page 1 (a cover letter). The following puppeteer code solved my problem. It adds a style tag which collapses the margin-top on the first page (effectively hiding the margin). It then adds a margin-top to the body, to put a visible margin back into place.\r\n> > ```\r\n> > await page.addStyleTag({\r\n> >     content: \"@page:first {margin-top: 0;} body {margin-top: 1cm;}\"\r\n> > });\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > That being said, I do think puppeteer should add the ability to execute javascript to manipulate header and footer templates. There are a lot of use cases for this (alternating pages for binders would be another example).\r\n> \r\n> For any of you who tried this and had issues with the footer in other pages - try to add `margin-bottom`\r\n> \r\n> ```\r\n> await page.addStyleTag({\r\n> \tcontent: \"@page:first {margin-top: 0; margin-bottom: 150px;}\"\r\n> });\r\n> ```\r\n\r\nHow to hide footer in the last page?"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 949409986,
+        "Author": "sanderha",
+        "Created At": "2021-10-22T08:37:13Z",
+        "Comment Body": "To solve this problem we ended up generating multiple pdf's and merging them with https://www.npmjs.com/package/pdf-merger-js \r\n\r\nWould be nice to have some more options in Puppeteer though"
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 1253788355,
+        "Author": "deepakageeru",
+        "Created At": "2022-09-21T14:24:07Z",
+        "Comment Body": "> ```\r\n> const firstPage = await page.pdf({\r\n>         format: 'A4',\r\n>         pageRanges: '1',\r\n>       });\r\n>       const restPages = await page.pdf({\r\n>         format: 'A4',\r\n>         headerTemplate: '<p></p>',\r\n>         footerTemplate:\r\n>           '<div class=\"footer\" style=\"font-size: 10px;color: #000; margin: 10px auto;clear:both; position: relative;\"><span class=\"pageNumber\"></span></div>',\r\n>         displayHeaderFooter: true,\r\n>         pageRanges: '2-',\r\n>         margin: {\r\n>           bottom: '100px',\r\n>         },\r\n>       });\r\n>       const totalLength = firstPage.length + restPages.length;\r\n>       const result = Buffer.concat([firstPage, restPages], totalLength);\r\n> ```\r\n> \r\n> This works for me without any error but it chops off the 1st page. The generated PDF starts from page 2. Any pointers appreciated.\r\n\r\nI tried similar thing using C# package of puppeteer, merging two buffers may work for text files but not pdfs as the way pdfs are encoded is different."
+    },
+    {
+        "Issue ID": 2089,
+        "Issue State": "closed",
+        "Issue Title": "Ability to prevent header/footer on certain pages",
+        "Comment ID": 1265059510,
+        "Author": "felegy-norbert",
+        "Created At": "2022-10-03T07:45:36Z",
+        "Comment Body": "So 4 years passed and no proper solution yet?"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1676355013,
+        "Author": "itsmekingtiger",
+        "Created At": "2023-08-13T13:06:19Z",
+        "Comment Body": "I've just solve same problem with running:\r\n\r\n```bash\r\n$ node node_modules/puppeteer/install.js\r\n\r\n# Downloading chrome r115.0.5790.170 - 121.5 MB [====================] 100% 0.0s \r\n# Chrome (115.0.5790.170) downloaded to /Users/nomicon/.cache/puppeteer/chrome/mac_arm-115.0.5790.170\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1676410931,
+        "Author": "AeShevch",
+        "Created At": "2023-08-13T16:51:27Z",
+        "Comment Body": "> I've just solve same problem with running:\r\n> \r\n> ```shell\r\n> $ node node_modules/puppeteer/install.js\r\n> \r\n> # Downloading chrome r115.0.5790.170 - 121.5 MB [====================] 100% 0.0s \r\n> # Chrome (115.0.5790.170) downloaded to /Users/nomicon/.cache/puppeteer/chrome/mac_arm-115.0.5790.170\r\n> ```\r\n\r\nThnx for your answer. I updated my Dockerfile, but nothing changes\r\n```\r\n# Install dependencies only when needed\r\nFROM node:16.3.0-alpine AS deps\r\n# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.\r\nRUN apk update && apk add --no-cache libc6-compat && apk add git\r\nWORKDIR /app\r\n\r\nCOPY package.json package-lock.json ./\r\nRUN npm ci --legacy-peer-deps\r\nRUN node node_modules/puppeteer/install.js\r\n\r\n# Rebuild the source code only when needed\r\nFROM node:alpine AS builder\r\n# add environment variables to client code\r\nARG NEXT_PUBLIC_BACKEND_URL\r\n\r\nENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL\r\n\r\nWORKDIR /app\r\n\r\nCOPY . .\r\nCOPY --from=deps /app/node_modules ./node_modules\r\nARG NODE_ENV=production\r\nRUN echo ${NODE_ENV}\r\nRUN NODE_ENV=${NODE_ENV} npm run build\r\n\r\n# Production image, copy all the files and run next\r\nFROM node:alpine AS runner\r\nWORKDIR /app\r\nRUN addgroup -g 1001 -S nodejs\r\nRUN adduser -S nextjs -u 1001\r\n\r\n# You only need to copy next.config.js if you are NOT using the default configuration.\r\n# Copy all necessary files used by nex.config as well otherwise the build will fail\r\n\r\nCOPY --from=builder /app/next.config.js ./next.config.js\r\nCOPY --from=builder /app/public ./public\r\nCOPY --from=builder --chown=nextjs:nodejs /app/.next ./.next\r\nCOPY --from=builder /app/node_modules ./node_modules\r\nCOPY --from=builder /app/package.json ./package.json\r\nCOPY --from=builder /app/pages ./pages\r\nCOPY --from=builder /app/themes ./themes\r\nCOPY --from=builder /app/.env ./.env\r\n\r\nUSER nextjs\r\n\r\n# Expose\r\nEXPOSE 3000\r\n\r\n# Next.js collects completely anonymous telemetry data about general usage.\r\n# Learn more here: https://nextjs.org/telemetry\r\n# Uncomment the following line in case you want to disable telemetry.\r\nENV NEXT_TELEMETRY_DISABLED 1\r\nCMD [\"node\", \"node_modules/puppeteer/install.js\"]\r\nCMD [\"npm\", \"start\"]\r\n\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1676414383,
+        "Author": "aleksandr-shevchenko-0",
+        "Created At": "2023-08-13T17:06:27Z",
+        "Comment Body": "> ```shell\r\n> node node_modules/puppeteer/install.js\r\n> ```\r\n\r\n<img width=\"1207\" alt=\"Screenshot 2023-08-13 at 21 07 57\" src=\"https://github.com/puppeteer/puppeteer/assets/134926474/2286c9f1-554b-4f83-aad9-9ddbb5e55fa5\">\r\nRun it directly inside my docker container on production and now I have new error:\r\n\r\n```\r\nFailed to launch the browser process! spawn /home/nextjs/.cache/puppeteer/chrome/linux-115.0.5790.170/chrome-linux64/chrome ENOENT\\n\\n\\nTROUBLESHOOTING: https://pptr.dev/troubleshooting\\n\r\n```\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1676418207,
+        "Author": "aleksandr-shevchenko-0",
+        "Created At": "2023-08-13T17:24:01Z",
+        "Comment Body": "New try\r\n\r\nDockerFile:\r\n```\r\nFROM node:16.3.0-alpine AS deps\r\nRUN apk update && apk add --no-cache libc6-compat && apk add git && apk add chromium\r\n```\r\n\r\nnodejs\r\n```\r\n  const browser = await puppeteer.launch({\r\n    executablePath: `/usr/bin/chromium-browser`,\r\n    args: [`--disable-gpu`, `--disable-setuid-sandbox`, `--no-sandbox`, `--no-zygote`],\r\n  });\r\n```\r\n\r\nand... new error:\r\n```\r\nFailed to launch the browser process! spawn /usr/bin/chromium-browser ENOENT\\n\\n\\nTROUBLESHOOTING: https://pptr.dev/troubleshooting\\n\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1676451661,
+        "Author": "aleksandr-shevchenko-0",
+        "Created At": "2023-08-13T20:07:23Z",
+        "Comment Body": "I did it! \r\n\r\n```\r\n  const browser = await puppeteer.launch({\r\n    headless: true,\r\n    executablePath: `/usr/bin/google-chrome`,\r\n    args: [`--no-sandbox`, `--headless`, `--disable-gpu`, `--disable-dev-shm-usage`],\r\n  });\r\n```\r\n\r\n```\r\n# Install dependencies only when needed\r\nFROM node:slim AS deps\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nRUN apt-get update && \\\r\n    apt-get install -y libc6 && \\\r\n    apt-get install -y git && \\\r\n    rm -rf /var/lib/apt/lists/*\r\n\r\nWORKDIR /app\r\n\r\nCOPY package.json package-lock.json ./\r\nRUN npm ci --legacy-peer-deps\r\n\r\n# Rebuild the source code only when needed\r\nFROM node:slim AS builder\r\n# add environment variables to client code\r\nARG NEXT_PUBLIC_BACKEND_URL\r\n\r\nENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL\r\n\r\nWORKDIR /app\r\n\r\nCOPY . .\r\nCOPY --from=deps /app/node_modules ./node_modules\r\nARG NODE_ENV=production\r\nRUN echo ${NODE_ENV}\r\nRUN NODE_ENV=${NODE_ENV} npm run build\r\n\r\n# Production image, copy all the files and run next\r\nFROM node:slim AS runner\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nWORKDIR /app\r\n\r\n# Create a non-root user\r\nRUN useradd -m nextjs -u 1001\r\n\r\nRUN apt-get update && apt-get install -y gnupg wget && \\\r\n  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \\\r\n  echo \"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\" > /etc/apt/sources.list.d/google-chrome.list && \\\r\n  apt-get update && \\\r\n  apt-get install -y google-chrome-stable --no-install-recommends && \\\r\n  rm -rf /var/lib/apt/lists/*\r\n\r\n# You only need to copy next.config.js if you are NOT using the default configuration.\r\n# Copy all necessary files used by nex.config as well otherwise the build will fail\r\n\r\nCOPY --from=builder /app/next.config.js ./next.config.js\r\nCOPY --from=builder /app/public ./public\r\nCOPY --from=builder --chown=nextjs:nodejs /app/.next ./.next\r\nCOPY --from=builder /app/node_modules ./node_modules\r\nCOPY --from=builder /app/package.json ./package.json\r\nCOPY --from=builder /app/pages ./pages\r\nCOPY --from=builder /app/themes ./themes\r\nCOPY --from=builder /app/.env ./.env\r\n\r\nUSER nextjs\r\n\r\n# Expose\r\nEXPOSE 3000\r\n\r\n# Next.js collects completely anonymous telemetry data about general usage.\r\n# Learn more here: https://nextjs.org/telemetry\r\n# Uncomment the following line in case you want to disable telemetry.\r\nENV NEXT_TELEMETRY_DISABLED 1\r\nCMD [\"npm\", \"start\"]\r\n\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1694583626,
+        "Author": "ShinanTc",
+        "Created At": "2023-08-27T06:24:58Z",
+        "Comment Body": "> \r\n\r\nHey @AeShevch,\r\n\r\nInstead of headless=true, use headless=\"new\". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).\r\n\r\nAlso, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?\r\n\r\nThank you \ud83d\udc93"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1744108676,
+        "Author": "Shreehar01",
+        "Created At": "2023-10-03T03:31:16Z",
+        "Comment Body": "The following steps worked for me:\r\nIn the node_modules/puppeteer directory, `sudo node install.mjs` (This installs the required chrome version)\r\nThen:\r\n```\r\nsudo apt-get install libgbm1\r\nsudo apt-get install libasound2\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1786687896,
+        "Author": "Stekmo",
+        "Created At": "2023-10-31T07:56:09Z",
+        "Comment Body": "We encountered the same issue when we redeployed our service to Google Cloud App Engine after bumping the node version from 16 to 20. What solved it for us was adding the [--no-cache](https://cloud.google.com/appengine/docs/standard/php-gen2/specifying-dependencies) option when deploying.\r\n\r\n> > \r\n> \r\n> Hey @AeShevch,\r\n> \r\n> Instead of headless=true, use headless=\"new\". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).\r\n> \r\n> Also, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?\r\n> \r\n> Thank you \ud83d\udc93\r\n\r\n`headless: true` is not going away. It is a way to opt in now, but in a future release specifying `headless: true` will simply use the new headless mode instead of the old one. https://github.com/puppeteer/puppeteer/blob/0d4aab828ac92f6269d6af1dad923fc9daa4158c/packages/puppeteer-core/src/node/LaunchOptions.ts#L26-L36"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1794737259,
+        "Author": "deepakPococare",
+        "Created At": "2023-11-06T12:44:11Z",
+        "Comment Body": "Every time I am getting the below error can anyone just what to do? \r\n\r\nDockerfile:56\r\n--------------------\r\n  55 |     \r\n  56 | >>> RUN apt-get update && apt-get install -y gnupg wget && \\\r\n  57 | >>>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \\\r\n  58 | >>>   echo \"deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main\" > /etc/apt/sources.list.d/google-chrome.list && \\\r\n  59 | >>>   apt-get update && \\\r\n  60 | >>>   apt-get install -y google-chrome-stable --no-install-recommends && \\\r\n  61 | >>>   rm -rf /var/lib/apt/lists/*\r\n  62 |     \r\n--------------------\r\nERROR: failed to solve: process \"/dev/.buildkit_qemu_emulator /bin/sh -c apt-get update && apt-get install -y gnupg wget &&   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg &&   echo \\\"deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main\\\" > /etc/apt/sources.list.d/google-chrome.list &&   apt-get update &&   apt-get install -y google-chrome-stable --no-install-recommends &&   rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100\r\nError: Process completed with exit code 1.\r\n\r\nThis is my Dockerfile. \r\n\r\n###################\r\n# BUILD FOR LOCAL DEVELOPMENT\r\n###################\r\n\r\nFROM node:slim As development\r\n\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nRUN apt-get update && \\\r\n    apt-get install -y libc6 && \\\r\n    apt-get install -y git && \\\r\n    rm -rf /var/lib/apt/lists/*\r\n\r\nWORKDIR /usr/src/app\r\n\r\nCOPY --chown=node:node package*.json .env ./ \r\n\r\nRUN npm ci\r\n\r\nCOPY --chown=node:node . .\r\n\r\nUSER node\r\n\r\n###################\r\n# BUILD FOR PRODUCTION START\r\n###################\r\n\r\nFROM node:slim As build\r\n\r\nWORKDIR /usr/src/app\r\n\r\nCOPY --chown=node:node nest-cli.json tsconfig*.json package*.json .env ./ \r\n\r\nCOPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules\r\n\r\nCOPY --chown=node:node . .\r\n\r\nRUN npm run build\r\n\r\nENV NODE_ENV production\r\n\r\nRUN npm ci --only=production && npm cache clean --force\r\n\r\nUSER node\r\n\r\n###################\r\n# PRODUCTION\r\n###################\r\n\r\nFROM node:slim  As production\r\n\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nWORKDIR /usr/src/app\r\n\r\nRUN apt-get update && apt-get install -y gnupg wget && \\\r\n  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \\\r\n  echo \"deb [arch=arm64] http://dl.google.com/linux/chrome/deb/ stable main\" > /etc/apt/sources.list.d/google-chrome.list && \\\r\n  apt-get update && \\\r\n  apt-get install -y google-chrome-stable --no-install-recommends && \\\r\n  rm -rf /var/lib/apt/lists/*\r\n\r\nCOPY --chown=node:node --from=build /usr/src/app/node_modules  ./node_modules\r\nCOPY --chown=node:node --from=build /usr/src/app/.env  .\r\nCOPY --chown=node:node --from=build /usr/src/app/dist ./dist\r\n\r\nCMD [ \"node\", \"dist/main.js\" ]\r\n\r\n\r\nNote: I am using arch=arm64 architecture. \r\nI have been struggling with it for 2 days not getting resolved can anyone help me, or just something? \r\n\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1975241470,
+        "Author": "prakhart111",
+        "Created At": "2024-03-03T17:42:23Z",
+        "Comment Body": "I'm getting this error on Vercel, \r\nI've tried PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true and headless: true.\r\n\r\n```\r\nError generating invoice Error: Could not find Chrome (ver. 122.0.6261.69). This can occur if either\r\n 1. you did not perform an installation before running the script (e.g. `npx puppeteer browsers install chrome`) or\r\n 2. your cache path is incorrectly configured (which is: /home/sbx_user1051/.cache/puppeteer).\r\n```\r\n\r\nAny suggestions guys?"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1977963162,
+        "Author": "deepakPococare",
+        "Created At": "2024-03-05T04:50:03Z",
+        "Comment Body": "\r\nHey : Prakhar if you are using node refer this I have also faced issue initially finally below file worked for me.\r\n\r\n###################\r\n# BUILD FOR LOCAL DEVELOPMENT\r\n###################\r\n\r\nFROM node:lts-alpine As development\r\n\r\nRUN apk update && apk add --no-cache nmap && \\\r\n    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \\\r\n    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \\\r\n    apk update && \\\r\n    apk add --no-cache \\\r\n      chromium \\\r\n      harfbuzz \\\r\n      \"freetype>2.8\" \\\r\n      ttf-freefont \\\r\n      nss \r\n\r\nENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser\r\n\r\nWORKDIR /usr/src/app\r\n\r\nCOPY --chown=node:node package*.json .env ./ \r\n\r\nRUN npm ci\r\n\r\nCOPY --chown=node:node . .\r\n\r\nUSER node\r\n\r\n###################\r\n# BUILD FOR PRODUCTION START\r\n###################\r\n\r\nFROM node:lts-alpine As build\r\n\r\nWORKDIR /usr/src/app\r\n\r\nCOPY --chown=node:node nest-cli.json tsconfig*.json package*.json .env ./ \r\n\r\nCOPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules\r\n\r\nCOPY --chown=node:node . .\r\n\r\nRUN npm run build\r\n\r\nENV NODE_ENV production\r\n\r\nRUN npm ci --only=production && npm cache clean --force\r\n\r\nUSER node\r\n\r\n###################\r\n# PRODUCTION\r\n###################\r\n\r\nFROM node:lts-alpine As production\r\n\r\n# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nWORKDIR /usr/src/app\r\n\r\nRUN apk update && apk add --no-cache nmap && \\\r\n    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \\\r\n    echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \\\r\n    apk update && \\\r\n    apk add --no-cache \\\r\n      chromium \\\r\n      harfbuzz \\\r\n      \"freetype>2.8\" \\\r\n      ttf-freefont \\\r\n      nss \r\n\r\nENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser\r\n\r\nCOPY --chown=node:node --from=build /usr/src/app/node_modules  ./node_modules\r\nCOPY --chown=node:node --from=build /usr/src/app/.env  .\r\nCOPY --chown=node:node --from=build /usr/src/app/dist ./dist\r\n\r\nCMD [ \"node\", \"dist/main.js\" ]"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 1979479351,
+        "Author": "prakhart111",
+        "Created At": "2024-03-05T19:23:24Z",
+        "Comment Body": "Thanks @deepakPococare, I am not using node right now, but I think I'll probably have to migrate this to an EC2. Thanks for this, will be helpful when I do it."
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2109507694,
+        "Author": "0xcuonghx",
+        "Created At": "2024-05-14T07:47:26Z",
+        "Comment Body": "> RUN apt-get update && apt-get install -y gnupg wget && \\\r\n>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \\\r\n>   echo \"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\" > /etc/apt/sources.list.d/google-chrome.list && \\\r\n>   apt-get update && \\\r\n>   apt-get install -y google-chrome-stable --no-install-recommends && \\\r\n>   rm -rf /var/lib/apt/lists/*\r\n\r\n If you are in an ARM-based CPU like Apple M1, you should use the --platform argument when you build the Docker image.\r\n``` bash\r\ndocker build --platform linux/amd64 -t image-name .\r\n\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2125636545,
+        "Author": "horsemedia",
+        "Created At": "2024-05-22T19:53:48Z",
+        "Comment Body": "Im getting same error like:\r\nCould not find Chrome (ver. 125.0.6422.60). This can occur if either\\n 1. you did not perform an installation before running the script (e.g. `npx puppeteer browsers install chrome`) or\\n 2. your cache path is incorrectly configured (which is: /home/sbx_user1051/.cache/puppeteer).\\nFor (2), check out our guide on configuring puppeteer at https://pptr.dev/guides/configuration.\r\n\r\n\r\nIm using nextjs 14. its working perfectly fine in local but its giving me an error on production. i have deployed my nextjs app on aws Amplify."
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2185622529,
+        "Author": "Gingaaa",
+        "Created At": "2024-06-24T05:14:36Z",
+        "Comment Body": "![image](https://github.com/puppeteer/puppeteer/assets/93460183/0b58ed76-190e-4fc2-940a-d16252b29e8d)\r\n\r\n\r\nI am also facing chrome version problem.\r\n\r\nI am using Nextjs for my website and for hosting Aws Amplify. \r\nCan any one please help me with this. \r\ni want to solve this problem because in my project every thing is working except this one.\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2245234651,
+        "Author": "geri777",
+        "Created At": "2024-07-23T13:19:07Z",
+        "Comment Body": "It looks like Google has removed Chrome from http://dl.google.com/linux/chrome/deb/\r\nI have found it at this mirror: http://mirror.cs.uchicago.edu/google-chrome/dists/ however it doesn't work when I add this url to /etc/apt/sources.list.d\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2249726029,
+        "Author": "yashcfg",
+        "Created At": "2024-07-25T08:11:44Z",
+        "Comment Body": "> ![image](https://private-user-images.githubusercontent.com/93460183/342209417-0b58ed76-190e-4fc2-940a-d16252b29e8d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjE4OTQxMTQsIm5iZiI6MTcyMTg5MzgxNCwicGF0aCI6Ii85MzQ2MDE4My8zNDIyMDk0MTctMGI1OGVkNzYtMTkwZS00ZmMyLTk0MGEtZDE2MjUyYjI5ZThkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA3MjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNzI1VDA3NTAxNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY1MmNjYmY0MmM0YzMwYWYwOGY5NTU2NDkyMDFmYzUyZGU5ZmI3M2U2MTg0OWFkOTE2NGI1ZmNmMDdkMDdkMjUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HJiEEqHRL7oqrQ5N0-UOoy-voKAeuCOCHzvNZc5_KAo)\r\n> \r\n> I am also facing chrome version problem.\r\n> \r\n> I am using Nextjs for my website and for hosting Aws Amplify. Can any one please help me with this. i want to solve this problem because in my project every thing is working except this one.\r\n\r\nI resolved it by adding `executablePath` in puppeteer launch options like - \r\n\r\n`const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], executablePath: '/usr/bin/google-chrome'});`\r\n\r\nI already had chrome installed inside my docker container, adding `executablePath` fixed the issue.\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2251938406,
+        "Author": "gregorvand",
+        "Created At": "2024-07-26T04:14:47Z",
+        "Comment Body": "+1 to above, adding `excutablePath: '/usr/bin/google-chrome'` also fixed this, that suddenly stopped working\r\n\r\nfor ref. this is using `timbru31/node-chrome` image"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2270158977,
+        "Author": "Sonicof",
+        "Created At": "2024-08-06T00:46:38Z",
+        "Comment Body": "> > \r\n> \r\n> Hey @AeShevch,\r\n> \r\n> Instead of headless=true, use headless=\"new\". headless=true is going away. Reference [here.](https://developer.chrome.com/articles/new-headless/#new-headless-in-puppeteer).\r\n> \r\n> Also, can you please mention what was the key thing that led to fixing the issue? Was it setting PUPPETEER_SKIP_CHROMIUM_DOWNLOAD env variable to true or headless=true? Because I deployed my app on Vercel & got the same error. Vercel does not support Docker images on hobby plan. So do you have any workarounds for me?\r\n> \r\n> Thank you \ud83d\udc93\r\n\r\nThis video is very helpful for any problem like yours : https://www.youtube.com/watch?v=6cm6G78ZDmM"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2307898735,
+        "Author": "lowzyyy",
+        "Created At": "2024-08-23T22:48:55Z",
+        "Comment Body": "In node:22-alpine3.18 image i installed it:\r\n```\r\nRUN apk add --no-cache \\\r\n      chromium \r\nENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser\r\n\r\n```\r\nand removed .puppeteerrc.cjs file from my root folder so puppeteer can now envoke chrome normally "
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2325050785,
+        "Author": "GoodnessEzeokafor",
+        "Created At": "2024-09-02T16:13:55Z",
+        "Comment Body": "> I did it!\r\n> \r\n> ```\r\n>   const browser = await puppeteer.launch({\r\n>     headless: true,\r\n>     executablePath: `/usr/bin/google-chrome`,\r\n>     args: [`--no-sandbox`, `--headless`, `--disable-gpu`, `--disable-dev-shm-usage`],\r\n>   });\r\n> ```\r\n> \r\n> ```\r\n> # Install dependencies only when needed\r\n> FROM node:slim AS deps\r\n> ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n> \r\n> RUN apt-get update && \\\r\n>     apt-get install -y libc6 && \\\r\n>     apt-get install -y git && \\\r\n>     rm -rf /var/lib/apt/lists/*\r\n> \r\n> WORKDIR /app\r\n> \r\n> COPY package.json package-lock.json ./\r\n> RUN npm ci --legacy-peer-deps\r\n> \r\n> # Rebuild the source code only when needed\r\n> FROM node:slim AS builder\r\n> # add environment variables to client code\r\n> ARG NEXT_PUBLIC_BACKEND_URL\r\n> \r\n> ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL\r\n> \r\n> WORKDIR /app\r\n> \r\n> COPY . .\r\n> COPY --from=deps /app/node_modules ./node_modules\r\n> ARG NODE_ENV=production\r\n> RUN echo ${NODE_ENV}\r\n> RUN NODE_ENV=${NODE_ENV} npm run build\r\n> \r\n> # Production image, copy all the files and run next\r\n> FROM node:slim AS runner\r\n> ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n> \r\n> WORKDIR /app\r\n> \r\n> # Create a non-root user\r\n> RUN useradd -m nextjs -u 1001\r\n> \r\n> RUN apt-get update && apt-get install -y gnupg wget && \\\r\n>   wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \\\r\n>   echo \"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\" > /etc/apt/sources.list.d/google-chrome.list && \\\r\n>   apt-get update && \\\r\n>   apt-get install -y google-chrome-stable --no-install-recommends && \\\r\n>   rm -rf /var/lib/apt/lists/*\r\n> \r\n> # You only need to copy next.config.js if you are NOT using the default configuration.\r\n> # Copy all necessary files used by nex.config as well otherwise the build will fail\r\n> \r\n> COPY --from=builder /app/next.config.js ./next.config.js\r\n> COPY --from=builder /app/public ./public\r\n> COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next\r\n> COPY --from=builder /app/node_modules ./node_modules\r\n> COPY --from=builder /app/package.json ./package.json\r\n> COPY --from=builder /app/pages ./pages\r\n> COPY --from=builder /app/themes ./themes\r\n> COPY --from=builder /app/.env ./.env\r\n> \r\n> USER nextjs\r\n> \r\n> # Expose\r\n> EXPOSE 3000\r\n> \r\n> # Next.js collects completely anonymous telemetry data about general usage.\r\n> # Learn more here: https://nextjs.org/telemetry\r\n> # Uncomment the following line in case you want to disable telemetry.\r\n> ENV NEXT_TELEMETRY_DISABLED 1\r\n> CMD [\"npm\", \"start\"]\r\n> ```\r\n\r\nits September 2nd 2024  and this solution just saved my job\r\nif you are using `alphine` you might want to do it this way\r\n```\r\n\r\n# Builder stage\r\nFROM node:18-alpine as builder\r\n\r\nUSER root\r\n\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n# RUN apk update && \\\r\n#     apk install -y libc6 && \\\r\n#     apk install -y git && \\\r\n#     rm -rf /var/lib/apt/lists/*\r\n\r\nRUN apk update && \\\r\n    apk add --no-cache \\\r\n    libc6-compat \\\r\n    git \\\r\n    gnupg \\\r\n    wget \\\r\n    chromium \\\r\n    nss \\\r\n    freetype \\\r\n    harfbuzz \\\r\n    ca-certificates \\\r\n    ttf-freefont && \\\r\n    rm -rf /var/cache/apk/*\r\n\r\n\r\nUSER node\r\nWORKDIR /home/node\r\n\r\nCOPY package*.json ./\r\nRUN npm ci\r\n\r\nCOPY --chown=node:node . .\r\nRUN npm run build \\\r\n    && npm prune --production\r\n\r\n# Production stage\r\nFROM node:18-alpine\r\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\r\n\r\nRUN apk update && \\\r\n    apk add --no-cache \\\r\n    libc6-compat \\\r\n    chromium \\\r\n    nss \\\r\n    freetype \\\r\n    harfbuzz \\\r\n    ca-certificates \\\r\n    ttf-freefont && \\\r\n    rm -rf /var/cache/apk/*\r\n\r\n# Set environment variables for Chromium\r\nENV CHROMIUM_PATH=/usr/bin/chromium-browser\r\nUSER node\r\nWORKDIR /home/node\r\n\r\n# Copy the application files from the builder stage\r\nCOPY --from=builder --chown=node:node /home/node/package*.json ./\r\nCOPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/\r\nCOPY --from=builder --chown=node:node /home/node/dist/ ./dist/\r\n\r\nEXPOSE 4560\r\n\r\nCMD [\"node\", \"dist/main.js\"]\r\n\r\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2346321268,
+        "Author": "Himanshu-Agg12",
+        "Created At": "2024-09-12T13:40:49Z",
+        "Comment Body": "Please HELP someone?\r\n@GoodnessEzeokafor , i am still facing some issue. I got the chromium at container inside usr/bin/chromium-browser path, but i get error as target closed everytime. I have written the sequential calls with await statements. Can you please help me if you know the fix?\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2370188706,
+        "Author": "rachelhnik",
+        "Created At": "2024-09-24T05:16:06Z",
+        "Comment Body": "Do u still use .puppeteerrc.cjs file ?\r\n"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2504797536,
+        "Author": "arsalansadiq",
+        "Created At": "2024-11-27T21:29:43Z",
+        "Comment Body": "I am using node's alpine image and its Nov, 2024 and none of the changes above worked for me to install chromium and puppeteer. I kept getting the same error so this is what I did to resolve the error:\r\n- update the docker base image to be `FROM zenika/alpine-chrome:with-puppeteer AS base`. Information on the docker image is [here](https://github.com/jlandure/alpine-chrome).\r\n- removed the `apk add` line because I didnt need anything since the image has nodejs too\r\n- remove any puppeteer envs\r\n\r\nThis worked at the cost of a heavy docker image ~450MB but was able to make this work."
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2625586348,
+        "Author": "b1ew",
+        "Created At": "2025-01-30T21:01:23Z",
+        "Comment Body": "> I am using node's alpine image and its Nov, 2024 and none of the changes above worked for me to install chromium and puppeteer. I kept getting the same error so this is what I did to resolve the error:\n> \n> * update the docker base image to be `FROM zenika/alpine-chrome:with-puppeteer AS base`. Information on the docker image is [here](https://github.com/jlandure/alpine-chrome).\n> * removed the `apk add` line because I didnt need anything since the image has nodejs too\n> * remove any puppeteer envs\n> \n> This worked at the cost of a heavy docker image ~450MB but was able to make this work.\n\nthis is the only one that's working for me on alpine nextjs, huge thanks! \ud83c\udf7a\n\n```\nFROM zenika/alpine-chrome:with-puppeteer AS base\n\nENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true\nENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser\n\nUSER root\n\n# 1. Install dependencies only when needed\nFROM base AS deps\n\nWORKDIR /app\n\n# Install dependencies based on the preferred package manager\nCOPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./\nRUN \\\n  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \\\n  elif [ -f package-lock.json ]; then npm ci; \\\n  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \\\n  else echo \"Lockfile not found.\" && exit 1; \\\n  fi\n\n\n# 2. Rebuild the source code only when needed\nFROM base AS builder\nWORKDIR /app\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY . .\nCOPY .env.local\nRUN npm run build\n\n# 3. Production image, copy all the files and run next\nFROM base AS runner\nWORKDIR /app\n\nENV PORT 3000\nENV NODE_ENV=production\n\nRUN addgroup -g 1001 -S nodejs\nRUN adduser -S nextjs -u 1001\n\nCOPY --from=builder /app/public ./public\n\nCOPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./\nCOPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static\n\nUSER nextjs\n\nEXPOSE $PORT\n\nCMD [\"node\", \"server.js\"]\n```"
+    },
+    {
+        "Issue ID": 10729,
+        "Issue State": "closed",
+        "Issue Title": "Could not find Chrome (ver. 115.0.5790.170)",
+        "Comment ID": 2643737104,
+        "Author": "Bencute",
+        "Created At": "2025-02-07T18:56:27Z",
+        "Comment Body": "I used pieces from the official docker image https://github.com/puppeteer/puppeteer/blob/main/docker/Dockerfile and the official documentation https://pptr.dev/guides/docker. The following minimal Dockerfile configuration was obtained. It should download all dependencies for the browser\n\n```\nFROM node:20\nRUN apt-get update \\\n    && apt-get install -y --no-install-recommends fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-khmeros \\\n    fonts-kacst fonts-freefont-ttf dbus dbus-x11\n\nRUN npx puppeteer browsers install chrome --install-deps\n```\nIt should be noted that the script will be run from the root user. Pupiter must be run with the following parameter --no-sandbox\n\n```\nconst browser = await puppeteer.launch({\n   headless: true,\n   args: ['--no-sandbox'],\n});\n```"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1592643627,
+        "Author": "github-actions[bot]",
+        "Created At": "2023-06-15T08:57:14Z",
+        "Comment Body": "This issue has an invalid Node.js version: `18`. Versions must follow [SemVer](https://semver.org/) formatting. Please update the form with a valid version.\n\n---\n[Analyzer run](https://github.com/puppeteer/puppeteer/actions/runs/5276806673)"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1592938975,
+        "Author": "OrKoN",
+        "Created At": "2023-06-15T12:20:37Z",
+        "Comment Body": "The browser is downloaded during the installation of Puppeteer when running `npm install`. Is Puppeteer part of your package.json and package-lock.json? Do you have the verbose log for `npm i` and the image build process? Probably, download fails or the puppeteer is not installed as part of `npm install`."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1593556850,
+        "Author": "ThomasLarge",
+        "Created At": "2023-06-15T18:42:03Z",
+        "Comment Body": "I'm seeing this too, was working fine but just stopped working on a fresh install. Does this always pull the latest chrome? Seen issues with this and Cypress before"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594025086,
+        "Author": "lifosmin",
+        "Created At": "2023-06-16T03:06:56Z",
+        "Comment Body": "my package json looks like this, I'm sure the Puppeteer is installed\r\n\r\n`{\r\n    \"name\": \"api\",\r\n    \"version\": \"1.0.0\",\r\n    \"description\": \"\",\r\n    \"main\": \"server.js\",\r\n    \"type\": \"module\",\r\n    \"scripts\": {\r\n      \"dev\": \"nodemon server.js\"\r\n    },\r\n    \"keywords\": [],\r\n    \"author\": \"\",\r\n    \"license\": \"ISC\",\r\n    \"dependencies\": {\r\n      \"body-parser\": \"^1.20.2\",\r\n      \"cheerio\": \"^1.0.0-rc.12\",\r\n      \"dotenv\": \"^16.1.4\",\r\n      \"express\": \"^4.18.2\",\r\n      \"firebase-admin\": \"^11.9.0\",\r\n      \"mysql\": \"^2.18.1\",\r\n      \"nodemon\": \"^2.0.22\",\r\n      \"puppeteer\": \"^20.6.0\",\r\n      \"puppeteer-core\": \"^20.7.1\",\r\n      \"random-useragent\": \"^0.5.0\"\r\n    }\r\n  }\r\n  \r\n`"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594229464,
+        "Author": "OrKoN",
+        "Created At": "2023-06-16T07:20:17Z",
+        "Comment Body": "We had no changes here recently. Puppeteer always pulls the pinned version of Chrome. Could you please share a reduced reproduction for this? Our official docker image builds and tests without issue https://github.com/puppeteer/puppeteer/pkgs/container/puppeteer  "
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594520888,
+        "Author": "OrKoN",
+        "Created At": "2023-06-16T11:19:46Z",
+        "Comment Body": "Update here: it might be that there is some problem with the server where the browser is downloaded from. Today we see occasional ECONNREFUSED errors, you should see it in the npm install log if the installation fails: https://github.com/puppeteer/puppeteer/actions/runs/5288559932/jobs/9570469267?pr=10396 "
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594603273,
+        "Author": "lifosmin",
+        "Created At": "2023-06-16T12:30:51Z",
+        "Comment Body": "the bug happened when i was trying to connect browser const browser = await puppeteer.launch({\r\n    headless: true,\r\n    args: [\r\n      '--no-sandbox',\r\n      '--disable-setuid-sandbox',\r\n    ],\r\n  });\r\n  \r\n  I configured docker file to install all dependencies that was needed to run at cloud."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594887917,
+        "Author": "yoursunny",
+        "Created At": "2023-06-16T15:40:23Z",
+        "Comment Body": "I'm seeing Chromium download failure too.\r\nhttps://github.com/yoursunny/NDNts/actions/runs/5291639615/jobs/9577451367#step:6:94\r\n\r\nThe server is refusing connection from GitHub Actions.\r\nHowever, I can connect to it from local desktop."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1594890949,
+        "Author": "lifosmin",
+        "Created At": "2023-06-16T15:42:53Z",
+        "Comment Body": "can i know how to resolve this?\r\n\r\nOn Fri, 16 Jun 2023 at 22.40 Junxiao Shi ***@***.***> wrote:\r\n\r\n> I'm seeing Chromium download failure too.\r\n>\r\n> https://github.com/yoursunny/NDNts/actions/runs/5291639615/jobs/9577451367#step:6:94\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/puppeteer/puppeteer/issues/10388#issuecomment-1594887917>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/APU4JK5UEG5AQFW6OFCNCJ3XLR47FANCNFSM6AAAAAAZHQPK4I>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1595335224,
+        "Author": "andyMrtnzP",
+        "Created At": "2023-06-16T21:27:11Z",
+        "Comment Body": "Seems like the default server the `browsers` package pulls Chrome from is not serving r`114.0.5735.133`. Has no issue serving, say [112.0.5615.49](https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip), but trying to download [114.0.5735.133](https://chromedriver.storage.googleapis.com/114.0.5735.133/chromedriver_linux64.zip) will fail.\r\n\r\n"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1598172671,
+        "Author": "OrKoN",
+        "Created At": "2023-06-20T06:11:25Z",
+        "Comment Body": "It seems the server is healthy again and I could not see any failures in the last two days. "
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1600383551,
+        "Author": "abdalem",
+        "Created At": "2023-06-21T08:07:28Z",
+        "Comment Body": "@lifosmin HI ! Did you resolved your issue ?"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1601324713,
+        "Author": "AdwaitMaidaan",
+        "Created At": "2023-06-21T17:57:32Z",
+        "Comment Body": "Having the same issue. I did all the steps from creating the config file to adding the launch parameters to puppeteer, but nothing seems to be working. \r\nI have the .cache directory with the chrome version inside it, but I still get the error \"Error: Could not find Chrome (ver. 114.0.5735.133)\"\r\nAny help would be appreciated."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1604331435,
+        "Author": "mauricio-gg",
+        "Created At": "2023-06-23T14:03:24Z",
+        "Comment Body": "I'm having the same issue. Why is this closed?"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609176892,
+        "Author": "sorinfratila",
+        "Created At": "2023-06-27T09:57:03Z",
+        "Comment Body": "still experiencing this as well: `Could not find Chrome (ver. 114.0.5735.90)`"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609208213,
+        "Author": "cc-thingo",
+        "Created At": "2023-06-27T10:13:49Z",
+        "Comment Body": "I'm having the same issue. `Could not find Chrome (ver. 114.0.5735.133)`"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609241688,
+        "Author": "mauricio-gg",
+        "Created At": "2023-06-27T10:36:26Z",
+        "Comment Body": "I was able to fix this by placing `.pupeteerrc.cjs` in my project's root directory"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609254342,
+        "Author": "OrKoN",
+        "Created At": "2023-06-27T10:45:16Z",
+        "Comment Body": "Please read the documentation and make sure when you deploy to the server that you install the browser binaries for the server operating system. If you believe there is a bug, please open a new issue with reproduction steps demonstrating that the browser is not downloaded to the cache directory after an `npm install` is run. \r\n\r\n- https://pptr.dev/#installation\r\n- https://pptr.dev/guides/configuration"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609319279,
+        "Author": "sorinfratila",
+        "Created At": "2023-06-27T11:32:02Z",
+        "Comment Body": "> I was able to fix this by placing .pupeteerrc.cjs in my project's root directory\r\n\r\n@mauricio-gg could you tell me what does that file contain exactly ?\r\nalso what version of puppeteer are you using ? are you importing from puppeteer or puppeteer-core ?"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609320139,
+        "Author": "sorinfratila",
+        "Created At": "2023-06-27T11:32:43Z",
+        "Comment Body": "~~locally this thing works for me, it's in Docker that it doesn't work.~~\r\nit seems to work now after I have made the build supporting mac M1 chip."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1609680181,
+        "Author": "cc-thingo",
+        "Created At": "2023-06-27T14:59:02Z",
+        "Comment Body": "I already add `.pupeteerrc.cjs` in project. Locally this thing works for me, but it doesn't work in digital ocean server."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1610975356,
+        "Author": "sk8killer",
+        "Created At": "2023-06-28T08:19:29Z",
+        "Comment Body": "Same error for me with Firebase Hosting after deploying since yesterday : `Could not find Chrome (ver. 114.0.5735.133)`\r\nI tried everything, but nothing works : \r\n- operating a clean install of all packages with :\r\n`npm clean-install`\r\n- cleaning the npm cahe with : \r\n`npm cache clean --force`\r\n- adding a gcp-build script to install chrome after deployment on Firebase Hosting with this : \r\n`\"gcp-build\": \"node node_modules/puppeteer/install.js\"` (doens't work because node_modules doesn't seem to be accessible from the root hosting directory...)\r\n- adding a `puppeteer.config.js` as detailed in the puppeteer docs : \r\n[https://pptr.dev/guides/configuration/#changing-the-default-cache-directory](https://pptr.dev/guides/configuration/#changing-the-default-cache-directory)\r\n\r\nUnfortunately, i tried to downgrade puppeteer to the previews working version for me on Firebase Hosting wich was 10.4.0\r\nand it still doesn't work.\r\n\r\nThis is very frustrating and urgent for me as part of the website i need to deploy is currently out of service !\r\n\r\nI noticed that when I try to install puppeteer in local, the `.cache/puppeteer` folder does not install every time. On ten tries, the `.cache/puppeteer` directory has only been installed once.\r\n\r\nSo I don't think that it is a problem with Firebase Hosting but rather with Puppeteer or the Chrome install server.\r\n\r\nThis issue needs to be reopenned."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1612466381,
+        "Author": "besnikh",
+        "Created At": "2023-06-29T05:49:52Z",
+        "Comment Body": "I have been awake last 3 days with this :( \r\nEven ChatGPT couldn't help me :) \r\n\r\nThese are my files that I managed to run Puppeteer on Docker and Google Cloud Run\r\n\r\nDockerfile\r\n\r\n```\r\nFROM node:latest\r\n\r\nWORKDIR /app\r\n\r\nCOPY package.json yarn.lock ./\r\n\r\nRUN yarn install\r\n\r\nCOPY . .\r\n\r\n# Install puppeteer dependencies\r\nRUN apt-get update && apt-get install -y \\\r\n    wget \\\r\n    gconf-service \\\r\n    libasound2 \\\r\n    libatk1.0-0 \\\r\n    libcairo2 \\\r\n    libcups2 \\\r\n    libfontconfig1 \\\r\n    libgdk-pixbuf2.0-0 \\\r\n    libgtk-3-0 \\\r\n    libnspr4 \\\r\n    libpango-1.0-0 \\\r\n    libxss1 \\\r\n    fonts-liberation \\\r\n    libappindicator1 \\\r\n    libnss3 \\\r\n    lsb-release \\\r\n    xdg-utils\r\n\r\nENV PUPPETEER_DOWNLOAD_PATH=/usr/local/chromium\r\n\r\nRUN yarn add puppeteer\r\n\r\nEXPOSE 4000\r\n\r\nCMD [\"yarn\", \"start\"]\r\n```\r\n\r\nSome parts of index.js \r\n\r\n```\r\nconst browser = await puppeteer.launch({\r\n    headless: \"new\",\r\n    args: [\r\n      '--no-sandbox',\r\n      '--disable-dev-shm-usage'\r\n    ],\r\n  });\r\n\r\nawait page.goto(url, { waitUntil: 'domcontentloaded' });\r\n```\r\n\r\nHope this helps someone but I don't know what happened with that Chromium it killed me "
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1612644907,
+        "Author": "sk8killer",
+        "Created At": "2023-06-29T08:44:03Z",
+        "Comment Body": "> Same error for me with Firebase Hosting after deploying since yesterday : `Could not find Chrome (ver. 114.0.5735.133)` I tried everything, but nothing works :\r\n> \r\n> * operating a clean install of all packages with :\r\n>   `npm clean-install`\r\n> * cleaning the npm cahe with :\r\n>   `npm cache clean --force`\r\n> * adding a gcp-build script to install chrome after deployment on Firebase Hosting with this :\r\n>   `\"gcp-build\": \"node node_modules/puppeteer/install.js\"` (doens't work because node_modules doesn't seem to be accessible from the root hosting directory...)\r\n> * adding a `puppeteer.config.js` as detailed in the puppeteer docs :\r\n>   https://pptr.dev/guides/configuration/#changing-the-default-cache-directory\r\n> \r\n> Unfortunately, i tried to downgrade puppeteer to the previews working version for me on Firebase Hosting wich was 10.4.0 and it still doesn't work.\r\n> \r\n> This is very frustrating and urgent for me as part of the website i need to deploy is currently out of service !\r\n> \r\n> I noticed that when I try to install puppeteer in local, the `.cache/puppeteer` folder does not install every time. On ten tries, the `.cache/puppeteer` directory has only been installed once.\r\n> \r\n> So I don't think that it is a problem with Firebase Hosting but rather with Puppeteer or the Chrome install server.\r\n> \r\n> This issue needs to be reopenned.\r\n\r\nUPDATE 29/06/2023 : Everything works now like a charm today... I don't know why !"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1612647240,
+        "Author": "sorinfratila",
+        "Created At": "2023-06-29T08:45:57Z",
+        "Comment Body": "> I don't know why !\r\n\r\n@sk8killer some people have commented that there might (have been/) be some issues with the server chrome binary is being downloaded from."
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1614005261,
+        "Author": "tungvtrelipasoft",
+        "Created At": "2023-06-30T01:51:49Z",
+        "Comment Body": "Run node_modules/puppeteer/install.js to download the binary"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1618903375,
+        "Author": "odebroqueville",
+        "Created At": "2023-07-03T17:11:13Z",
+        "Comment Body": "I have the same problem:\r\n\r\n> error: \"Could not find Chrome (ver. 114.0.5735.133). This can occur if either\\n 1. you did not perform an installation before running the script (e.g. `npm install`) or\\n 2. your cache path is incorrectly configured (which is: /root/.cache/puppeteer).\\nFor (2), check out our guide on configuring puppeteer at https://pptr.dev/guides/configuration.\"\r\n\r\nI also tried all of the measures below:\r\n\r\n- operating a clean install of all packages with :\r\nnpm clean-install\r\n- cleaning the npm cahe with :\r\nnpm cache clean --force\r\n- adding a gcp-build script in package.json to install chrome after deployment on Firebase Hosting with this :\r\n\"gcp-build\": \"node node_modules/puppeteer/install.js\" (doens't seem to do anything!)\r\n- increasing the allocated memory to 1024M\r\n- adding a puppeteer.config.js as detailed in the puppeteer docs :\r\nhttps://pptr.dev/guides/configuration/#changing-the-default-cache-directory\r\n\r\nbut nothing worked! \r\n\r\nI'm not sure if the .puppeteer.config.cjs file should be placed in the root directory or in the functions folder:\r\n\r\n![Screenshot 2023-07-03 at 19 08 29](https://github.com/puppeteer/puppeteer/assets/4818315/dbdb747f-fad5-481d-93ce-5e1a1a350412)\r\n\r\nEDIT: I changed the filename to puppeteer.config.cjs and placed it in the functions folder. After deploying, a .cache folder was created with a very large number of files. `firebase deploy` ended with:\r\n\r\n> \u26a0  functions: Upload Error: HTTP Error: 400, <?xml version='1.0' encoding='UTF-8'?><Error><Code>EntityTooLarge</Code><Message>Your proposed upload is larger than the maximum object size specified in your Policy Document.</Message><Details>Content-length exceeds upper bound on range</Details></Error>"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1619012026,
+        "Author": "joel-ghats",
+        "Created At": "2023-07-03T18:57:43Z",
+        "Comment Body": "@besnikh \r\n\r\n> I have been awake last 3 days with this :( Even ChatGPT couldn't help me :)\r\n> \r\n> These are my files that I managed to run Puppeteer on Docker and Google Cloud Run\r\n> \r\n> Dockerfile\r\n> \r\n> ```\r\n> FROM node:latest\r\n> \r\n> WORKDIR /app\r\n> \r\n> COPY package.json yarn.lock ./\r\n> \r\n> RUN yarn install\r\n> \r\n> COPY . .\r\n> \r\n> # Install puppeteer dependencies\r\n> RUN apt-get update && apt-get install -y \\\r\n>     wget \\\r\n>     gconf-service \\\r\n>     libasound2 \\\r\n>     libatk1.0-0 \\\r\n>     libcairo2 \\\r\n>     libcups2 \\\r\n>     libfontconfig1 \\\r\n>     libgdk-pixbuf2.0-0 \\\r\n>     libgtk-3-0 \\\r\n>     libnspr4 \\\r\n>     libpango-1.0-0 \\\r\n>     libxss1 \\\r\n>     fonts-liberation \\\r\n>     libappindicator1 \\\r\n>     libnss3 \\\r\n>     lsb-release \\\r\n>     xdg-utils\r\n> \r\n> ENV PUPPETEER_DOWNLOAD_PATH=/usr/local/chromium\r\n> \r\n> RUN yarn add puppeteer\r\n> \r\n> EXPOSE 4000\r\n> \r\n> CMD [\"yarn\", \"start\"]\r\n> ```\r\n> \r\n> Some parts of index.js\r\n> \r\n> ```\r\n> const browser = await puppeteer.launch({\r\n>     headless: \"new\",\r\n>     args: [\r\n>       '--no-sandbox',\r\n>       '--disable-dev-shm-usage'\r\n>     ],\r\n>   });\r\n> \r\n> await page.goto(url, { waitUntil: 'domcontentloaded' });\r\n> ```\r\n> \r\n> Hope this helps someone but I don't know what happened with that Chromium it killed me\r\n\r\n\r\n this worked for me \r\n \r\n ```\r\nFROM node:18\r\n\r\nWORKDIR app\r\n\r\nCOPY package.json .\r\nCOPY package-lock.json .\r\nRUN npm install\r\n\r\n# Install necessary dependencies for Puppeteer\r\nRUN apt-get update \\\r\n    && apt-get install -y wget gnupg \\\r\n    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \\\r\n    && sh -c 'echo \"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google.list' \\\r\n    && apt-get update \\\r\n    && apt-get install -y google-chrome-stable libxss1 \\\r\n    libx11-xcb1 \\\r\n    libxtst6 \\\r\n    libnss3 \\\r\n    libxss1 \\\r\n    libasound2 \\\r\n    libatk-bridge2.0-0 \\\r\n    libgtk-3-0 \\\r\n    --no-install-recommends \\\r\n    && rm -rf /var/lib/apt/lists/*\r\n\r\nCOPY . .\r\n\r\nEXPOSE 8080\r\n\r\nCMD [\"npm\", \"start\"]\r\n\r\n```\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1625078091,
+        "Author": "geminiyellow",
+        "Created At": "2023-07-07T08:51:07Z",
+        "Comment Body": "I'm having the same issue. `error Could not find Chrome (ver. 114.0.5735.133). `"
+    },
+    {
+        "Issue ID": 10388,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Error retrieving document: Error: Could not find Chrome (ver. 114.0.5735.90)",
+        "Comment ID": 1625127087,
+        "Author": "slochten",
+        "Created At": "2023-07-07T09:27:43Z",
+        "Comment Body": "Same issue here: `Could not find Chrome (ver. 114.0.5735.133)`"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 813761769,
+        "Author": "mattparlane",
+        "Created At": "2021-04-06T01:40:57Z",
+        "Comment Body": "You can't call `page.setCookie` with an array of cookies, it needs to be called separately for each cookie. Try:\r\n\r\n```\r\nfor (let i = 0; i < cookieJSON.length; i++) {\r\n  await page.setCookie(cookieJSON[i]);\r\n}\r\n```"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1165588791,
+        "Author": "stale[bot]",
+        "Created At": "2022-06-24T13:42:19Z",
+        "Comment Body": "We're marking this issue as unconfirmed because it has not had recent activity and  we weren't able to confirm it yet. It will be closed if no further activity occurs within the next 30 days.\n"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1193339312,
+        "Author": "stale[bot]",
+        "Created At": "2022-07-24T15:24:26Z",
+        "Comment Body": "We are closing this issue. If the issue still persists in the latest version of Puppeteer, please reopen the issue and update the description. We will try our best to accomodate it!\n"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1330659416,
+        "Author": "droplet-js",
+        "Created At": "2022-11-29T13:33:19Z",
+        "Comment Body": "any news update?\r\n\r\n```javascript\r\n// get cookie from chrome devtools console\r\nawait cookieStore.getAll();\r\n```\r\n\r\n```typescript\r\n// and try set cookies\r\n    const cookiesJson = `[\r\n        {\"domain\":\"www.example.cn\",\"expires\":1670313927089,\"name\":\"gfsitesid\",\"path\":\"/ad/\",\"sameSite\":\"none\",\"secure\":true,\"value\":\"xxxx\"},\r\n        {\"domain\":null,\"expires\":null,\"name\":\"csrf_session_id\",\"path\":\"/\",\"sameSite\":\"none\",\"secure\":true,\"value\":\"xxxx\"},\r\n        {\"domain\":null,\"expires\":1701166533374,\"name\":\"csrftoken\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":\"example.cn\",\"expires\":1701252933374,\"name\":\"tt_webid\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":\"example.cn\",\"expires\":1701245082000,\"name\":\"Hm_lvt_5d77c979053345c4bd8db63329f818ec\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":\"example.cn\",\"expires\":null,\"name\":\"Hm_lpvt_5d77c979053345c4bd8db63329f818ec\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":null,\"expires\":1670313918000,\"name\":\"ttcid\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":null,\"expires\":1670313918000,\"name\":\"tt_scid\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":null,\"expires\":1674893119000,\"name\":\"s_v_web_id\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":\"example.cn\",\"expires\":1674893126018,\"name\":\"passport_csrf_token\",\"path\":\"/\",\"sameSite\":\"none\",\"secure\":true,\"value\":\"xxxx\"},\r\n        {\"domain\":\"example.cn\",\"expires\":1674893126018,\"name\":\"passport_csrf_token_default\",\"path\":\"/\",\"sameSite\":\"lax\",\"secure\":false,\"value\":\"xxxx\"},\r\n        {\"domain\":\"www.example.cn\",\"expires\":1670313927089,\"name\":\"gftoken\",\"path\":\"/\",\"sameSite\":\"none\",\"secure\":true,\"value\":\"xxxx\"}\r\n    ]`;\r\n\r\nconst cookies: Array<Protocol.Network.CookieParam> = JSON.parse(cookiesJson).map((value: any) => value as Protocol.Network.CookieParam);\r\n                    for (let i = 0; i < cookies.length; i++) {\r\n                        await page.setCookie(cookies[i]);\r\n                    }\r\n```\r\n\r\n```shell\r\nProtocolError: Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.domain - BINDINGS: string value expected at position 15\r\n```"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1411594730,
+        "Author": "weigu123",
+        "Created At": "2023-02-01T07:41:56Z",
+        "Comment Body": "The problem is still there"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1763175586,
+        "Author": "juan-manuel-rodriguez",
+        "Created At": "2023-10-14T20:41:32Z",
+        "Comment Body": "> You can't call `page.setCookie` with an array of cookies, it needs to be called separately for each cookie. Try:\r\n> \r\n> ```\r\n> for (let i = 0; i < cookieJSON.length; i++) {\r\n>   await page.setCookie(cookieJSON[i]);\r\n> }\r\n> ```\r\n\r\nWorked for me, thank you"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 1934693742,
+        "Author": "svtxvt",
+        "Created At": "2024-02-08T18:18:43Z",
+        "Comment Body": "`await page.setCookie(...cookies);`"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 2395794916,
+        "Author": "randybastian777",
+        "Created At": "2024-10-07T03:03:49Z",
+        "Comment Body": "i already try all of above.\r\n\r\nstill error:\r\nProtocolError: Protocol error (Network.setCookies): Invalid parameters Failed to deserialize params.cookies.expires - BINDINGS: double value expected at position 222.\r\n\r\nany update?"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 2532077914,
+        "Author": "filippopassalacqua",
+        "Created At": "2024-12-10T15:34:16Z",
+        "Comment Body": "Same error\r\n\r\nProtocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.partitionKey - BINDINGS: string value expected at position 262\r\n\r\n"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 2534715925,
+        "Author": "GuillaumeDievart",
+        "Created At": "2024-12-11T08:13:24Z",
+        "Comment Body": "UP I have the same issue too, even used in the for iteration"
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 2638808914,
+        "Author": "taukirsheikh",
+        "Created At": "2025-02-06T04:40:37Z",
+        "Comment Body": "@filippopassalacqua  @randybastian777 @droplet-js @GuillaumeDievart  \nThis problem occurs when you have `\"expires\":null` in your cookies, which the whole cookies as invalid, so remove that field "
+    },
+    {
+        "Issue ID": 7029,
+        "Issue State": "closed",
+        "Issue Title": "Protocol error (Network.deleteCookies): Invalid parameters Failed to deserialize params.name - BINDINGS: mandatory field missing at position 58544",
+        "Comment ID": 2643179660,
+        "Author": "moeinrahimi1",
+        "Created At": "2025-02-07T14:59:12Z",
+        "Comment Body": "simply use like below:\ncookies is a array of objects like this:\n``` javascript\nconst cookies = [\n{\n        \"name\": \"night_mode\",\n        \"domain\":\".x.com\",\n        \"path\":\"/\",\n        \"value\": \"2\"\n    }\n]\nbrowser.setCookie(...cookies)\n```"
+    },
+    {
+        "Issue ID": 13560,
+        "Issue State": "closed",
+        "Issue Title": "[Bug]: Dblclick events can get dropped when using WebDriver BiDi with Chrome",
+        "Comment ID": 2642976038,
+        "Author": "OrKoN",
+        "Created At": "2025-02-07T13:39:24Z",
+        "Comment Body": "Fixed via https://github.com/puppeteer/puppeteer/pull/13596 and will be available in the next release."
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 467213806,
+        "Author": "jpgklassen",
+        "Created At": "2019-02-25T22:41:11Z",
+        "Comment Body": "**Update:** I edited my code so that it catches the TimeoutError and sends me an email to let me know. But when the program attempts to email me, it fails. This is what I saw in the log file:\r\n\r\n```\r\nMon Feb 25 2019 11:15:10 GMT-0800 (Pacific Standard Time) Error: Failed to deliver email to undefined: Error: spawn ENOMEM\r\n    at transporter.sendMail (/var/www/scraper/middleware/send-email.js:30:18)\r\n    at transporter.send.args (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:226:21)\r\n    at callback (/var/www/scraper/node_modules/nodemailer/lib/sendmail-transport/index.js:88:28)\r\n    at SendmailTransport.send (/var/www/scraper/node_modules/nodemailer/lib/sendmail-transport/index.js:111:20)\r\n    at _processPlugins.err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:214:34)\r\n    at Mail._processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:262:20)\r\n    at _processPlugins.err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:184:18)\r\n    at processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:275:28)\r\n    at err (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:283:17)\r\n    at Mail._convertDataImages (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:387:20)\r\n    at Mail._defaultPlugins.compile.args (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:31:41)\r\n    at processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:279:13)\r\n    at Mail._processPlugins (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:287:9)\r\n    at Mail.sendMail (/var/www/scraper/node_modules/nodemailer/lib/mailer/index.js:164:14)\r\n    at /var/www/scraper/middleware/send-email.js:28:19\r\n    at new Promise (<anonymous>)\r\n```\r\n\r\nBased on the ENOMEM, it looks like the program has run out of memory and that's why it timed out. I have the server monitoring memory usage every minute, and memory usage is slowly increasing over time as the program runs. This indicates a memory leak, however I have scoured my code for memory leaks and found none (maybe you guys can find one?)"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 467882435,
+        "Author": "jpgklassen",
+        "Created At": "2019-02-27T14:29:40Z",
+        "Comment Body": "**Update:** After a ton of troubleshooting, I've determined that the memory leak is happening in `page.evaluate()`. When this function returns, every variable declared within the function remains in memory. The callback function that was passed to `page.evaluate()` is also stored in memory, in the form of a string! It makes no difference if I call `page.close()` and `browser.close()` after every single `page.evaluate()`... the variables still continue to accumulate in memory until the program runs out of memory and crashes. I've even tried manually running the garbage collector after every `page.evaluate()`, but it doesn't get rid of the variables.\r\n\r\n**This is a big problem for those of us who are using puppeteer for web scraping!!**"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 468812651,
+        "Author": "aslushnikov",
+        "Created At": "2019-03-01T21:09:58Z",
+        "Comment Body": "> I've determined that the memory leak is happening in `page.evaluate()`\r\n\r\n@jpgklassen TL;DR: I didn't find a leak here.\r\n\r\nI ran DevTools allocation profiler against a simple script:\r\n\r\n```js\r\nconst puppeteer = require('puppeteer');\r\n\r\n(async () => {\r\n    const browser = await puppeteer.launch();\r\n    const page = await browser.newPage();\r\n    for (let i = 0; i < 10000; ++i) {\r\n      await page.evaluate(i => console.log(i), i);\r\n    }\r\n})();\r\n```\r\nThe result **does look** like there's a leak:\r\n\r\n![image](https://user-images.githubusercontent.com/746130/53665740-22fb6980-3c21-11e9-96eb-332ba4425855.png)\r\n\r\nHowever, if you run this with a new-enough node (I ran node 11), you'll notice that the retainer is a DevTools debugger.\r\n\r\n![image](https://user-images.githubusercontent.com/746130/53665830-65bd4180-3c21-11e9-8523-438b0a4bdcca.png)\r\n\r\nThis is actually a DevTools bug: `page.evaluate` creates a function object to validate input, and DevTools debugger retains the script source to provide debugging capabilities.We should either disable a debugger or filter out devtools-specific GC roots.\r\n\r\nRunning the script with a quick fix yields the following trace:\r\n![image](https://user-images.githubusercontent.com/746130/53666193-4ffc4c00-3c22-11e9-979a-375a8e870b22.png)\r\n\r\nThere are some weird memory allocations here and there, but they have nothing to do with Puppeteer's evaluate.\r\n\r\n---\r\n\r\nTo sum up:\r\n- there's no leak in `page.evaluate()`\r\n- there *is* a bug in DevTools allocation profiler. We'll get it fixed soon (cc @a1ph), thanks for bringing this up!\r\n- you're running out of memory for some other reason; it could be your page re-use policy. It is very important to close the page and create a new one every once in a while; otherwise, Chromium will slowly grow render area for the page's renderer over time.\r\n- can you please check if you have the same behavior on older Puppeteer versions?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 471818925,
+        "Author": "jpgklassen",
+        "Created At": "2019-03-12T02:02:43Z",
+        "Comment Body": "Thanks so much for your reply @aslushnikov. I _was_ using DevTools in development, so that would explain the many copies of the `page.evaluate()` callback function I was seeing in memory. However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the `page.evaluate()` callback is saved in memory, every time `page.evaluate()` is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.\r\n\r\nAlso, I am not using DevTools in production and there is a memory leak there as well.\r\n\r\nRegarding your suggestion to close the page and create a new one every once in a while - I have tried this, and it does slow down the memory leak a bit, but does not fix it unfortunately.\r\n\r\nSomething else I've noticed is that when the program crashes due to this error, and PM2 restarts it, it often restarts with WAY higher memory usage... even though the Page object, Browser object, and Mongoose connection were closed (in the `catch{}` block) before the program ended! (see below, around 4am)\r\n![memory-usage](https://user-images.githubusercontent.com/10780140/54169835-9ecf9000-4431-11e9-9411-1254458a4cb6.png)\r\n"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 473386456,
+        "Author": "aslushnikov",
+        "Created At": "2019-03-15T17:59:37Z",
+        "Comment Body": "> Regarding your suggestion to close the page and create a new one every once in a while - I have tried this, and it does slow down the memory leak a bit, but does not fix it unfortunately.\r\n\r\n@jpgklassen IIUC your chart reports total memory allocation for your VM. Can you have a chart with a breakdown of memory allocations between processes? Since there are many parties involved, I wonder who's fault is this: node's, chrome's, or mongo's. "
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 473525387,
+        "Author": "jpgklassen",
+        "Created At": "2019-03-16T12:19:50Z",
+        "Comment Body": "@aslushnikov Yes, my chart shows total memory usage for the VM. Unfortunately I don't know of a way to chart memory usage for Chrome or Mongo, but I can use PM2 Plus to track memory usage for the Node program I think. I have just set it up and I'll let it run for a while..."
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 473898920,
+        "Author": "jpgklassen",
+        "Created At": "2019-03-18T12:57:26Z",
+        "Comment Body": "**Update:** I turned off PM2 temporarily in order to allow the program to crash, so that I could examine memory usage after the crash. Sure enough, the baseline memory usage after the crash is much higher:\r\n![memory-usage2](https://user-images.githubusercontent.com/10780140/54531328-3c4f2600-4942-11e9-9f78-6ef8c19d7925.png)\r\n\r\nAfter the program crashed, when I examine the process list with the `top` command, there were no processes to account for the additional memory usage:\r\n![top](https://user-images.githubusercontent.com/10780140/54531426-7ae4e080-4942-11e9-8103-e837de70f162.png)\r\n\r\nThis leads me to believe that the program left behind some stuff in memory. The longer I leave it running with PM2, the closer together the crashes get (because it keeps leaving stuff in memory so it runs out of memory faster and faster). You would think that memory would be cleared when the Node program crashes, but for some reason it isn't... any ideas why?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 474052313,
+        "Author": "aslushnikov",
+        "Created At": "2019-03-18T18:48:15Z",
+        "Comment Body": "> You would think that memory would be cleared when the Node program crashes, but for some reason it isn't... any ideas why?\r\n\r\n@jpgklassen This should never be the case. \r\n\r\n> After the program crashed, when I examine the process list with the top command\r\n\r\nThis is an in-direct way to inspect system. These observations *might* or *might not* help to determine the root issue. There are [ways](https://unix.stackexchange.com/questions/554/how-to-monitor-cpu-memory-usage-of-a-single-process) to track memory usage per-process in Linux; I'd try using some of these to get a name of a misbehaving service and then file a bug against it to the bugtracker.\r\n\r\nI'll close this for now since I didn't find any leak in Puppeteer code per se."
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 486976270,
+        "Author": "jpgklassen",
+        "Created At": "2019-04-26T08:35:57Z",
+        "Comment Body": "@aslushnikov, would you mind commenting on this statement I made earlier:\r\n\r\n> However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the page.evaluate() callback is saved in memory, every time page.evaluate() is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.\r\n\r\nDo you think this could be the cause of the memory leak?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 512889722,
+        "Author": "ghost",
+        "Created At": "2019-07-18T16:28:24Z",
+        "Comment Body": "I have the same problem.\r\n\r\nSo far I\u2019m thinking of restarting the nodejs every hour .... but what to do .... if even browser.close does not solve the leak problem"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 559972467,
+        "Author": "cartene",
+        "Created At": "2019-11-30T14:10:54Z",
+        "Comment Body": "Hi! I have the same problem. I have to launch a different chrome for each webpage I am scraping, because I am using a different proxy for each page. Since I am using docker container I am unable to force the OS (Ubuntu LTS) to clean up the cache or residual memory. Any updates?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 566135218,
+        "Author": "hatemalimam",
+        "Created At": "2019-12-16T16:26:55Z",
+        "Comment Body": "Same issue here..."
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 609379676,
+        "Author": "HoseinGhanbari",
+        "Created At": "2020-04-05T08:34:36Z",
+        "Comment Body": "Same issue here..."
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 614191623,
+        "Author": "olegthelilfix",
+        "Created At": "2020-04-15T18:02:33Z",
+        "Comment Body": "Same issue here... "
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 645095812,
+        "Author": "ingsuniki",
+        "Created At": "2020-06-17T01:37:32Z",
+        "Comment Body": "I encountered a problem about time scheduling in a repeat for several url pages once or alternately, but he could not run as it should be, various methods have been taken and finally can run only by using an import and export module function and then running with the cron node , but a new problem arises because he cannot use the browser.close () function, but can only use page.close which results in a memory leak because when I use browser.close () then the next process he will not be able to open the browser in next process, is there anyone who can help "
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 818678676,
+        "Author": "patryk-zielinski93",
+        "Created At": "2021-04-13T11:59:01Z",
+        "Comment Body": "I have the same problem in Puppeteer 8.0.0. Evaluate function is kept in memory as strings.\r\n![image](https://user-images.githubusercontent.com/19761334/114548328-e869b500-9c5f-11eb-9f27-8e8e6635150f.png)\r\n\r\n> We should either disable a debugger or filter out devtools-specific GC roots.\r\n\r\nI run page.evaluate a lot of times. How to disable debugger to prevent that strange behavior? "
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 847120127,
+        "Author": "Phviana",
+        "Created At": "2021-05-24T15:25:59Z",
+        "Comment Body": "Same issue here...\r\n Any updates?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 885014112,
+        "Author": "teo523",
+        "Created At": "2021-07-22T15:40:21Z",
+        "Comment Body": "same issue here...why has this issue been closed?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 891381562,
+        "Author": "vdkkia",
+        "Created At": "2021-08-02T22:43:10Z",
+        "Comment Body": "+1"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 895162732,
+        "Author": "teo523",
+        "Created At": "2021-08-09T11:57:54Z",
+        "Comment Body": "Hi @aslushnikov, it seems @jpgklassen is right in her comment. Could you please address this?\r\n\r\n> @aslushnikov, would you mind commenting on this statement I made earlier:\r\n> \r\n> > However, I don't think your answer addresses all the variables I was seeing in memory too. It seems every variable declared in the page.evaluate() callback is saved in memory, every time page.evaluate() is called; and as far as I can tell the retainer for these variables is not the DevTools debugger.\r\n> \r\n> Do you think this could be the cause of the memory leak?\r\n\r\n"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 953671400,
+        "Author": "garcia-marco",
+        "Created At": "2021-10-28T09:26:28Z",
+        "Comment Body": "+1"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 968155429,
+        "Author": "Nou4r",
+        "Created At": "2021-11-13T22:10:39Z",
+        "Comment Body": "+"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1041935654,
+        "Author": "plungarini",
+        "Created At": "2022-02-16T17:55:15Z",
+        "Comment Body": "+1"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1173253739,
+        "Author": "falkenbach",
+        "Created At": "2022-07-04T01:55:40Z",
+        "Comment Body": "> **Solution:** I've written a self-contained javascript file that visibly shows a simplified cause and resolution of this memory leak. https://gist.github.com/david-littlefield/b9006cc236aaf67f25bfe54b34182805\r\n\r\nNot relevant, you not doing any page.eval's so yours case is not a solution"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1173254270,
+        "Author": "falkenbach",
+        "Created At": "2022-07-04T01:56:50Z",
+        "Comment Body": "+1"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1538814071,
+        "Author": "haryelramalho",
+        "Created At": "2023-05-08T18:07:05Z",
+        "Comment Body": "+1"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1578181703,
+        "Author": "mikejackowski",
+        "Created At": "2023-06-06T08:30:29Z",
+        "Comment Body": "why was this ticket closed?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1630416000,
+        "Author": "shirser121",
+        "Created At": "2023-07-11T08:51:06Z",
+        "Comment Body": "Did someone find a solution?"
+    },
+    {
+        "Issue ID": 4059,
+        "Issue State": "closed",
+        "Issue Title": "page.evaluate() is leaking memory",
+        "Comment ID": 1808111146,
+        "Author": "musabgultekin",
+        "Created At": "2023-11-13T12:53:39Z",
+        "Comment Body": "I observed a similar leak in playwright. Which makes me wonder that it might not be specific to puppeteer. It might not be the exact same thing though, not exactly sure."
+    }
+]

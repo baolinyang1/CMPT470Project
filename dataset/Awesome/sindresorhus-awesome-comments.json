@@ -1,0 +1,1028 @@
+[
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 1030709811,
+        "Author": "0566616453",
+        "Created At": "2022-02-05T22:41:40Z",
+        "Comment Body": "Leave a comment "
+    },
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 1097583756,
+        "Author": "nassarjjjj",
+        "Created At": "2022-04-13T05:47:08Z",
+        "Comment Body": "\u0627\u0644\u0633\u0644\u0627\u0645 "
+    },
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 1541010739,
+        "Author": "Porpasad",
+        "Created At": "2023-05-09T23:21:55Z",
+        "Comment Body": "awesome.re"
+    },
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 2561649852,
+        "Author": "30031987Ya",
+        "Created At": "2024-12-25T06:23:56Z",
+        "Comment Body": "> Related to #1268\r\n\r\n"
+    },
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 2561658487,
+        "Author": "Tester1234537",
+        "Created At": "2024-12-25T06:43:11Z",
+        "Comment Body": "Nao.. is what the men intehliveru en the bak.and pss the\r\n Visi\u00f3n is esy.. O we an the kill\r\n\r\n\r\nEl mi\u00e9, 25 dic 2024, 1:31 a. m., 30031987Ya ***@***.***>\r\nescribi\u00f3:\r\n\r\n> Related to #1268 <https://github.com/sindresorhus/awesome/pull/1268>\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sindresorhus/awesome/pull/1269#issuecomment-2561649852>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/A7TCOKOUUO52CVS3RPMI4VL2HJGNNAVCNFSM6AAAAABRWO4PUOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKNRRGY2DSOBVGI>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 1269,
+        "Issue State": "closed",
+        "Issue Title": "Add flat badges to gh-pages branch",
+        "Comment ID": 2645842050,
+        "Author": "AngSolids",
+        "Created At": "2025-02-08T16:54:08Z",
+        "Comment Body": "Solid project"
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 277684554,
+        "Author": "sindresorhus",
+        "Created At": "2017-02-06T13:44:22Z",
+        "Comment Body": "> It is a curated list of awesome web apps that work without requesting you to create an account. This list will help users to do common tasks without having to download a software or create web accounts.\r\n\r\nWhat problem does it solve though? I honestly rather create an account in a great web app then use a crappy one without login (Not saying this is the case every time, but very often)."
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 277698447,
+        "Author": "aviaryan",
+        "Created At": "2017-02-06T14:31:24Z",
+        "Comment Body": "The main motivation for this is like suppose you want to do a certain task, let's say plot a graph for a function to see its behaviour. You come to no-login-web-apps repo, look up the index and quickly find something that works for you, out of the box. No logins, no registrations. Of course, if you will be doing this too often, you might want to create an account on that site.\r\n\r\n> I honestly rather create an account in a great web app then use a crappy one without login\r\n\r\n**From README:** Most of the apps mentioned here do provide some kind of a user account feature to save history and progress. But as already stated before, a user account is not necessary to use the main features of these apps.\r\n\r\nMaybe I should add a marker for sites that allow logins ?\r\n\r\n----\r\n\r\nConsidering the above explanation, I think my PR is suitable for this project. @sindresorhus What do you think? "
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 277723395,
+        "Author": "jedahan",
+        "Created At": "2017-02-06T15:51:06Z",
+        "Comment Body": "I also see this list as a great resource on finding applications that have the potential to be easily distributed, offline first, generally (though not always) small codebase... "
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 280865698,
+        "Author": "sindresorhus",
+        "Created At": "2017-02-18T18:36:27Z",
+        "Comment Body": "> @sindresorhus What do you think?\r\n\r\n:+1:\r\n\r\n> only has awesome items with descriptions\r\n\r\nNoticed a few items are missing description.\r\n\r\n> Each link description starts with an uppercase character and ends with a period.\r\n\r\nNot followed.\r\n\r\n> Drop all the A / An prefixes in the descriptions.\r\n\r\nNot followed.\r\n\r\n> Consistent naming. For example, Node.js, not NodeJS or node.js.\r\n\r\nFor example, I see both `Youtube` and `youtube` used, but neither are correct. It's `YouTube`."
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 280991022,
+        "Author": "aviaryan",
+        "Created At": "2017-02-20T05:24:38Z",
+        "Comment Body": "@sindresorhus I have updated the list with the improvements you suggested. Can you please have a look. Thanks \ud83d\ude0a"
+    },
+    {
+        "Issue ID": 878,
+        "Issue State": "closed",
+        "Issue Title": "Add No-Login Web Apps",
+        "Comment ID": 2645840067,
+        "Author": "AngSolids",
+        "Created At": "2025-02-08T16:49:47Z",
+        "Comment Body": "Can you forget to stroger you're talking bullet"
+    },
+    {
+        "Issue ID": 3019,
+        "Issue State": "closed",
+        "Issue Title": "Meta tweaks",
+        "Comment ID": 2105632784,
+        "Author": "OR3Omimi",
+        "Created At": "2024-05-11T08:26:32Z",
+        "Comment Body": "> <!-- Congrats on creating an Awesome list! \ud83c\udf89 -->\n> \n> <!-- Please fill in the below placeholders -->\n> \n> ### By submitting this pull request I confirm I've read and complied with the below requirements \ud83d\udd96\n> \n> This is a typo fix pull request, which is not related to the awesome list itself. :-)\n\n\u524d\u6392\u961f\u7b49\u670d\u52a1\u662f\u5426\u8981\u5728\u8fd9\u4e2a\u89d2\u8272\u603b\u52a8\u5458\u4eec\u770b\u8fc7\u6765# \u770b\u5230\u8fd9\u91cc\u4e86**\u5feb\u6765\u4e70\u8d35\u65cf\u548c\u6211\u4eec\u8981****~~\u6c11\u56fd~~"
+    },
+    {
+        "Issue ID": 3312,
+        "Issue State": "closed",
+        "Issue Title": "Add Large Language Model",
+        "Comment ID": 2558267710,
+        "Author": "sindresorhus",
+        "Created At": "2024-12-21T23:32:07Z",
+        "Comment Body": "Thanks for making an Awesome list! \ud83d\ude4c\r\n\r\nIt looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+    },
+    {
+        "Issue ID": 3312,
+        "Issue State": "closed",
+        "Issue Title": "Add Large Language Model",
+        "Comment ID": 2558865577,
+        "Author": "donBarbos",
+        "Created At": "2024-12-23T04:04:35Z",
+        "Comment Body": "hi @zhiyuan8, your list is really awesome but it doesn't meet any of the requirements :disappointed:\r\n\r\nfirst of all I would advise you to start with a linter (it showed me 210 errors):\r\n`npx awesome-lint https://github.com/NexaAI/Awesome-LLMs-on-device`\r\nyour list is almost entirely made up of different tables, although the guidelines says that the list should look like this:\r\n`- [Item](link) - Description.`\r\nI think this is the main thing you should start with.\r\n\r\n**and of course read all the requirements!**"
+    },
+    {
+        "Issue ID": 3312,
+        "Issue State": "closed",
+        "Issue Title": "Add Large Language Model",
+        "Comment ID": 2558916560,
+        "Author": "NewAlexandria",
+        "Created At": "2024-12-23T05:05:18Z",
+        "Comment Body": "@zhiyuan8 , I hope you'll revise it.  This looks like a great list. "
+    },
+    {
+        "Issue ID": 1354,
+        "Issue State": "closed",
+        "Issue Title": "Would anyone be interested: \"Awesome list of hardware for Kali Linux\"?",
+        "Comment ID": 405025738,
+        "Author": "ghost",
+        "Created At": "2018-07-14T14:04:45Z",
+        "Comment Body": "Also idk how to add labels to issues in this tracker. Can someone add the `list request` and `help wanted` labels for me?"
+    },
+    {
+        "Issue ID": 1354,
+        "Issue State": "closed",
+        "Issue Title": "Would anyone be interested: \"Awesome list of hardware for Kali Linux\"?",
+        "Comment ID": 408619551,
+        "Author": "sindresorhus",
+        "Created At": "2018-07-28T16:33:24Z",
+        "Comment Body": "The requirements for a list is listed here: https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md\r\n\r\nUsually, you start a list when you know a topic very well and want to share the resources and knowledge you have gathered. It doesn't really work to create an empty list and hope that people will come by and help out.\r\n\r\nInstead, try to find some people in the Kali Linux community to start the list with."
+    },
+    {
+        "Issue ID": 1354,
+        "Issue State": "closed",
+        "Issue Title": "Would anyone be interested: \"Awesome list of hardware for Kali Linux\"?",
+        "Comment ID": 408679763,
+        "Author": "ghost",
+        "Created At": "2018-07-29T14:00:53Z",
+        "Comment Body": " >  It doesn't really work to create an empty list and hope that people will come by and help out.\r\n\r\nOkay yeah that makes sense, and I am in full agreement with the point. I have neither the experience nor expert knowledge to contribute to my own list meaningfully so I guess I will delete the repo for now. Thank you."
+    },
+    {
+        "Issue ID": 1354,
+        "Issue State": "closed",
+        "Issue Title": "Would anyone be interested: \"Awesome list of hardware for Kali Linux\"?",
+        "Comment ID": 2626200967,
+        "Author": "Jrmufunwa",
+        "Created At": "2025-01-31T03:03:34Z",
+        "Comment Body": "How do I install Kali Linux on Samsung A05s..?"
+    },
+    {
+        "Issue ID": 3151,
+        "Issue State": "closed",
+        "Issue Title": "Add Japanese list",
+        "Comment ID": 2290001694,
+        "Author": "sindresorhus",
+        "Created At": "2024-08-14T22:06:38Z",
+        "Comment Body": "https://github.com/sindresorhus/awesome/blob/main/create-list.md"
+    },
+    {
+        "Issue ID": 3151,
+        "Issue State": "closed",
+        "Issue Title": "Add Japanese list",
+        "Comment ID": 2614160774,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:15:08Z",
+        "Comment Body": "Delete"
+    },
+    {
+        "Issue ID": 3154,
+        "Issue State": "closed",
+        "Issue Title": "Add Machine Learning section",
+        "Comment ID": 2325394682,
+        "Author": "oguzhan18",
+        "Created At": "2024-09-03T00:00:08Z",
+        "Comment Body": "This is an automated response to help you with this issue. Please let us know if you need further assistance."
+    },
+    {
+        "Issue ID": 3154,
+        "Issue State": "closed",
+        "Issue Title": "Add Machine Learning section",
+        "Comment ID": 2327568358,
+        "Author": "ghost",
+        "Created At": "2024-09-03T22:45:24Z",
+        "Comment Body": "I\u2019m sorry. Is this how you treat?\r\nI have no clue on coding and I don\u2019t have any interests on it! Government\r\nforced me to die and my google map record got changed by somebody. I don\u2019t\r\nseriously like the way your company supervised at all! I\u2019m dying through\r\nthese 2 months.\r\nThe world is full of miserable. Why should I live?\r\n\r\nO\u011fuzhan \u00c7ART ***@***.***>\u65bc 2024\u5e749\u67083\u65e5 \u9031\u4e8c\uff0c08:07\u5beb\u9053\uff1a\r\n\r\n> This is an automated response to help you with this issue. Please let us\r\n> know if you need further assistance.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sindresorhus/awesome/issues/3154#issuecomment-2325394682>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/ASM7JGOTEEAB65PUBRORGA3ZUT4TJAVCNFSM6AAAAABMUEBPC2VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDGMRVGM4TINRYGI>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 3154,
+        "Issue State": "closed",
+        "Issue Title": "Add Machine Learning section",
+        "Comment ID": 2614160621,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:14:20Z",
+        "Comment Body": "Delete "
+    },
+    {
+        "Issue ID": 3216,
+        "Issue State": "closed",
+        "Issue Title": "create-list.md not clear about license and contributing in footernote",
+        "Comment ID": 2614160294,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:12:52Z",
+        "Comment Body": "Delete \n"
+    },
+    {
+        "Issue ID": 3241,
+        "Issue State": "closed",
+        "Issue Title": "Awesome Windows link is dead",
+        "Comment ID": 2455808441,
+        "Author": "ForNeVeR",
+        "Created At": "2024-11-04T22:13:33Z",
+        "Comment Body": "This is being addressed by #3227."
+    },
+    {
+        "Issue ID": 3241,
+        "Issue State": "closed",
+        "Issue Title": "Awesome Windows link is dead",
+        "Comment ID": 2463231224,
+        "Author": "msbegee",
+        "Created At": "2024-11-07T21:16:54Z",
+        "Comment Body": "diable"
+    },
+    {
+        "Issue ID": 3241,
+        "Issue State": "closed",
+        "Issue Title": "Awesome Windows link is dead",
+        "Comment ID": 2495680189,
+        "Author": "0PandaDEV",
+        "Created At": "2024-11-23T22:57:32Z",
+        "Comment Body": "Finally, after 2 months #3227 was merged and with this the windows link is fixed. This issue can be closed now @abhy-kumar "
+    },
+    {
+        "Issue ID": 3241,
+        "Issue State": "closed",
+        "Issue Title": "Awesome Windows link is dead",
+        "Comment ID": 2614160051,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:11:41Z",
+        "Comment Body": "Close and delete "
+    },
+    {
+        "Issue ID": 3266,
+        "Issue State": "closed",
+        "Issue Title": "Handbrake Web is listed twice",
+        "Comment ID": 2466451502,
+        "Author": "RonnyAL",
+        "Created At": "2024-11-09T20:32:01Z",
+        "Comment Body": "Accidentally opened issue in wrong repo!"
+    },
+    {
+        "Issue ID": 3266,
+        "Issue State": "closed",
+        "Issue Title": "Handbrake Web is listed twice",
+        "Comment ID": 2614159737,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:10:16Z",
+        "Comment Body": "Close "
+    },
+    {
+        "Issue ID": 3302,
+        "Issue State": "closed",
+        "Issue Title": "What Are the Criteria for \u201cNo Blockchain-Related Lists\u201d in Pull Request Guidelines?",
+        "Comment ID": 2532931084,
+        "Author": "sindresorhus",
+        "Created At": "2024-12-10T21:29:44Z",
+        "Comment Body": "There are too many blockchain projects that are pure scam and I don't want to spend a lot of time investigation whether the submissions are such projects.\r\n\r\n---\r\n\r\n> There are already some \u201cblockchain-related\u201d items on the existing awesome list\r\n\r\nThe work was already done with those."
+    },
+    {
+        "Issue ID": 3302,
+        "Issue State": "closed",
+        "Issue Title": "What Are the Criteria for \u201cNo Blockchain-Related Lists\u201d in Pull Request Guidelines?",
+        "Comment ID": 2614159603,
+        "Author": "CiCi2019-cu",
+        "Created At": "2025-01-26T01:09:35Z",
+        "Comment Body": "Clear all"
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2495512845,
+        "Author": "sindresorhus",
+        "Created At": "2024-11-23T15:23:44Z",
+        "Comment Body": "Thanks for making an Awesome list! \ud83d\ude4c\r\n\r\nIt looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2498088581,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-25T13:55:38Z",
+        "Comment Body": "> Thanks for making an Awesome list! \ud83d\ude4c\r\n> \r\n> It looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome.\r\n\r\nI've edit the repo conform to awesome-lint, there is one requirement that not satisfied,\r\nsince I am adding an entry related to Postgres, I think it will be better that this\r\nentry be listed below the Postgres entry."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2499495157,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-26T02:14:27Z",
+        "Comment Body": "> There is no issue with `npx awesome-lint https://github.com/pghacking/awesome-postgres-hacking`; it is now `\u2705 Linting` successfully.\r\n> \r\n> It would be better to add it to the README.md file of the Awesome repository as follows because other projects have added it this way.\r\n> \r\n> * [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.\r\n>   \r\n>   * [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - PostgreSQL hacking resources.\r\n> \r\n> There is also a description of \u201cPostgreSQL hacking resources.\u201d It should not start with the title.\r\n\r\nChanged as a subentry.\r\nNon english native speaker, what do you mean by saying \"It should not start with the title\"?\r\nCan you be specific which part should be changed?"
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2500317668,
+        "Author": "bozaci",
+        "Created At": "2024-11-26T11:05:19Z",
+        "Comment Body": "Your Description: **PostgreSQL hacking resources.**\r\nPostgreSQL, present at the beginning of the description, should not be at the beginning. It would be best if you corrected the description accordingly, other pull requests are requested this way.\r\n\r\nExample:\r\n\r\n- [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.\r\n  - [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - Resources for PostgreSQL hacking."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2500554974,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-26T12:05:43Z",
+        "Comment Body": "> Your Description: **PostgreSQL hacking resources.** PostgreSQL, present at the beginning of the description, should not be at the beginning. It would be best if you corrected the description accordingly, other pull requests are requested this way.\r\n> \r\n> Example:\r\n> \r\n> * [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) - Object-relational database.\r\n>   \r\n>   * [Hacking](https://github.com/pghacking/awesome-postgres-hacking#readme) - Resources for PostgreSQL hacking.\r\n\r\nChanged accordingly, thanks"
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2502684393,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-27T04:12:02Z",
+        "Comment Body": "> Finally, as far as I can see you have added a pull request review, but no \u2018approved\u2019, \u2018request changes\u2019 or any comments.\r\n\r\nI don't remember I add a pull request review, I just do quote reply. I had re-requested your review after I did some change, I'm not sure if mean that."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2503613896,
+        "Author": "bozaci",
+        "Created At": "2024-11-27T11:20:06Z",
+        "Comment Body": "**The one you added**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen).\r\nI have reviewed https://github.com/sindresorhus/awesome/pull/3247 and https://github.com/sindresorhus/awesome/pull/3256\r\n\r\n**Checklist request**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen).\r\nTry to prioritise unreviewed PRs, but you can also add more comments to reviewed PRs. Review the following list when reviewing. This requirement is to help the Awesome project become self-sustaining. Leave a comment here about which PRs you have reviewed. You are expected to make a good effort and be thorough. Look at previous PR reviews for inspiration. Just commenting \u2018looks good\u2019 or just marking the pull request as approved doesn't count! You really need to point out errors or suggestions for improvement. Comments pointing out a lint violation are allowed, but do not count as a review.\r\n\r\n---\r\n\r\nI think there has been a slight misunderstanding here. It is not enough to say \u2018I have reviewed these PRs\u2019. The checklist expects you to do a detailed review and share any shortcomings or suggestions for improvement. For example, you can look at previous reviews and get inspired. So it would be best if you made a more in-depth evaluation."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2503684813,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-27T11:55:10Z",
+        "Comment Body": "> **The one you added**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen). I have reviewed #3247 and #3256\r\n> \r\n> **Checklist request**: You should review at least 2 other [open pull requests](https://github.com/sindresorhus/awesome/pulls?q=is%3Apr+is%3Aopen). Try to prioritise unreviewed PRs, but you can also add more comments to reviewed PRs. Review the following list when reviewing. This requirement is to help the Awesome project become self-sustaining. Leave a comment here about which PRs you have reviewed. You are expected to make a good effort and be thorough. Look at previous PR reviews for inspiration. Just commenting \u2018looks good\u2019 or just marking the pull request as approved doesn't count! You really need to point out errors or suggestions for improvement. Comments pointing out a lint violation are allowed, but do not count as a review.\r\n> \r\n> I think there has been a slight misunderstanding here. It is not enough to say \u2018I have reviewed these PRs\u2019. The checklist expects you to do a detailed review and share any shortcomings or suggestions for improvement. For example, you can look at previous reviews and get inspired. So it would be best if you made a more in-depth evaluation.\r\n\r\nOK, I just reviewed #3283 and #3247 and left a LGTM approve message."
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2506297605,
+        "Author": "zhjwpku",
+        "Created At": "2024-11-28T14:51:35Z",
+        "Comment Body": "> Thanks for creating the list!\r\n> \r\n> Please note in the guidelines:\r\n> \r\n> > Entries have a description, unless the title is descriptive enough by itself. It rarely is though.\r\n> \r\n> In your list, most of the entries have none. Only the books, the first two mailing lists, and the tools have them.\r\n> \r\nTBH, I think the titles are descriptive enough by themselves.\r\n\r\n> Also, there's an empty section \"Parser\".\r\n\r\nI just add for entry for parser section.\r\n"
+    },
+    {
+        "Issue ID": 3282,
+        "Issue State": "closed",
+        "Issue Title": "Add PostgreSQL hacking",
+        "Comment ID": 2608127718,
+        "Author": "DanailMinchev",
+        "Created At": "2025-01-22T19:48:03Z",
+        "Comment Body": "Please have a look at these linting errors, mainly missing dots:\r\n<img width=\"715\" alt=\"image\" src=\"https://github.com/user-attachments/assets/0f08b6d5-0757-4adb-b274-f085aa6189dc\" />\r\n"
+    },
+    {
+        "Issue ID": 3341,
+        "Issue State": "closed",
+        "Issue Title": "Add missing period for consistency in the Code-of-Conduct.md section",
+        "Comment ID": 2609191815,
+        "Author": "sindresorhus",
+        "Created At": "2025-01-23T08:49:34Z",
+        "Comment Body": "You have to fix the source if so: https://www.contributor-covenant.org/version/1/4/code-of-conduct/"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2229468457,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-15T21:25:21Z",
+        "Comment Body": "unicorn"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2236179760,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-18T10:36:22Z",
+        "Comment Body": "@TupleType can you elaborate what you mean?"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2236189457,
+        "Author": "TupleType",
+        "Created At": "2024-07-18T10:42:07Z",
+        "Comment Body": "> @TupleType can you elaborate what you mean?\r\n\r\nIncludes a succinct description of the project/theme at the top of the readme. [(Example)](https://github.com/willempienaar/awesome-quantified-self)\r\n\u2705 Mobile operating system for Apple phones and tablets.\r\n\u2705 Prototyping interactive UI designs.\r\n\u274c Resources and tools for iOS development.\r\n\u274c Awesome Framer packages and tools.\r\n\r\n"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2236194892,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-18T10:45:30Z",
+        "Comment Body": "@TupleType I think the sentence I have\r\n\r\n> Xiangqi, also known as Chinese chess, is a two-players abstract strategy board-game from China, with a long history of tradition, theory and tactics.\r\n\r\nis a pretty succint description of what xiangqi is.\r\n\r\nCould you clarify why you think it does not fit the guidelines? If you have a better wording in mind, of course happy to receive feedback :)\r\n"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2236198960,
+        "Author": "TupleType",
+        "Created At": "2024-07-18T10:47:48Z",
+        "Comment Body": "I mean the first line of the readme should be second"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2236231488,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-18T11:06:25Z",
+        "Comment Body": "@TupleType  Do you mean that I should move the sentence\r\n\r\n> A curated list of xiangqi related resources.\r\n\r\nafter the description? I don't mind the change, but why do you think it's against the guidelines? I took as model the example repository linked in the guidelines: https://github.com/woop/awesome-quantified-self and that also starts with\r\n\r\n> Carefully curated list of awesome Quantified Self resources.\r\n\r\nbefore the description. Similarly other lists: https://github.com/sindresorhus/awesome-electron , so I don't think it's against the guidelines for that to come before the topic description :thinking: As far as I can tell, I don't think it's required to be quoted (with `>` ) either."
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2242372697,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-22T08:22:47Z",
+        "Comment Body": "Hi @sindresorhus \ud83d\udd96 ,\r\n\r\nI think this PR is ready, let me know if you think otherwise."
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2250629206,
+        "Author": "lucaferranti",
+        "Created At": "2024-07-25T15:10:13Z",
+        "Comment Body": "@sindresorhus friendly ping :)"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2261507610,
+        "Author": "jackaubone",
+        "Created At": "2024-07-31T21:39:43Z",
+        "Comment Body": "__k "
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2262153216,
+        "Author": "lucaferranti",
+        "Created At": "2024-08-01T06:28:25Z",
+        "Comment Body": "@sindresorhus world's gentlest ping :) \r\n\r\nPlease let me know if this is good to go"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2276025252,
+        "Author": "lucaferranti",
+        "Created At": "2024-08-08T14:51:18Z",
+        "Comment Body": "@sindresorhus weekly ping :peace_symbol:"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2276558465,
+        "Author": "sindresorhus",
+        "Created At": "2024-08-08T20:01:31Z",
+        "Comment Body": "@lucaferranti Please stop pinging. All it does is move it to the bottom of my review list. Getting a list merged generally takes time."
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2276588857,
+        "Author": "lucaferranti",
+        "Created At": "2024-08-08T20:21:36Z",
+        "Comment Body": "I understand and apologize for bothering.\r\n\r\nYou are running a great open project here on your free time and this is great! I am sorry I broke the etiquette by pinging you and I did not mean to sound rude or pushy. Now that I know the rules, I am happy with your answer and happy to wait as long as it takes. Thanks for informing me and again, sorry for the inconvenience\r\n"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2429933324,
+        "Author": "sindresorhus",
+        "Created At": "2024-10-22T18:10:11Z",
+        "Comment Body": "`Xiangqi` in `Xiangqi, also known as Chinese chess, is a two-players abstract strategy board-game from China, with a long history of tradition, theory and tactics.` should be linkified to https://en.wikipedia.org/wiki/Xiangqi\r\n\r\n---\r\n\r\n> `https://www.chessdb.cn/query/ - Interactive board to search positions and statistics about their outcomes and continuations.`\r\n\r\nShould be:\r\n\r\n> `[ChessDB](https://www.chessdb.cn/query/) - Interactive board to search positions and statistics about their outcomes and continuations.`\r\n\r\nSame everywhere.\r\n\r\n---\r\n\r\nRun the list through ChatGPT to fix typos."
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2430331616,
+        "Author": "lucaferranti",
+        "Created At": "2024-10-22T21:19:24Z",
+        "Comment Body": "TIL, the correct spelling is dynasty and not dinasty :sweat_smile: \r\n\r\nThank you very much for the review! The points raised should be fixed now"
+    },
+    {
+        "Issue ID": 3110,
+        "Issue State": "closed",
+        "Issue Title": "Add Xiangqi",
+        "Comment ID": 2525211707,
+        "Author": "theodorosploumis",
+        "Created At": "2024-12-07T15:36:09Z",
+        "Comment Body": "I do believe that adding the **Chinese** words on the list beside the English titles does not give added value. This is the case on the [Opening](https://github.com/lucaferranti/awesome-xiangqi#opening) section.\r\n"
+    },
+    {
+        "Issue ID": 3332,
+        "Issue State": "closed",
+        "Issue Title": "Create  Birthday Countdown",
+        "Comment ID": 2595419009,
+        "Author": "0543597595",
+        "Created At": "2025-01-16T12:19:01Z",
+        "Comment Body": " Please review the link: [Birthday Countdown Online](https://www.birthday-countdown.online)\r\n- Ensure that the project description matches the intended purpose and that all necessary features are highlighted."
+    },
+    {
+        "Issue ID": 3332,
+        "Issue State": "closed",
+        "Issue Title": "Create  Birthday Countdown",
+        "Comment ID": 2595425341,
+        "Author": "0543597595",
+        "Created At": "2025-01-16T12:20:24Z",
+        "Comment Body": "@0543597595  (the maintainer's GitHub handle), the pull request is ready to be merged. Please review and merge when possible."
+    },
+    {
+        "Issue ID": 3332,
+        "Issue State": "closed",
+        "Issue Title": "Create  Birthday Countdown",
+        "Comment ID": 2595441741,
+        "Author": "DanailMinchev",
+        "Created At": "2025-01-16T12:24:27Z",
+        "Comment Body": "@0543597595 please rename your pull request to \"Add Birthday Countdown\" and looks like you are not supplying Awesome list repository, please read the guidelines for contributing"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2543850905,
+        "Author": "Axorax",
+        "Created At": "2024-12-15T12:17:24Z",
+        "Comment Body": "unicorn"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2543852801,
+        "Author": "Axorax",
+        "Created At": "2024-12-15T12:23:22Z",
+        "Comment Body": "not sure on why the linter in the github actions failed but heres a screenshot of me running awesome linter on it:\r\n\r\n![image](https://github.com/user-attachments/assets/15d185a3-040a-41b5-bd56-f9c4bf73ef3b)\r\n"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2549223948,
+        "Author": "donBarbos",
+        "Created At": "2024-12-17T18:07:35Z",
+        "Comment Body": "linter show me next problems:\r\n```bash\r\n\u2716 Linting\r\n\r\n  README.md:158:77\r\n  \u2716  158:77  List item description must end with proper punctuation  remark-lint:awesome-list-item\r\n  \u2716  163:99  List item description must end with proper punctuation  remark-lint:awesome-list-item\r\n  \u2716  184:41  List item description must end with proper punctuation  remark-lint:awesome-list-item\r\n  \u2716  186:67  List item description must end with proper punctuation  remark-lint:awesome-list-item\r\n\r\n  4 errors\r\n```\r\nanyway you need to fix your `README.md`,\r\nand it's linter output from workflow (you always can check github actions logs):\r\n```bash\r\nwarning: url contains a newline in its path component: https://github.com/Axorax/awesome-free-apps\r\nhttps://github.com/Axorax/awesome-free-apps\r\nhttps://github.com/Axorax/awesome-free-apps/\r\nfatal: credential url cannot be parsed: https://github.com/Axorax/awesome-free-apps\r\nhttps://github.com/Axorax/awesome-free-apps\r\nhttps://github.com/Axorax/awesome-free-apps/\r\nfatal: remote helper 'https' aborted session\r\n```\r\n\r\nthese're similar awesome lists i found:\r\n- https://github.com/RunaCapital/awesome-oss-alternatives\r\n- https://github.com/diegoleme/awesome-open-source-alternatives\r\n\r\nbut you can explain how your list is different and what you mean by ___free___ apps?\r\n(I didn't find any explanation in your readme)\r\n\r\nand I also don't think it's worth adding your list to several topics"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2549272909,
+        "Author": "Axorax",
+        "Created At": "2024-12-17T18:24:40Z",
+        "Comment Body": "Hey! So, I added more apps and messed up some punctuations. Should be fixed now.\r\n\r\nHow is my list different?\r\nWell, there are open source app lists. My list is for free apps that means the app can be open-source or closed source. The listen only contains the best free apps that can have their source code public or private.\r\n\r\nI put it in three topics as the list covers windows, mac and linux. There are no free app lists currently, so I made one."
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2549469055,
+        "Author": "Mo-way",
+        "Created At": "2024-12-17T19:48:40Z",
+        "Comment Body": "@Axorax \r\nThe free needs more clear, because (software) people differentiate `free as in freedom` and `free as in free beer`. \r\nSee: https://en.wikipedia.org/wiki/Gratis_versus_libre\r\n\r\nAwesome to see the resonance to your list! It seems there's definitely a desire for a \"gratis\" apps list, regardless the freedom of the source code. Still, I think adding it in one category only suffices.. All other \"free apps\" related lists are in `Miscellaneous` (apart from the macOS one, for obvious reasons)."
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2549531321,
+        "Author": "Jogai",
+        "Created At": "2024-12-17T20:18:54Z",
+        "Comment Body": "Was dissapointed when looking at the games category. No free games listed, mostly launchers of big for-profit corpos."
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2550527624,
+        "Author": "Axorax",
+        "Created At": "2024-12-18T07:09:46Z",
+        "Comment Body": "@Mo-way Thanks for the feedback! What category should I list it in?"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2550701869,
+        "Author": "Mo-way",
+        "Created At": "2024-12-18T08:42:25Z",
+        "Comment Body": "@Axorax  Miscellaneous"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2553002925,
+        "Author": "Axorax",
+        "Created At": "2024-12-19T07:54:53Z",
+        "Comment Body": "> Another nitpick: if yo ask me, the \"\u2b50 recommended by us\" category makes no sense on an awesome list - if you don't recommend it, remove it from the list\r\n\r\nofc we recommend all the apps but the star ones are the apps in that category with the best UI and functionality like best all together"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2553286360,
+        "Author": "Mo-way",
+        "Created At": "2024-12-19T09:56:55Z",
+        "Comment Body": "> ofc we recommend all the apps but the star ones are the apps in that category with the best UI and functionality like best all together\r\n\r\nOkay, sounds sensible to me. I agree, there are many very long awesome lists, where some prioritization would help. \r\nLet's see what others say"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2567454717,
+        "Author": "yijun-lee",
+        "Created At": "2025-01-02T09:02:30Z",
+        "Comment Body": "Thank you so much for creating such an excellent list!\r\n\r\nAlthough it overlaps a bit with what you mentioned earlier, here are my thoughts:\r\n\r\n1. Regarding \u201c\u2b50 recommended by us,\u201d I think it would be better to either clarify the criteria for recommendation or remove it altogether if there aren\u2019t any explicit standards. The awesome list itself is already about listing only \u2018awesome\u2019 things. Of course, if you want to highlight the most awesome among the awesome ones, then it could still make sense to include it.\r\n2. What is the criteria for labeling something as a free app? Platforms like Steam or Xbox seem a bit ambiguous to be categorized as \u201cfree apps.\u201d\r\n\r\nHope this feedback helps!"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2567669529,
+        "Author": "Axorax",
+        "Created At": "2025-01-02T12:00:35Z",
+        "Comment Body": "> Thank you so much for creating such an excellent list!\r\n> \r\n> Although it overlaps a bit with what you mentioned earlier, here are my thoughts:\r\n> \r\n> 1. Regarding \u201c\u2b50 recommended by us,\u201d I think it would be better to either clarify the criteria for recommendation or remove it altogether if there aren\u2019t any explicit standards. The awesome list itself is already about listing only \u2018awesome\u2019 things. Of course, if you want to highlight the most awesome among the awesome ones, then it could still make sense to include it.\r\n> 2. What is the criteria for labeling something as a free app? Platforms like Steam or Xbox seem a bit ambiguous to be categorized as \u201cfree apps.\u201d\r\n> \r\n> Hope this feedback helps!\r\n\r\n1. > yup, it'll highlight only the most awesome ones in that category.\r\n2. > the launcher is free and there are a lot of free games on there that u can play"
+    },
+    {
+        "Issue ID": 3308,
+        "Issue State": "closed",
+        "Issue Title": "Add Free Apps",
+        "Comment ID": 2585954226,
+        "Author": "jsp-mx",
+        "Created At": "2025-01-12T23:01:50Z",
+        "Comment Body": "looks good"
+    },
+    {
+        "Issue ID": 3326,
+        "Issue State": "closed",
+        "Issue Title": "C# is a language I don't seem to find",
+        "Comment ID": 2573944521,
+        "Author": "Jogai",
+        "Created At": "2025-01-06T21:18:48Z",
+        "Comment Body": "Not how it works. Its a community effort. If you have a c# list, make a PR. But maybe for you search with the term \".NET\""
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2452339402,
+        "Author": "sindresorhus",
+        "Created At": "2024-11-01T18:04:21Z",
+        "Comment Body": "Thanks for making an Awesome list! \ud83d\ude4c\r\n\r\nIt looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2452904898,
+        "Author": "hardBSDk",
+        "Created At": "2024-11-02T07:23:15Z",
+        "Comment Body": "@sindresorhus I spent some minutes reading the guidelines with attention, if something was not followed is because I didn't understood.\r\n\r\nCan you say what parts aren't followed?"
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2452910879,
+        "Author": "hardBSDk",
+        "Created At": "2024-11-02T07:50:54Z",
+        "Comment Body": "I also know that the repository must have more than 1 month of life, thus I will left this PR open until the date."
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2453485823,
+        "Author": "tangrames",
+        "Created At": "2024-11-03T16:26:17Z",
+        "Comment Body": "\n\n\u00a0\u00a0\u00a0\u00a0\u00a0 \u8c22\u8c22\uff0c\u60a8\u7684\u90ae\u4ef6\u6211\u5df2\u7ecf\u6536\u5230\uff0c\u770b\u5230\u90ae\u4ef6\u540e\uff0c\u6211\u4f1a\u7b2c\u4e00\u65f6\u95f4\u56de\u590d\u60a8\uff01\n\u00a0\u00a0\u00a0\u00a0\u00a0 \u795d\u4e00\u5207\u987a\u5229\uff01"
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2453966124,
+        "Author": "Jogai",
+        "Created At": "2024-11-04T07:17:09Z",
+        "Comment Body": "> I also know that the repository must have more than 1 month of life, thus I will left this PR open until the date.\r\n\r\nRule 1 of the guidelines: Don't open a Draft / WIP pull request while you work on the guidelines. A pull request should be 100% ready and should adhere to all the guidelines when you open it\r\n\r\nSo it doesnt seem like you actually read it. When reading, also follow the links the guidelines contain."
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2525223929,
+        "Author": "theodorosploumis",
+        "Created At": "2024-12-07T16:00:14Z",
+        "Comment Body": "My comments on this PR:\r\n\r\n1) I do not think that this is an \"Awesome\" list. I mean that creating a single repository to include all the FOSS Alternatives is somehow a \"utopia\". In fact all of the Awesome lists included on this project are (kind of) FOSS related.\r\n2) Even if the No1 is not correct the list is too poor to be an \"awesome\". It misses known entries.\r\n3) The sections are too generic. This is due to No1 above. For example the section \"System Services\" (where you mention Mobile App repository services) should be named \"Digital software distribution platform\".\r\n4) The sections are not in alphabetical order so navigating through them is too hard to accomplish.\r\n5) There are already similar Awesome lists (some of them are also included on this project): \r\n - https://github.com/RunaCapital/awesome-oss-alternatives\r\n - https://github.com/tvvocold/FOSS-for-Dev\r\n - https://github.com/sfermigier/awesome-foss-alternatives\r\n"
+    },
+    {
+        "Issue ID": 3256,
+        "Issue State": "closed",
+        "Issue Title": "Add \"FOSS Alternatives\"",
+        "Comment ID": 2585648249,
+        "Author": "hardBSDk",
+        "Created At": "2025-01-12T08:57:14Z",
+        "Comment Body": "As some rules are boring for me and maybe I disagree with some of them, I will close this PR and maybe send a new PR later.\r\n\r\nIf someone want to do that for me, feel free to do.\r\n\r\nMy motivation is low."
+    },
+    {
+        "Issue ID": 3278,
+        "Issue State": "closed",
+        "Issue Title": "Update readme.md",
+        "Comment ID": 2568725148,
+        "Author": "Nathan090a",
+        "Created At": "2025-01-03T05:53:50Z",
+        "Comment Body": "Right so show me\r\n\r\n\ufffc\r\n\r\nNathoskid35Ogbonge green warrior from Naija\r\n***@***.***://heylink.me/nathoskid35/\r\n\r\nOn Fri, Jan 3, 2025, 6:52 AM K-HOJA ***@***.***> wrote:\r\n\r\n> ***@***.**** commented on this pull request.\r\n>\r\n> Hi bro I think I have found this issue\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sindresorhus/awesome/pull/3278#pullrequestreview-2528575741>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BNRIS5LXESKHZ2WXJ5AFSTD2IYQR7AVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZDKMRYGU3TKNZUGE>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 3278,
+        "Issue State": "closed",
+        "Issue Title": "Update readme.md",
+        "Comment ID": 2568729452,
+        "Author": "KHOJA5865",
+        "Created At": "2025-01-03T06:01:06Z",
+        "Comment Body": "Can you share me your code\r\n\r\nAndroid uchun Outlook<https://aka.ms/AAb9ysg> oling\r\n________________________________\r\nFrom: Nathan090a ***@***.***>\r\nSent: Friday, January 3, 2025 10:54:17 AM\r\nTo: sindresorhus/awesome ***@***.***>\r\nCc: K-HOJA ***@***.***>; Comment ***@***.***>\r\nSubject: Re: [sindresorhus/awesome] Update readme.md (PR #3278)\r\n\r\n\r\nRight so show me\r\n\r\n\ufffc\r\n\r\nNathoskid35Ogbonge green warrior from Naija\r\n***@***.***://heylink.me/nathoskid35/\r\n\r\nOn Fri, Jan 3, 2025, 6:52 AM K-HOJA ***@***.***> wrote:\r\n\r\n> ***@***.**** commented on this pull request.\r\n>\r\n> Hi bro I think I have found this issue\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sindresorhus/awesome/pull/3278#pullrequestreview-2528575741>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BNRIS5LXESKHZ2WXJ5AFSTD2IYQR7AVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZDKMRYGU3TKNZUGE>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/sindresorhus/awesome/pull/3278#issuecomment-2568725148>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/BNNGCRLJHG6XELB5FT3OFMD2IYQYTAVCNFSM6AAAAABSBVQ7BOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKNRYG4ZDKMJUHA>.\r\nYou are receiving this because you commented.Message ID: ***@***.***>\r\n"
+    },
+    {
+        "Issue ID": 3316,
+        "Issue State": "closed",
+        "Issue Title": "Update readme.md",
+        "Comment ID": 2564413237,
+        "Author": "donBarbos",
+        "Created At": "2024-12-28T19:29:05Z",
+        "Comment Body": "You first need to complete all the requirements and then send PR.\r\n\r\nIt seems you haven't fulfilled any of the requirements at all. I advise you to close the PR now and open it when everything is ready, especially since at least a month must pass from the date of the repository creation, and your repository only has two days.\r\n\r\nand please read the documentation before doing anything"
+    },
+    {
+        "Issue ID": 3316,
+        "Issue State": "closed",
+        "Issue Title": "Update readme.md",
+        "Comment ID": 2564415894,
+        "Author": "sindresorhus",
+        "Created At": "2024-12-28T19:42:04Z",
+        "Comment Body": "Awesome lists require a lot more effort than this."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1842767837,
+        "Author": "sindresorhus",
+        "Created At": "2023-12-06T12:27:09Z",
+        "Comment Body": "Thanks for making an Awesome list! \ud83d\ude4c\r\n\r\nIt looks like you didn't read the [guidelines](https://github.com/sindresorhus/awesome/blob/master/pull_request_template.md) closely enough. I noticed multiple things that are not followed. Try going through the list point for point to ensure you follow it. I spent a lot of time creating the guidelines so I wouldn't have to comment on common mistakes, and rather spend my time improving Awesome."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1844634082,
+        "Author": "benallfree",
+        "Created At": "2023-12-07T05:58:29Z",
+        "Comment Body": "@sindresorhus Could you please direct us to a more detailed analysis of what was missing or not followed? Two of us have reviewed each of the points and can't spot anything, so there might be something we are misinterpreting. Thank you for any help you can provide."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1856637385,
+        "Author": "Mobin965500",
+        "Created At": "2023-12-14T21:24:40Z",
+        "Comment Body": "vless://d7321fa1-20c3-4388-be9f-f53291bd79cc@discord.com:443?type=grpc&serviceName=31520094&security=tls&fp=&alpn=http%2F1.1%2Ch2&sni=1469688760.behmusic.store#vip-ktdb2liy"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1869700295,
+        "Author": "philipp2525",
+        "Created At": "2023-12-26T18:14:21Z",
+        "Comment Body": "yes hello.. I am neither. I am a professional and have a lot to do with computers. I was sent to this app by okx. I'm trying to open my reserves or so... I've only been doing it for a few days... ...I don't understand a word. Although I translate... and hardly anyone works as hard as you do..., only sndrrs... don't have to be offended. I should do it quickly. but I'm not that good with everything. well and Christmas is here too.. I've been logged in to apps for 3 days.. \ud83e\udd17\ud83e\udd17\n"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1869702104,
+        "Author": "philipp2525",
+        "Created At": "2023-12-26T18:18:21Z",
+        "Comment Body": "Ich meine habe nicht viel mit pc tap und co zu tun . Nur das \u00fcbliche . Bei okx war es anders .  Ich will es gerne lernen . \n "
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1869703740,
+        "Author": "philipp2525",
+        "Created At": "2023-12-26T18:21:58Z",
+        "Comment Body": "Und hier gibt es viel zu lesen . Das muss ich 2 -3 mal lesen .ich will von niemanden Zeit verschwenden.. hab \u00fcberhaupt nicht ge\u00e4hnt was diese darstellt .. wollte keine zu nahe treten .  Nur diese die Reserven . Weil ich Angst hatte die laufe. Ab. Oder so .. "
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1869705874,
+        "Author": "philipp2525",
+        "Created At": "2023-12-26T18:27:02Z",
+        "Comment Body": "but when I came here to the spp. I found it interesting.. and started reading. But I'm probably an inhuman. Because I'm playing with my daughter on Christmas too... well... I'll read on now"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1870769472,
+        "Author": "KFCMULLBANK",
+        "Created At": "2023-12-28T02:38:49Z",
+        "Comment Body": "I cant log in on my microsoft.com\r\n\r\nDen tis 26 dec. 2023 19:27PHILIPP B\u00d6GE ***@***.***> skrev:\r\n\r\n> but when I came here to the spp. I found it interesting.. and started\r\n> reading. But I'm probably an inhuman. Because I'm playing with my daughter\r\n> on Christmas too... well... I'll read on now\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sindresorhus/awesome/pull/2895#issuecomment-1869705874>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/A42O56QZ3PZCLXOLAWXSZBDYLMJIPAVCNFSM6AAAAABAI2MEUGVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQNRZG4YDKOBXGQ>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1871820159,
+        "Author": "hannibalfishkop",
+        "Created At": "2023-12-29T07:56:06Z",
+        "Comment Body": "Nice"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1871824835,
+        "Author": "benallfree",
+        "Created At": "2023-12-29T08:05:30Z",
+        "Comment Body": "@sindresorhus This issue is getting spammed, can we please merge & close? What else needs to be done?"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1872495695,
+        "Author": "svilupp",
+        "Created At": "2023-12-30T09:58:28Z",
+        "Comment Body": "Hi @benallfree ,\r\n\r\nI ran your list through the linter (`npx awesome-lint https://github.com/benallfree/awesome-pocketbase`) and I'm getting the following errors:\r\n> \u2716  33:1  Marker style should be -  remark-lint:unordered-list-marker-style\r\n\r\nWould you mind reviewing the Svelte section? I believe it uses an asterisk instead of a dash as a marker.\r\n"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1872500771,
+        "Author": "benallfree",
+        "Created At": "2023-12-30T10:30:15Z",
+        "Comment Body": "@jorgoose see above"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1943368824,
+        "Author": "sindresorhus",
+        "Created At": "2024-02-14T09:24:27Z",
+        "Comment Body": "> The description starts with an uppercase character and ends with a period."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1943369015,
+        "Author": "sindresorhus",
+        "Created At": "2024-02-14T09:24:34Z",
+        "Comment Body": "Descriptions should not be title-cased."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1943370112,
+        "Author": "sindresorhus",
+        "Created At": "2024-02-14T09:25:17Z",
+        "Comment Body": "> Includes a succinct description of the project/theme at the top of the readme. [(Example)](https://github.com/willempienaar/awesome-quantified-self)"
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1943370957,
+        "Author": "sindresorhus",
+        "Created At": "2024-02-14T09:25:49Z",
+        "Comment Body": "> Consistent and correct naming. For example, Node.js, not NodeJS or node.js."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 1959916855,
+        "Author": "benallfree",
+        "Created At": "2024-02-22T17:23:19Z",
+        "Comment Body": "@jorgoose Please see https://github.com/benallfree/awesome-pocketbase/pull/36 and pull from upstream. I believe we have addressed @sindresorhus 's comments, but since this PR is from your branch I was hoping you could do an upstream pull to refresh it."
+    },
+    {
+        "Issue ID": 2895,
+        "Issue State": "closed",
+        "Issue Title": "Add PocketBase",
+        "Comment ID": 2131318073,
+        "Author": "sindresorhus",
+        "Created At": "2024-05-25T16:03:57Z",
+        "Comment Body": "Tweet: https://x.com/awesome__re/status/1794398728352141554"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 115642008,
+        "Author": "sindresorhus",
+        "Created At": "2015-06-26T10:49:04Z",
+        "Comment Body": "https://github.com/sindresorhus/awesome/blob/master/contributing.md\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 115655072,
+        "Author": "veelenga",
+        "Created At": "2015-06-26T11:53:35Z",
+        "Comment Body": "Bottom of the category of something else ?\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 115656071,
+        "Author": "sindresorhus",
+        "Created At": "2015-06-26T12:02:01Z",
+        "Comment Body": "> Bottom of the category\n\nYes\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 116027781,
+        "Author": "sindresorhus",
+        "Created At": "2015-06-27T12:12:36Z",
+        "Comment Body": "@n1trux git squash if there are multiple commits so not to litter the changelog with tweak commits ;)\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 116144144,
+        "Author": "n1trux",
+        "Created At": "2015-06-27T21:13:21Z",
+        "Comment Body": "ok, sorry. Still new to Git after a year or so :p\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 117232351,
+        "Author": "sindresorhus",
+        "Created At": "2015-06-30T15:39:47Z",
+        "Comment Body": "@veelenga Would be awesome if you could link back here in your list so users can easily discover more awesome lists ;)\n"
+    },
+    {
+        "Issue ID": 208,
+        "Issue State": "closed",
+        "Issue Title": "Add Crystal programming language",
+        "Comment ID": 117436493,
+        "Author": "veelenga",
+        "Created At": "2015-07-01T05:08:07Z",
+        "Comment Body": ":+1: [Done](https://github.com/veelenga/awesome-crystal/commit/13d05eb70017f2dd481818ddef53e82ece4c9426)!\n"
+    }
+]

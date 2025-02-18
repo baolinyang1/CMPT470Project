@@ -1,0 +1,782 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+3198,closed,axios 在 vue 中 请求出现 network error,674668494,ChenKaiKe,2020-08-17T05:43:39Z,我也遇到了，是什么原因呀？
+3198,closed,axios 在 vue 中 请求出现 network error,695854562,github-actions[bot],2020-09-21T00:07:20Z,"Hello! :wave:
+
+This issue is being automatically marked as stale because it has not been updated in a while. Please confirm that the issue is still present and reproducible. If no updates or new comments are received the issue will be closed in a few days.
+
+Thanks."
+3198,closed,axios 在 vue 中 请求出现 network error,736244164,plusby,2020-12-01T06:05:40Z,怎么解决？
+3198,closed,axios 在 vue 中 请求出现 network error,820986344,zhaozedong,2021-04-16T07:44:44Z,请问网友这个问题解决了吗
+3198,closed,axios 在 vue 中 请求出现 network error,820997668,plusby,2021-04-16T08:03:36Z,"我的是因为我发起了一个请求，然后刷新了页面之前的请求就会报这个错，所以解决方案就是手动终止之前的请求，或者就这个请求报的错不提示出来，发自我的华为手机-------- 原始邮件 --------发件人： zhaozedong ***@***.***>日期： 2021年4月16日周五 下午3:44收件人： axios/axios ***@***.***>抄送： zhuyu258 ***@***.***>, Comment ***@***.***>主    题： Re: [axios/axios] axios 在 vue 中 请求出现 network error (#3198)
+请问网友这个问题解决了吗
+
+—You are receiving this because you commented.Reply to this email directly, view it on GitHub, or unsubscribe."
+3198,closed,axios 在 vue 中 请求出现 network error,821001637,zhaozedong,2021-04-16T08:10:27Z,"谢谢  我的不是这个 我的项目是混合h5  在华为市场审核被驳回 截屏网络错误   其他应用市场 ios都没没问题  我们自己也用华为真机 云真机测试也没问题  但是华为市场审核那边就是有问题  我已经裂开了，想着排查是不是axios库的问题
+"
+3198,closed,axios 在 vue 中 请求出现 network error,1004738042,chaojiangcn,2022-01-04T11:41:10Z,i hava same question
+3198,closed,axios 在 vue 中 请求出现 network error,1004738253,ChenKaiKe,2022-01-04T11:41:32Z,你好，你的来件我已经收到，谢谢，打扰啦。
+3198,closed,axios 在 vue 中 请求出现 network error,1725004180,ct-0902,2023-09-19T07:52:47Z,有解决办法了吗？我也遇到了
+3198,closed,axios 在 vue 中 请求出现 network error,1725004643,ChenKaiKe,2023-09-19T07:53:07Z,你好，你的来件我已经收到，谢谢，打扰啦。
+3198,closed,axios 在 vue 中 请求出现 network error,2661776715,MrZhongFF,2025-02-17T01:49:29Z,请求的接口是否有跨域配置？有些低版本机型浏览器，不支持跨域请求头。看到的一篇类似的，苹果手机请求程序报network error错误： https://juejin.cn/post/7031504210516508679
+3198,closed,axios 在 vue 中 请求出现 network error,2661777226,ChenKaiKe,2025-02-17T01:50:00Z,你好，你的来件我已经收到，谢谢，打扰啦。
+4778,closed,Unsupported use of https Agent (pfx),1420707192,AbimaelAndrade,2023-02-07T12:39:34Z,"Hi @jasonsaayman, do you find any solution? I'm with the same problem."
+4778,closed,Unsupported use of https Agent (pfx),1420712327,attilavarga96,2023-02-07T12:44:03Z,"Hello, I found the solution. You have to use the NODE_OPTIONS=--openssl-legacy-provider env for your node.js project."
+4778,closed,Unsupported use of https Agent (pfx),1611905820,phbragam,2023-06-28T18:42:40Z,"> Hello, I found the solution. You have to use the NODE_OPTIONS=--openssl-legacy-provider env for your node.js project.
+
+Same problem here. Do you remember how to do this configuration?"
+4778,closed,Unsupported use of https Agent (pfx),1611976082,attilavarga96,2023-06-28T19:25:40Z,"The easiest way to set up this solution is that.
+![image](https://github.com/axios/axios/assets/19992314/0847e656-e4d2-4966-99d9-cbd66a906c2c)
+Set it up in your package.json script."
+4778,closed,Unsupported use of https Agent (pfx),2661592737,shes-dev,2025-02-16T20:01:05Z,Thanks 
+3469,closed,onUploadProgress will be 100% before uploading process finished,742821414,UXandre,2020-12-10T21:48:51Z,"Facing the same issue today. I found on google that some people said it happens because the file is uploaded very fast when you run your server on localhost. So you need to slow down your network to Slow 3G. I tried that with no luck, either.
+
+Would appreciate if anybody could give a pointer! Thank you!"
+3469,closed,onUploadProgress will be 100% before uploading process finished,796103326,shannhastings,2021-03-10T21:04:03Z,"I see the same issue.  The onUploadProgress will ramp up to 100 pretty quick on a large file, but watching the network tab the file is still sending for a long time after progress has said it was 100.  Then finally the promise will return.  This does not have anything to do with localhost.  Just upload a large file to say S3 and you will see, the onUploadProgress calls will finish WAY before the actual promise, i.e. the data, has been transmitted.
+
+"
+3469,closed,onUploadProgress will be 100% before uploading process finished,846055522,Alirez14,2021-05-21T15:54:38Z,same here on react native please fix the issue :/
+3469,closed,onUploadProgress will be 100% before uploading process finished,852215192,snaptsoft,2021-06-01T15:23:36Z,Unfortunately also still seeing this issue using Expo 41.0 and React Native. 
+3469,closed,onUploadProgress will be 100% before uploading process finished,890881703,weijiatan456,2021-08-02T09:38:42Z,Same here. It will be great if anyone can post a work around on this issue.
+3469,closed,onUploadProgress will be 100% before uploading process finished,895418810,SiSa68,2021-08-09T17:51:10Z,"Same!
+It takes longer time to upload also (comparing to postman)"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1008287463,hraschan,2022-01-09T12:21:58Z,Got the same issue! Any ideas? 
+3469,closed,onUploadProgress will be 100% before uploading process finished,1068730324,johnbonds,2022-03-16T04:51:55Z,Running into the same problem. The promise returns when the file finished uploading but the progress callbacks are happening almost instantly. Using React Native.
+3469,closed,onUploadProgress will be 100% before uploading process finished,1069265414,johnbonds,2022-03-16T15:34:56Z,"I found this closed issue on react-native. Not sure if it's related or if this issue simply cropped back up:
+
+https://github.com/facebook/react-native/issues/11853"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1080383947,ziaadini,2022-03-28T09:04:19Z,"i think it's not related to axios and upload, it's because your api server doing some thing else (for example resize or ...) and it's delayed."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1080439918,milad145,2022-03-28T09:51:22Z,"> i think it's not related to axios and upload, it's because your api server doing some thing else (for example resize or ...) and it's delayed.
+
+i test my backend api with ajax in the web side with the same api and it work fine. problem occurred when i use it in react-native"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1080792259,snaptsoft,2022-03-28T15:23:23Z,"The API we are hitting is a commercially available one for document management. We also hit is using Axios in a react PWA without any issues. I believe the issue lay in the combination of RN and Axios.
+
+On Mar 28, 2022, at 02:51, Milad Aslani Somarin ***@***.******@***.***>> wrote:
+
+
+
+i think it's not related to axios and upload, it's because your api server doing some thing else (for example resize or ...) and it's delayed.
+
+i test my backend api with ajax in the web side with the same api and it work fine. problem occurred when i use it in react-native
+
+—
+Reply to this email directly, view it on GitHub<https://github.com/axios/axios/issues/3469#issuecomment-1080439918>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AN6IKZUBGFTXVS25XEHU253VCF6KNANCNFSM4UU4WZ7Q>.
+You are receiving this because you commented.Message ID: ***@***.***>
+
+"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1080795299,johnbonds,2022-03-28T15:26:02Z,I'm pretty sure this is a RN issue specifically in Java. If I get some time I'm going to see about debugging it in the RN source code.
+3469,closed,onUploadProgress will be 100% before uploading process finished,1100591976,lnzhaotian,2022-04-16T07:09:59Z,So this is still not solved yet? I'm also stuck with this problem for quite a while now.
+3469,closed,onUploadProgress will be 100% before uploading process finished,1146343069,jakehasler,2022-06-03T20:37:56Z,"I'm seeing this in RN on iOS, not just android. Just FYI."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1152092506,MussadiqAli,2022-06-10T08:08:16Z,"I am facing the same issue. Does anyone know the answer?
+I have tried with both XMLHttpRequest and Axios, and both have the same problem, first, they show progress up to 100% in a second and then start uploading the file.
+I also have tried with the simple web page to upload files, where both methods work successfully the problem only in React Native"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1152094319,MussadiqAli,2022-06-10T08:10:19Z,"> I'm pretty sure this is a RN issue specifically in Java. If I get some time I'm going to see about debugging it in the RN source code.
+
+do you find any solution?"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1203423461,Yuki-TU,2022-08-03T02:50:42Z,"> I also have tried with the simple web page to upload files, where both methods work successfully the problem only in React Native.
+
+In my environment, I get the same problem with react, typescript. Is it the same for others?
+
+"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1332208838,stharvey,2022-11-30T14:11:21Z,"I am seeing this exact issue too.  At first I was using `XMLHttpRequest ` and was getting this issue so I changed over to using axios and problem is exactly the same.
+
+The actual upload works correctly however the `onUploadProgress` callback is gets up to 100% within the first couple of seconds even though the actual file upload takes ~1-2 minutes or more.  The `axios.post` promise isn't resolved until the file upload is actually successful."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1332686624,stharvey,2022-11-30T20:13:30Z,"Hello again, I've figured this out.  Just in case this helps someone else:
+
+The issue was occurring when running a development bundle on a metro server - axios/xhr was reporting on the status of the upload of the file to the metro proxy rather than to the final destination on the net.
+
+When I created an apk build everything worked correctly."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1333461654,milad145,2022-12-01T09:17:45Z,"> Hello again, I've figured this out. Just in case this helps someone else:
+> 
+> The issue was occurring when running a development bundle on a metro server - axios/xhr was reporting on the status of the upload of the file to the metro proxy rather than to the final destination on the net.
+> 
+> When I created an apk build everything worked correctly.
+
+sorry, I can't understand. do you mean that if I build a release apk it gonna be OK? "
+3469,closed,onUploadProgress will be 100% before uploading process finished,1337853297,stharvey,2022-12-05T17:51:43Z,"Hello @milad145 - yes, in my case this only occurs when running it via Metro Bundler - i.e. a debug or development build.  If you are able to edit your code and preview the changes immediately on save then you are using Metro Bundler.
+
+For me, when running a release build `onUploadProgress` works as expected."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1409425844,DigitalBrainJS,2023-01-30T22:08:44Z,"If the issue is with the xhr adapter, then the problem is not with Axios itself, but with the implementation of `XMLHttpRequest` on the target platform. The problem may occur if the request size is not calculated. You can try manually setting the `Content-Length` header if it's not set automatically. If this wouldn't fix the issue, there's probably nothing we can do about it in the context of the xhr adapter, as it's most likely an internal platform issue.
+
+https://github.com/facebook/react-native/issues/11853
+https://stackoverflow.com/questions/47623357/react-native-and-xmlhttprequest-upload-progress-bar"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1597528816,abdoutech19,2023-06-19T17:34:09Z,"I confirm the answer of @stharvey, in React Native the issue only occurs when running the app in debug mode, when running it in release mode the upload progress works as expected."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1649876058,MohamedKamalOthman,2023-07-25T13:44:25Z,"I have the same problem on android
+
+    ""axios"": ^1.4.0.
+    ""React Native"": v0.76.7.
+"
+3469,closed,onUploadProgress will be 100% before uploading process finished,1649880699,stharvey,2023-07-25T13:47:05Z,"Hello @MohamedKamalOthman - can you confirm that this is happening on your release builds? 
+
+This happens when running a debug build but should work correctly in release."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1650005439,MohamedKamalOthman,2023-07-25T14:58:13Z,Hello @stharvey - it's working on release builds but not on debug.
+3469,closed,onUploadProgress will be 100% before uploading process finished,1650018098,stharvey,2023-07-25T15:04:42Z,"Thanks for the update. As far as I am aware there is no way to get this working on debug builds. The debug server is acting as a proxy and the progress being reported is that initial transfer before being uploaded remotely.
+
+It's nothing to be concerned about. The upload will still work and the promise will be returned when the remote transfer is complete."
+3469,closed,onUploadProgress will be 100% before uploading process finished,1817937240,ahmed-khlifi,2023-11-19T18:20:36Z, i have the same issue using React js with vite
+3469,closed,onUploadProgress will be 100% before uploading process finished,1887034902,Jamal-ReachFirst,2024-01-11T12:14:02Z,"Same issue using `react-native`
+
+```
+""axios"": ""^1.1.2"",
+""react-native"": ""0.69.12"",
+```"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1704836182,DavidJDallas,2023-09-04T08:28:38Z,This isn't an issue with Axios; Axios is returning a 500 error. Please can you provide more information 
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1705084675,william3333,2023-09-04T11:13:47Z,"is it an VPN error? When I use  the codespaces, it’s no error like this,but I have the error using VS Code"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1705085129,william3333,2023-09-04T11:14:09Z,"what information do you want,btw"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1705110818,DavidJDallas,2023-09-04T11:33:30Z,"I'm not sure if it's a VPN error, sorry. Regarding the information needed, ideally all the headers will be filled out to give us a better idea of how to locate the bug or feature or problem that you are suggesting. At the moment you haven't described the issue or any of the other headers apart from the code example, which by itself isn't sufficient to reproduce what you're experiencing as there are various things that aren't defined in the code: for instance, the Type 'ChatCompletionRequestMessage', the variable 'router', etc.
+
+But ultimately it seems like this, as you have described, isn't an issue with Axios but with something else, and so the Axios issues github is the wrong place to ask. It would probably be better suited to stack overflow or google or using an AI to try and explore the answer. "
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1705200065,william3333,2023-09-04T12:38:11Z,"Thank you  for your reply.
+
+On Mon, Sep 4, 2023 at 7:33 PM David Dallas ***@***.***>
+wrote:
+
+> I'm not sure if it's a VPN error, sorry. Regarding the information needed,
+> ideally all the headers will be filled out to give us a better idea of how
+> to locate the bug or feature or problem that you are suggesting. At the
+> moment you haven't described the issue or any of the other headers apart
+> from the code example, which by itself isn't sufficient to reproduce what
+> you're experiencing as there are various things that aren't defined in the
+> code: for instance, the Type 'ChatCompletionRequestMessage', the variable
+> 'router', etc.
+>
+> But ultimately it seems like this, as you have described, isn't an issue
+> with Axios but with something else, and so the Axios issues github is the
+> wrong place to ask. It would probably be better suited to stack overflow or
+> google or using an AI to try and explore the answer.
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/axios/axios/issues/5855#issuecomment-1705110818>, or
+> unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/AOLAN7JFCNXQLYE75MGEGADXYW4BLANCNFSM6AAAAAA4I6GZNY>
+> .
+> You are receiving this because you authored the thread.Message ID:
+> ***@***.***>
+>
+"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1712912707,oryx-it,2023-09-10T19:04:34Z,"I'm trying to add knowledge to superagi and it's also throwing
+
+AxiosError: Request failed with status code 500
+Call Stack
+AxiosError
+node_modules/axios/lib/core/AxiosError.js (22:0)
+settle
+node_modules/axios/lib/core/settle.js (19:0)
+onloadend
+node_modules/axios/lib/adapters/xhr.js (107:12)"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1713346089,DavidJDallas,2023-09-11T07:46:27Z,"> I'm trying to add knowledge to superagi and it's also throwing
+> 
+> AxiosError: Request failed with status code 500 Call Stack AxiosError node_modules/axios/lib/core/AxiosError.js (22:0) settle node_modules/axios/lib/core/settle.js (19:0) onloadend node_modules/axios/lib/adapters/xhr.js (107:12)
+
+Hey @oryx-it , this isn't a bug or an issue with Axios, Axios is doing what it's supposed to do: the server has returned a 500 error (internal server error) and Axios is simply returning you that error. 
+"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1751669370,jay-f-k,2023-10-07T09:57:23Z,each time i try to make a post request to a localhost url with axios i get that particular error.....can someone help me out?
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1751807842,PrabalParihar,2023-10-07T20:09:10Z,"i am also getting the same error
+
+app-index.js:31 
+AxiosError
+code
+: 
+""ERR_BAD_RESPONSE""
+config
+: 
+{transitional: {…}, adapter: 'xhr', transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}
+message
+: 
+""Request failed with status code 500""
+name
+: 
+""AxiosError""
+request
+: 
+XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, …}
+response
+: 
+{data: '<!DOCTYPE html><html><head><style data-next-hide-f…p"":true,""scriptLoader"":[]}\x3C/script></body></html>', status: 500, statusText: 'Internal Server Error', headers: AxiosHeaders, config: {…}, …}
+stack
+: 
+""AxiosError: Request failed with status code 500\n    at settle (webpack-internal:///(app-pages-browser)/./node_modules/axios/lib/core/settle.js:24:12)\n    at XMLHttpRequest.onloadend (webpack-internal:///(app-pages-browser)/./node_modules/axios/lib/adapters/xhr.js:121:66)""
+[[Prototype]]
+: 
+Error"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1823844254,friesbat,2023-11-23T05:39:44Z,"Unhandled Runtime Error
+AxiosError: Request failed with status code 500
+
+Call Stack
+settle
+node_modules\axios\lib\core\settle.js (19:0)
+XMLHttpRequest.onloadend
+node_modules\axios\lib\adapters\xhr.js (107:12)"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1859189678,MiladJoodi,2023-12-17T14:34:50Z,Just use useEffect
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",1859275857,DavidJDallas,2023-12-17T20:31:36Z,"> each time i try to make a post request to a localhost url with axios i get that particular error.....can someone help me out?
+
+
+
+> each time i try to make a post request to a localhost url with axios i get that particular error.....can someone help me out?
+
+
+
+> i am also getting the same error
+> 
+> app-index.js:31 AxiosError code : ""ERR_BAD_RESPONSE"" config : {transitional: {…}, adapter: 'xhr', transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …} message : ""Request failed with status code 500"" name : ""AxiosError"" request : XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, …} response : {data: '<style data-next-hide-f…p"":true,""scriptLoader"":[]}\x3C/script>', status: 500, statusText: 'Internal Server Error', headers: AxiosHeaders, config: {…}, …} stack : ""AxiosError: Request failed with status code 500\n at settle (webpack-internal:///(app-pages-browser)/./node_modules/axios/lib/core/settle.js:24:12)\n at XMLHttpRequest.onloadend (webpack-internal:///(app-pages-browser)/./node_modules/axios/lib/adapters/xhr.js:121:66)"" [[Prototype]] : Error
+
+This will be a problem with your project rather than Axios. If you send me a link to your repo where you're implementing this I can have a look for you and may be able to help. @PrabalParihar @jay-f-k "
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",2095205276,ahmadzaki8828,2024-05-06T05:06:48Z,hey i am trying to make the same project from the yt video were you guys able to figure out what the issue was causing this and how to fix it?
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",2105744993,abhimanyukc,2024-05-11T13:25:58Z,"catch (error) {
+        console.log(error.message); try this code in catch block your error gonna solve. you are not handling exception in proper way"
+5855,closed,"AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …",2660875753,Lilspitfire630,2025-02-15T11:16:33Z,Im getting this error code when using Microsoft.. attempting advanced hunting techniques I'm reaching out in hopes my community can help me figure this out.. thank you all! And god bless America!!
+6261,closed,fix: wrong variable name causing runtime error,2656749495,sean-dickinson,2025-02-13T14:22:38Z,This was addressed in a different PR.
+6260,closed,Abort Signal Cancellation is failing due to incorrect variable name ,2152143335,riurisniti,2024-06-06T11:34:28Z,This was resolved in https://github.com/axios/axios/pull/6307
+6713,closed,ENOMEM errors during test execution,2500186097,Robg79new,2024-11-26T10:05:21Z,Upgrading node to version 20 or above resolved this problem
+6713,closed,ENOMEM errors during test execution,2654925999,OwenAllen0,2025-02-12T21:54:14Z,"If you still have this issue after upgrading to node, you might want to make sure [keepAlive](https://github.com/axios/axios/issues/1846) is enabled. I had a similar issue where axios was raising ENOMEM errors even though the memory usage never exceeded 500mb (out of 4096mb).
+
+I believe the issue was that during polling operations where the same endpoint is called many times, axios was creating a new TCP connection and for some reason the old ones were not being cleared properly. This was on MacOs."
+6784,closed,Error: Error: self-signed certificate - rejectUnauthorized: false in jsdom vitest environment,2652297866,WillianAgostini,2025-02-11T23:34:48Z,"Hi @j-mew-s,
+
+The issue occurs because `jsdom` uses the 'xhr' adapter by default, while `node` uses the 'http' adapter.
+
+To resolve this, you can configure axios to use the 'http' adapter in your project like this:
+
+```javascript
+const instance = axios.create({
+  baseURL: 'https://localhost:3000',
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false
+  }),
+  adapter: 'http',
+});
+``` "
+6784,closed,Error: Error: self-signed certificate - rejectUnauthorized: false in jsdom vitest environment,2653158508,j-mew-s,2025-02-12T09:45:36Z,"Thank you for your speedy response, that has resolved the issue."
+5902,closed,BaseURL config vs absolute URL,1723812614,fmunozs,2023-09-18T16:04:42Z,"Hello team, IMHO this could be a security issue, there is no mention on the documentation as far as I could see, that a full URL will always be parsed as such after setting the BaseURL attribute. 
+
+I know that it could be a breaking change, but by default if BaseURL is set it should never try to identify if the path parameter is a full and always attempt to create the final URL using the baseURL+path. 
+
+"
+5902,closed,BaseURL config vs absolute URL,1741859609,ankit-kumarc,2023-09-30T21:07:19Z,"Hi
+I would like to work on this issue. Please assign it to me."
+5902,closed,BaseURL config vs absolute URL,1899119368,GethosTheWalrus,2024-01-18T19:57:51Z,"Just pushed a PR allowing you to change `axios.defaults.allowAbsoluteUrls` or supply a config param called `allowAbsoluteUrls` with a request to modify this behavior. Setting the param to `false` will cause the specified path to be combined with the base URL regardless of whether or not it is absolute. This value is `true` by default, preserving the original behavior.
+
+**Minimal example:** Will make a request to `https://www.miketoscano.com/https://www.google.com` (combined urls)
+```
+import axios from './axios.js';
+
+axios.defaults.baseURL = 'https://www.miketoscano.com';
+axios.defaults.allowAbsoluteUrls = false;
+
+console.log(axios.defaults);
+
+axios.get('https://www.google.com').then( (response) => {
+    console.log(response);
+    console.log('done');
+});
+```
+
+Minimal example 2: Will make a request to `http://someurl.com/http://someotherurl.com/` (combined urls)
+```
+const instance = axios.create({
+      baseURL: 'http://someurl.com/',
+      allowAbsoluteUrls: false
+    });
+
+    instance.get('http://someotherurl.com/');
+});
+```"
+6192,closed,feat: Add config for ignoring absolute URLs (#5902),1900709381,mrosenbaum15,2024-01-19T16:19:03Z,@GethosTheWalrus  really feel like I could use this👌
+6192,closed,feat: Add config for ignoring absolute URLs (#5902),1909153977,GethosTheWalrus,2024-01-25T00:36:05Z,@jasonsaayman any chance I could get a review on this one 😉 ?
+6192,closed,feat: Add config for ignoring absolute URLs (#5902),2135200780,ryanlawson,2024-05-28T13:19:17Z,"@GethosTheWalrus Builds are passing after updating the branch.
+https://github.com/GethosTheWalrus/axios/actions/runs/9233322382"
+6192,closed,feat: Add config for ignoring absolute URLs (#5902),2135527332,GethosTheWalrus,2024-05-28T15:28:26Z,@DigitalBrainJS @nickuraltsev @mzabriskie Would it be possible to get some eyes on this PR? It's pretty small and is passing the required actions in my fork.
+6192,closed,feat: Add config for ignoring absolute URLs (#5902),2651286364,jasonsaayman,2025-02-11T16:09:46Z,@GethosTheWalrus please can you check out the conflicts
+6780,closed,add disableDefaultUserAgent Option,2648585235,DigitalBrainJS,2025-02-10T16:26:02Z,Axios already supports this feature by setting the unwanted header value to false.
+6780,closed,add disableDefaultUserAgent Option,2651296075,myyrakle,2025-02-11T16:13:17Z,"Ah... I just found out. I realized that if I explicitly put null in headers, it will be turned off."
+6351,closed,Security vulnerability,2067632382,jasonsaayman,2024-04-20T10:32:07Z,"at a glance without going into the code i believe this is inside of the tests, I think it may be a false positive, please send drop the CVE link"
+6351,closed,Security vulnerability,2069049613,swetha8612,2024-04-22T10:33:11Z,"Thank you for your response. I don't have CVE link but have some data from fortify scan. The file path in the repo is \axios\dist\axios.js
+
+In this case, the data is sent at setAttribute() in axios.js file.
+
+The malicious content sent to the web browser often takes the form of a JavaScript segment, but can also include HTML, Flash or any other type of code that the browser executes. The variety of attacks based on XSS is almost limitless, but they commonly include transmitting private data such as cookies or other session information to the attacker, redirecting the victim to web content controlled by the attacker, or performing other malicious operations on the user's machine under the guise of the vulnerable site.
+Cross-site scripting (XSS) vulnerabilities occur when:
+
+1. Data enters a web application through an untrusted source. In the case of DOM-based XSS, data is read from a URL parameter or other value within the browser and written back into the page with client-side code. In the case of reflected XSS, the untrusted source is typically a web request, while in the case of persisted (also known as stored) XSS it is typically a database or other back-end data store.
+
+
+2. The data is included in dynamic content that is sent to a web user without validation. In the case of DOM-based XSS, malicious content is executed as part of DOM (Document Object Model) creation, whenever the victim's browser parses the HTML page."
+6351,closed,Security vulnerability,2378508869,scku208,2024-09-27T06:37:52Z,"Hello @jasonsaayman , I think I have encountered a similar issue. I used Checkmarx for vulnerability scanning, and the Axios version is 1.7.7.
+
+The documentation explains that in the axios.js, the source is line 793, and the destination is line 782. 
+
+```
+....
+780.
+781.
+function s(o) {
+let i = o;
+
+....
+782. return t && (n.setAttribute(""href"", i), i = n.href),
+n.setAttribute(""href"", i), {
+
+....
+793.
+return r = s(window.location.href),
+
+```
+
+
+However, since this is the result after the Vue build, I suspect it should be the following function.
+(It looks like ""function s  -> resolveURL, parameter url -> o, var href -> i"")
+
+from line 2656:
+```
+function resolveURL(url) {
+    var href = url;
+    if (msie) {
+      // IE needs attribute set twice to normalize properties
+      urlParsingNode.setAttribute('href', href);
+      href = urlParsingNode.href;
+    }
+    urlParsingNode.setAttribute('href', href);
+
+    // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+    return {
+      href: urlParsingNode.href,
+      protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+      host: urlParsingNode.host,
+      search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+      hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+      hostname: urlParsingNode.hostname,
+      port: urlParsingNode.port,
+      pathname: urlParsingNode.pathname.charAt(0) === '/' ? urlParsingNode.pathname : '/' + urlParsingNode.pathname
+    };
+  }
+originURL = resolveURL(window.location.href);
+```
+
+If there is confirmed cybersecurity risk, I hope you can assist in handling it.
+
+
+
+The following is what I found in CHATGPT. It suggested the following solutions:
+
+The issue you encountered is due to unfiltered or unencoded external input being directly embedded into HTML attributes in the axios-DsPaXkF5.js file, which can lead to potential cross-site scripting (XSS) attacks. This is a security vulnerability that should be properly addressed. Here are a few solutions:
+
+1. Parameter Validation and Sanitization
+Ensure that all inputs for the href attribute are validated and sanitized. You can use a function to filter or sanitize untrusted inputs. For example:
+
+```
+function sanitizeUrl(url) {
+    // Check URL format
+    const urlPattern = /^(https?:\/\/|\/|#)/; // Allowed URL formats
+    if (!urlPattern.test(url)) {
+        return '#'; // Return default value to avoid unsafe URLs
+    }
+    return url;
+}
+// Use this function to sanitize before setting the href attribute:
+let safeUrl = sanitizeUrl(i);
+n.setAttribute(""href"", safeUrl);
+```
+
+2. Use DOMPurify
+If you need to support more complex HTML content, consider using DOMPurify. This is a library specifically designed for sanitizing HTML and can help filter out potential XSS attacks:
+
+```
+//Import DOMPurify
+import DOMPurify from 'dompurify';
+
+// Use DOMPurify to clean the URL
+let safeUrl = DOMPurify.sanitize(i);
+n.setAttribute(""href"", safeUrl);
+```
+
+3. Use the URL Object
+Use JavaScript's URL object to parse and validate URLs. This ensures that only valid URLs will be used:
+```
+function isValidUrl(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
+}
+// Use it
+if (isValidUrl(i)) {
+    n.setAttribute(""href"", i);
+} else {
+    n.setAttribute(""href"", '#'); // Or another safe default value
+}
+```
+4. Implement Content Security Policy (CSP)
+Setting a CSP header can enhance the security of your website and help prevent XSS attacks. While this cannot completely replace sanitization of untrusted data, it can serve as an additional layer of defense. You can set CSP in the server's response headers:
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none';
+```
+
+Summary
+Always take security measures when handling untrusted input by using validation, sanitization, CSP, and other methods to reduce potential security risks. These steps can not only fix the current vulnerabilities but also improve the overall security of the application.""
+"
+6351,closed,Security vulnerability,2378616374,jasonsaayman,2024-09-27T07:39:05Z,thanks for the additional information. I will try to get a appropriate fix for this
+6351,closed,Security vulnerability,2496523932,scku208,2024-11-25T02:03:15Z,"Hi @jasonsaayman,
+
+Thank you for your previous response and for looking into this issue. I really appreciate your effort and dedication to finding an appropriate fix.
+
+I was wondering if there might be an estimated timeline for when the fix could be implemented. This would help me plan accordingly, as I am encountering a similar problem. If there are any updates or workarounds available, I’d be grateful to know.
+
+Thanks again for your time and all the hard work you put into maintaining this project!
+
+Best regards,
+scku208"
+6351,closed,Security vulnerability,2622177354,wraithgar,2025-01-29T16:48:33Z,"There is no security vulnerability here.  The code is contained wholly in the `isURLSameOrigin` code.  That code simply compares two urls and returns a boolean if their origin is the same.  The url objects created therein that have their `href` attributes set are never returned, and thus couldn't possibly be serialized or displayed to the end user.
+
+The PR addressing this is generally a good code cleanup, but it's just that.  No CVE should be made from this and folks who are following along should not concern themselves about a security issue here."
+6351,closed,Security vulnerability,2622182845,wraithgar,2025-01-29T16:50:54Z,"It would generally help the security of Javascript and Node.js if folks would actually be required to show a vulnerability being made, rather than point out a line of code that does something suspect.  ChatGPT is not a valid security researcher."
+6351,closed,Security vulnerability,2647782674,konpeki622,2025-02-10T12:00:25Z,I also don't think this would cause security attacks unless someone can provide a POC.
+6777,closed,Include License Header in Minified JavaScript File,2646139677,jasonsaayman,2025-02-09T09:14:06Z,LGTM Thanks 🏄 
+5163,closed,axios response interceptor retry request,1285427989,felixmosh,2022-10-20T12:10:44Z,"I have a similar setup with accessToken & refreshToken,
+
+```js
+function isUnAuthorizedError(error) {
+  return error.config && error.response && error.response.status === 401;
+}
+
+function shouldRetry(config) {
+  return config.retries.count < 3;
+}
+
+function updateAuthToken(response) {
+  localStorage.setItem('token', response.data.accessToken);
+}
+
+async function authInterceptor(error) {
+  error.config.retries = error.config.retries || {
+    count: 0,
+  };
+
+  if (isUnAuthorizedError(error) && shouldRetry(error.config)) {
+    const response = await axios.post(`/token/refresh`, {});
+
+    updateAuthToken(response);
+
+    error.config.retries.count += 1;
+    axios.defaults.headers.common.Authorization = `Bearer ${response.data.accessToken}`; // update the accessToken
+    return axios.rawRequest(error.config); // retries the original request
+  }
+  return Promise.reject(error);
+}
+
+axios.interceptors.response.use(null, authInterceptor);
+```
+
+After updating to v1 it propagates a `DOM exception` as resolved promise (instead of **reject** it)
+
+```
+""Error: Failed to execute 'setRequestHeader' on 'XMLHttpRequest': 'function(header, parser) {
+    header = normalizeHeader(header);
+
+    if (!header) return undefined;
+
+    const key = findKey(this, header);
+
+    if (key) {
+      const value = this[key];
+
+      if (!parser) {
+        return value;
+      }
+
+      if (parser === true) {
+        return parseTokens(value);
+      }
+
+      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__[""default""].isFunction(parser)) {
+        return parser.call(this, value, key);
+      }
+
+      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__[""default""].isRegExp(parser)) {
+        return parser.exec(value);
+      }
+
+      throw new TypeError('parser must be boolean|regexp|function');
+    }
+  }' is not a valid HTTP header field value.
+    at setRequestHeader (webpack-internal:///../../node_modules/axios/lib/adapters/xhr.js:210:17)
+    at Object.forEach (webpack-internal:///../../node_modules/axios/lib/utils.js:263:10)
+    at dispatchXhrRequest (webpack-internal:///../../node_modules/axios/lib/adapters/xhr.js:209:57)
+    at new Promise (<anonymous>)
+    at xhrAdapter (webpack-internal:///../../node_modules/axios/lib/adapters/xhr.js:63:10)
+    at Axios.dispatchRequest (webpack-internal:///../../node_modules/axios/lib/core/dispatchRequest.js:55:10)""
+```
+
+I've managed to debug it, and looks like it trying to set a **function** as a value.
+
+![image](https://user-images.githubusercontent.com/9304194/196945790-9050495c-f303-4134-9c88-9127b980ca81.png)
+![image](https://user-images.githubusercontent.com/9304194/196945858-e570c5f8-6d6f-4964-9551-224fc0581b60.png)
+
+When you call `axios.request`, 
+![image](https://user-images.githubusercontent.com/9304194/196955257-48d26b6c-e93e-404e-9177-f79a16392006.png)
+![image](https://user-images.githubusercontent.com/9304194/196955331-bc2f0107-0e6f-493e-9212-346f30c7b1fa.png)
+```js
+config.method = 'get'
+```
+it returns the `get` property of the prototype instead of the get property of the headers (if exists)
+![image](https://user-images.githubusercontent.com/9304194/196955588-697e2bde-06f9-4ce1-abb1-2b72faef9e4a.png)
+
+Related to #5143 "
+5163,closed,axios response interceptor retry request,1286480562,felixmosh,2022-10-21T05:30:57Z,@Bobeshmo why did you closed this issue?
+5163,closed,axios response interceptor retry request,1286484339,christian-tchaikovsky,2022-10-21T05:37:59Z,"@felixmosh,  It seems to me that this issue has already been resolved #5143. Fixed in #5148. Do you think this question should be opened?"
+5163,closed,axios response interceptor retry request,1286496962,felixmosh,2022-10-21T05:59:47Z,"The guy made a PR, but it is still open... So it not fixed.
+I think it's better to reflect the issues that comes from this, maybe, it will help to write a test for this scenario."
+5163,closed,axios response interceptor retry request,1287420238,Huiet,2022-10-21T20:44:34Z,"Is there an eta on the merge/update for this 👀 . The fix seems simple in the PR, but I'm new to this rodeo https://github.com/axios/axios/pull/5148/files"
+5163,closed,axios response interceptor retry request,1301549669,hezhongfeng,2022-11-03T01:33:53Z,"same problem. 
+Reduce version to `v0.27.2` resolved"
+5163,closed,axios response interceptor retry request,1399430455,felixmosh,2023-01-22T08:35:14Z,"Any progress with this?
+"
+5163,closed,axios response interceptor retry request,1400531155,mhassan1,2023-01-23T15:23:01Z,This appears to be fixed in `axios@1.2.0` and higher.
+5163,closed,axios response interceptor retry request,1417469540,felixmosh,2023-02-05T11:05:16Z,"Looks like it solved, thanx ;]"
+5163,closed,axios response interceptor retry request,1418615396,christian-tchaikovsky,2023-02-06T07:11:43Z,I'm closing issues because the problem has been solved. Thanks!
+5163,closed,axios response interceptor retry request,2647648768,ramazansancar,2025-02-10T11:02:22Z,What is the current code structure and version? How was it resolved? @christian-tchaikovsky 
+6779,closed,Incorrect Protocol Override in Axios Proxy Settings Leads to 400 Bad Requests,2647403287,brady-ss,2025-02-10T09:23:36Z,"When using a proxy, I thought it was correct for axios to make an HTTP request with an HTTPS URL and send it to the proxy, and that the proxy should handle the subsequent process properly. It seems like an incorrect request, so I am closing it. I apologize."
+6779,closed,Incorrect Protocol Override in Axios Proxy Settings Leads to 400 Bad Requests,2647595194,brady-ss,2025-02-10T10:40:17Z,"https://github.com/axios/axios/pull/6465
+
+related,"
+5978,closed,Fixed the breaking UI and made it responsive for all screens as per issue #5977,2627833962,jasonsaayman,2025-01-31T17:10:56Z,can you rebase pls
+5978,closed,Fixed the breaking UI and made it responsive for all screens as per issue #5977,2646141834,jasonsaayman,2025-02-09T09:20:00Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+6034,closed,fix(sandbox): form shrinking on submit,2627835895,jasonsaayman,2025-01-31T17:12:06Z,can you rebase pls
+6034,closed,fix(sandbox): form shrinking on submit,2646141867,jasonsaayman,2025-02-09T09:20:05Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+5952,closed,fix: Fix uneven layout issue in axios sandbox when pressing send request button with adding overflow-x css,2646141505,jasonsaayman,2025-02-09T09:19:03Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+5953,closed,fix: #5951 uneven send-request layout,2646141521,jasonsaayman,2025-02-09T09:19:06Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+5956,closed,modified html file,1743235763,Shivammishra1432,2023-10-02T15:29:06Z,"Previously, when the ""send request"" button was pressed in the Axios sandbox, the layout appeared uneven or distorted. This was likely due to dynamic content causing layout shifts."
+5956,closed,modified html file,2627837240,jasonsaayman,2025-01-31T17:12:54Z,can you rebase pls
+5956,closed,modified html file,2646141551,jasonsaayman,2025-02-09T09:19:11Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+5957,closed,Improve the ui and layout.,2627836893,jasonsaayman,2025-01-31T17:12:41Z,can you rebase pls
+5957,closed,Improve the ui and layout.,2646141575,jasonsaayman,2025-02-09T09:19:15Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+5961,closed,Adjusted the layout for Axios Sandbox,2627836563,jasonsaayman,2025-01-31T17:12:30Z,can you rebase pls
+5961,closed,Adjusted the layout for Axios Sandbox,2646141404,jasonsaayman,2025-02-09T09:18:42Z,"Thanks for your PR, I am unfortunately going to close this as we have a plan to re-build all examples"
+6775,closed,Axios,2646140619,jasonsaayman,2025-02-09T09:16:34Z,"Thanks, for this PR but we would not want to modify the minified files as they will just be overwritten at the next build. Please adjust the configs rather."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",600028594,BankNatthapon,2020-03-17T11:50:32Z,+1
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",600034021,chinesedfan,2020-03-17T12:04:43Z,"Can you provide the network panel request list in the browser, instead of the server logs?"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",600440911,newnewnet,2020-03-18T06:03:02Z,"@chinesedfan 
+```json
+[{
+  ""_index"": ""log_2020-02"",
+  ""_type"": ""request"",
+  ""_id"": ""h0R0inABPJ1TmlIM0gHa"",
+  ""_version"": 1,
+  ""_score"": null,
+  ""_source"": {
+    ""env"": ""production"",
+    ""request"": {
+      ""body"": {
+        ""paymentId"": ""id"",
+        ""price"": 30,
+        ""method"": ""braintree"",
+        ""paymentObject"": {
+          ""nonce"": ""token"",
+          ""type"": ""CreditCard"",
+        }
+      },
+      ""email"": ""test@gmail.com"",
+      ""httpVersion"": ""1.1"",
+      ""headers"": {
+        ""host"": ""api.someurl.com"",
+        ""x-request-id"": ""ccfd38ea73c14e26b7b6c4285e2f8a3a"",
+        ""x-real-ip"": ""10.138.15.197"",
+        ""x-forwarded-for"": ""10.138.15.197"",
+        ""x-forwarded-host"": ""api.someurl.com"",
+        ""x-forwarded-port"": ""443"",
+        ""x-forwarded-proto"": ""https"",
+        ""x-original-uri"": ""/api/v2/rental-submissions/id/credit-report/payment?t=1582870872332"",
+        ""x-scheme"": ""https"",
+        ""x-original-forwarded-for"": ""2601:681:8680:4ed0:91ed:9c39:9c62:47a1"",
+        ""content-length"": ""459"",
+        ""accept-encoding"": ""gzip"",
+        ""cf-ipcountry"": ""US"",
+        ""cf-ray"": ""56c04c1f3e6da02c-SLC"",
+        ""cf-visitor"": ""{\""scheme\"":\""https\""}"",
+        ""accept"": ""application/json, text/plain, */*"",
+        ""sec-fetch-dest"": ""empty"",
+        ""authorization"": ""Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU4YTkzYTU3MzExMjAwMWI4NTdiYWUiLCJlbWFpbCI6Ind5YXR0c21pdGg0MjdAZ21haWwuY29tIiwidHlwZSI6InJlbnRlciIsImlhdCI6MTU4Mjg2ODc5NCwiZXhwIjoxNTgyOTU1MTk0fQ.JFo4IvERk-K5Tszit0sqDF5BsqiX2x_OUzDdhIC3U6f08K6RMzePg_GQTdDI-2vCbHFDxfklzVe-XOnKTruzdiJiiPQXMIW1kuO-a3glvOiSMrg_ZfxRywHBP0tM9k7IzK1JVjMBum_vEtCNupVA4SWmp63e_-gCXucQqiC_F-KGDLKXUNK444oyrF3Pzjcs2kQsrJmhSHqhFeSww5DWFB04JaNYuinT8lDpqAP_gPp3XVEPf7uipdSVgi5M8DxHvmpZYQf069VxEgw4QBLwWDtnOASI1yjrqb3UQDkQGsKdMgVhAMOXeVP-SHKf7z9Br94Vtz70pCHxR51FZHoMkWG9dsuvAUcfWq8Qpv1Ml7tRpvE8tlvfG3GNL55eZvjreWKANu-QmXTEXXIJRech7RCWv-5cM1mrBy6MtF5XoIrPQ2LSVwujNwtSeqraksE-10IrAgWKcJ0y22hLSbKx7hgJ88FLatBIs_Fnni0MX-OTfBKrI8RBb8JCT0rTZo4IgCOFJ6GPniYSV6gjC48l0VfoMqLJygrwIgnZCMh4G8KLf4U5w84HuLKQCdSgvUM_Ts8bJfgcWRAFi7IDdkVgT1fq_9sZssCqJ87olXNbf76Kg3HGs_jIJ7Palrv5vXUYtHJnk7aGXF7Q8PAT9Hl97FUBYd2hyiLpnL-QLAH9ynI"",
+        ""user-agent"": ""Mozilla/5.0 (Linux; Android 10; SM-G970U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.119 Mobile Safari/537.36"",
+        ""content-type"": ""application/json;charset=UTF-8"",
+        ""origin"": ""https://www.someurl.com"",
+        ""sec-fetch-site"": ""same-site"",
+        ""sec-fetch-mode"": ""cors"",
+        ""referer"": ""https://www.someurl.com/apply/id/option/id/payment?utm_source=crmls&utm_medium=email"",
+        ""accept-language"": ""en-US,en;q=0.9"",
+        ""cf-connecting-ip"": ""2601:681:8680:4ed0:91ed:9c39:9c62:47a1"",
+        ""cdn-loop"": ""cloudflare""
+      },
+      ""method"": ""POST"",
+      ""originalUrl"": ""/api/v2/rental-submissions/id/credit-report/payment?t=1582870872332"",
+      ""path"": ""/api/v2/rental-submissions/id/credit-report/payment"",
+      ""query"": {
+        ""t"": ""1582870872332""
+      },
+      ""route"": {
+        ""path"": ""/rental-submissions/:rentalSubmissionId/credit-report/payment""
+      }
+    },
+    ""@timestamp"": ""2020-02-28T06:21:16.194Z"",
+    ""response"": {
+      ""statusCode"": 409
+    },
+    ""duration"": 694,
+    ""error"": {
+      ""stack"": ""PaymentGateWayError: Cannot use a payment_method_nonce more than once.\n    at Function._callee6$ (/app/src/services/rental-submission/credit-report.js:314:13)\n    at tryCatch (/app/node_modules/regenerator-runtime/runtime.js:62:40)\n    at Generator.invoke [as _invoke] (/app/node_modules/regenerator-runtime/runtime.js:288:22)\n    at Generator.prototype.(anonymous function) [as throw] (/app/node_modules/regenerator-runtime/runtime.js:114:21)\n    at asyncGeneratorStep (/app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:24)\n    at _throw (/app/node_modules/@babel/runtime/helpers/asyncToGenerator.js:29:9)\n    at <anonymous>"",
+      ""message"": ""Cannot use a payment_method_nonce more than once."",
+      ""name"": ""PaymentGateWayError"",
+      ""errors"": {
+        ""validationErrors"": {},
+        ""errorCollections"": {
+          ""transaction"": {
+            ""validationErrors"": {
+              ""paymentMethodNonce"": [
+                {
+                  ""attribute"": ""payment_method_nonce"",
+                  ""code"": ""91564"",
+                  ""message"": ""Cannot use a payment_method_nonce more than once.""
+                }
+              ]
+            },
+            ""errorCollections"": {}
+          }
+        }
+      }
+    },
+    ""os"": {
+      ""totalmem"": 7841001472,
+      ""freemem"": 1229262848,
+      ""loadavg"": [
+        1.31884765625,
+        0.8310546875,
+        0.77392578125
+      ]
+    },
+    ""process"": {
+      ""memory"": {
+        ""rss"": 104476672,
+        ""heapTotal"": 52981760,
+        ""heapUsed"": 44889168,
+        ""external"": 52970
+      }
+    }
+  },
+  ""fields"": {
+    ""@timestamp"": [
+      ""2020-02"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",600720240,chinesedfan,2020-03-18T16:08:03Z,"@newnewnet Sorry, I mean the screenshot like following if you are using Chrome. And I hope you can do some debugging to find out where triggers those two requests.
+
+This issue will be kept open for weeks or months, but will be closed at last if no detailed evidences point to axios bugs. Because we don't know how to help. Thanks for understanding.
+
+![image](https://user-images.githubusercontent.com/1736154/76981235-4486da80-6975-11ea-8fc6-6606b6affa38.png)
+"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",601535126,newnewnet,2020-03-20T04:37:43Z,"@chinesedfan 
+I can't make it had happened again but I have a network panel log for this case.
+
+<img width=""1060"" alt=""Screen Shot 2563-03-19 at 17 49 11"" src=""https://user-images.githubusercontent.com/2849568/77060491-3b484d00-6a0b-11ea-8ac1-702cafa52705.png"">
+
+I think it's the same issue with #2326
+"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",617753938,yravid,2020-04-22T12:38:58Z,"Same thing happens to me, don't know how to reproduce exactly.
+Environment:
+""axios"": ""0.19.0""
+Chromium 76.0.3809.146
+Node.js | 12.4.0
+macOS Mojave 10.14.6"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",633519838,YitziG,2020-05-25T11:12:00Z,"This looks like a pre-flight request.
+
+https://dev.to/p0oker/why-is-my-browser-sending-an-options-http-request-instead-of-post-5621"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",645359018,KangZiRu,2020-06-17T13:01:22Z,"@YitziG in my case in #2326 , it is the exact same POST request. I confirmed it by checking the access log on the server."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",658415796,diazh,2020-07-14T21:11:22Z,"i am having the same issue. The same request is sent twice (or 4 because the preflight requests).
+![Screen Shot 2020-07-14 at 2 07 44 PM](https://user-images.githubusercontent.com/12104685/87476732-be556a80-c5db-11ea-8512-9b7ab7dbd6fe.png)
+"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",670607663,denisbarriere,2020-08-07T16:44:37Z,"Same here. 
+We have a React Native app calling our api to create some records with a POST request. 
+From time to time, our api receives the exact same request twice (3 times once) in a row (a few ms time difference). 
+We checked the app code and we made sure that it cannot make this POST, so when I saw this thread, I though that it could be a bug in axios.
+It would be great to have some feedback on the progress of this ticket. And ideally, have some expectations on when we can get a fix live.
+Thanks a lot!"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",681128765,spawnrider,2020-08-26T21:17:13Z,"+1 
+Same issue for me but I have three request (one prefilght OPTIONS followed by 2 GET calls) : 
+![image](https://user-images.githubusercontent.com/107427/91357861-32e21280-e7f2-11ea-8c19-42902a62f82e.png)
+
+Note that the third (the second GET) request does not contains the cookies "
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",681626864,chinesedfan,2020-08-27T06:45:05Z,"As mentioned in https://github.com/axios/axios/issues/2326#issuecomment-578407778, though lots of people were not satisfied with the comment, I am really glad to help. But can someone give a reproducible example?
+
+Server logs are not trusted. A possible way is adding a breakpoint before axios sends the request(like in xhr adapter) and see who called it twice."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",681818709,spawnrider,2020-08-27T08:56:10Z,"A reproducible example online is the Directus demo site : https://demo.directus.io/
+Use admin@example.com / password to connect to the admin panel. You will see 2 request to https://demo.directus.io/thumper/.
+The first call stack : 
+![image](https://user-images.githubusercontent.com/107427/91419418-ac5e1d00-e853-11ea-8ff8-4a1358c58589.png)
+
+The second call stack : 
+![image](https://user-images.githubusercontent.com/107427/91419518-c8fa5500-e853-11ea-81bc-67dbce360563.png)
+
+Note that ""const response = await axios.get(url);""  (line 180 in action.js) is called only once."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",681951718,chinesedfan,2020-08-27T13:33:15Z,"@spawnrider Thanks for your detailed information and screenshots. Note that call stacks(hover your mouse on the initiator column of the browser's network panel) only show the situation when just sending the request, which doesn't mean ""actions.js:180"" will never be called. It's a kind of history, instead of future behaviors.
+
+- When the first request is send, ""actions.js:180"" has not been called yet, or at least not in the upper call stack.
+- When the second request is send, it is there, which means the second request is send by inner function code of ""actions.js:180"".
+
+If added a breakpoint at ""actions.js:180"", you will see it stops twice. One is when the page is loading. And the other is after I submitted the admin name and password. If you add a log statement after ""actions.js:180"", I bet it will be printed twice. In summary, nothing is wrong."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",695864399,liunan591,2020-09-21T01:17:01Z,this issue troubled me a lot. I sent a post request but got two in server.  There art two minutes between the req received by server. 
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",700613685,VidurMalik,2020-09-29T10:27:20Z,"For everyone facing this problem and using Sagas / Actions, the problem might be in your sagas. Sagas might get yielded twice which will lead to the action being called once, but the web request executing twice. A potential solution is to use `takeLatest`/`takeLeading` rather than `takeEvery` in your sagas (https://redux-saga.js.org/docs/api/index.html#takeleadingpattern-saga-args)
+
+If this doesn't work, maybe look at if your sagas are being mounted twice. @chinesedfan "
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",700616689,jafar-jabr,2020-09-29T10:33:46Z,"> For everyone facing this problem and using Sagas / Actions, the problem might be in your sagas. Sagas might get yielded twice which will lead to the action being called once, but the web request executing twice. A potential solution is to use `takeLatest`/`takeLeading` rather than `takeEvery` in your sagas (https://redux-saga.js.org/docs/api/index.html#takeleadingpattern-saga-args)
+> 
+> If this doesn't work, maybe look at if your sagas are being mounted twice. @chinesedfan
+
+for me this was not the case, the redux debug tool shows the action dispatched only once but still the request goes twice
+the only solution was to remove axios and to use fetch API."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",720174303,github-actions[bot],2020-11-02T00:05:08Z,"Hello! :wave:
+
+This issue is being automatically marked as stale because it has not been updated in a while. Please confirm that the issue is still present and reproducible. If no updates or new comments are received the issue will be closed in a few days.
+
+Thanks."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",724935461,rafa798,2020-11-10T20:03:28Z,same problem with version 0.20.0
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",725574849,rafa798,2020-11-11T18:03:35Z,"After long hours of testing and debugging where requests were still duplicated in the SAP log, I was able to reproduce the problem locally. Everything indicates that Oh My Zsh and the nodemon left a hidden instance running with watch. Causing unwanted simultaneous firing. I can absolutely say that they were not provoked by Axios."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",731348712,christofferjjohansen,2020-11-20T18:53:02Z,"Not a solution, but adding an observation. I've been completely stumped by this issue, and only realized today that Axios was doing the double POST, which was causing a real headache in my app.
+
+I'm using Vue, Nuxt specifically; had the POST happening in a pre-render lifecycle hook, `created`, ended up moving it to `mounted`, and the double POST disappeared, and it's working as intended now...
+
+Like I said, not a solution, but perhaps it'll help with the troubleshooting."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",738476587,dancancodeit,2020-12-04T00:46:15Z,"I'm also experiencing this issue, I've also tried logging right after to see if the function was being called twice but the log statement only appears twice while the api call is executed twice
+![Screen Shot 2020-12-03 at 7 44 38 PM](https://user-images.githubusercontent.com/10767856/101107392-33800700-35a0-11eb-9f4e-f9e4ff00d042.png)
+![Screen Shot 2020-12-03 at 7 47 19 PM](https://user-images.githubusercontent.com/10767856/101107481-64603c00-35a0-11eb-9abe-654960b84da9.png)
+![Screen Shot 2020-12-03 at 7 46 44 PM](https://user-images.githubusercontent.com/10767856/101107498-6c1fe080-35a0-11eb-9164-24dd54b7ae18.png)
+"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",743285656,tomellwood,2020-12-11T16:15:24Z,"I have the same issue - we are calling `axios.post` inside a Next JS API endpoint, it is only called once (it's not tied to any lifecycle hooks), yet the service it is requesting is getting duplicate requests, no more than 1 second apart.
+
+We are only receiving the response from the second request, in our case, an error stating that the email used to register has already been used; the first request is technically successful as the user is generated in the database.
+
+We are using axios version 0.21.0"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",784139970,abhijoshi2k,2021-02-23T11:39:02Z,I am having same issue. Multiple post requests are sent every time even if I call my function only once!
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",784264784,dancancodeit,2021-02-23T15:02:46Z,"@tomellwood @abhijoshi2k I ended up figuring out the problem. This isn't a problem with axios but in your react development environment the component is rendered twice if you're in StrictMode. The purpose of this to uncover unpredicted side-effects, it doesn't happen in production"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",784354487,abhijoshi2k,2021-02-23T17:04:59Z,@DanCanCodeIt Hey... that solved my issue. Thanks for quick help.
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",808983832,melvin78,2021-03-29T00:02:47Z,I managed to fix my issue. At first my axios instance was not sending duplicate requests. Then after i installed vee validate a vue plugin for handling form validations that's where the issue started. Vee validate also handles server side validation by passing the error objects to the form.  So i had to change my button to type 'submit' for the validation observer to pick up the errors object. This in turn somehow brought about the duplicating of axios requests . When i removed the validation it stopped making the duplicate requests. 
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",865269605,tpharaoh,2021-06-21T18:58:50Z,"> Same here.
+> We have a React Native app calling our api to create some records with a POST request.
+> From time to time, our api receives the exact same request twice (3 times once) in a row (a few ms time difference).
+> We checked the app code and we made sure that it cannot make this POST, so when I saw this thread, I though that it could be a bug in axios.
+> It would be great to have some feedback on the progress of this ticket. And ideally, have some expectations on when we can get a fix live.
+> Thanks a lot!
+
+Did you ever figure this out? I am having same issue with capacitorjs app, copy pasting identical code into HTML page works fine
+
+EDIT: I did a few more tests and it only affects IOS/Safari for me."
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",883635938,AyazAI,2021-07-20T19:22:24Z,"The **problem** in my case was caused by **React development server**.
+The strict mode in react caused the issue!
+![image](https://user-images.githubusercontent.com/45338553/126382520-c84833ce-acf0-4861-a5e7-b7e4d56d3079.png)
+
+I had to remove the strict mode
+![image](https://user-images.githubusercontent.com/45338553/126382817-1cc7fece-e8ef-48bd-8b1c-1ae084627f83.png)
+
+This solved the problem of sending double requests!
+
+The strict mode checks are only run in **development mode**.
+Doc: https://reactjs.org/docs/strict-mode.html
+"
+2825,closed,"Axios send the same request twice and ignore the first response, only receives the second response.",889195420,tsawyer999,2021-07-29T14:30:54Z,@AyazAI Thank you very much! Solved our issues.

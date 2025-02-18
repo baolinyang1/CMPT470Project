@@ -1,0 +1,1166 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+12194,closed,fix: prevent double call to SetGitModule on repo change,2659425041,pmiossec,2025-02-14T14:06:04Z,"> Does it still work when the app starts at the dashboard and then a repo is selected?
+
+Yes, It seems good."
+12191,closed,bug in VB code,2657412493,pmiossec,2025-02-13T18:26:47Z,You are in the wrong place to request help on this subject. Closing as not gitextensions related.
+12191,closed,bug in VB code,2658076076,Minaishac,2025-02-14T01:46:06Z,"thank you very much
+
+On Thu, Feb 13, 2025 at 7:27 PM Philippe Miossec ***@***.***>
+wrote:
+
+> You are in the wrong place to request help on this subject. Closing as not
+> gitextensions related.
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/12191#issuecomment-2657412493>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ALVZSZXSY6TZKKKXTMVDO7T2PTPX7AVCNFSM6AAAAABXCRVQIWVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMNJXGQYTENBZGM>
+> .
+> You are receiving this because you authored the thread.Message ID:
+> ***@***.***>
+> [image: pmiossec]*pmiossec* left a comment
+> (gitextensions/gitextensions#12191)
+> <https://github.com/gitextensions/gitextensions/issues/12191#issuecomment-2657412493>
+>
+> You are in the wrong place to request help on this subject. Closing as not
+> gitextensions related.
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/12191#issuecomment-2657412493>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ALVZSZXSY6TZKKKXTMVDO7T2PTPX7AVCNFSM6AAAAABXCRVQIWVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMNJXGQYTENBZGM>
+> .
+> You are receiving this because you authored the thread.Message ID:
+> ***@***.***>
+>
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",478603370,vbjay,2019-04-01T14:30:36Z,"Run git gc. You have 1.5 GB in.git folder.
+
+On Mon, Apr 1, 2019, 10:17 AM JacksReacher <notifications@github.com> wrote:
+
+> Current behaviour
+>
+> After opening GE, clicking the ""Commit"" button to review changes, causes
+> GE to stop responding.
+> Expected behaviour
+>
+> Should open the ""View Changes"" dialog
+> Steps to reproduce
+>
+> After opening GE, clicking the ""Commit"" button to review changes, causes
+> GE to stop responding.
+> Screenshots
+>
+> [image: image]
+> <https://user-images.githubusercontent.com/8247176/55333795-d5a32f80-544c-11e9-858e-e12ba54d1b98.png>
+> Did this work in previous version of GitExtensions
+>
+> Yes, prior to 3.00.00.4433
+> Environment
+>
+> Windows 10
+>
+>    - Git Extensions 3.0.2.5232
+>    - Build 23b6f51
+>    <https://github.com/gitextensions/gitextensions/commit/23b6f51905006ccdde8701591df706284b4155dc>
+>    - Git 2.20.1.windows.1
+>    - Microsoft Windows NT 10.0.17763.0
+>    - .NET Framework 4.7.3362.0
+>    - DPI 96dpi (no scaling)
+>
+> Diagnostics
+>
+> This is the last image of the diagnostics, before everything freezes:
+> [image: image]
+> <https://user-images.githubusercontent.com/8247176/55334158-91fcf580-544d-11e9-9716-c412c43ff3eb.png>
+> $ git for-each-ref --format=""%(refname)"" refs/ | cut -d""/"" -f2 | uniq -c 4
+> heads 601 remotes 97 tags $ git stash list | wc -l 0
+> joseph.peavey@DESKTOP-PJV66D5 MINGW64 /c/CVProjects/skykick
+> (origin/jpeave/64026ConvertSummaryToJson) $ git count-objects -vH count:
+> 1450 size: 11.43 MiB in-pack: 873959 packs: 30 size-pack: 1.48 GiB
+> prune-packable: 696 garbage: 0 size-garbage: 0 bytes
+> joseph.peavey@DESKTOP-PJV66D5 MINGW64 /c/CVProjects/skykick
+> (origin/jpeave/64026ConvertSummaryToJson) $ du -h -d 1 .git 40K .git/hooks
+> 1.0K .git/info 397K .git/logs 1.5G .git/objects 320K .git/refs 1.5G .git
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/6427>, or mute the
+> thread
+> <https://github.com/notifications/unsubscribe-auth/ADdhsefzVSRh92FtGot-tgycP8EJBcwwks5vchTwgaJpZM4cV1dX>
+> .
+>
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",478604974,JacksReacher,2019-04-01T14:34:46Z,"Thanks VBJay; unfortunately didn't help:
+
+$  du -h -d 1 .git                                                                                                                       40K     .git/hooks                                                                                                                       73K     .git/info                                                                                                                        393K    .git/logs                                                                                                                        1.4G    .git/objects                                                                                                                     13K     .git/refs                                                                                                                        1.4G    .git
+--
+
+
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",490883551,RussKie,2019-05-09T12:31:51Z,"Is the error specific to a particular repo or across all repos?
+Can you please try 3.1-RC1 and see if it resolves the issue?"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",493550981,JacksReacher,2019-05-17T18:20:29Z,"Sorry it took so long to get back to you. Just tried with 3.1.0.5877 and it's still happening.
+![GitExtensionsVersion](https://user-images.githubusercontent.com/8247176/57948161-c447a280-7895-11e9-9ba4-19b1b483cf93.png)
+
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",571558327,Ian1971,2020-01-07T11:59:54Z,"I have this same issue. I have narrowed it down to occurring on my high dpi laptop display when a second monitor is connected and the gitextensions window is on the high dpi display.
+
+So it is fine if gitextensions is on the second monitor, or if I switch to laptop display only. I suspect there is a dialog box that cannot be seen.
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",572433414,RussKie,2020-01-09T07:41:58Z,Could you please describe steps to reproduce? The more details the better
+6427,closed,"GE stops responding when clicking the ""Commit"" button",572456047,Ian1971,2020-01-09T08:50:39Z,"Pre-condition 2 displays. One is high dpi (laptop) the other standard (monitor) (not sure if the dpi is significant or the two screens)
+1. Launch gitextensions and ensure window is on the high dpi display
+1. Press commit
+1. Observe no commit window and now when you click anywhere you get a windows beep
+1. Kill git ext via task manager
+1. Re-launch git ext and this time ensure window on the 2nd screen (monitor)
+1. Press commit
+1. Observe it behaves normally
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",573628576,RussKie,2020-01-13T11:55:38Z,"> * Launch gitextensions and ensure window is on the high dpi display
+> * Press commit
+> * Observe no commit window and now when you click anywhere you get a windows beep
+
+This means the commit window outside the visible desktop bounds. The commit window can be closed with <kbd>ESC</kbd>, no need to kill the app.
+
+From your description the 2nd monitor is your primary monitor. I believe I've observed a similar behaviour in multi monitor setups (I don't have one any longer)."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",573634548,Ian1971,2020-01-13T12:13:08Z,"Using ESC is a good tip.
+The laptop monitor is the primary monitor I believe. At least that is the one where the system tray appears."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",578873906,ghost,2020-01-27T18:00:14Z,This issue has been automatically marked as stale because it has been marked as requiring author feedback but has not had any activity for **14 days**. It will be closed if no further activity occurs.
+6427,closed,"GE stops responding when clicking the ""Commit"" button",579162791,Ian1971,2020-01-28T09:47:20Z,"Its still an issue. The workaround helps though.
+
+On Mon, 27 Jan 2020, 18:00 msftbot[bot], <notifications@github.com> wrote:
+
+> This issue has been automatically marked as stale because it has been
+> marked as requiring author feedback but has not had any activity for *14
+> days*. It will be closed if no further activity occurs.
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/6427?email_source=notifications&email_token=AACN2SMDN5XD2KPGR3QARYLQ74OK7A5CNFSM4HCXK5L2YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGOEKAOUMQ#issuecomment-578873906>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/AACN2SMCHTFLGTE5KS5WQQTQ74OK7ANCNFSM4HCXK5LQ>
+> .
+>
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",702691162,jupsoleil,2020-10-02T11:52:44Z,I confirm it's still a bug 3.4.3.9999 .
+6427,closed,"GE stops responding when clicking the ""Commit"" button",703241616,RussKie,2020-10-04T11:29:32Z,"I have WIP POC in https://github.com/gitextensions/gitextensions/pull/8341, but since I don't currently have a 2nd monitor so I can't test it.
+Anyone is welcome to pick this work and submit a fix.
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",797727379,AustinSpears,2021-03-12T20:11:53Z,+1 on this.  I spent a very frustrated afternoon assuming a recent git update caused this issue before stumbling upon this thread.  I use a 4k monitor as my main screen and a 1080p monitor as a secondary.
+6427,closed,"GE stops responding when clicking the ""Commit"" button",797789525,RussKie,2021-03-12T22:20:50Z,"Please try the latest dev version, this issue is fixed.
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",798855376,RussKie,2021-03-14T07:42:35Z,The issue is fixed in #8341
+6427,closed,"GE stops responding when clicking the ""Commit"" button",909358700,adamswallows,2021-08-31T15:47:33Z,"This continues to be a bug in 3.5.3. Works fine on lower DPI monitor. The comments from @Ian1971 on Jan 9, 2020 describe the same issue I'm experiencing. Build and system details below.
+
+- Git Extensions 3.5.3.12551
+- Build 00604a59a673142a3d34a22aa657466a922977f3
+- Git 2.33.0.windows.2
+- Microsoft Windows NT 10.0.19043.0
+- .NET Framework 4.8.4400.0
+- DPI 168dpi (175% scaling)"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",909361536,Ian1971,2021-08-31T15:51:13Z,Still an issue for me also
+6427,closed,"GE stops responding when clicking the ""Commit"" button",945801591,eng-marani,2021-10-18T13:59:03Z,"I have the same exact issue. dual monitor setup, with a FullHD and a 4K monitor side by side.
+THe trick of pressing ESC while showing the window out of screen not always works, because some other forms may steal focus clicking around. I think a better solution, if ensuring saved coordinates always landing into screen area is too difficult, is to allow the form to appear in taskbar, with it's own preview, so it would be easier to recover it."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1326397952,andriibratanin,2022-11-24T12:40:49Z,The issue still persist on v4.0.0.15569
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1327183604,eng-marani,2022-11-25T09:04:38Z,"Yes, unfortunately, i have to CONFIRM that the misplaced commit window in a dual monitor setup is still present on the latest version. I have attempted a fix to mitigate it, but i have removed my branch because i though it was already incorporated in the latest release with a better (and proper) implementation, but it's not.
+
+Is it possible to reopen the bug on Window Position Manager, that may save unrestorable windows position ?
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1327188640,eng-marani,2022-11-25T09:09:45Z,"I have a 100% workflow to reproduce it. I hope this image will be attached correctly:
+
+![image](https://user-images.githubusercontent.com/14199364/203942515-a802eb69-101c-4be3-abf0-9f372edcccef.png)
+
+You need to setup a dual monitor environment. 
+The monitor (1) is a FullHD/text 100%
+The monitor (2) is a 4K/text 150%
+Note that they are not a precise ""extended"" desktop, because the monitor (1) is not aligned to (2) on top.
+
+If you can open the commit window in one monitor, it will disappear if, after closing it, the main window is dragged into the other monitor. In a nutshel, the commit window will become visible *ONLY* if was previously saved on the *SAME* monitor where it is restored. 100% reproducible.
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1327192789,eng-marani,2022-11-25T09:13:57Z,"In my humble opinion, i think that saving just ""X,Y"" origin coordinate is not enough, also the monitor ID where it is saved is important. As a workaround, the function to understand if the form will be out of screen or not, have flaws. It detect the form *CAN* be displayed even if it can not. So the window will appear offscreen, but without any cue icon in the taskbar it is impossible to move. 
+Of course pressing ESC will close the window, now user can move the main form into the *OTHER* monitor, and in this case commit form will appear again to screen (because the main form is now on the same screen where the child form has been saved before).
+
+"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1699122167,pilotola,2023-08-30T12:58:57Z,"First, thanks that someone reported this back in the days. As I struggled with this for a while myself for a few days. I tried even re-installing Git Extensions, but that didn't help either. 
+
+As you might have guessed the above trick (by moving the main window to the smaller laptop screen and after that press the commit button) worked! So I can let you know that this ""bug"" is still active in 4.1.0.16698 release.
+
+Thanks for a great product."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",1723399071,hrenocop,2023-09-18T13:21:39Z,"> I have this same issue. I have narrowed it down to occurring on my high dpi laptop display when a second monitor is connected and the gitextensions window is on the high dpi display.
+> 
+> So it is fine if gitextensions is on the second monitor, or if I switch to laptop display only. I suspect there is a dialog box that cannot be seen.
+
+It's funny i have the same situation. The window of changes was appear on the second monitor, that was turned off. "
+6427,closed,"GE stops responding when clicking the ""Commit"" button",2326650188,jacksorjacksor,2024-09-03T14:18:31Z,"> I have this same issue. I have narrowed it down to occurring on my high dpi laptop display when a second monitor is connected and the gitextensions window is on the high dpi display.
+> 
+> So it is fine if gitextensions is on the second monitor, or if I switch to laptop display only. I suspect there is a dialog box that cannot be seen.
+
++1 to this"
+6427,closed,"GE stops responding when clicking the ""Commit"" button",2646065672,dimijimi-github,2025-02-09T04:39:01Z,"I had the same issue in v5.1.1
+
+
+## Workaround
+
+I moved extensions to screen 2 and changed the screen to 100%. Also I moved the extensions window further up and left (I don't think it matters)
+I clicked ""commit"" and I saw the popup.
+Then changed the screen back to 150% and it works again."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",2646110021,mstv,2025-02-09T07:41:01Z,"Does https://github.com/gitextensions/gitextensions/releases/tag/v5.2.1 work (better) for you?
+#12119 was added to the pre-release v5.2."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",2646410396,dimijimi-github,2025-02-09T17:07:06Z,"No, this did not help unfortunately."
+6427,closed,"GE stops responding when clicking the ""Commit"" button",2646423726,mstv,2025-02-09T17:19:25Z,"> No, this did not help unfortunately.
+
+Thank you for testing.
+Are you able to watch the function `` in `src/app/GitUI/GitExtensionsForm.cs` in the debugger?
+The values of the following variables are of interest:
+* `position`
+* `workingAreas`"
+12179,closed,fix(Output History Panel): Hide with Left Panel,2644209074,RussKie,2025-02-07T22:02:09Z,I asked about this in the original changeset. Having controls cross container boundaries is a bad idea.
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2564336293,gerhardol,2024-12-28T14:20:25Z,"Works fine.
+I would prefer a separate flat/tree setting (even if switching may require one more step):
+![image](https://github.com/user-attachments/assets/8bac88c6-d48b-4b81-b83f-92bdf661efaf)
+
+When sorting by status, Range should be at the bottom.
+Sort modified Both,B,A, then New etc. Why submodules separate (there are no special icons, should be handled as modified with both/B/A)?
+![image](https://github.com/user-attachments/assets/6e320bff-c3d3-46cb-b4ee-7a02745950ec)
+
+Can rangediff be in top view, no need for a folder?
+Similar for groups with just one item (but may not be feasible there).
+![image](https://github.com/user-attachments/assets/80bfbe6f-9d09-4d39-bd84-dd86affa5c58)
+
+Nice that collapsing is automatic, but skip the folder icon
+![image](https://github.com/user-attachments/assets/c75588e2-7666-41cd-8362-4052b0816c0a)
+
+When scrolling to next, nice that next group expands.
+It would be nice to have collapse/expand as for side panel
+
+Should selecting a folder with leafs have some info in the fileviewer? First file?
+Action when rightclicking should be as if all subnodes are selected.
+So maybe selecting a folder selects all nodes?
+
+RangeDiff should have a new icon, reusing it for yet another purpose is a little confusing (since is was added for groups)"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2564563731,mstv,2024-12-29T00:11:50Z,"> Works fine. I would prefer a separate flat/tree setting (even if switching may require one more step):
+> ![image](https://private-user-images.githubusercontent.com/6248932/399085137-8bac88c6-d48b-4b81-b83f-92bdf661efaf.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU0Mjg0OTcsIm5iZiI6MTczNTQyODE5NywicGF0aCI6Ii82MjQ4OTMyLzM5OTA4NTEzNy04YmFjODhjNi1kNDhiLTRiODEtYjgzZi05MmJkZjY2MWVmYWYucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MTIyOCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDEyMjhUMjMyMzE3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NjEyZjljYTcxNWI2NjMxYzFkMTU1MjUxOWI1ODc5Njk5M2UxZGY5MWRmM2M2OGY5MGE1MzY3NTRlM2UzY2Q3MCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.6qCEyKkx_XEXyimXz25Z8p0kYanpMwI55vdb4M65CdI)
+
+Opening a submenu of a context menu would be a pretty expensive second step.
+I could add an additional context menu item ""As tree"" (but will be much code).
+
+> When sorting by status, Range should be at the bottom.
+
+I agree.
+
+>  Sort modified Both,B,A, then New etc. Why submodules separate (there are no special icons, should be handled as modified with both/B/A)?
+> ![image](https://private-user-images.githubusercontent.com/6248932/399085399-6e320bff-c3d3-46cb-b4ee-7a02745950ec.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU0Mjg0OTcsIm5iZiI6MTczNTQyODE5NywicGF0aCI6Ii82MjQ4OTMyLzM5OTA4NTM5OS02ZTMyMGJmZi1jM2QzLTQ2Y2ItYjRlZS03YTAyNzQ1OTUwZWMucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MTIyOCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDEyMjhUMjMyMzE3WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YzUzNzlmM2YwOGRiNjk1MDhkZjg2ZGQzOTA4MGY3NmU1NjI0ZTUxOTg1ZTkyMDBmZjk5OWE3OWMyMGVhMjc5OSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.U_wzdFXDMQ0xwRPsmtKEAyJlGLuc8WkJ2J82yajDITA)
+
+I do not fully understand the point about submodules. It might become resolved when considering the `DiffStatus` for the grouping, too.
+ 
+> Can rangediff be in top view, no need for a folder? Similar for groups with just one item (but may not be feasible there).
+
+👍 Should not be difficult for grouping (same as the already implemented handling if there is only one group).
+
+> It would be nice to have collapse/expand as for side panel
+> Action when rightclicking should be as if all subnodes are selected. So maybe selecting a folder selects all nodes?
+
+I am adding `Collapse`, `Expand` and `Select all`. In the follow-up for adding a file-tree mode or later, special menu items or behavior can be added.
+
+> Should selecting a folder with leaves have some info in the fileviewer? First file? 
+
+Yes, if one has a good idea. But not the first file - same as in the ""File tree"".
+ 
+> RangeDiff should have a new icon, reusing it for yet another purpose is a little confusing (since is was added for groups)
+
+I agree. My main use of range diff is to see equal (and skipped) revisions. So a different icon would be good. Proposals?
+For the additional diff groups, I was thinking of overlays ""B"", ""A"", ""C""ombined. An ""R"" overlay might suffice for range diff, too."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2564691210,gerhardol,2024-12-29T11:17:16Z,"> Opening a submenu of a context menu would be a pretty expensive second step. I could add an additional context menu item ""As tree"" (but will be much code).
+
+I meant a separate menu on the top level, as appearance
+
+> I do not fully understand the point about submodules. It might become resolved when considering the `DiffStatus` for the grouping, too.
+
+I consider a changed submodule as a changed file.
+There is no special icon for both changed (or only A/B)  for submodules
+
+> > RangeDiff should have a new icon, reusing it for yet another purpose is a little confusing (since is was added for groups)
+> 
+> I agree. My main use of range diff is to see equal (and skipped) revisions. So a different icon would be good. Proposals? For the additional diff groups, I was thinking of overlays ""B"", ""A"", ""C""ombined. An ""R"" overlay might suffice for range diff, too.
+
+Overlay in general would be good for these icons. The variants (both changed etc) need to be changed for dark mode anyway.
+I am not a designer, it takes time to get opinions and a lot more to implement changes, so no great proposal myself."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2564811156,gerhardol,2024-12-29T18:48:59Z,"Right click on folder should enable more context menu options
+
+![image](https://github.com/user-attachments/assets/ccedd96c-0d5e-42be-b2ff-cc95f2ccaac3)
+
+![image](https://github.com/user-attachments/assets/b6ef767d-7dbf-4385-8621-6c57ec2fe38b)
+
+This is new functionality, nice to have for RevDiff but needed if FileTree is updated too (or integrated in RevDiff).
+Add todo in Description?"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2566954372,gerhardol,2025-01-01T10:48:21Z,"A few comments on this PR as it is now:
+~~[ ] Remove folder icons for files, appears on the first items~~
+~~[ ] Remove icons if top is matched (file status, will affect all but submodules)~~
+[ ] Lazy for GitItemStatus https://github.com/gitextensions/gitextensions/pull/12116#discussion_r1899208401
+~~[ ] Comment for the unexpected shift-click behavior~~
+~~* The dependency is fine in principle, need to check some details.~~
+
+Questions:
+* Should changed submodules be in modified status gruop? Now they are separated
+~~* Separate the flat/tree setting?~~
+
+For future PRs?
+~~* context menu for folders https://github.com/gitextensions/gitextensions/pull/12116#issuecomment-2564811156~~
+* Optional group for all files, to replace file tree tab (maybe). Added similar to grep, i.e. after diff. 
+
+--
+For first item
+![image](https://github.com/user-attachments/assets/eee056a8-f803-47b8-827f-7f8860e66b13)
+"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2567188298,mstv,2025-01-01T23:56:56Z,"Thank you for the detailed feedback. I am aware of the TODOs.
+
+`TreeView` has several limitations, particularly icons:
+`StateImages` are limited to 14 (only a runtime error when trying to use a higher index). `StateImages` are scaled in a special way.
+`Images` work better. But it looks ugly if some nodes have no icon.
+With `OwnerDrawAll`, one needs to draw everything including tree lines, which feels like implementing the tree view control from scratch, what I do not want to do.
+
+Tooltips are automatically provided - if `Text` matches the owner-drawn length. I saw the wrong selection highlight length, too. I am adapting this.
+
+> Should changed submodules be in modified status group? Now they are separated.
+
+""Sort by status"" is a TODO yet and should yield the same ordering as before. New subgroups or changes in the ordering should be added in a follow-up.
+
+> Separate the flat/tree setting?
+
+I prefer a one-stop shop. A ""tree / flat"" toggle could be useful in addition.
+Later, we should add a toolbar with sort options and filtering.
+FormCommit and artificial commits could use a separate sorting setting."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2569773485,mstv,2025-01-03T20:25:27Z,"> folder icons for files, appears on the first items
+
+If a file is the only file in a subfolder, no subfolder-node is created but the folder icon is added to the file as `StateImage` (with arbitrary scaling by the TreeView control).
+Without the folder icon, one could miss the fact that the file is located in a subfolder.
+
+(sorted by path)
+![image](https://github.com/user-attachments/assets/a418679e-a17d-410b-a34a-ee2931415da6)  
+
+(grouped by status)
+![image](https://github.com/user-attachments/assets/87709b4b-125d-4613-a1a0-538b920f281f)
+
+It is not the ""first"" item but a single item - between the surrounding sibling folders:
+![image](https://github.com/user-attachments/assets/1b2eef60-4602-4806-9868-6b537e9ce0b3)
+
+Not used in flat view:
+![image](https://github.com/user-attachments/assets/f5275fb8-ab2f-46c3-87f8-9386a19d455c)
+
+---
+
+> Should changed submodules be in modified status gruop? Now they are separated
+
+I think the current sorting is the same as in master.
+
+![image](https://github.com/user-attachments/assets/b51ee8bc-17a4-411c-b13c-fd0ff92a4025)
+
+![image](https://github.com/user-attachments/assets/d801e29a-db7c-4dbb-9e3c-aac79c09027d)
+
+The mentioned more logical sorting could simply be achieved in a separate PR by moving up the submodule icons in `CreateImageListData`.
+
+> I prefer current order changed,added,removed then by both,B,A
+
+Then we could remove `DiffStatus` from `GetStatusKey` again and rely on the order of `images` in `CreateImageListData`.
+
+```
+            (string imageKey, Bitmap icon)[] images =
+            [
+                (nameof(Images.FileStatusUnknown), ScaleHeight(Images.FileStatusUnknown)),
+                (nameof(Images.FileStatusModified), ScaleHeight(Images.FileStatusModified)),
+                (nameof(Images.FileStatusModifiedOnlyA), ScaleHeight(Images.FileStatusModifiedOnlyA)),
+                (nameof(Images.FileStatusModifiedOnlyB), ScaleHeight(Images.FileStatusModifiedOnlyB)),
+                (nameof(Images.FileStatusModifiedSame), ScaleHeight(Images.FileStatusModifiedSame)),
+                (nameof(Images.FileStatusModifiedUnequal), ScaleHeight(Images.FileStatusModifiedUnequal)),
+                (nameof(Images.FileStatusAdded), ScaleHeight(Images.FileStatusAdded)),
+                (nameof(Images.FileStatusAddedOnlyA), ScaleHeight(Images.FileStatusAddedOnlyA)),
+                (nameof(Images.FileStatusAddedOnlyB), ScaleHeight(Images.FileStatusAddedOnlyB)),
+                (nameof(Images.FileStatusAddedSame), ScaleHeight(Images.FileStatusAddedSame)),
+                (nameof(Images.FileStatusAddedUnequal), ScaleHeight(Images.FileStatusAddedUnequal)),
+                (nameof(Images.FileStatusRemoved), ScaleHeight(Images.FileStatusRemoved)),
+                (nameof(Images.FileStatusRemovedOnlyA), ScaleHeight(Images.FileStatusRemovedOnlyA)),
+                (nameof(Images.FileStatusRemovedOnlyB), ScaleHeight(Images.FileStatusRemovedOnlyB)),
+                (nameof(Images.FileStatusRemovedSame), ScaleHeight(Images.FileStatusRemovedSame)),
+                (nameof(Images.FileStatusRemovedUnequal), ScaleHeight(Images.FileStatusRemovedUnequal)),
+                (nameof(Images.Unmerged), ScaleHeight(Images.Unmerged)),
+                (nameof(Images.FileStatusRenamed), ScaleHeight(Images.FileStatusRenamed.AdaptLightness())),
+                (nameof(Images.FileStatusRenamedOnlyA), ScaleHeight(Images.FileStatusRenamedOnlyA)),
+                (nameof(Images.FileStatusRenamedOnlyB), ScaleHeight(Images.FileStatusRenamedOnlyB)),
+                (nameof(Images.FileStatusRenamedSame), ScaleHeight(Images.FileStatusRenamedSame)),
+                (nameof(Images.FileStatusRenamedUnequal), ScaleHeight(Images.FileStatusRenamedUnequal)),
+                (nameof(Images.FileStatusCopied), ScaleHeight(Images.FileStatusCopied)),
+                (nameof(Images.FileStatusCopiedOnlyA), ScaleHeight(Images.FileStatusCopiedOnlyA)),
+                (nameof(Images.FileStatusCopiedOnlyB), ScaleHeight(Images.FileStatusCopiedOnlyB)),
+                (nameof(Images.FileStatusCopiedSame), ScaleHeight(Images.FileStatusCopiedSame)),
+                (nameof(Images.FileStatusCopiedUnequal), ScaleHeight(Images.FileStatusCopiedUnequal)),
+                (nameof(Images.SubmodulesManage), ScaleHeight(Images.SubmodulesManage)),
+                (nameof(Images.FolderSubmodule), ScaleHeight(Images.FolderSubmodule)),
+                (nameof(Images.SubmoduleDirty), ScaleHeight(Images.SubmoduleDirty)),
+                (nameof(Images.SubmoduleRevisionUp), ScaleHeight(Images.SubmoduleRevisionUp)),
+                (nameof(Images.SubmoduleRevisionUpDirty), ScaleHeight(Images.SubmoduleRevisionUpDirty)),
+                (nameof(Images.SubmoduleRevisionDown), ScaleHeight(Images.SubmoduleRevisionDown)),
+                (nameof(Images.SubmoduleRevisionDownDirty), ScaleHeight(Images.SubmoduleRevisionDownDirty)),
+                (nameof(Images.SubmoduleRevisionSemiUp), Sc"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2569934057,gerhardol,2025-01-03T23:34:41Z,"Regression from #12115: When moving to next file on bottom file with scrollwheel, the selection restarts at the top file.
+I implemented it this way in the original PR, but got requests to change.
+Now I am used to stop at the bottom file and have been confused a couple of times over the number of changes..."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2571258916,gerhardol,2025-01-04T11:19:28Z,"Heading needed in FormCommit for sort by status
+
+Collapsed
+![image](https://github.com/user-attachments/assets/401adb42-08c0-458c-b30a-d46f7d23cc44)
+
+Expanded (as it is default, so no major issue)
+![image](https://github.com/user-attachments/assets/87ad18ca-de93-47e5-b572-64433dd331cd)
+"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2571274252,RussKie,2025-01-04T12:29:38Z,"> Heading needed in FormCommit for sort by status
+> 
+> Collapsed ![image](https://private-user-images.githubusercontent.com/6248932/400135281-401adb42-08c0-458c-b30a-d46f7d23cc44.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU5OTQwMTksIm5iZiI6MTczNTk5MzcxOSwicGF0aCI6Ii82MjQ4OTMyLzQwMDEzNTI4MS00MDFhZGI0Mi0wOGMwLTQ1OGMtYjMwYS1kNDZmN2QyM2NjNDQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAxMDRUMTIyODM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDdhM2NhYTI2YTczNjI4Y2U0MzVmZTAxYjIxNDA5Mjc4OWU5NDIxMDZhZDZjMDAwM2Q5YWNjZmFhZjI5NjEyNCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.ylej66CQeKx9LAEqPAno3X-jLKP0kHlIdKiucD9Qe9k)
+> 
+> Expanded (as it is default, so no major issue) ![image](https://private-user-images.githubusercontent.com/6248932/400135245-87ad18ca-de93-47e5-b572-64433dd331cd.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU5OTQwMTksIm5iZiI6MTczNTk5MzcxOSwicGF0aCI6Ii82MjQ4OTMyLzQwMDEzNTI0NS04N2FkMThjYS1kZTkzLTQ3ZTUtYjU3Mi02NDQzM2RkMzMxY2QucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAxMDRUMTIyODM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9OGYxYzRhZTE0NmU5ZjIxOGI4OGUyZDk2YWIzNzE3ZTIwYzljYmUzNGUyMmQ5MDY4MGE1NDZkZTVjNjdhNWFmNiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.bWr7pDa7hYUlyNHmC6J9xlRJ750Joa_kEtTemGkYTsc)
+
+Why? Why do we need the separation?"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2571278261,gerhardol,2025-01-04T12:45:19Z,"> > Heading needed in FormCommit for sort by status
+> > Collapsed ![image](https://private-user-images.githubusercontent.com/6248932/400135281-401adb42-08c0-458c-b30a-d46f7d23cc44.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU5OTQwMTksIm5iZiI6MTczNTk5MzcxOSwicGF0aCI6Ii82MjQ4OTMyLzQwMDEzNTI4MS00MDFhZGI0Mi0wOGMwLTQ1OGMtYjMwYS1kNDZmN2QyM2NjNDQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAxMDRUMTIyODM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDdhM2NhYTI2YTczNjI4Y2U0MzVmZTAxYjIxNDA5Mjc4OWU5NDIxMDZhZDZjMDAwM2Q5YWNjZmFhZjI5NjEyNCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.ylej66CQeKx9LAEqPAno3X-jLKP0kHlIdKiucD9Qe9k)
+> > Expanded (as it is default, so no major issue) ![image](https://private-user-images.githubusercontent.com/6248932/400135245-87ad18ca-de93-47e5-b572-64433dd331cd.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU5OTQwMTksIm5iZiI6MTczNTk5MzcxOSwicGF0aCI6Ii82MjQ4OTMyLzQwMDEzNTI0NS04N2FkMThjYS1kZTkzLTQ3ZTUtYjU3Mi02NDQzM2RkMzMxY2QucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAxMDRUMTIyODM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9OGYxYzRhZTE0NmU5ZjIxOGI4OGUyZDk2YWIzNzE3ZTIwYzljYmUzNGUyMmQ5MDY4MGE1NDZkZTVjNjdhNWFmNiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.bWr7pDa7hYUlyNHmC6J9xlRJ750Joa_kEtTemGkYTsc)
+> 
+> Why? Why do we need the separation?
+
+When you collapse the group, it looks like something is missing"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2571282196,mstv,2025-01-04T13:03:11Z,"> Why do we need the separation?
+
+In order to be able to collapse an uninteresting group of files instead of scrolling a lot.
+These grouping nodes could be omitted in flat mode. I would say they are needed in tree mode.
+
+> Heading needed in FormCommit for sort by status
+
+Really? If yes, we will need a `TranslatedString` for each status image (follow-up PR).
+These nodes are expanded on click. I thought this would be self-explanatory enough."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2571321188,mstv,2025-01-04T14:34:59Z,"> > ![Image](https://private-user-images.githubusercontent.com/36601201/397101058-379af522-5bcf-4e75-aef1-7a07bc92ec1e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU5ODQwMzQsIm5iZiI6MTczNTk4MzczNCwicGF0aCI6Ii8zNjYwMTIwMS8zOTcxMDEwNTgtMzc5YWY1MjItNWJjZi00ZTc1LWFlZjEtN2EwN2JjOTJlYzFlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMDQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTA0VDA5NDIxNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIxYjQ1NWU5OTVjNWYxOGUwY2E3YjQyOGIwMjdiNzQzYjM1MWJhNDUwMGFlMTFjZGNkMTllZmYzNDg1NGRkZTcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.kzbp8RzyyXCKyVa52gWoar4F4cS9JPOsdKb8ITfyNrw)
+> 
+> Why are the first two nodes flattened and not represented as tree nodes? IMO, if we're presenting the chageset in a form of a tree then everything should be presented as a tree.
+
+The tree is as dense as possible. Nodes with just one child are merged with the child node.
+
+I cannot view your image. I guess, the first part of https://github.com/gitextensions/gitextensions/pull/12116#issuecomment-2569773485 explains it."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2572946728,gerhardol,2025-01-06T11:46:51Z,"This is great!
+I am fine with the changes, there are a few items I may would like to tweak, but dropping most for now
+
+> Without the folder icon, one could miss the fact that the file is located in a subfolder.
+
+I probably want to skip the folder icon, dropping for now
+
+>>    Separate the flat/tree setting?
+> I prefer a one-stop shop. A ""tree / flat"" toggle could be useful in addition.
+
+OK
+
+> The mentioned more logical sorting could simply be achieved in a separate PR by moving up the submodule icons in CreateImageListData.
+
+>>    I prefer current order changed,added,removed then by both,B,A
+
+> Then we could remove DiffStatus from GetStatusKey again and rely on the order of images in CreateImageListData.
+
+There is still no icons for all submodule status, so this would require more icons. (4*9 of mostly new icons, as the ""overlay"" will not look good if applied as for the other icons.)
+
+Suggestion to add colors to the icons (icon for the multiparent diff for combined should have this icon, it is not Diff-onlyA), pushed to private branch feature/filestatuslist_tree
+
+![Skärmbild 2025-01-06 120318](https://github.com/user-attachments/assets/3b96f006-26e9-4ab0-b070-4806e01a46b2)
+![Skärmbild 2025-01-06 122743](https://github.com/user-attachments/assets/1fbbbee2-df6e-45e8-a408-c843575a5cd8)
+
+![Skärmbild 2025-01-06 122615](https://github.com/user-attachments/assets/645dec7a-fd5f-4084-b551-6dcedaa9b6fd)
+![Skärmbild 2025-01-06 121039](https://github.com/user-attachments/assets/74354c56-b053-4d1f-8935-7de08c0433d5)
+"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2575615346,gerhardol,2025-01-07T15:43:43Z,"One annoying detail with the treeview is that the horisontal scrolling changes to be ""in the middle"" if selection is changed.
+So I have to scroll to the left to see the tree contents.
+Even more now when the filename often is a few chars (equivalent) from left, the old path is not so interesting. (and the tooltip is there, even if it is sometmes hard to trigger)"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2576300742,mstv,2025-01-07T21:58:04Z,">> Then we could remove DiffStatus from GetStatusKey again and rely on the order of images in CreateImageListData.
+
+> There is still no icons for all submodule status, so this would require more icons. (4*9 of mostly new icons, as the ""overlay"" will not look good if applied as for the other icons.)
+
+Then the `DiffStatus` character can be appended (instead of prepended) to the image index in `GetStatusKey`.
+
+---
+
+> One annoying detail with the treeview is that the horizontal scrolling changes to be ""in the middle"" if selection is changed.
+
+It had been even worse before I added setting `TopNode` when restoring the selection in `UpdateFileStatusListView`.
+I am afraid, we will need to send some Window Messages to the TreeView control in order to restore the position of the horizontal scrollbar. I could not find any regarding properties or methods in `TreeView`.
+(The tilt-able wheel of my mouse is very useful here.)"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2578789359,gerhardol,2025-01-08T22:25:51Z,"Can the scroll be set to max left at refresh?
+
+Include this in 5.2? (I would like a fix for the scrolling in some way.)
+Any other change otherwise?
+Then a 5.2 release branch (or merge to the existing).
+Then I would like to start merging my PRs."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2578849280,mstv,2025-01-08T23:06:41Z,"> Can the scroll be set to max left at refresh?
+
+- [x] We (I) need to find out the regarding WM codes (arcane science). Found in Left Panel.
+
+> (I would like a fix for the scrolling in some way.)
+
+So do I.
+
+> Include this in 5.2?
+
+I prefer to merge it after branching off 5.2, after you have merged your PRs.
+I am trying to prepare the RC.
+I have bumped the master branch to 5.3.
+
+> Any other change otherwise?
+
+- [ ] Requests from additional reviews.
+- [x] There are glitches while loading large trees.
+  Edit: Caused by `DrawNode` event for _invisible_ nodes and while inside `Begin/EndUpdate`. Handled.
+- [x] ~Selection can be off after collapsing / expanding using the `v` / `>` icons.~"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2597029963,gerhardol,2025-01-16T22:23:17Z,"Submodules with version info is unreadable when focused as the highlighting is not including the version
+
+![image](https://github.com/user-attachments/assets/41a34162-b93a-4f3f-84ac-80254413c95f)
+![image](https://github.com/user-attachments/assets/44da922e-f65d-4c87-a789-d8c71866d909)
+
+It is almost readable in dark mode:
+![image](https://github.com/user-attachments/assets/8124ec00-7f9c-440b-b93c-dd7a08017014)
+
+Edit: Other than this quite minor issue, this is working great, including the follow ups with no prs yet.
+
+Edit2: Fixed
+"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2601029914,gerhardol,2025-01-19T21:34:12Z,"""Follow file"", when selecting a new commit, the selected file should be in the following order:
+* Previously actively selected
+* In file filter
+* first in list
+
+The first in list is always chosen now
+(The refactoring of selection API is OK, it is this PR)."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2602839142,mstv,2025-01-20T16:27:09Z,"> The refactoring of selection API is OK, it is this PR
+
+Both this and #12149 are OK, too. It is broken in the WIP commit which adds delayed expansion (and file icons)."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2603303879,gerhardol,2025-01-20T22:22:59Z,"This is primarily for the revdiff-in-filetree, the revdiff folders seem to expand in another way, but I have not looked at the code and report here.
+
+Search for a file in the tree in the searchbox and select the expanded selection. Then remove the filter (you maybe want to see other files in the folder), the selections are collapsed again (the file is still selected).
+
+(other comments on a branch without PRs is that lineno panel is red, you can multiple files but not ""Diff the selected files"", you can select first/second in diff but not ""Diff selected files"")."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2639363126,pmiossec,2025-02-06T10:04:52Z,"@mstv A little UX improvement that I would like to see added: 
+When there is only one ""Diff"" group, clicking on it just select it and **do not** fold it.
+Folding it bring no value (because that's the only thing to display) and if I click on it for any reason, I have to click on it again (and it's frustrating 😉 )
+
+
+"
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2646276622,mdonatas-trafi,2025-02-09T12:57:25Z,"I hope it's not too late to ask. Is it possible to have tree-view as an option? Currently UX has so many subtle and not so subtle sharp edges that it makes it hardly usable (for me).
+I've created 3 issues related to this but there are more quirks than that."
+12116,closed,feat(`FileStatusList`): Use `TreeView`,2646382661,mstv,2025-02-09T16:20:09Z,"> I hope it's not too late to ask. Is it possible to have tree-view as an option?
+
+Sorry that it broke how you use it.
+It is not too late because the answer is the same: In principle, yes because it is _soft_ ware. But it would be much effort for little benefit.
+
+Multi-selection works with `Ctrl+click` and `Shift+click`. (`Ctrl+A` works the same as before.)
+At least with #12149, I do not see much need for or value in features like
+- be able to have **no** selection
+- select multiple entries **from bottom** with the mouse
+  With #12149, just select a diff group or a folder and operate on all contained items.
+  It should not be too difficult to add a generic click and drag for selecting multiple files - to `MultiSelectTreeView`.
+  (Though changing the focused node on mouse down is hard to achieve with `TreeView`.)"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",566912646,RussKie,2019-12-18T07:29:47Z,"Please try downloading from GitHub and installing v3.3, and let us know
+if it works (or doesn't).
+
+On Wed, Dec 18, 2019, 6:07 PM Dave Van den Eynde <notifications@github.com>
+wrote:
+
+> Current behaviour
+>
+> Currently have 3.1.1 installed.
+>
+> I tried installing 3.2.1 after getting the in-app update notification, but
+> that failed with the following error: ""This application requires
+> Powershell"". I figured this would be caught by someone so I just waited it
+> out, but today I tried installing 3.3 (GitExtensions-3.3.0.7719.msi) and it
+> gave me the same error.
+>
+> I've scanned the open and closed issues, and checked my local environment.
+> Indeed, I'm on a computer in an organisation that has some form of
+> corporate control (or more than one), but in Powershell
+> ""$ExecutionContext.SessionState.LanguageMode"" evaluates to ""FullLanguage"".
+> Expected behaviour
+>
+> I would expect to be able to upgrade to the latest without a hitch.
+> Steps to reproduce
+>
+>    - Double-click the downloaded setup package.
+>    - Choose ""Install for all users""
+>    - Keep default install location (C:\Program Files (x86)\GitExtensions)
+>    - Keep component selection as is
+>    - Choose ""OpenSSH"" (It's how my current setup is configured)
+>    - Keep telemetry on (tried without too, no difference)
+>    - Click ""Install""
+>
+> Screenshots
+>
+> [image: image]
+> <https://user-images.githubusercontent.com/650760/71063567-399d8d80-216d-11ea-90ee-87b05aeb6eb4.png>
+> Did this work in previous version of GitExtensions
+>
+> Current installed version worked, couldn't get newer versions (3.2.1 or
+> newer) to install.
+> Environment
+>
+>    - Git Extensions 3.1.1.6049
+>    - Build 2f87210
+>    <https://github.com/gitextensions/gitextensions/commit/2f872105b4eb42421d9fdafd68e90a9e27d20d96>
+>    - Git 2.20.1.windows.1
+>    - Microsoft Windows NT 10.0.16299.0
+>    - .NET Framework 4.7.3468.0
+>    - DPI 96dpi (no scaling)
+>
+> Diagnostics
+>
+> Please let me know what I can do to assist in investigating the problem.
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/7524?email_source=notifications&email_token=ABBTEXQAKFJLEG4I2OHFW7DQZHD4VA5CNFSM4J4GNH22YY3PNVWWK3TUL52HS4DFUVEXG43VMWVGG33NNVSW45C7NFSM4IBICW4Q>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ABBTEXT6QFPUTPMGPMNUOJDQZHD4VANCNFSM4J4GNH2Q>
+> .
+>
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",567000293,DaveVdE,2019-12-18T11:51:07Z,"I downloaded GitExtensions-3.3.0.7719.msi through GitHub, and tried the same but I have the same behavior."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",567001665,RussKie,2019-12-18T11:55:26Z,"Can you share a log?
+
+On Wed, 18 Dec 2019 at 22:51, Dave Van den Eynde <notifications@github.com>
+wrote:
+
+> I downloaded GitExtensions-3.3.0.7719.msi through GitHub, and tried the
+> same but I have the same behavior.
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/7524?email_source=notifications&email_token=ABBTEXUPBPLB4CHRAXB5VELQZIFCZA5CNFSM4J4GNH22YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGOEHF3ZZI#issuecomment-567000293>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ABBTEXWTRTRXZNM62474PLTQZIFCZANCNFSM4J4GNH2Q>
+> .
+>
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",567004885,DaveVdE,2019-12-18T12:06:11Z,"I produced a log using the following command line: 
+
+`msiexec /i ""C:\Users\xxxx\Downloads\GitExtensions-3.3.0.7719.msi"" /L*V ""C:\log\install.log""`
+
+Without sharing the entire log file, I think I found the offending part here:
+
+```
+Action 13:01:52: LaunchConditions. Evaluating launch conditions
+Action start 13:01:52: LaunchConditions.
+This application requires Windows PowerShell.
+MSI (s) (E8:1C) [13:01:55:396]: Note: 1: 2205 2:  3: Error 
+MSI (s) (E8:1C) [13:01:55:396]: Note: 1: 2228 2:  3: Error 4: SELECT `Message` FROM `Error` WHERE `Error` = 1709 
+MSI (s) (E8:1C) [13:01:55:396]: Product: Git Extensions 3.3.0.7719 -- This application requires Windows PowerShell.
+
+Action ended 13:01:55: LaunchConditions. Return value 3.
+Action ended 13:01:55: INSTALL. Return value 3.
+```
+
+How can I find in the log where it comes to that conclusion?
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",567007112,DaveVdE,2019-12-18T12:13:04Z,"Just for shits 'n giggles, I tried executing the same in a command window run as Administrator, and it seems to work that way.
+
+This could very well be environmental. In that case, I thank you for the assistance and will close this issue at once.
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",567008884,RussKie,2019-12-18T12:18:56Z,"Hmm... could be that your local gpo prohibits executing PS scripts 🤔
+
+On Wed, 18 Dec 2019 at 23:13, Dave Van den Eynde <notifications@github.com>
+wrote:
+
+> Just for shits 'n giggles, I tried executing the same in a command window
+> run as Administrator, and it seems to work that way.
+>
+> This could very well be environmental. In that case, I thank you for the
+> assistance and will close this issue at once.
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/7524?email_source=notifications&email_token=ABBTEXTOEGQVG4XAIJZXK2TQZIHVBA5CNFSM4J4GNH22YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGOEHF5PCA#issuecomment-567007112>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ABBTEXVHPK6LLYUUMANFJA3QZIHVBANCNFSM4J4GNH2Q>
+> .
+>
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",613964282,simplyaboutcode,2020-04-15T10:45:11Z,"Any new info about that? Have similar problem :(
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",613967961,DaveVdE,2020-04-15T10:53:47Z,"It was a problem with the machine. Probably some enterprise-level global policy thing.
+
+It worked for me if I started the installer explicitly as Administrator."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",613973970,pmiossec,2020-04-15T11:09:14Z,I think that will be fixed by #7442 once next version of gitextensions will be released... 
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",613984381,RussKie,2020-04-15T11:34:15Z,"That was fixed in 3.3. Update to the latest version.
+
+"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",622355951,MikeSchurman,2020-05-01T11:41:53Z,"![image](https://user-images.githubusercontent.com/7268923/80803061-8cf60280-8b87-11ea-8947-08bfe98e48de.png)
+This still happens for me, I have powershell installed.
+
+Installing from command prompt as administrator worked."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",624134972,simplyaboutcode,2020-05-05T15:46:15Z,"@RussKie I couldnt update because this error occured during update. Didnt try remove/add program thougt.
+
+@MikeSchurman you’re great !! That worked for me also :)"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",624398943,RussKie,2020-05-06T01:35:45Z,@simplyaboutcode we need logs to provide any meaningful feedback. Changes are it is locked by your corporate group policy (if it is a work computer).
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",791203294,NerdFan,2021-03-05T07:01:10Z,"![image](https://user-images.githubusercontent.com/21181182/110079060-48338d00-7d91-11eb-9e89-0807e23bcb8b.png)
+Does not matter what setting to choose during installation - it always ending with this!
+Did not tryed command with administrator but it is not normal way how to install software."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",1311895019,ffonz,2022-11-11T16:07:12Z,"Had the same problem, even with 4.0.0. I solved it by opening a command prompt with elevated rights and install the .msi from there, but this is not a neat solution. Maybe better if the installer asks for elevated rights. But the best solution would be if Git Extensions could be installed without administrative rights."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",1311904994,ffonz,2022-11-11T16:16:30Z,"[install.log](https://github.com/gitextensions/gitextensions/files/9991580/install.log)
+
+I hope this log helps solving the issue."
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",2643012639,kevilay,2025-02-07T13:55:38Z,"I had this same issue on v7.0.3. To resolve run the installer in a cmd prompt as admin.
+
+1. Windows Key --> Type Command Prompt --> Right click --> Run As Admin
+2. Find the path of your downloads folder (""C:\Users\Username\Downloads""). Generally this is it.
+3. In command prompt type cd C:\Users\Username\Downloads to switch to the directory of the downloaded file
+4. Type ecatcher.msi --> This will run it as admin in the cmd prompt"
+7524,closed,"Ever since version 3.2.1, setup fails with ""This application requires PowerShell""",2643036674,DaveVdE,2025-02-07T14:06:13Z,"> I had this same issue on v7.0.3. To resolve run the installer in a cmd prompt as admin.
+> 
+> 1. Windows Key --> Type Command Prompt --> Right click --> Run As Admin
+> 2. Find the path of your downloads folder (""C:\Users\Username\Downloads""). Generally this is it.
+> 3. In command prompt type cd C:\Users\Username\Downloads to switch to the directory of the downloaded file
+> 4. Type ecatcher.msi --> This will run it as admin in the cmd prompt
+
+We're at v7 now?"
+9796,closed,Feedback with new Blame and File history in next version,1006123517,gerhardol,2022-01-05T22:19:52Z,"I have no need to defend the change, but I guess I will explain why I prefer it this way.
+Everything can be improved.
+It is possible to change the behavior back to the 3.5 so when opening separate instances, they use the FileHistory.
+
+![image](https://user-images.githubusercontent.com/6248932/148295394-6f9f59e6-2a1a-47d7-92fe-d47a01adc8fb.png)
+
+I want to set FileHistory as deprecated, remove it at some point together with other forms like Compare.
+This is quite some extra code to maintain.
+
+Note that FileHistory (both before and in master) can be used to show history for several files or folders.
+
+>     1. Before it was a clearly identifiable different view. Now it's difficult to distinguish to a normal instance
+
+How to make this clearer? 
+Suggestion in next question.
+
+Personally, I hardly use the extra instance, just filters in current Browse (`F` in Diff/Tree) then clear the filter (`Shift-Ctrl-F` in grid).
+ 
+>     2. There is a lot less space to see the diff and blame. And you always have to move the split separator. Sometimes a diff was difficult to read, so now that you can't see the whole file and have a blame view, it will be worst :(
+
+Some shortcut to collapse the left panel as well as the FileStatusList?
+(Could be default when open with file filter).
+
+>     3. You loose the ""View"" tab (that I sometimes I preferred to use because I found the blame aggressive when you move your mouse and the grey selection change)
+
+The ""filtered file"" is preselected in Diff/Tree.
+You can view the file instead of blame in Tree tab with `B` (as well as Blame in Diff).
+
+>     4. You no more are able to identify quickly which instance is file history (and when you want to switch quickly and often during an investigation or when you want to clean the instances opened, its a pain) lost in all similar windows
+> I think we need to reproduce this behavior (ie. changing the title of the application) when the ""Path filter"" is enabled
+
+The title is already adjusted when there is a file filter, FileHistory could be added too. Or just put the filtered path name first?
+
+>     5. Maybe when we open a new instance to enable the ""Path filter"", the left panel should be hidden
+
+See 2.
+
+>     6. I don't know if it make sense also to filter the file list also
+
+The file is preselected, also when you change commit (unless you select a file that is in the newly selected commit too), so I do not see a need here.
+If something, add the file status list filter.
+ 
+>     7. Perf: It takes more time to open the file history in another window. And because it's a full GitExtension instance, it also fetch in background if enable, do the `git status` that could take a lot of CPU on big repositories.
+
+With the repo loading tweaks in master, I find opening Browse similar to FileHistory before.
+(Also not using separate instances much.)
+
+>     8. Q: Is there a possibility to open the old window? I though we would keep it...
+
+See above, but I would like to prepare to remove.
+
+>     9. I'm pretty sure the ""Filtering"" icon is not enough visible for legacy user that will have it enabled when doing ""File History"" as usual (and that we will have some issues opened). And a dropdown menu (like the stash button) to disable quickly the filters could be an improvement...
+
+Dropdown for Advanced filter would be nice.
+(I settled with implementing the shortcut eventually, there were too much going on.)
+
+>     10. When blame is enabled, it's strange the way to come back to the ""diff"" view. You need to click again on the file.
+
+My intention was that you only do the blame temporary that you go to FileTree for longer term blame.
+I find this convenient.
+
+>     11. When you use ""Blame this revision"" or ""Blame previous revision"", you come back to the diff view
+>         ![blame](https://user-images.githubusercontent.com/460196/148285926-6be2f99e-eff3-43be-9cae-dac37f054b56.gif)
+
+That could be changed.
+
+>     12. Q: Where are all these options:
+>         ![image](https://user-images.githubusercontent.com/460196/148283985-bd1984d4-1715-44b8-9a17-03116141a7ab.png)
+
+Should be added to Settings
+
+>     13. When you are in blame but you change the commit selected, you switch to the diff (I think that's the problem) even if  the blame icon is still enabled.
+
+Same as 11, all changes go back to diff."
+9796,closed,Feedback with new Blame and File history in next version,1006522487,gerhardol,2022-01-06T11:57:58Z,"4.
+Is this sufficient?
+
+![image](https://user-images.githubusercontent.com/6248932/148379196-b52b012f-c25f-40bf-886d-5f9edaeeb279.png)
+![image](https://user-images.githubusercontent.com/6248932/148379674-19fe9408-f533-4292-a005-97c0da53bc74.png)
+"
+9796,closed,Feedback with new Blame and File history in next version,1006532992,gerhardol,2022-01-06T12:11:53Z,"10.
+11.
+For Blame in diff tab, it is not trivial to only change from Blame when selecting a new file, I would like to get consensus if that is the way to go before looking into it.
+(It is easier to explicitly toggle blame/diff, but that is not my preferred usage).
+
+13.
+The blame icon should have been reset here (or keep blame until another file is selected...)
+
+
+
+"
+9796,closed,Feedback with new Blame and File history in next version,1007055862,gerhardol,2022-01-07T01:00:34Z,"See #9801 for Settings update
+
+The following will be added to Browse View menu and the RevGrid context menu, after Show first parents.
+
+![image](https://user-images.githubusercontent.com/6248932/148474019-1fd0aa30-7ac6-414d-a989-24f80efd73a9.png)
+
+![image](https://user-images.githubusercontent.com/6248932/148473975-cb8c1cc9-a825-4e8a-8e62-75f9d7c90282.png)
+
+I have pushed feature/i9796-path-app-title to change the Blame behavior in RevDiff
+That toggles Blame form menu and `B`, resets  automatically when the the file can no longer be displayed."
+9796,closed,Feedback with new Blame and File history in next version,1007320996,pmiossec,2022-01-07T11:02:29Z,">I have no need to defend the change, but I guess I will explain why I prefer it this way.
+
+Agreed. Maybe it just need some adjustments
+
+>It is possible to change the behavior back to the 3.5 so when opening separate instances, they use the FileHistory.
+
+Great! I will be able to use that until we ironed out the feature and that way we can still release.
+
+> Is this sufficient?
+>
+
+I think it is a good step in the right direction but I think we could improve it a little.
+
+Here are for me useful things:
+1. I like the idea of the ""File History"" text we had before but (1) it is too long and hide the filename in the task bar preview (2) it could be wrong when you display a folder history => Proposition: Use an emoji instead
+2. The file name is the more important information (and the path is too long) => Proposition: display filename and after directory path like ""filename.cs [directory/path/to/file]""
+
+After a quick test using an emoji, I end up with something like that (when applied on the File History form because it was easier for me) and that I think render quite well
+
+![image](https://user-images.githubusercontent.com/460196/148528722-4ec7879a-ab5e-4b53-8f71-307603214b0e.png)
+
+![image](https://user-images.githubusercontent.com/460196/148528759-fed96bc8-867b-47bd-93f7-5f235d851aa6.png)
+
+with the code `.Append($""⏱️ {Path.GetFileName(FileName)} [{Path.GetDirectoryName(FileName)}]"");`
+
+edit: or in `AppTitleGenerator.cs`:
+
+```csharp
+            // Pathname normally have quotes already
+            pathName = string.IsNullOrWhiteSpace(pathName)
+                ? """"
+                    : $""⏱️ {Path.GetFileName(pathName.Trim('""'))} [{Path.GetDirectoryName(pathName.Trim('""'))}]"";
+```
+
+What do you think?
+
+Note: I'm sorry but I can't be as active as you on the project (I'm really amazed at all the work you do and the PR you do) and so I understand it will bring some friction around fixing all these little problems. So it will maybe takes time before I answer all your comments...
+
+> 13. The blame icon should have been reset here (or keep blame until another file is selected...)
+
+Maybe when we select another file, it could be acceptable to display the diff but when we select another revision, use the ""Blame this revision"" or ""Blame previous revision"", we **must** stay in blame mode. And yes the state of the icon should well reflect the current state so there is at least a bug to fix here.
+
+13b. Another thing linked here: In the file history, the revision grid is filtered on the file you blame. I think we should keep this behavior. That would allow the user to change the selected revision easily otherwise when clicking in a revision, you left the blame mode (especially if the commit has not changes on this file) which break the user workflow."
+9796,closed,Feedback with new Blame and File history in next version,1007342576,pmiossec,2022-01-07T11:40:32Z,">Personally, I hardly use the extra instance, just filters in current Browse (F in Diff/Tree) then clear the filter (Shift-Ctrl-F in grid).
+
+That's another ""regression"" in my workflow. `Shift-Ctrl-F` is already a convenient shortcut used in the Browse form that select the ""File tree"" and allows you to type a filepath. It is not working anymore :(
+
+![image](https://user-images.githubusercontent.com/460196/148538492-0b21f857-f56f-40ed-9f5b-b49edbe6305d.png)
+"
+9796,closed,Feedback with new Blame and File history in next version,1007780073,gerhardol,2022-01-07T22:15:26Z,"See #9801, #9803 for settings and #9804 for Blame behavior in RevDiff
+
+What I feel remain is AppTitle (below, #9806), split button for AdvancedFilter (maybe) and collapse sidepanel when opening Browse with a pathfilter (do currently not think that is a good idea).
+
+> That's another ""regression"" in my workflow. Shift-Ctrl-F is already a convenient shortcut used in the Browse form that select the ""File tree"" and allows you to type a filepath. It is not working anymore :(
+
+That works for me, it depends what you have focused.
+Any suggestions?
+
+> > It is possible to change the behavior back to the 3.5 so when opening separate instances, they use the FileHistory.
+> 
+> Great! I will be able to use that until we ironed out the feature and that way we can still release.
+
+> Note: I'm sorry but I can't be as active as you on the project (I'm really amazed at all the work you do and the PR you do) and so I understand it will bring some friction around fixing all these little problems. So it will maybe takes time before I answer all your comments...
+
+A problem with the current master is the lack of testing. Most of that is done by maintainers...
+Comments like this is important before more users test.
+
+All is done on the free time so I hope you and others get more time.
+I am getting stuck with too many open PRs.
+I would like vNext/4.0 to be released...
+
+> > Is this sufficient?
+> 
+> I think it is a good step in the right direction but I think we could improve it a little.
+
+I adopted the suggestion to handle path filters that do not resolve file names.
+Maybe there is a better emoji, lets use this for now.
+(It is not so important what is in there in my opinion.)
+"
+9796,closed,Feedback with new Blame and File history in next version,1007829829,gerhardol,2022-01-08T00:01:59Z,">> 9. I'm pretty sure the ""Filtering"" icon is not enough visible for legacy user that will have it enabled when doing ""File History"" as usual (and that we will have some issues opened). And a dropdown menu (like the stash button) to disable quickly the filters could be an improvement...
+
+> Dropdown for Advanced filter would be nice.
+(I settled with implementing the shortcut eventually, there were too much going on.)
+
+See #9807
+However, a ToolStripSplitButton has no *Checked* state so some other way is needed to indicate filters (not just path filters).
+"
+9796,closed,Feedback with new Blame and File history in next version,1007885099,RussKie,2022-01-08T04:44:57Z,"> > ```
+> > 1. Before it was a clearly identifiable different view. Now it's difficult to distinguish to a normal instance
+> > ```
+> 
+> 
+> How to make this clearer?
+> Suggestion in next question.
+> 
+> 
+> Personally, I hardly use the extra instance, just filters in current Browse (`F` in Diff/Tree) then clear the filter (`Shift-Ctrl-F` in grid).
+
+I prefer the ""old"" way too, as it worked for my workflows (e.g. looking up histories for several files simultaneously). I found the ""new"" blame restrictive in terms of flexibility. 
+One extra benefits of having a separate dialog for me was that the dialog has knobs and toggles specific to the History view. How we need to expose the same controls on the main dialog, which has a questionable UX value proposition.
+
+> > ```
+> > 9. I'm pretty sure the ""Filtering"" icon is not enough visible for legacy user that will have it enabled when doing ""File History"" as usual (and that we will have some issues opened). And a dropdown menu (like the stash button) to disable quickly the filters could be an improvement...
+> > ```
+> 
+> 
+> Dropdown for Advanced filter would be nice.
+> (I settled with implementing the shortcut eventually, there were too much going on.)
+
+Can you please elaborate more in this point? Better yet please open a new issue. I don't think I clearly understand the issue to provide a good feedback on https://github.com/gitextensions/gitextensions/pull/9807.
+
+> Is this sufficient?
+> 
+> ![image](https://user-images.githubusercontent.com/6248932/148379196-b52b012f-c25f-40bf-886d-5f9edaeeb279.png) ![image](https://user-images.githubusercontent.com/6248932/148379674-19fe9408-f533-4292-a005-97c0da53bc74.png)
+
+I'm personally not seeing this as an improvement - we're overloading the title bar with information - we have a) repo name, b) repo branch, c) app name and now we have additional information which can be arbitrary long. I think we need to reconsider what information is present in the title bar.
+
+> Here are for me useful things:
+> 
+> 1. I like the idea of the ""File History"" text we had before but (1) it is too long and hide the filename in the task bar preview (2) it could be wrong when you display a folder history => Proposition: Use an emoji instead
+> 2. The file name is the more important information (and the path is too long) => Proposition: display filename and after directory path like ""filename.cs [directory/path/to/file]""
+> 
+> After a quick test using an emoji, I end up with something like that (when applied on the File History form because it was easier for me) and that I think render quite well
+> 
+> ![image](https://user-images.githubusercontent.com/460196/148528722-4ec7879a-ab5e-4b53-8f71-307603214b0e.png)
+
+I _think_ I like the idea with the emoji, but I'm finding the chosen emoji confusing. For file history I'd expect something like these (though I don't know if these are available as emojis):
+![image](https://user-images.githubusercontent.com/4403806/148631673-82144b17-debd-4d64-9797-9309c916db4a.png)
+![image](https://user-images.githubusercontent.com/4403806/148631685-3f88c956-1605-4505-8e64-597bb432e01c.png)
+![image](https://user-images.githubusercontent.com/4403806/148631686-28a68665-d37f-43fc-b49d-f03094d8c762.png)
+
+I also not finding ""filename.cs [directory/path/to/file]"" over ""directory/path/to/file/filename.cs"", as it adds an additional layer of mental indirection. Perhaps we should apply shortening strategies we apply in other places.
+"
+9796,closed,Feedback with new Blame and File history in next version,1007885516,RussKie,2022-01-08T04:49:03Z,"To clarify, I think the ""inplace"" blame functionality is useful in some scenarios, and do not think it should be reverted/removed, but so far I found it more frustrating than useful in my work. I often deal with very large files (X,000 and XY,000 lines of code) with long histories (hunderds commits), and the ""inline"" blame often slow me down."
+9796,closed,Feedback with new Blame and File history in next version,1007987416,gerhardol,2022-01-08T13:13:50Z,"I suggest the discussion about changes with PRs are kept in the PRs. For instance #9806 for the title bar (the description is updated there).
+I feel the PRs are independent of the default presentation of file history.
+
+In general, it has always been possible to filter paths in Browse, it was just that it did not work well (no revision grid for instance...).
+Some of the improvements has benefited FileHistory too. The moved settings related to history/blame is something I have hunted around for anyway too.
+The only that could affect the ""3.5"" handling as I see it is the default when opening a repo with path filter as well as Blame is the default in FileTree.
+I want to keep that, but I do not have a majority vote...
+
+Presentation of filters is an important piece here I believe. Not just the title bar #9806 and indicators in the tool bar #9807 but the UI changes pmiossec suggested here with the sidebar etc.
+
+> I prefer the ""old"" way too, as it worked for my workflows (e.g. looking up histories for several files simultaneously). I found the ""new"" blame restrictive in terms of flexibility.
+> I often deal with very large files (X,000 and XY,000 lines of code) with long histories (hunderds commits), and the ""inline"" blame often slow me down.
+
+In what way? You can open FileHistory for folders etc in separate instances as before, ""inline"" filters is added functionality.
+
+> One extra benefits of having a separate dialog for me was that the dialog has knobs and toggles specific to the History view. How we need to expose the same controls on the main dialog, which has a questionable UX value proposition.
+
+What controls?
+Settings is the only I see.
+You get Blame by default in the FileTree (unless you use View by default, if that what was slowing you down).
+For me the limitations in FileHistory was very frustrating.
+
+>>>  9. I'm pretty sure the ""Filtering"" icon is not enough visible for legacy user that will have it enabled when doing ""File History"" as usual (and that we will have some issues opened). And a dropdown menu (like the stash button) to disable quickly the filters could be an improvement...
+
+>>    Dropdown for Advanced filter would be nice.
+    (I settled with implementing the shortcut eventually, there were too much going on.)
+
+> Can you please elaborate more in this point? Better yet please open a new issue. I don't think I clearly understand the issue to provide a good feedback on #9807.
+
+The reason I originally used a shortcut only to quickly disable filters was the lack of a *Checked* state for `ToolStripSplitButton`.
+The presentation that Browse has filters could be a separate issue, but it relates to the defaults."
+9796,closed,Feedback with new Blame and File history in next version,1150436125,gerhardol,2022-06-08T21:33:02Z,@pmiossec Most of the suggestions have been implemented. Can this be closed?
+9796,closed,Feedback with new Blame and File history in next version,1150520616,pmiossec,2022-06-08T23:42:49Z,"Yes, it could be closed.
+I have not use the feature a lot during the last months to have a clear view.
+I find it not as good as the old one but good enough (even if sometimes, because it is in the same screen I feel a little lost not knowing if the revision grid has been well filtered and it's a little disturbing even for me that I consider knowing how the application works).
+
+One last thing that I find a little painful and that made sense before but not so now that the blame is in the file content tab, is the fact that when you double click (a thing that I does often to copy a word), it blames the revision and so I loose where I was 😕
+
+For me blaming from the gutter is enough.
+
+But maybe it's a personal point of view and not necessarily should be changed. One day after a lot of frustration, I will remember the behavior... "
+9796,closed,Feedback with new Blame and File history in next version,1151083868,gerhardol,2022-06-09T12:54:30Z,"> One last thing that I find a little painful and that made sense before but not so now that the blame is in the file content tab, is the fact that when you double click (a thing that I does often to copy a word), it blames the revision and so I loose where I was
+
+Blame mode could be off by default or switch to file when another file is selected like in Diff tab.
+I saw some comment where a user did not want Blame (but diff) to be shown when opening a separate instance (the special mode that collapses the left panel). I prefer Blame here so the functionality can be discovered."
+9796,closed,Feedback with new Blame and File history in next version,1173054090,mstv,2022-07-03T10:22:01Z,"> One last thing that I find a little painful and that made sense before but not so now that the blame is in the file content tab, is the fact that when you double click (a thing that I do often to copy a word), it blames the revision and so I loose where I was
+
+I agree. Double clicking the blame text should not switch to another revision - even never regardless of any mode IMO. Double clicking the gutter is the far clearer trigger."
+9796,closed,Feedback with new Blame and File history in next version,1193390263,gerhardol,2022-07-24T20:37:01Z,Any more comments?
+9796,closed,Feedback with new Blame and File history in next version,2637522985,pmiossec,2025-02-05T17:06:16Z,Closing as old and all comments have been fixed or state is unknown...
+12181,closed,GitExtension portable won't locate donet runtimes installed in C:\Users\<username>\AppData\Local\Microsoft\donet,2633804204,gerhardol,2025-02-04T12:45:55Z,"As the message explain, did you install Desktop runtime?
+There is a separate argument to specify --runtime windowsdesktop "
+12181,closed,GitExtension portable won't locate donet runtimes installed in C:\Users\<username>\AppData\Local\Microsoft\donet,2633813798,KiudLyrl,2025-02-04T12:49:50Z,"there is no need to specify --runtime windowsdesktop if you just do ""dotnet-install.ps1""
+
+In my first message I showed that the windowsdesktop runtime was installed, because the output of donet --list-runtimes shows : Microsoft.WindowsDesktop.App 8.0.12 [C:\User<myusername>\AppData\Local\Microsoft\dotnet\shared\**Microsoft.WindowsDesktop.App**]"
+12181,closed,GitExtension portable won't locate donet runtimes installed in C:\Users\<username>\AppData\Local\Microsoft\donet,2633849724,pmiossec,2025-02-04T13:05:42Z,"If l remember well, that's not gitextensions that ensure that the good runtime is installed. So the ""bad"" behavior is between you (not installed the good thing), the runtime and the OS..."
+12181,closed,GitExtension portable won't locate donet runtimes installed in C:\Users\<username>\AppData\Local\Microsoft\donet,2633864738,KiudLyrl,2025-02-04T13:12:13Z,"but I did install the good thing. it's just not in program files, are we forced to install in program files? I can't install in program files on this machine which is why I went for a user installation, as defined by the microsoft documentation.
+
+https://learn.microsoft.com/en-us/dotnet/core/install/windows#install-with-powershell"
+12181,closed,GitExtension portable won't locate donet runtimes installed in C:\Users\<username>\AppData\Local\Microsoft\donet,2633885699,KiudLyrl,2025-02-04T13:18:45Z,"I got it, setting that environment variable make the portable program able to resolve dotnet : 
+
+DOTNET_ROOT=C:\Users\<username>\AppData\Local\Microsoft\dotnet"
+1326,closed,Diff: optionally show file list as tree,13676172,mdonatas,2013-02-16T22:25:41Z,"Apart form tree view for diffed files I also miss ability to view/preview a file like it is possible from `File history` and `Blame` forms `View` tab.
+
+What do you think of this idea:
+![toolbar](https://f.cloud.github.com/assets/483659/164241/d92153f6-7886-11e2-96dd-c6bc020ca2ad.png)
+
+a toolbar in `FormBrowse` Diff tab to switch view modes or settings. One would change file list into filtered file tree and the other one would change Diff (shown on the right) into full file View.
+"
+1326,closed,Diff: optionally show file list as tree,13676477,feinstaub,2013-02-16T22:45:16Z,"I like the toolbar idea. It could have items like this:
+- Flat view
+- Tree view
+- [separator]
+- Show Diff
+- Show A
+- Show B
+"
+1326,closed,Diff: optionally show file list as tree,13681545,jbialobr,2013-02-17T06:30:22Z,"Order by file type, especially for unstaged file list shown on FormCommit.
+"
+1326,closed,Diff: optionally show file list as tree,13687443,feinstaub,2013-02-17T15:24:02Z,"Suggestion for a menu that could be common for the file list user control (which includes diff file list and unstaged and staged files list of the commit dialog):
+- Group by [drop down with three options:]
+  - None (Flat)
+  - Directory hierarchy (Tree)
+  - File extension [shows a node for each file extension]
+- Sort by [drop down with two options:]
+  - Filename
+  - File extension
+  - [sep]
+  - Ascending [radio]
+  - Descending [radio]
+
+In addition to that the diff tab would have three buttons of what to show: Diff | A | B
+"
+1326,closed,Diff: optionally show file list as tree,13690268,mdonatas,2013-02-17T18:12:07Z,"These sound as good ideas but at first I'll try to move in small steps :) I'm afraid that otherwise I would not finish this at all.
+For now I am working on a tree/list toggling via toolbar.
+
+![difftree](https://f.cloud.github.com/assets/483659/165240/f4b7853a-792c-11e2-8413-87e896ab33ff.png)&nbsp;&nbsp;&nbsp;![difflist](https://f.cloud.github.com/assets/483659/165241/f4f2fc1e-792c-11e2-9fe8-aa9d7af21937.png)
+
+It's a lot more work than initially expected. Things like what to do on click, on drag, on right click, etc, etc. Anyhow, I am making progress :)
+"
+1326,closed,Diff: optionally show file list as tree,13690484,feinstaub,2013-02-17T18:23:59Z,"@mdonatas: looks nice already! My comment about the menu was how I think it could look like in the end when also jbialobr's suggestion is incorporated (I will create a separate issue for this later). So, I am also a good friend of small steps. :)
+"
+1326,closed,Diff: optionally show file list as tree,13848153,feinstaub,2013-02-20T18:32:56Z,"An alternative to view the complete file from the Diff tab would be to add a context menu entry ""Show in file tree"" which would switch to the File tree tab and select the desired file there. Then one would also see the file in context of other files.
+"
+1326,closed,Diff: optionally show file list as tree,18167384,feinstaub,2013-05-20T19:31:50Z,"> Apart form tree view for diffed files I also miss ability to view/preview a file like it is possible from File history and Blame forms View tab.
+
+implemented here: https://github.com/gitextensions/gitextensions/pull/1850
+"
+1326,closed,Diff: optionally show file list as tree,43571193,mvas,2014-05-19T23:35:07Z,"Any chances this feature will appear in FormCommit ? 
+
+I'm missing it when having long file names (which is the case quite frequently).
+Making from that:
+![image](https://cloud.githubusercontent.com/assets/1790471/3021230/dca2e50a-dfad-11e3-9937-915c1ad1d071.png)
+to that:
+![image](https://cloud.githubusercontent.com/assets/1790471/3021238/107d93d4-dfae-11e3-98af-f0554abf20b6.png)
+
+I could give that a try in case nobody working on that now
+"
+1326,closed,Diff: optionally show file list as tree,43586700,mdonatas,2014-05-20T05:04:31Z,"I am not doing anything with this. So if others aren't doing anything either, feel free to do it :)
+"
+1326,closed,Diff: optionally show file list as tree,43594987,KindDragon,2014-05-20T07:38:21Z,"I don't like treeview for file list in that dialog.
+Maybe better use ListView with categories?
+Category: packages\jQuery\Content\themes\base\images
+List of files...
+"
+1326,closed,Diff: optionally show file list as tree,43595510,jbialobr,2014-05-20T07:45:47Z,"I use `Truncate long filenames` setting set to `fileNameOnly`. The full path is always displayed on file diff tab.
+"
+1326,closed,Diff: optionally show file list as tree,43596240,ghanique,2014-05-20T07:56:00Z,"@KindDragon I strongly disagree. The `Category with List of Files` view is IMHO the worst of both worlds. I'd even prefer just a horizontal scrollbar over the `Category` view. My order of preference would be:
+1. TreeView
+2. Current view with horizontal scrollbar
+3. Category view.
+"
+1326,closed,Diff: optionally show file list as tree,43673393,mvas,2014-05-20T19:42:24Z,"So maybe having optional TreeView is ok? Something like button in toolbar or option in settings
+"
+1326,closed,Diff: optionally show file list as tree,43726559,KindDragon,2014-05-21T08:21:06Z,"FileListView currently used in lot of forms, will be difficult to replace it with a TreeView
+"
+1326,closed,Diff: optionally show file list as tree,366514004,RussKie,2018-02-18T12:52:25Z,"> Anyhow, I am making progress :)
+
+@mdonatas anything to share yet?"
+1326,closed,Diff: optionally show file list as tree,366518347,vbjay,2018-02-18T14:03:43Z,"I think grouping by folder path is better. I'd much rather keep the
+listview.
+
+On Sun, Feb 18, 2018, 7:52 AM RussKie <notifications@github.com> wrote:
+
+> Anyhow, I am making progress :)
+>
+> @mdonatas <https://github.com/mdonatas> anything to share yet?
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gitextensions/gitextensions/issues/1326#issuecomment-366514004>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/ADdhsagvqeizGw7WHqwsNDeFlCAp9ZGSks5tWB0LgaJpZM4ANLFH>
+> .
+>
+"
+1326,closed,Diff: optionally show file list as tree,590543832,ajaskiewiczpl,2020-02-24T20:55:06Z,Any progress on this?
+1326,closed,Diff: optionally show file list as tree,590566832,gerhardol,2020-02-24T21:51:21Z,"If someone starts working on this feature, they should add a note about it. It is up for grabs."
+1326,closed,Diff: optionally show file list as tree,602500732,RussKie,2020-03-23T10:10:41Z,"For the general benefit, for the most part agreed proposal is [here](https://github.com/gitextensions/gitextensions/issues/7867#issuecomment-602094623):
+
+![image](https://user-images.githubusercontent.com/4403806/77305732-adda6500-6d4a-11ea-906c-17e4a5e36e0b.png)
+"
+12171,closed,fix(ShowProcessDialogPasswordInput): Default to false,2628648482,RussKie,2025-02-01T01:05:24Z,Thank you @mstv 
+12127,closed,fix(theme): Remove unused hook methods,2571418808,gerhardol,2025-01-04T21:40:47Z,"> > As the darksilver theme mostly changed system colors, it was removed.
+> 
+> Does GE gracefully fall back to another theme?
+
+Default (invariant, what is in the code) is used if the theme cannot be loaded.
+However, the darksilver as well as dark theme has not been included with GE 4/5, so no change here."
+12131,closed,fix(theme): Check for default theme,2574024366,gerhardol,2025-01-06T22:17:56Z,"> (The links in the PR description just point to the commit.)
+
+fixed"
+12133,closed,fix: InactiveSelectionHighlight in theme,2576198726,gerhardol,2025-01-07T20:52:26Z,Adding another color due to https://github.com/gitextensions/gitextensions/pull/12125/files/b747df35c153298a0129983b4b1bba56b752439e#r1903163726
+12125,closed,fix: Adapt hardcoded colors,2571365885,RussKie,2025-01-04T17:44:05Z,"> Should this be merged after v5.2. Or do we take the risk of a quick v5.2.1?
+
+Do we have anything for a .1 release?"
+12125,closed,fix: Adapt hardcoded colors,2571416756,mstv,2025-01-04T21:30:51Z,"> > Should this be merged after v5.2. Or do we take the risk of a quick v5.2.1?
+> 
+> Do we have anything for a .1 release?
+
+I meant we should release a v5.2 with the bug fixes #12122 & #12129 and, optionally, with the low-risk feature #12023 (used for several months; and we have a fallback: the much slower ConEmu).
+Most of Gerhard's refactoring PRs are pretty safe for merging before v5.2.
+But this PR changes a lot and does not work well for FormCommit yet. So, there would be a risk that we would quickly need to release 5.2.1 if it causes more side-effects.
+
+I would appreciate a soon release of v5.2. Then we could switch to .NET 9 and merge the fresh features (theming, tree view) and let them mature and be extended."
+12125,closed,fix: Adapt hardcoded colors,2571418593,RussKie,2025-01-04T21:39:37Z,"I'm away until the end of Jan and only have a mac, but I can try to muster a release.
+You're welcome to give it a go too, and I'll give a helping hand, if required. "
+12125,closed,fix: Adapt hardcoded colors,2571426275,gerhardol,2025-01-04T22:20:22Z,"> > Should this be merged after v5.2. Or do we take the risk of a quick v5.2.1?
+> 
+> Do we have anything for a .1 release?
+
+I believe a 5.2 should be done soon, many nice corrections by mstv lately.
+Release from master (I could consider #12116 too)
+
+The changes I have in non draft for themeing should all have no effect on the default theme (I hope I have described all, forgot to mention src/app/GitUI/Editor/RebaseTodoHighlightingStrategy.cs)
+This is the big one and also if mstv had not seen a problem, I would not merge it before a 5.2
+
+I would like to merge the preparing PRs together so the actual changes for the theme are minimized and discussions can be on actual issues."
+12125,closed,fix: Adapt hardcoded colors,2584678679,mstv,2025-01-10T22:58:16Z,Are you hesitating to merge?

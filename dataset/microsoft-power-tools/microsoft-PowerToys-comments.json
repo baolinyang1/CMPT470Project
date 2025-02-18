@@ -1,0 +1,1406 @@
+[
+    {
+        "Issue ID": 36654,
+        "Issue State": "closed",
+        "Issue Title": "Powertoys causing chromium browsers to have high cpu usage (Utility: Video Capture)",
+        "Comment ID": 2580047164,
+        "Author": "toybuilder",
+        "Created At": "2025-01-09T12:34:01Z",
+        "Comment Body": "I am not sure that is necessarily the reason -- I have experienced high CPU usage in Chrome with the Utility: Video Capture task, but my PowerToys installation has Video Conference Mute disabled."
+    },
+    {
+        "Issue ID": 36654,
+        "Issue State": "closed",
+        "Issue Title": "Powertoys causing chromium browsers to have high cpu usage (Utility: Video Capture)",
+        "Comment ID": 2584497888,
+        "Author": "cinnamon-msft",
+        "Created At": "2025-01-10T22:16:03Z",
+        "Comment Body": "I'm not certain this is related to PowerToys and we'll also be deprecating Video Conference Mute soon, so I'll close this out :)"
+    },
+    {
+        "Issue ID": 36654,
+        "Issue State": "closed",
+        "Issue Title": "Powertoys causing chromium browsers to have high cpu usage (Utility: Video Capture)",
+        "Comment ID": 2661663314,
+        "Author": "robertwt7",
+        "Created At": "2025-02-16T22:56:47Z",
+        "Comment Body": "This is 100% related to this issue. i was looking for this for soo long now on why my Utility Video Capture is taking so much memory after i left the computer open for a while (up to 15-20GB of memory). After so many trial of reinstalling chrome, googling, opening issue on google chrome, disabling `Video Conference Mute` from powertoys resolve my issue!!\n\n\nReference\n- https://issues.chromium.org/issues/391666316\n- https://answers.microsoft.com/en-us/microsoftedge/forum/all/utility-video-capture/10197628-240e-4c45-92bd-d716caf65949\n- https://superuser.com/questions/1865950/high-memory-usage-by-chrome-based-applications-mainly-by-video-capture-mojom-v"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2549657254,
+        "Author": "cblake777",
+        "Created At": "2024-12-17T21:20:40Z",
+        "Comment Body": "Oh sure, despite being told that the feature *WASN'T BEING REMOVED*, we now are told it is going to be removed after all.  It's so wonderful being *lied to.*\n\n*PLEASE* DO NOT REMOVE. As was stated *NUMEROUS* times in #36339, the Windows \"equivalent\" *IS NOT AN EQUIVALENT AT ALL*. This feature is a *constant* in my day-to-day use, and, as can be seen by all the responses in the other thread, a lot of others rely on it as well."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2549669274,
+        "Author": "sirmeili",
+        "Created At": "2024-12-17T21:27:05Z",
+        "Comment Body": "What the hell? You said you were only deprecating it and said it would not be removed. I use this feature daily! Especially the video mute!"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2549735541,
+        "Author": "kiddailey",
+        "Created At": "2024-12-17T22:04:08Z",
+        "Comment Body": "Agreed.  I use this every day as a consistent, simple, reliable way of muting across a variety of applications.\n\nEdit: I think cblake777 may have meant the thread #21473"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2549766417,
+        "Author": "RMRx",
+        "Created At": "2024-12-17T22:21:42Z",
+        "Comment Body": "Well, until this becomes a OOB OS function, which it certainly should, or another simple, reliable software for this purpose appears, it is \"winget pin add Microsoft.PowerToys\" at 0.87.\nHow unfortunate."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2550223953,
+        "Author": "flyingwolf79",
+        "Created At": "2024-12-18T03:18:24Z",
+        "Comment Body": "Well, looks like automatic updates are being turned off then. You guys went back on your word, you said deprecation only, not removal. \n\nNow we know exactly how much to trust you all. "
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2550224366,
+        "Author": "flyingwolf79",
+        "Created At": "2024-12-18T03:18:56Z",
+        "Comment Body": "You know, the absolute least you could do is release it as an unsupported standalone. "
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2550247706,
+        "Author": "chjohans",
+        "Created At": "2024-12-18T03:39:11Z",
+        "Comment Body": "This is horrible horrible HORRIBLE news! :(\n\nI was just waiting for this, even when \"promised\" it wouldn't happen, as this is just how big arrogant companies do things!\n"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2550835078,
+        "Author": "BenedekFarkas",
+        "Created At": "2024-12-18T09:36:16Z",
+        "Comment Body": "> Well, looks like automatic updates are being turned off then. You guys went back on your word, you said deprecation only, not removal.\n> \n> Now we know exactly how much to trust you all.\n\nMy thoughts exactly. This is very disappointing.\n\nEDIT: Isn't this because v0.87 broke this feature (at least for me it doesn't mute the mic anymore) and you can't or don't want to fix it? v0.86 works fine."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2555193429,
+        "Author": "klueman",
+        "Created At": "2024-12-19T17:14:16Z",
+        "Comment Body": ">It has been in maintenance mode since v0.67\n\nYou can't use that as an excuse when you're the ones that put it in maintenance mode to begin with. You could have been developing it this whole time. All you're saying is you're doing now what you wanted to do two years ago but received pushback on, so you're trying again.\n\n>has low usage\n\nSo what? Many tools in the suite have niche uses only a small portion of users will ever need or want.\n\nIsn't that the point of all of this? To provide specialized tools for enthusiasts based on how useful they can be, rather than how popular they are.\n\n>and there are similar features already available in Windows\n\nIn Windows 11. Windows 10 still has 300 days of support left and a significant userbase.\n\nAlso, that doesn't seem to matter for things like fancyzones.\n\nMoreover, to keep making this excuse feels dismissive and disrespectful, because you already know its bull. You know because it has been reiterated over and over and over again for two years that *the features are not equivalent*.\n\nThis is basically the same as saying \"we're dropping Advanced Paste because Windows has paste function already\". The point is the tool *is better* than the Windows implementation.\n\nIf you're going to drop it, don't blow smoke. Drop it with an actual explanation for why the team doesn't want to maintain it anymore. What's the actual difficulty in just leaving it be? What are the issues with maintaining it further?"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2556265186,
+        "Author": "kiddailey",
+        "Created At": "2024-12-20T04:31:22Z",
+        "Comment Body": "\n> EDIT: Isn't this because v0.87 broke this feature (at least for me it doesn't mute the mic anymore) and you can't or don't want to fix it? v0.86 works fine.\n\nOh wow.  Thanks @BenedekFarkas for the heads-up on this. I'm still on 0.84.1 and have been reluctant to upgrade for fear of losing the ability to mute.  Good to know about the breakage."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2556314358,
+        "Author": "chjohans",
+        "Created At": "2024-12-20T05:26:41Z",
+        "Comment Body": "I am quite sure that all our comments will fall on deaf ears because that's how big arrogant companies behave."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2556317441,
+        "Author": "chjohans",
+        "Created At": "2024-12-20T05:30:08Z",
+        "Comment Body": "> > Well, looks like automatic updates are being turned off then. You guys went back on your word, you said deprecation only, not removal.\n> > Now we know exactly how much to trust you all.\n> \n> My thoughts exactly. This is very disappointing.\n> \n> EDIT: Isn't this because v0.87 broke this feature (at least for me it doesn't mute the mic anymore) and you can't or don't want to fix it? v0.86 works fine.\n\nI don't think that's the case, at least not for me. I'm on v0.87 as well and VCM works just fine, muting both my microphone and my camera.\n"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2590274301,
+        "Author": "nwillems94",
+        "Created At": "2025-01-14T15:37:18Z",
+        "Comment Body": "Does anyone know of a way to just compile and install the VCM component as a standalone executable? Even without the settings page?"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2620283518,
+        "Author": "CookSleep",
+        "Created At": "2025-01-28T23:46:55Z",
+        "Comment Body": "This is the only function I use, and you just deleted it..\nAlmost no one agreed with this decision in another issue #21473 , and I find it hard to understand why this is called \"low usage\" or \"the community's idea.\"\nWindows still doesn't support a global microphone switch, and people don't just use the few programs you support. The claim that \"Windows already has a similar feature\" is ridiculous!"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2620581906,
+        "Author": "doskkyh",
+        "Created At": "2025-01-29T03:17:59Z",
+        "Comment Body": "Saying that Windows has is similar feature is misleading at the very least. Windows does not have a similar solution at all. Disabling or muting the microphone manually through the settings is not a viable alternative. "
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2620852909,
+        "Author": "DerGroessteMeister",
+        "Created At": "2025-01-29T06:59:42Z",
+        "Comment Body": "this would REALLY be a pity\n\nit is what brought me to WPT in the first place. i really wish you\u2018d reconsider\ni can understand the frustration of many here\n\nplease continue your great work, all the best, Chris"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2621215148,
+        "Author": "HamonTeacher",
+        "Created At": "2025-01-29T10:15:07Z",
+        "Comment Body": "Bruh, I used this feature literally every day! Why remove it? Bring it back please, this feature has no alternatives!"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2621279673,
+        "Author": "RMRx",
+        "Created At": "2025-01-29T10:42:56Z",
+        "Comment Body": "> Bruh, I used this feature literally every day! Why remove it? Bring it back please, this feature has no alternatives!\nSame here, it was the reason I started using PowerToys at all.\n\nAs far as I know, there is no current alternative for reliably muting *all* microphones plus the camera on OS level.\nIs there any hope this module could be made available separately?"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2621375849,
+        "Author": "jfpaccini",
+        "Created At": "2025-01-29T11:23:52Z",
+        "Comment Body": "I really do not understand the problem that would have been to simply keep this tool ? Maintenance mode, fine. So what ? who has a problem with that ? is there any unofficial-we-do-not-dare-to-say reason ?\n\nPlease bring us this feature back !! ;)\n\nthanks"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2621862916,
+        "Author": "AnonymousWP",
+        "Created At": "2025-01-29T14:48:29Z",
+        "Comment Body": "What's the point of removing it if you don't even offer a native Windows feature that works in a similar way? What's the point of removing it if barely need to 'maintain'/touch the code of this feature. No downsides for you, but only for us. Well, it is what it is then, but I'm not updating."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2623408162,
+        "Author": "cxwong1",
+        "Created At": "2025-01-30T02:56:43Z",
+        "Comment Body": "Dear OP - Created an account say how much I really don't like this feature removed. It's the feature I use the most. I loved it. It was reliable and worked for any application as intended. Please bring it back. What's the benefit of removing it?\n\nTo everyone else - What is the \"equivalent\" the OP is referring to? I've never heard of one."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2623904604,
+        "Author": "BenedekFarkas",
+        "Created At": "2025-01-30T09:04:32Z",
+        "Comment Body": "> To everyone else - What is the \"equivalent\" the OP is referring to? I've never heard of one.\n\nNone of us here have, I think. :(\n\n> EDIT: Isn't this because v0.87 broke this feature (at least for me it doesn't mute the mic anymore) and you can't or don't want to fix it? v0.86 works fine.\n\nThis comment I posted earlier turned out to be a red herring. It seems to me that whenever I start an application that uses my mic (that can also be the \"Sounds\" settings window where you see the mic on the \"Recording\" tab), VCM doesn't mute it, only after toggling mic mute on and off. \"Have you tried turning it off and on again?\" prevails as always. :D\nClosing and starting PowerToys again after starting the application that uses mic also works.\n\n> Does anyone know of a way to just compile and install the VCM component as a standalone executable? Even without the settings page?\n\nI briefly looked into factoring out VCM into a separate application and so far it seems possible. I haven't got far in the process yet, but most of the module projects can be removed from the solution (except for some projects in MouseUtils due to VCM depending on them), which cuts down the number of projects from ~200 to just 40.\n\nStarting the application from VS like that works fine, but it messes with the settings of the live application, because it's reading the same registry entries (and it initializes every module to be enabled), so the settings-related logic (and UI) of all the other modules need to be stripped out too.\n\n-----\n\nBTW someone asked in another thread about the claim regarding low usage and if there's telemetry data behind the decision. There is a small Telemetry project in the solution and `TelemetryBase.cs` has a comment on top that says:\n\n> // WARNING: THIS FILE GETS REPLACED ON THE BUILD FARM\n\nI wonder what's the replacement logic. :D"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2627326210,
+        "Author": "sleepyeyesvince",
+        "Created At": "2025-01-31T13:20:20Z",
+        "Comment Body": "FWIW I've managed to figure a workaround.\nPrimarily using this:\n[https://github.com/frgnca/AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets)\n\nInstallation is as outlined in the linked project page:\nIn an administrator Terminal PowerShell Window:\n\n`Install-Module -Name AudioDeviceCmdlets`\n\nYou can test with command:\n\n`Set-AudioDevice -RecordingMuteToggle`\n\nThen I made an old school batch file (I tried with a PowerShell .ps1 but I'm not good with it and couldn't get it to work well with the following steps below).\n\nIn my MicMute.bat:\n\n`powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Set-AudioDevice -RecordingMuteToggle\"`\n\nI saved MicMute.bat somewhere (%USERPROFILE%\\Documents\\).\n\n1. Open PowerToys \"Keyboard Manager\" module and enable it\n2. Click Remap a shortcut\n3. Click + Add shortcut remapping\n4. Under \"Select:\" on the left, click the Shortcut pencil button and record the keyboard combination you want to use (eg Ctrl + /). Hit OK.\n5. Under \"To:\" choose the \"Action:\" dropdown as \"Run Program\". Click \"Select Program\" button and locate your saved MicMute.bat.\n6. [Optional: Change the \"Visibility\" to \"Hidden\" if you don't want a window popping up when the script runs]\n7. Leave other options as default, particularly, leave \"Target Apps:\" blank (defaults to \"All apps\")\n8. Hit \"OK\" at the top right of the \"Remap shortcuts\" window\n9. Now test by hitting your shortcut.\n\nOne caveat with the removal of VCM, it appears the little toolbar showing the microphone was muted was also removed. I haven't quite figured out how to replace that yet, but I'll look further into it. If someone has an idea?\n\n[Edited for formatting]"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2627350290,
+        "Author": "jfpaccini",
+        "Created At": "2025-01-31T13:32:20Z",
+        "Comment Body": "> FWIW I've managed to figure a workaround. Primarily using this: https://github.com/frgnca/AudioDeviceCmdlets\n\nThis is great ! \n\n![Image](https://github.com/user-attachments/assets/54f5222f-7472-4150-90af-3eb00203762b)\n\n> One caveat with the removal of VCM, it appears the little toolbar showing the microphone was muted was also removed. I haven't quite figured out how to replace that yet, but I'll look further into it. If someone has an idea?\n\nWindows 11 has this icon in the notification area that appears when a program uses the microphone. it correctly toggles when launching the powershell command:\n\n![Image](https://github.com/user-attachments/assets/cb1e5b8f-ead9-464f-a95a-26a5d3ddfbdf)\n\n![Image](https://github.com/user-attachments/assets/5bd8a64a-9ce9-45aa-85cf-1218f1bd2aea)\n\nThanks for this !\n"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2627992459,
+        "Author": "Psyphil",
+        "Created At": "2025-01-31T17:58:56Z",
+        "Comment Body": "Using SoundSwitch as an alternative.\n\nhttps://github.com/Belphemur/SoundSwitch\n\nNo more PowerToys"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2628039030,
+        "Author": "cxwong1",
+        "Created At": "2025-01-31T18:27:55Z",
+        "Comment Body": "> Using SoundSwitch as an alternative. \n> No more PowerToys\n\nI'm looking forward to trying this! (Still wishing PowerToys devs will bring back the video conference mute... the fewer programs I have running at the same time the better \ud83d\ude06 )"
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2628344053,
+        "Author": "crutkas",
+        "Created At": "2025-01-31T20:27:12Z",
+        "Comment Body": "I made the decision to pull it.  Almost all the same reasons held for why we wanted to do it back with 0.67 still hold true.  It is very difficult to test, debug in general, different webcam hardware caused issues, Arm64 quirks, had accessibility issues, it actually is x86 vs 64-bit, and extremely low usage from telemetry compared to other PowerToys utilities.  The complexities of the virtual driver added to installing, upgrading, and uninstalling PowerToys also added to my decision.\n\nI do know it does actively impact those who did that and usage is usage.  As a user, you have choices and we respect that.  Our team cares deeply about users and giving everyone extremely powerful utilities.\n\nAs an open-source project, if someone does find it useful, 100% please fork / leverage our code.  Here is the fork we used to remove it (https://github.com/microsoft/PowerToys/commit/12bb5c21317474255c5399849de65637b593ba0e). This will have the best snapshot of the latest bits of code for this utility and how we removed it out."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2631599354,
+        "Author": "codydunne",
+        "Created At": "2025-02-03T17:14:55Z",
+        "Comment Body": "@jfpaccini, I had the same problem as @sleepyeyesvince with the removal of the toolbar icon. The [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets) command doesn't toggle the visible microphone icon. Nor does it show me the little banner I had at the top of the screen that Video Conference Mute gave me."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2633483803,
+        "Author": "jfpaccini",
+        "Created At": "2025-02-04T10:27:12Z",
+        "Comment Body": "@codydunne \n> [@jfpaccini](https://github.com/jfpaccini), I had the same problem as [@sleepyeyesvince](https://github.com/sleepyeyesvince) with the removal of the toolbar icon. The [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets) command doesn't toggle the visible microphone icon. Nor does it show me the little banner I had at the top of the screen that Video Conference Mute gave me.\n\nThe mic icon appears only when the mic is in use, for me it appears when a teams call starts. This is per the mic usage permission feature in win11. \n\nNo solution for the top of screen banner though."
+    },
+    {
+        "Issue ID": 36339,
+        "Issue State": "closed",
+        "Issue Title": "Deprecate Video Conference Mute in v0.88",
+        "Comment ID": 2660955915,
+        "Author": "Krak8",
+        "Created At": "2025-02-15T14:51:52Z",
+        "Comment Body": "I was using this daily....\nTime to un-install powertoys "
+    },
+    {
+        "Issue ID": 37440,
+        "Issue State": "closed",
+        "Issue Title": "The enabled modules become disabled after a restart of PowerToys.",
+        "Comment ID": 2656903251,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T15:09:37Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36562 , similarity score: 83%\n- #35818 , similarity score: 83%\n- #30588 , similarity score: 82%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37440,
+        "Issue State": "closed",
+        "Issue Title": "The enabled modules become disabled after a restart of PowerToys.",
+        "Comment ID": 2656993007,
+        "Author": "Pelangrin",
+        "Created At": "2025-02-13T15:39:24Z",
+        "Comment Body": "Similar to other open tickets. To me, it only occurs when I double-click to open PowerToys."
+    },
+    {
+        "Issue ID": 37440,
+        "Issue State": "closed",
+        "Issue Title": "The enabled modules become disabled after a restart of PowerToys.",
+        "Comment ID": 2660953126,
+        "Author": "Pelangrin",
+        "Created At": "2025-02-15T14:43:48Z",
+        "Comment Body": "I discovered a minor bug in PowerToys. When it's first opened, the dashboard displays only six default-enabled modules. Despite this, all modules are enabled, even though the initial Dashboard view doesn't reflect this.\n\nSteps to reproduce the issue:\n- I have pinned PowerToys to the Start Menu.\n- PowerToys is not set to auto-run on Windows startup.\n- All PowerToys modules are enabled.\nWhen I first start PowerToys by double-clicking it from the Start Menu, it opens to the Dashboard, which shows only six enabled modules: Advanced Paste, Image Resizer, PowerRename, Always On Top, File Locksmith, and New+.\n- However, after closing the Dashboard and reopening it from the Taskbar menu, the Dashboard correctly shows all modules as enabled.\n\nThis bug is purely cosmetic, affecting only the initial display of the Dashboard."
+    },
+    {
+        "Issue ID": 35314,
+        "Issue State": "closed",
+        "Issue Title": "V0.85.1 does not install properly",
+        "Comment ID": 2660160747,
+        "Author": "nguyen-dows",
+        "Created At": "2025-02-14T20:00:57Z",
+        "Comment Body": "@MurraySobol, does this latest version of PowerToys install for you? "
+    },
+    {
+        "Issue ID": 35314,
+        "Issue State": "closed",
+        "Issue Title": "V0.85.1 does not install properly",
+        "Comment ID": 2660925879,
+        "Author": "MurraySobol",
+        "Created At": "2025-02-15T13:26:58Z",
+        "Comment Body": "Problem long ago resolved, I am currently running 0.88.0\r\n\r\n________________________________\r\n"
+    },
+    {
+        "Issue ID": 37441,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run Calculator: Add trigonometric angle unit conversion functions",
+        "Comment ID": 2659974942,
+        "Author": "OldUser101",
+        "Created At": "2025-02-14T18:11:55Z",
+        "Comment Body": "Apologies for any confusion, there appear to be several commits included in this PR that I previously made and merged as part of older PRs. I'm not sure if this is normal behaviour, but it does not appear to affect anything."
+    },
+    {
+        "Issue ID": 37441,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run Calculator: Add trigonometric angle unit conversion functions",
+        "Comment ID": 2660570796,
+        "Author": "htcfreek",
+        "Created At": "2025-02-15T00:32:28Z",
+        "Comment Body": "@OldUser101 \nPlase try to fix this. Sounds like a bad commit history/order."
+    },
+    {
+        "Issue ID": 37441,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run Calculator: Add trigonometric angle unit conversion functions",
+        "Comment ID": 2660806100,
+        "Author": "OldUser101",
+        "Created At": "2025-02-15T08:10:37Z",
+        "Comment Body": "@htcfreek\r\n\r\nEverything has been fixed, the new pull request is #37475."
+    },
+    {
+        "Issue ID": 37431,
+        "Issue State": "closed",
+        "Issue Title": "Why show this error?",
+        "Comment ID": 2655898245,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T08:46:03Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #37116 , similarity score: 91%\n- #37110 , similarity score: 91%\n- #36616 , similarity score: 91%\n- #36914 , similarity score: 91%\n- #37051 , similarity score: 89%\n- #37397 , similarity score: 86%\n- #36451 , similarity score: 84%\n- #37430 , similarity score: 82%\n- #37384 , similarity score: 81%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37431,
+        "Issue State": "closed",
+        "Issue Title": "Why show this error?",
+        "Comment ID": 2660114905,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:32:21Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37431,
+        "Issue State": "closed",
+        "Issue Title": "Why show this error?",
+        "Comment ID": 2660115260,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:32:37Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 20908,
+        "Issue State": "closed",
+        "Issue Title": "Direct shortcut to single tools (right click on PowerToys icon)",
+        "Comment ID": 2660181752,
+        "Author": "cinnamon-msft",
+        "Created At": "2025-02-14T20:13:55Z",
+        "Comment Body": "We now have the quick access menu from the system tray :) going to close this out!"
+    },
+    {
+        "Issue ID": 37449,
+        "Issue State": "closed",
+        "Issue Title": "File Explorer keeps a single window",
+        "Comment ID": 2658106301,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-14T02:13:14Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #28816 , similarity score: 83%\n- #31827 , similarity score: 82%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37449,
+        "Issue State": "closed",
+        "Issue Title": "File Explorer keeps a single window",
+        "Comment ID": 2660167508,
+        "Author": "cinnamon-msft",
+        "Created At": "2025-02-14T20:05:07Z",
+        "Comment Body": "/dup https://github.com/microsoft/PowerToys/issues/28816"
+    },
+    {
+        "Issue ID": 37449,
+        "Issue State": "closed",
+        "Issue Title": "File Explorer keeps a single window",
+        "Comment ID": 2660167955,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T20:05:24Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 32470,
+        "Issue State": "closed",
+        "Issue Title": "Bug occurrence",
+        "Comment ID": 2057985055,
+        "Author": "github-actions[bot]",
+        "Created At": "2024-04-15T23:35:21Z",
+        "Comment Body": "Hi I'm an AI powered bot that finds similar issues based off the issue title.\n\nPlease view the issues below to see if they solve your problem, and if the issue describes your problem please consider closing this one and thumbs upping the other issue to help us prioritize it. Thank you!\n\n\n### Closed similar issues:\n- [Bug (#23176)](https://github.com/microsoft/PowerToys/issues/23176),  similarity score: 0.85\n- [bug (#27375)](https://github.com/microsoft/PowerToys/issues/27375),  similarity score: 0.85\n- [Bug report generated by PowerToys automatically. (#28118)](https://github.com/microsoft/PowerToys/issues/28118),  similarity score: 0.84\n- [BUG report (#23525)](https://github.com/microsoft/PowerToys/issues/23525),  similarity score: 0.83\n- [Power Toys Bug (#21988)](https://github.com/microsoft/PowerToys/issues/21988),  similarity score: 0.81\n\n> Note: You can give me feedback by thumbs upping or thumbs downing this comment."
+    },
+    {
+        "Issue ID": 32470,
+        "Issue State": "closed",
+        "Issue Title": "Bug occurrence",
+        "Comment ID": 2660140029,
+        "Author": "nguyen-dows",
+        "Created At": "2025-02-14T19:47:47Z",
+        "Comment Body": "/dup ##27375\n"
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1002851927,
+        "Author": "franky920920",
+        "Created At": "2021-12-30T03:02:39Z",
+        "Comment Body": "Duplicate of #7"
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1002851954,
+        "Author": "franky920920",
+        "Created At": "2021-12-30T03:02:46Z",
+        "Comment Body": "Thanks for your suggestion! This issue is a duplicate. \r\nI'm linking this issue to #7 to centralize the discussion thread, please go to that thread for discussion.\r\n\r\n_Thanks for your help to make PowerToys a better piece of software!_"
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1002879381,
+        "Author": "peterfritz",
+        "Created At": "2021-12-30T05:30:42Z",
+        "Comment Body": "Hi, I saw his issue when searching for duplicates, but I saw little to no similarities, his focuses on monitoring and limiting battery capacity, and it seems to be a feature that must be implemented by the manufacturer, otherwise impossible. Mine is a way simpler purely visual addition to improve the taskbar battery icon."
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1043343626,
+        "Author": "crutkas",
+        "Created At": "2022-02-17T19:36:20Z",
+        "Comment Body": "this is too vague as is and unclear what isn't handled by systray and the power and battery settings page."
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1043343858,
+        "Author": "crutkas",
+        "Created At": "2022-02-17T19:36:35Z",
+        "Comment Body": "/needinfo"
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1046312070,
+        "Author": "peterfritz",
+        "Created At": "2022-02-20T20:13:10Z",
+        "Comment Body": "The Windows 11 systray doesn't have an option to always show the battery percentage.\r\nI don't know if it's a feature that's possible, relevant or useful enough to be added to PowerToys but I think it would be useful nonetheless, as you wouldn't need to click, press WIN + A neither hover the icon for a second or so, the percentage would be visible and available at a glance, just as in almost any other device.\r\n"
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 1048202271,
+        "Author": "crutkas",
+        "Created At": "2022-02-22T20:53:41Z",
+        "Comment Body": "#7 is different than this "
+    },
+    {
+        "Issue ID": 15212,
+        "Issue State": "closed",
+        "Issue Title": "Battery percentage displayed in the taskbar",
+        "Comment ID": 2660155246,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:57:19Z",
+        "Comment Body": "Rolling out in build Windows 11 Insider Preview Build 26120.3000 (Dev Channel)"
+    },
+    {
+        "Issue ID": 32935,
+        "Issue State": "closed",
+        "Issue Title": "Add macro recorder to record mouse or keyboard steps",
+        "Comment ID": 2122427410,
+        "Author": "github-actions[bot]",
+        "Created At": "2024-05-21T11:32:36Z",
+        "Comment Body": "Hi I'm an AI powered bot that finds similar issues based off the issue title.\n\nPlease view the issues below to see if they solve your problem, and if the issue describes your problem please consider closing this one and thumbs upping the other issue to help us prioritize it. Thank you!\n\n\n### Closed similar issues:\n- [add macro recording option (#31970)](https://github.com/microsoft/PowerToys/issues/31970),  similarity score: 0.84\n- [Extend Keyboard Manager for Keyboard Macros (#29006)](https://github.com/microsoft/PowerToys/issues/29006),  similarity score: 0.76\n\n> Note: You can give me feedback by thumbs upping or thumbs downing this comment."
+    },
+    {
+        "Issue ID": 32935,
+        "Issue State": "closed",
+        "Issue Title": "Add macro recorder to record mouse or keyboard steps",
+        "Comment ID": 2365398304,
+        "Author": "Chealer",
+        "Created At": "2024-09-22T01:08:52Z",
+        "Comment Body": "Please indicate which version is affected, retitle the ticket as an issue report and provide an example of what you would like to support."
+    },
+    {
+        "Issue ID": 32935,
+        "Issue State": "closed",
+        "Issue Title": "Add macro recorder to record mouse or keyboard steps",
+        "Comment ID": 2660149122,
+        "Author": "nguyen-dows",
+        "Created At": "2025-02-14T19:53:50Z",
+        "Comment Body": "/dup #31970\n"
+    },
+    {
+        "Issue ID": 32935,
+        "Issue State": "closed",
+        "Issue Title": "Add macro recorder to record mouse or keyboard steps",
+        "Comment ID": 2660149462,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:54:05Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 32958,
+        "Issue State": "closed",
+        "Issue Title": "Fancy Zone Resize",
+        "Comment ID": 2123566831,
+        "Author": "github-actions[bot]",
+        "Created At": "2024-05-21T23:01:28Z",
+        "Comment Body": "Hi I'm an AI powered bot that finds similar issues based off the issue title.\n\nPlease view the issues below to see if they solve your problem, and if the issue describes your problem please consider closing this one and thumbs upping the other issue to help us prioritize it. Thank you!\n\n### Open similar issues:\n\n- [Fancy Zones - Fancy Sizes ? (#19811)](https://github.com/microsoft/PowerToys/issues/19811),  similarity score: 0.77\n- [Fancy Zones Layout Change using Scroll Wheel (#20556)](https://github.com/microsoft/PowerToys/issues/20556),  similarity score: 0.77\n\n### Closed similar issues:\n- [Multiple FancyZones Layout (#17634)](https://github.com/microsoft/PowerToys/issues/17634),  similarity score: 0.78\n- [Switching layout of FancyZones by mouse wheel scrolling duing drag. (#22090)](https://github.com/microsoft/PowerToys/issues/22090),  similarity score: 0.78\n- [FancyZones : Scrolling while dragging a window and the zones are activated, should cycle through the FancyZone layouts (#23196)](https://github.com/microsoft/PowerToys/issues/23196),  similarity score: 0.77\n\n> Note: You can give me feedback by thumbs upping or thumbs downing this comment."
+    },
+    {
+        "Issue ID": 32958,
+        "Issue State": "closed",
+        "Issue Title": "Fancy Zone Resize",
+        "Comment ID": 2660146203,
+        "Author": "nguyen-dows",
+        "Created At": "2025-02-14T19:51:54Z",
+        "Comment Body": "/dup #19811\n"
+    },
+    {
+        "Issue ID": 32958,
+        "Issue State": "closed",
+        "Issue Title": "Fancy Zone Resize",
+        "Comment ID": 2660146632,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:52:11Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37460,
+        "Issue State": "closed",
+        "Issue Title": "Include \u03c0 symbol in PowerToys Run",
+        "Comment ID": 2659879803,
+        "Author": "OldUser101",
+        "Created At": "2025-02-14T17:21:40Z",
+        "Comment Body": "@skanda890 \n\nSince the pi character is not typically on most keyboards, you can just type `pi` instead. \n\n![Image](https://github.com/user-attachments/assets/c82af51f-3e75-4a66-abfd-b8b5a10cae85)\n\nThe pi symbol could easily be added if it was still needed, however."
+    },
+    {
+        "Issue ID": 37118,
+        "Issue State": "closed",
+        "Issue Title": "Add App Exclusion Option for Shortcut Remappings",
+        "Comment ID": 2660125483,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:39:12Z",
+        "Comment Body": "/dup https://github.com/microsoft/PowerToys/issues/8809"
+    },
+    {
+        "Issue ID": 37118,
+        "Issue State": "closed",
+        "Issue Title": "Add App Exclusion Option for Shortcut Remappings",
+        "Comment ID": 2660125861,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:39:29Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37462,
+        "Issue State": "closed",
+        "Issue Title": "## Exception",
+        "Comment ID": 2659398090,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-14T13:54:30Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #33952 , similarity score: 89%\n- #34709 , similarity score: 88%\n- #31489 , similarity score: 87%\n- #33584 , similarity score: 86%\n- #36081 , similarity score: 85%\n- #33442 , similarity score: 82%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37462,
+        "Issue State": "closed",
+        "Issue Title": "## Exception",
+        "Comment ID": 2660119298,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:35:16Z",
+        "Comment Body": "/dup #31226 "
+    },
+    {
+        "Issue ID": 37462,
+        "Issue State": "closed",
+        "Issue Title": "## Exception",
+        "Comment ID": 2660119678,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:35:32Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37450,
+        "Issue State": "closed",
+        "Issue Title": "Error when using VLC to play mp4",
+        "Comment ID": 2660119126,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:35:10Z",
+        "Comment Body": "/dup #31226 "
+    },
+    {
+        "Issue ID": 37450,
+        "Issue State": "closed",
+        "Issue Title": "Error when using VLC to play mp4",
+        "Comment ID": 2660119533,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:35:26Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37425,
+        "Issue State": "closed",
+        "Issue Title": "\u51fa\u73b0bug",
+        "Comment ID": 2655459164,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T04:37:42Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #34032 , similarity score: 88%\n- #37170 , similarity score: 87%\n- #36461 , similarity score: 87%\n- #36114 , similarity score: 87%\n- #36959 , similarity score: 86%\n- #37384 , similarity score: 86%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37425,
+        "Issue State": "closed",
+        "Issue Title": "\u51fa\u73b0bug",
+        "Comment ID": 2660118992,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:35:04Z",
+        "Comment Body": "/dup #31226 "
+    },
+    {
+        "Issue ID": 37425,
+        "Issue State": "closed",
+        "Issue Title": "\u51fa\u73b0bug",
+        "Comment ID": 2660119315,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:35:16Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37445,
+        "Issue State": "closed",
+        "Issue Title": "White border appears if powertoys is active window",
+        "Comment ID": 2657456160,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T18:49:45Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #37381 , similarity score: 83%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37445,
+        "Issue State": "closed",
+        "Issue Title": "White border appears if powertoys is active window",
+        "Comment ID": 2660118417,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:34:41Z",
+        "Comment Body": "/dup https://github.com/microsoft/PowerToys/issues/37381"
+    },
+    {
+        "Issue ID": 37445,
+        "Issue State": "closed",
+        "Issue Title": "White border appears if powertoys is active window",
+        "Comment ID": 2660118735,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:34:54Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37463,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong. Report it -",
+        "Comment ID": 2659806561,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-14T16:45:33Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36679 , similarity score: 88%\n- #36752 , similarity score: 87%\n- #37291 , similarity score: 86%\n- #37374 , similarity score: 85%\n- #37116 , similarity score: 84%\n- #37397 , similarity score: 83%\n- #37430 , similarity score: 82%\n- #37439 , similarity score: 81%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37463,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong. Report it -",
+        "Comment ID": 2660116562,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:33:29Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37463,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong. Report it -",
+        "Comment ID": 2660116884,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:33:42Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37439,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong.",
+        "Comment ID": 2656865456,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T14:58:19Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #37094 , similarity score: 96%\n- #36616 , similarity score: 94%\n- #37116 , similarity score: 94%\n- #36914 , similarity score: 94%\n- #37110 , similarity score: 93%\n- #37397 , similarity score: 90%\n- #37431 , similarity score: 89%\n- #37435 , similarity score: 89%\n- #36451 , similarity score: 88%\n- #37430 , similarity score: 84%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37439,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong.",
+        "Comment ID": 2660115191,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:32:33Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37439,
+        "Issue State": "closed",
+        "Issue Title": "Something went wrong.",
+        "Comment ID": 2660115508,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:32:47Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37435,
+        "Issue State": "closed",
+        "Issue Title": "while using power toy search got this error",
+        "Comment ID": 2656113701,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T10:12:02Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36914 , similarity score: 93%\n- #37116 , similarity score: 92%\n- #37110 , similarity score: 92%\n- #36616 , similarity score: 92%\n- #36658 , similarity score: 91%\n- #37397 , similarity score: 89%\n- #37431 , similarity score: 88%\n- #36451 , similarity score: 86%\n- #37430 , similarity score: 85%\n- #37404 , similarity score: 82%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37435,
+        "Issue State": "closed",
+        "Issue Title": "while using power toy search got this error",
+        "Comment ID": 2660115061,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:32:28Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37435,
+        "Issue State": "closed",
+        "Issue Title": "while using power toy search got this error",
+        "Comment ID": 2660115364,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:32:41Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37430,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run ran into an issue",
+        "Comment ID": 2655875117,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-13T08:35:28Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36724 , similarity score: 94%\n- #36547 , similarity score: 93%\n- #36658 , similarity score: 93%\n- #36583 , similarity score: 93%\n- #37077 , similarity score: 93%\n- #36451 , similarity score: 89%\n- #37424 , similarity score: 87%\n- #37397 , similarity score: 85%\n- #37404 , similarity score: 81%\n- #23544 , similarity score: 81%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37430,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run ran into an issue",
+        "Comment ID": 2660114808,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:32:17Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37430,
+        "Issue State": "closed",
+        "Issue Title": "PowerToys Run ran into an issue",
+        "Comment ID": 2660115126,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:32:30Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37404,
+        "Issue State": "closed",
+        "Issue Title": "\"Something went wrong\"   powertoys wont start on windows on arm device",
+        "Comment ID": 2652549365,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-12T03:03:05Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36616 , similarity score: 85%\n- #36403 , similarity score: 85%\n- #37116 , similarity score: 85%\n- #36914 , similarity score: 85%\n- #37051 , similarity score: 85%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37404,
+        "Issue State": "closed",
+        "Issue Title": "\"Something went wrong\"   powertoys wont start on windows on arm device",
+        "Comment ID": 2654376854,
+        "Author": "snickler",
+        "Created At": "2025-02-12T17:19:12Z",
+        "Comment Body": "Hi @AMITH140  - the latest version available is 0.88.0. Can you try updating to that version from within the application and see if you still encounter this issue? "
+    },
+    {
+        "Issue ID": 37404,
+        "Issue State": "closed",
+        "Issue Title": "\"Something went wrong\"   powertoys wont start on windows on arm device",
+        "Comment ID": 2660114655,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:32:11Z",
+        "Comment Body": "/dup #36451  \n\n@snickler  we see reports in .88 :("
+    },
+    {
+        "Issue ID": 37404,
+        "Issue State": "closed",
+        "Issue Title": "\"Something went wrong\"   powertoys wont start on windows on arm device",
+        "Comment ID": 2660114966,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:32:23Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 37397,
+        "Issue State": "closed",
+        "Issue Title": "\u05de\u05e9\u05d4\u05d5 \u05d4\u05e9\u05ea\u05d1\u05e9",
+        "Comment ID": 2651291796,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-02-11T16:11:51Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #36616 , similarity score: 93%\n- #37116 , similarity score: 92%\n- #37110 , similarity score: 92%\n- #36914 , similarity score: 92%\n- #36403 , similarity score: 90%\n- #36451 , similarity score: 84%\n- #37384 , similarity score: 82%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 37397,
+        "Issue State": "closed",
+        "Issue Title": "\u05de\u05e9\u05d4\u05d5 \u05d4\u05e9\u05ea\u05d1\u05e9",
+        "Comment ID": 2660111175,
+        "Author": "crutkas",
+        "Created At": "2025-02-14T19:29:55Z",
+        "Comment Body": "/dup #36451"
+    },
+    {
+        "Issue ID": 37397,
+        "Issue State": "closed",
+        "Issue Title": "\u05de\u05e9\u05d4\u05d5 \u05d4\u05e9\u05ea\u05d1\u05e9",
+        "Comment ID": 2660111485,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:30:07Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 36991,
+        "Issue State": "closed",
+        "Issue Title": "Support for Vietnamese",
+        "Comment ID": 2605177141,
+        "Author": "similar-issues-ai[bot]",
+        "Created At": "2025-01-21T16:18:15Z",
+        "Comment Body": "We've found some similar issues:\n\n\n- #24101 , similarity score: 85%\n  \n\nIf any of the above are duplicates, please consider closing this issue out and adding additional context in the original issue.\n\n> Note: You can give me feedback by \ud83d\udc4d or \ud83d\udc4e this comment."
+    },
+    {
+        "Issue ID": 36991,
+        "Issue State": "closed",
+        "Issue Title": "Support for Vietnamese",
+        "Comment ID": 2660102468,
+        "Author": "nguyen-dows",
+        "Created At": "2025-02-14T19:24:46Z",
+        "Comment Body": "/dup #24101\n"
+    },
+    {
+        "Issue ID": 36991,
+        "Issue State": "closed",
+        "Issue Title": "Support for Vietnamese",
+        "Comment ID": 2660102806,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2025-02-14T19:24:58Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633332179,
+        "Author": "WinkelCode",
+        "Created At": "2020-05-25T01:18:47Z",
+        "Comment Body": "I had it happen a couple times that after playing a game (SWAT 4) with Nvidia's DSR feature (changing resolution to above native while game is running) at 2x native resolution, the Run window wouldn't show up until restarting PowerToys. I initially opened a separate issue for this but since I suddenly can't reproduce it I decided to close it for now and see what comes out of this issue."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633334652,
+        "Author": "NeoGenesis1986",
+        "Created At": "2020-05-25T01:29:48Z",
+        "Comment Body": "Restarting PowerToys doesn't help. It didn't work for me from the start. And I don't think it's a graphics card issue as I don't have one on my laptop."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633473577,
+        "Author": "deanso",
+        "Created At": "2020-05-25T09:21:19Z",
+        "Comment Body": "Same issue here, new installed powertoys to try out PowerToys Run, but searchbar not popping up when pressing Alt + Space. Tried different shortcut, restarting pc, run as admin and restarting powertoys, but no change.\r\n\r\nFrom another thread:\r\nStarting Power Launcher.exe (located in C:\\Program Files\\PowerToys\\modules\\launcher\\PowerLauncher.exe ) manually works. \r\nI'll try reinstalling and installing powertoys."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633476897,
+        "Author": "enricogior",
+        "Created At": "2020-05-25T09:28:42Z",
+        "Comment Body": "@NeoGenesis1986 @deanso \r\nopen the Task Manager and check under the `Details` tab if the `PowerLauncher.exe` process is running."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633483732,
+        "Author": "Sov3rain",
+        "Created At": "2020-05-25T09:43:55Z",
+        "Comment Body": "Same here. It was working fine in 0.18. I updated to 0.18.1 and now Windows Menu pops up. I tried to restart Power Toys.\r\n\r\n`PowerLauncher.exe` is not running, just `PowerToys.exe`\r\n\r\nEDIT: when starting `PowerLauncher.exe` manually, it works fine. Maybe it's an autostart problem?"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633486460,
+        "Author": "enricogior",
+        "Created At": "2020-05-25T09:50:03Z",
+        "Comment Body": "@Sov3rain \r\ncan you check if in the PowerToys Settings, the PowerToys Run module is ON?\r\n\r\n![image](https://user-images.githubusercontent.com/3206696/82801595-da5f4a00-9e7d-11ea-92d8-37b9fbe6b6a9.png)\r\n"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633487240,
+        "Author": "Sov3rain",
+        "Created At": "2020-05-25T09:51:51Z",
+        "Comment Body": "@enricogior  Yes it's ON. I tried to disable/enable it but no change."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633490292,
+        "Author": "enricogior",
+        "Created At": "2020-05-25T09:58:49Z",
+        "Comment Body": "@Sov3rain \r\ncan you do a test?\r\n - exit PowerToys\r\n - check in the Task Manager if `PowerLauncher.exe` is still running (it should) \r\n - terminate `PowerLauncher.exe`\r\n - restart PowerToys \r\n - if `PowerLauncher.exe` is not running open the `Event Viewer` and check under `Windows Logs -> Application` if there is any error related to `PowerLauncher.exe`\r\n\r\nThanks."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633493548,
+        "Author": "Sov3rain",
+        "Created At": "2020-05-25T10:05:54Z",
+        "Comment Body": "@enricogior \r\n\r\n> * exit PowerToys\r\n> * check in the Task Manager if `PowerLauncher.exe` is still running (it should)\r\n\r\nYes it is.\r\n\r\n> * terminate `PowerLauncher.exe`\r\n> * restart PowerToys\r\n\r\nPower Launcher is not restarting with PowerToys.\r\n\r\n> * if `PowerLauncher.exe` is not running open the `Event Viewer` and check under `Windows Logs -> Application` if there is any error related to `PowerLauncher.exe`\r\n\r\nNo error related to Power Launcher in the event viewer.\r\n\r\n"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633501045,
+        "Author": "enricogior",
+        "Created At": "2020-05-25T10:23:30Z",
+        "Comment Body": "@Sov3rain \r\nI was hoping some error was present in the Event log, it would have helped.\r\nThank you."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633501281,
+        "Author": "pietro-tp",
+        "Created At": "2020-05-25T10:24:09Z",
+        "Comment Body": "I have the same problem.\r\nI dont know if can help but: if i have powertoys run ENABLE nothing append if i use the shortcut Alt+spacebar. When i DISABLE powertoys run and use the same shortcut searchbox appear and work well."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633503024,
+        "Author": "enricogior",
+        "Created At": "2020-05-25T10:28:17Z",
+        "Comment Body": "@PietroGiustacori \r\nthat's interesting. Can you verify in `Task Manager -> Details` if `PowerLauncher.exe` exits when you enable it in the Settings and that it runs when you disable it?\r\nThanks.  "
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633508145,
+        "Author": "pietro-tp",
+        "Created At": "2020-05-25T10:41:07Z",
+        "Comment Body": "@enricogior \r\nSorry but i remember a thing, before i start PowerLauncher.exe by searching it in the folder PowerToys>modules>launcher and nothing append i i enable o disable Powertoys Run in Power Toys setting. If i not manually start PowerLauncher.exe nothing append.\r\nEnable o disable PowerToys run in the settings not have any results."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633519246,
+        "Author": "bars949",
+        "Created At": "2020-05-25T11:10:25Z",
+        "Comment Body": "Same issue with Windows 10, version 1909"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633523498,
+        "Author": "bars949",
+        "Created At": "2020-05-25T11:21:51Z",
+        "Comment Body": "In windows 10 alt + space these are standard hotkeys. Perhaps with the next update, the priority was increased?"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633547059,
+        "Author": "Makishima",
+        "Created At": "2020-05-25T12:25:19Z",
+        "Comment Body": "Same here, after the last update looks like `PowerLauncher.exe` do not start at all. If launch manually both `Alt + Space ` or `Ctrl + Space` is working correct"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633612506,
+        "Author": "bars949",
+        "Created At": "2020-05-25T15:02:18Z",
+        "Comment Body": "I found a problem with myself. It was in this thread: https://github.com/microsoft/PowerToys/issues/3456 but I did not change anything there. perhaps after rebooting the value is lost again. But by setting alt + space there, performance is restored."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633612934,
+        "Author": "bars949",
+        "Created At": "2020-05-25T15:03:18Z",
+        "Comment Body": "![image](https://user-images.githubusercontent.com/18220304/82824441-009edd00-9eb2-11ea-8f8c-43dd77f05688.png)\r\n"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633751534,
+        "Author": "aboalwi",
+        "Created At": "2020-05-26T00:25:47Z",
+        "Comment Body": "I had the same issue. Disabling Administrator mode then restarting PowerToys fixed it for me."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 633896202,
+        "Author": "Sov3rain",
+        "Created At": "2020-05-26T08:50:59Z",
+        "Comment Body": "> I had the same issue. Disabling Administrator mode then restarting PowerToys fixed it for me.\r\n\r\nTried this too, not fixed."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 634862814,
+        "Author": "SedyBenoitPeace",
+        "Created At": "2020-05-27T18:38:57Z",
+        "Comment Body": "I found a behaviour that maybe can help devs.\r\n\r\nI had this problem when updating PowerToys from an existing version already in place (I had 0.18 and updated to 0.18.1 on my work laptop) while on my personal one I installed straight the 0.18.1 and the keyboard shortcut is doing fine.\r\n\r\nI fixed on the work laptop as stated in this thread with starting manually PowerLauncher.exe\r\n\r\nSo I guess that in the updating process is breaking something in terms of PowerLauncher.exe autorun.\r\n\r\nEDIT: I forgot to mention Windows versions and it came to my mind after @holzfuss' comment.\r\nWork Laptop (where there was the issue with update): Windows 10 v1909\r\nPersonal Laptop (no issue but installed 0.18.1 straight) Windows 10 v1903\r\nSo it may be also thanks to my Windows version"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 634985540,
+        "Author": "holzfuss",
+        "Created At": "2020-05-27T22:53:16Z",
+        "Comment Body": "I installed 0.18.1 on my Win10 v19.09, no previous version, no update.\r\nAlt + Space doesn't do anything.\r\nPowerLauncher.exe ist not running."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 636100310,
+        "Author": "enricogior",
+        "Created At": "2020-05-29T17:44:57Z",
+        "Comment Body": "We made a fix for a different issue, that may also effect this issue if you are running PowerToys with administrator privileges.\r\nIf you want to test an **unsigned** private build, it's available here https://github.com/microsoft/PowerToys/issues/3646#issuecomment-636096648\r\nThank you!\r\n"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 636158779,
+        "Author": "daplon",
+        "Created At": "2020-05-29T19:53:23Z",
+        "Comment Body": "@enricogior   it works !!!  Now PowerLauncher.exe is running like in v0.18. Thanks !!!"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 636545525,
+        "Author": "gmahender",
+        "Created At": "2020-05-31T23:16:49Z",
+        "Comment Body": "@enricogior  any chance to get hotfix released before v0.19 release?"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 636597094,
+        "Author": "rholland",
+        "Created At": "2020-06-01T03:44:14Z",
+        "Comment Body": "toggled on and off - works now"
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 636636688,
+        "Author": "enricogior",
+        "Created At": "2020-06-01T06:22:42Z",
+        "Comment Body": "@gmahender \r\nyes, we are going to release 0.18.2 with this hotfix."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 639143704,
+        "Author": "crutkas",
+        "Created At": "2020-06-04T22:06:29Z",
+        "Comment Body": "This should be fixed with 0.18.2 which was just released."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 639474859,
+        "Author": "bojordan",
+        "Created At": "2020-06-05T13:18:50Z",
+        "Comment Body": "0.18.2 release does not solve this issue for me (same for unsigned build linked above). Always running PowerToys elevated; toggled Run on/off, changed shortcuts, etc. Works fine after running PowerLauncher.exe from admin PoweShell prompt."
+    },
+    {
+        "Issue ID": 3650,
+        "Issue State": "closed",
+        "Issue Title": "Alt + Space not working at all [Powertoys Run doesn't launch]",
+        "Comment ID": 639578890,
+        "Author": "crutkas",
+        "Created At": "2020-06-05T15:44:26Z",
+        "Comment Body": "@bojordan you May have a different bug then. Please file a new issue so we can work with you on it. "
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 1729195230,
+        "Author": "lwahonen",
+        "Created At": "2023-09-21T09:23:59Z",
+        "Comment Body": "I needed this acutely, so I added it to my fork ( https://github.com/lwahonen/PowerToys ). I'm happy to help get this merged upstream.\r\n\r\nUsage:\r\n\r\n\"PowerToys.FileLocksmithUI.exe\" \\<options\\> \\<files\\>\r\n\r\nOptions implemented:\r\n\r\n/list Dump all current locks to the console\r\n/wait Only quit after all the locks to a file are gone\r\n/kill Try to kill every process holding a lock to the files listed\r\n/quit Close FileLocksmith after processing other options\r\n\r\nFor example\r\n\r\n![image](https://github.com/microsoft/PowerToys/assets/3996667/9d85ad7e-04bf-41a8-bad3-3f0507daea0e)\r\n"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 1731495691,
+        "Author": "lwahonen",
+        "Created At": "2023-09-22T14:13:36Z",
+        "Comment Body": "Ended up making a separate project for the console tool, updated my repo. Not sure how to get the ConsoleSmith.exe packed in the installer, but I'm happy to work with someone more knowledgeable "
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2018510878,
+        "Author": "crutkas",
+        "Created At": "2024-03-25T17:18:00Z",
+        "Comment Body": "I would see if we couldn't just do this inside the UI and maybe adjust the UI exe name personally.\r\n\r\nBig feedback here would be to if there is an alternative to \"kill\""
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2018542763,
+        "Author": "lwahonen",
+        "Created At": "2024-03-25T17:34:59Z",
+        "Comment Body": "As I said in the other issue: Offering a command-line interface from a program built with subsystem:windows is a headache. You can reattach to the console that started you, but that still breaks things such as piping the output to a file - and scripts often redirect output of tools for reporting / further processing. \r\n\r\nI'm very happy if someone has a magic trick in their back pocket that can be used to:\r\n\r\n-Not show an extra console window when the application is started via icon\r\n-Output text to cmd if the application is started from the command line\r\n-Have said output be available for piping to files / other tools.\r\n\r\nAs to your other point, I'm happy to rename the command. Would terminate work better?  That seems to be the term often used in Win32 APIs such as TerminateThread"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2079077036,
+        "Author": "cow1337killer3",
+        "Created At": "2024-04-26T10:14:34Z",
+        "Comment Body": "Push it out the door the world needs it!"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2079101012,
+        "Author": "lwahonen",
+        "Created At": "2024-04-26T10:20:00Z",
+        "Comment Body": "> Push it out the door the world needs it!\r\n\r\nI'm waiting for @crutkas to either suggest a way to integrate the command-line to the existing UI, or accept that the CLI is a separate tool."
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2081818383,
+        "Author": "PolarGoose",
+        "Created At": "2024-04-29T03:10:31Z",
+        "Comment Body": "@Langenbacher,\r\nThere are already existing console tools for that:\r\n* [Sysinternals Handle](https://learn.microsoft.com/en-us/sysinternals/downloads/handle). Note: it doesn't support Unicode file names. Take a fixed version from [here](https://github.com/PolarGoose/Sysinternals-console-utils-with-Unicode-support)\r\n* [Handle2](https://github.com/PolarGoose/Handle2)\r\n\r\nWould they work for you?"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2120365788,
+        "Author": "cow1337killer3",
+        "Created At": "2024-05-20T12:29:53Z",
+        "Comment Body": "Moving discussion to https://github.com/PolarGoose/Handle2/issues/2"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2334711358,
+        "Author": "crutkas",
+        "Created At": "2024-09-06T19:47:25Z",
+        "Comment Body": "/dup https://github.com/microsoft/PowerToys/issues/22315"
+    },
+    {
+        "Issue ID": 28529,
+        "Issue State": "closed",
+        "Issue Title": "File Locksmith - command line version",
+        "Comment ID": 2334711572,
+        "Author": "microsoft-github-policy-service[bot]",
+        "Created At": "2024-09-06T19:47:37Z",
+        "Comment Body": "Hi! We've identified this issue as a duplicate of another one that already exists on this Issue Tracker. This specific instance is being closed in favor of tracking the concern over on the referenced thread. Thanks for your report!\n<!-- Policy app identification https://img.shields.io/static/v1?label=PullRequestIssueManagement. -->"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2345018677,
+        "Author": "github-actions[bot]",
+        "Created At": "2024-09-12T00:24:15Z",
+        "Comment Body": "\n# @check-spelling-bot Report\n### :red_circle: Please review\nSee the [:open_file_folder: files](https://github.com/microsoft/PowerToys/pull/34824/files/) view, the [:scroll:action log](https://github.com/microsoft/PowerToys/actions/runs/10821759987/job/30024422000#step:4:1),  or [:memo: job summary](https://github.com/microsoft/PowerToys/actions/runs/10821759987/attempts/1#summary-30024422000) for details.\n\n#### Unrecognized words (2)\n\nahk\ntsv\n\n<details><summary>Previously acknowledged words that are now absent\n</summary>applayout appsfolder cswinrt systemsettings SYSTEMWOW USEPOSITION USESIZE \n\ud83e\udee5\n</details>\n\n<details><summary>To accept  these unrecognized words as correct and remove the previously acknowledged and now absent words,\nyou could run the following commands</summary>\n\n... in a clone of the [git@github.com:daverayment/PowerToys.git](https://github.com/daverayment/PowerToys.git) repository\non the `keep-add-ahk` branch ([:information_source: how do I use this?](\nhttps://github.com/check-spelling/check-spelling/wiki/Accepting-Suggestions)):\n\n``` sh\ncurl -s -S -L 'https://raw.githubusercontent.com/check-spelling/check-spelling/v0.0.22/apply.pl' |\nperl - 'https://github.com/microsoft/PowerToys/actions/runs/10821759987/attempts/1'\n```\n</details>\n\n<details><summary>Available :books: dictionaries could cover words (expected and unrecognized) not in the :blue_book: dictionary</summary>\n\nThis includes both **expected items** (1897) from .github/actions/spell-check/expect.txt and **unrecognized words** (2)\n\nDictionary | Entries | Covers | Uniquely\n-|-|-|-\n[cspell:r/src/r.txt](https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20230509/dictionaries/r/src/r.txt)|543|1|1|\n[cspell:cpp/src/people.txt](https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20230509/dictionaries/cpp/src/people.txt)|23|1||\n[cspell:cpp/src/ecosystem.txt](https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20230509/dictionaries/cpp/src/ecosystem.txt)|51|1||\n\nConsider adding them (in `.github/workflows/spelling2.yml`) for `uses: check-spelling/check-spelling@v0.0.22` in its `with`:\n``` yml\n      with:\n        extra_dictionaries:\n          cspell:r/src/r.txt\n          cspell:cpp/src/people.txt\n          cspell:cpp/src/ecosystem.txt\n```\nTo stop checking additional dictionaries, add (in `.github/workflows/spelling2.yml`) for `uses: check-spelling/check-spelling@v0.0.22` in its `with`:\n``` yml\ncheck_extra_dictionaries: ''\n```\n\n</details>\n<details><summary>Warnings (1)</summary>\n\nSee the [:open_file_folder: files](https://github.com/microsoft/PowerToys/pull/34824/files/) view, the [:scroll:action log](https://github.com/microsoft/PowerToys/actions/runs/10821759987/job/30024422000#step:4:1),  or [:memo: job summary](https://github.com/microsoft/PowerToys/actions/runs/10821759987/attempts/1#summary-30024422000) for details.\n\n[:information_source: Warnings](https://github.com/check-spelling/check-spelling/wiki/Event-descriptions) | Count\n-|-\n[:information_source: non-alpha-in-dictionary](https://github.com/check-spelling/check-spelling/wiki/Event-descriptions#non-alpha-in-dictionary) | 1\n\nSee [:information_source: Event descriptions](https://github.com/check-spelling/check-spelling/wiki/Event-descriptions) for more information.\n\n</details>\n\n<!-- See https://github.com/check-spelling/check-spelling/wiki/Configuration-Examples%3A-advice --> <!-- markdownlint-disable MD033 MD041 -->\n<details><summary>If the flagged items are :exploding_head: false positives</summary>\n\nIf items relate to a ...\n* binary file (or some other file you wouldn't want to check at all).\n\n  Please add a file path to the `excludes.txt` file matching the containing file.\n\n  File paths are Perl 5 Regular Expressions - you can [test](\nhttps://www.regexplanet.com/advanced/perl/) yours before committing to verify it will match your files.\n\n  `^` refers to the file's path from the root of the repository, so `^README\\.md$` would exclude [README.md](\n../tree/HEAD/README.md) (on whichever branch you're using).\n\n* well-formed pattern.\n\n  If you can write a [pattern](\nhttps://github.com/check-spelling/check-spelling/wiki/Configuration-Examples:-patterns\n) that would match it,\n  try adding it to the `patterns.txt` file.\n\n  Patterns are Perl 5 Regular Expressions - you can [test](\nhttps://www.regexplanet.com/advanced/perl/) yours before committing to verify it will match your lines.\n\n  Note that patterns can't match multiline strings.\n\n</details>\n"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2345051792,
+        "Author": "daverayment",
+        "Created At": "2024-09-12T01:02:10Z",
+        "Comment Body": "@htcfreek Hi. Are you able to add a new file to the spelling checker `excludes.txt` file, please? The path to the file is `\\src\\common\\FilePreviewCommon\\Assets\\Monaco\\monacoExtraExtensions.txt`. Thank you!"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2345277612,
+        "Author": "htcfreek",
+        "Created At": "2024-09-12T05:01:31Z",
+        "Comment Body": "@daverayment \nThank you for the contribution. But unfortunately we can't accept this PR.\n\n1. This is the wrong way of implementing this. Please read the docs under https://github.com/microsoft/PowerToys/blob/main/doc%2Fdevdocs%2Fcommon%2FFilePreviewCommon.md .\n2. You did not ask for implementation of the csv part. This is tricky as it may override the explorer default preview handling and may prevents Excel from handling it."
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2346108706,
+        "Author": "daverayment",
+        "Created At": "2024-09-12T12:07:15Z",
+        "Comment Body": "Thank you for reviewing the PR, @htcfreek \ud83d\ude0a\r\n\r\nSorry, I don't think I explained the aims very well.\r\n\r\nThe intention is to use the Monaco renderer as a plaintext viewer for AutoHotKey scripts and other currently unsupported file extensions. The decision was deliberately made not to add these as new languages to Monaco, or as extensions to existing supported Monaco languages. This has the following advantages:\r\n\r\n- Plaintext files do not require syntax highlighting or any other special processing. They are for quick unformatted display only.\r\n- We can add new file extensions to the list much more easily than adding a new language to Monaco.\r\n- If a new language or syntax highlighting for a file type is added to Monaco's supported list, this will be automatically used, superseding the plaintext rendering.\r\n- Users themselves can add their own file extensions to the list without needing us to release a new version of PowerToys. (This is why I didn't hard-code the file extensions and created the new text file instead.)\r\n\r\nEssentially, this adds a plaintext preview capability which just uses Monaco as the rendering engine, and I should have made that clearer. Apologies.\r\n\r\nI understand that I didn't ask about the CSV or TSV additions. I wanted to provide an example that showed that a file extension could be handled either with a preview handler (for those viewing CSVs with Microsoft Office installed) or with Monaco (for those without Office using this plaintext renderer). There is code within the PR which specifically excludes those extensions which are supported by the ShellHandlerPreviewer, using its `IsItemSupported()` feature directly.\r\n\r\nI still think this is a worthwhile approach to displaying files which do not need special processing. If this PR is unsuitable, I would like to raise it as another issue and perhaps explain it better and open it up to further discussion.\r\n\r\nThanks again."
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2346260632,
+        "Author": "crutkas",
+        "Created At": "2024-09-12T13:17:31Z",
+        "Comment Body": "Why is this blocked?"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2346437415,
+        "Author": "htcfreek",
+        "Created At": "2024-09-12T14:20:03Z",
+        "Comment Body": "> Why is this blocked?\n\n1. Only the changes for AHK are discussed.\n2. The way we did it till yet is updating the language json in Monaco. But this PR implements a different way to define supported extensions for plain text that never has neen discussed in the issue and allows manual user configuration in a text file.\n3. The now configuration file is not configurable through setting ui.\n\nI think we should discuss first if we want this.\n"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2388996935,
+        "Author": "pep-sanwer",
+        "Created At": "2024-10-02T15:38:06Z",
+        "Comment Body": "Would love to see this land!"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2411801464,
+        "Author": "htcfreek",
+        "Created At": "2024-10-14T17:03:29Z",
+        "Comment Body": "@crutkas , @Aaron-Junker \nCan you please look at this PR and discuss internally if you are okay with supporting additional text file extension managed in a settings file by the user. (And without ui in PT Settings.)"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2412883156,
+        "Author": "crutkas",
+        "Created At": "2024-10-15T04:40:27Z",
+        "Comment Body": "this isn't directly a settings file but i do get the feeling.  also reason why this isn't a settings file is this would be overwritten every release"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2412901722,
+        "Author": "Aaron-Junker",
+        "Created At": "2024-10-15T04:59:32Z",
+        "Comment Body": "> this isn't directly a settings file but i do get the feeling.  also reason why this isn't a settings file is this would be overwritten every release\n\nSo imo, it should definitely be a settings file, so in the future we can also build an UI on top of it. But the bigger problem here is that this only adds support for using it in Peek, as for using it in File Explorer these file extensions would have to be registered additionally in the registry by the settings or the installer. This would require additional logic"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2413566847,
+        "Author": "htcfreek",
+        "Created At": "2024-10-15T10:58:31Z",
+        "Comment Body": "Imo this gets handled by PT settings and we provide a default value that the user can extend.\n\nI think we should add the three extensions in the regular way as fallback and open a new issue for the custom extension setting. (At the end the current way of this PR implements something that was never requested and discussed in the issues.)"
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2414384716,
+        "Author": "crutkas",
+        "Created At": "2024-10-15T15:43:05Z",
+        "Comment Body": "> > this isn't directly a settings file but i do get the feeling.  also reason why this isn't a settings file is this would be overwritten every release\r\n> \r\n> So imo, it should definitely be a settings file, so in the future we can also build an UI on top of it. But the bigger problem here is that this only adds support for using it in Peek, as for using it in File Explorer these file extensions would have to be registered additionally in the registry by the settings or the installer. This would require additional logic\r\n\r\nWe do reg stuff for stuff on and off for when we but this does get a little complicated i think.  If we shifted to more of a mental model like what #32817 it would unblock the \"now\" and get these extensions supported in both, no?\r\n\r\nI think for a good longer term\r\n\r\nhttps://github.com/microsoft/PowerToys/pull/32817\r\nhttps://github.com/microsoft/PowerToys/commit/c458087af02e1e6d7040c9248ca2973f68275956#diff-f56a13d2e109105150aaf7bc8ed89dbdc676942801a86bf83c4c42d09f1bcc02L1 "
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2414540737,
+        "Author": "htcfreek",
+        "Created At": "2024-10-15T16:53:55Z",
+        "Comment Body": "@crutkas \nI am not 100% what yout want to say because your comment seems to miss some words.\n\nBut the PR you referenced/adding the extensions to `languages.json` is the preferred way we do since ever. Doing this is easy and simple and I think for now the best solution to get the preview part of this PR in. What do you think @Aaron-Junker ?\n\nLater and discussed in a new issue we can implement a way for our users to add their own extension for txt files through PT settings."
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2415176446,
+        "Author": "daverayment",
+        "Created At": "2024-10-15T21:11:36Z",
+        "Comment Body": "Thank you everyone for discussing this.\r\n\r\nThe .txt file for user settings was not a good decision on my part. As @crutkas says, user entries would potentially be overwritten each install. Having an extra 'user-only' file where the user could list their own extensions could be a possibility, but discoverability would be a problem, it would be fragile, and it's all information I accept should really be exposed by an official PowerToys settings property.\r\n\r\nI agree that the way forward is to create a new issue for user-configurable plain text file support. I can certainly do that. I'm afraid I'm unfamiliar with the settings system at the moment, but I'll ask if I need a hand.\r\n\r\nLikewise, I can edit the `monaco_languages.json` and `monacoSpecialLanguages.js` files and hopefully that will cover the AutoHotKey requirement, which was the original issue. You know, before I went and complicated everything \ud83d\ude44\r\n\r\nDo you think it would be better if I closed this off and handled that via another PR?\r\n\r\nThanks again."
+    },
+    {
+        "Issue ID": 34824,
+        "Issue State": "closed",
+        "Issue Title": "[Peek] Add support for previewing AutoHotKey files, CSV, and other plaintext files",
+        "Comment ID": 2415219794,
+        "Author": "htcfreek",
+        "Created At": "2024-10-15T21:43:44Z",
+        "Comment Body": "@daverayment \n1. Implementing the user configurable plain text extension in a separate issue and pr sounds good. Please create the issue that we can discuss a good way of implementation. Later we can help with implementation.\n2. For the implementation of the original issues (.csv, .tsv, .ahk) as plain text using the currently approved way please open a new and clean PR. That easier to review.\n3. For the language.json part you find a documentation here:  https://github.com/microsoft/PowerToys/blob/main/doc%2Fdevdocs%2Fcommon%2FFilePreviewCommon.md"
+    }
+]

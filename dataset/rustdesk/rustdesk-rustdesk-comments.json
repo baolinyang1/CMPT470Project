@@ -1,0 +1,947 @@
+[
+    {
+        "Issue ID": 10811,
+        "Issue State": "closed",
+        "Issue Title": "Problem Feedback: Three-finger Downward Swipe Not Working",
+        "Comment ID": 2662963028,
+        "Author": "rustdesk",
+        "Created At": "2025-02-17T12:22:52Z",
+        "Comment Body": "https://github.com/rustdesk/rustdesk/issues/1776#issuecomment-1287441690"
+    },
+    {
+        "Issue ID": 1776,
+        "Issue State": "closed",
+        "Issue Title": "Better way to mouse scroll than three-finger on phone",
+        "Comment ID": 1287441690,
+        "Author": "rustdesk",
+        "Created At": "2022-10-21T21:13:26Z",
+        "Comment Body": "Sorry, we have considered this problem, but eventually we chose current implementation."
+    },
+    {
+        "Issue ID": 1776,
+        "Issue State": "closed",
+        "Issue Title": "Better way to mouse scroll than three-finger on phone",
+        "Comment ID": 1287476235,
+        "Author": "Anutrix",
+        "Created At": "2022-10-21T21:58:49Z",
+        "Comment Body": "But what about atleast adding support to make this actions customisable?"
+    },
+    {
+        "Issue ID": 1776,
+        "Issue State": "closed",
+        "Issue Title": "Better way to mouse scroll than three-finger on phone",
+        "Comment ID": 2325714000,
+        "Author": "YasharSL",
+        "Created At": "2024-09-03T06:38:15Z",
+        "Comment Body": "Same problem here, most android devices have already configured 3-finger gesture and the inability to customize the inputs, causes a lot of hassle"
+    },
+    {
+        "Issue ID": 1776,
+        "Issue State": "closed",
+        "Issue Title": "Better way to mouse scroll than three-finger on phone",
+        "Comment ID": 2335351919,
+        "Author": "HuaLun666",
+        "Created At": "2024-09-07T14:57:28Z",
+        "Comment Body": "I encountered a similar problem. My device (Redmi Pad Pro) has turned off three finger gestures, but still cannot use the mouse wheel. I would like to add custom options."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864337524,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T01:34:17Z",
+        "Comment Body": "noted with thanks"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864347051,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T03:11:27Z",
+        "Comment Body": "Wondering if you can work on it. You do not need to work on this big project. You can write standalone functions `get_display_server`, `get_env` and `get_active_userid` for non-display-manager. "
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864348750,
+        "Author": "mtoohey31",
+        "Created At": "2021-06-19T03:32:27Z",
+        "Comment Body": "Sure, I can try giving it a go tomorrow."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864438647,
+        "Author": "mtoohey31",
+        "Created At": "2021-06-19T17:19:36Z",
+        "Comment Body": "Alright, here's a new version of `get_display_server_of_session` that works without a display-manager:\r\n\r\n```rust\r\nfn get_display_server_of_session(session: &str) -> String {\r\n    if let Ok(output) = std::process::Command::new(\"loginctl\")\r\n        .args(vec![\"show-session\", \"-p\", \"Type\", session])\r\n        .output()\r\n    // Check session type of the session\r\n    {\r\n        let display_server = String::from_utf8_lossy(&output.stdout)\r\n            .replace(\"Type=\", \"\")\r\n            .trim_end()\r\n            .into();\r\n        if display_server == \"tty\" {\r\n            // If the type is tty...\r\n            if let Ok(output) = std::process::Command::new(\"loginctl\")\r\n                .args(vec![\"show-session\", \"-p\", \"TTY\", session])\r\n                .output()\r\n            // Get the tty number\r\n            {\r\n                let tty: String = String::from_utf8_lossy(&output.stdout)\r\n                    .replace(\"TTY=\", \"\")\r\n                    .trim_end()\r\n                    .into();\r\n                if let Ok(Some(xorg_results)) =\r\n                    run_cmds(format!(\"ps -e | grep \\\"{}.\\\\\\\\+Xorg\\\"\", tty))\r\n                // And check if Xorg is running on that tty\r\n                {\r\n                    if xorg_results.trim_end().to_string() != \"\" {\r\n                        // If it is, manually return \"x11\", otherwise return tty\r\n                        \"x11\".to_owned()\r\n                    } else {\r\n                        display_server\r\n                    }\r\n                } else {\r\n                    // If any of these commands fail just fall back to the display server\r\n                    display_server\r\n                }\r\n            } else {\r\n                display_server\r\n            }\r\n        } else {\r\n            // If the session is not a tty, then just return the type as usual\r\n            display_server\r\n        }\r\n    } else {\r\n        \"\".to_owned()\r\n    }\r\n}\r\n```\r\n\r\nBasically it just adds a check for whether the session type is tty, and if it is, it checks if Xorg is running on that tty. It's a bit of a mess of nested if statements so feel free to refactor that if you have a neater way of doing things. I believe this fixes the issue, let me know if changes to those are functions are necessary though. I haven't gotten to testing it in the main application, but I've tested it on its own and it correctly identifies the display server now on my setup which is Arch and startx (x11), stock Manjaro KDE (x11), and stock Fedora 34 (wayland).\r\n\r\nLmk if that looks ok and if you'd like me to open a PR or if you have something else in mind. Also, random fun fact, it looks like Teamviewer has this same issue according to this comment: https://aur.archlinux.org/packages/teamviewer/?O=40&PP=10#comment-763211."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864439916,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T17:30:21Z",
+        "Comment Body": "> get_display_server_of_session\r\n\r\nGood job, but you also need to modify `get_active_userid`, and `get_env`, RustDesk uses `get_env` to get `$DISPLAY` and `$XAUTHORITY` to make xdo and screen capture work. `get_active_userid` get the user id of the active X session."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864441859,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T17:47:14Z",
+        "Comment Body": "Have you test if you can get correct `$DISPLAY` and `$XAUTHORITY` with old get_env and your new `get_display_server_of_session`?"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864441990,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T17:48:24Z",
+        "Comment Body": "Seems `get_active_userid` can work, but I am not sure if `get_env` works with your new `get_display_server_of_session`."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864442050,
+        "Author": "mtoohey31",
+        "Created At": "2021-06-19T17:48:57Z",
+        "Comment Body": "No I have not tried that approach cause I assumed it would encounter issues when the program is running as a systemd service. I'm currently building the full application so I can test it properly to see what works and what doesn't."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864442132,
+        "Author": "rustdesk",
+        "Created At": "2021-06-19T17:49:38Z",
+        "Comment Body": "> building the full application\r\n\r\nThanks"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864447399,
+        "Author": "mtoohey31",
+        "Created At": "2021-06-19T18:36:51Z",
+        "Comment Body": "K I've got it built and I did some testing and it works just fine without changing any other functions. I don't think the bug was anything in the actual functionality, it was just these checks here that were preventing the program from trying to connect, because `get_display_server` was returning `tty` instead of `x11`, which is now fixed:\r\n\r\n```\r\nsrc/ui.rs\r\n450:            if dtype != \"x11\" {\r\n451:                return format!(\"Unsupported display server type {}, x11 expected!\", dtype);\r\n\r\nsrc/server/connection.rs\r\n402:            if dtype != \"x11\" {\r\n404:                    \"Unsupported display server type {}, x11 expected\",\r\n```\r\n\r\nI've got the changes in this branch [here](https://github.com/mtoohey31/rustdesk/tree/display-server-fix). Let me know if there's anything else you'd like me to check before opening a PR."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864492723,
+        "Author": "rustdesk",
+        "Created At": "2021-06-20T03:06:57Z",
+        "Comment Body": "Awesome work Mattherw. pr please. If you can help, please also look into  #56, much more challenge. Although now RustDesk is growng, we don't have enough cash but I can sponsor u anyway, Thanks for your time!"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864495911,
+        "Author": "mtoohey31",
+        "Created At": "2021-06-20T03:58:12Z",
+        "Comment Body": ":+1: PR created, I can maybe take a look tomorrow, I'd want to figure out how I'd go about it or whether it's even doable before agreeing to anything though. One other thing I was wondering is whether you'd be interested in including a Dockerfile for building the application, in case people want to use that method. I put a rough one together based on the build scripts in the README to test these changes and I figure it might be easier than trying to follow the scripts manually for a lot of people, it might also cut down on the number of build-related issues. Lmk if you're interested, if so I can clean it up and add documentation."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864496076,
+        "Author": "rustdesk",
+        "Created At": "2021-06-20T04:01:06Z",
+        "Comment Body": "> Dockerfile\r\n\r\n> clean it up and add documentation.\r\n\r\nPlease go ahead. Very interested.\r\n\r\n"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864496327,
+        "Author": "rustdesk",
+        "Created At": "2021-06-20T04:04:40Z",
+        "Comment Body": "> I'd want to figure out how I'd go about it or whether it's even doable before agreeing to anything though.\r\n\r\nThanks :)"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 864496540,
+        "Author": "rustdesk",
+        "Created At": "2021-06-20T04:07:53Z",
+        "Comment Body": "> doable\r\n\r\nThere is Wayland support (screen capture and input control) in https://github.com/H-M-H/Weylus/ with rust, I believe it is doable."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 1133636341,
+        "Author": "lstep",
+        "Created At": "2022-05-21T13:40:56Z",
+        "Comment Body": "Hello,\r\n\r\nI just downloaded version 1.1.9 (latest, as of today), on an Ubuntu Linux, starting from tty with `startx`, I thought the bug would be corrected on version 1.1.9, but I still get the error message `Unsupported display server tty, x11 expected` :-(. \r\n```\r\n$ ps -e |grep tty\r\n   4000 tty1     00:00:00 login\r\n   4089 tty1     00:00:00 bash\r\n   4683 tty2     07:33:45 Xorg\r\n```\r\nI guess that's because I switched to `tty2` before running `startx`, and your code only checks the tty that has the login process (as I see from the patch).\r\n\r\n\r\n```\r\n$ rustdesk --version\r\n1.1.9\r\n```\r\n"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 1133815751,
+        "Author": "rustdesk",
+        "Created At": "2022-05-22T04:24:30Z",
+        "Comment Body": "Really? @mtoohey31 could you please take a look?"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 1133917279,
+        "Author": "mtoohey31",
+        "Created At": "2022-05-22T15:15:18Z",
+        "Comment Body": "Sorry, I've been using Wayland (and haven't been using rustdesk) for a while now, so I'm probably not the best person to test this as it would require a lot of setup. However, I could be wrong, but I don't think from looking at it that `get_display_server_of_session` is limited operating on any specific tty, I'm pretty sure it will operate on the session its called with, regardless of what tty it corresponds to. The function that calls it (`get_display_server`) will always call it with the session of seat0 though, so maybe that's related?\n\nLooking back on the code for `get_display_server_of_session` this many months later it could definitely use a rewrite; there's got to be a way to accomplish this without running so many shell commands. But again, I don't have the setup to test it..."
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 1133921942,
+        "Author": "rustdesk",
+        "Created At": "2022-05-22T15:38:18Z",
+        "Comment Body": "> get_display_server_of_session\r\n\r\nThanks"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 1134607992,
+        "Author": "lstep",
+        "Created At": "2022-05-23T12:23:46Z",
+        "Comment Body": "From what I see in the code (but I'm not a Rust user), it gets the tty where the login process is running, but from what I see from my list of processes, I only have a login process on tty1, but (I don't know why), none shown on tty2, although I *am* logged in on tty2 (did a ALT-F2 to change).\r\n\r\n```\r\n$ ps -e |grep tty\r\n   4000 tty1     00:00:00 login\r\n   4089 tty1     00:00:00 bash\r\n   4683 tty2     07:33:45 Xorg\r\n```"
+    },
+    {
+        "Issue ID": 87,
+        "Issue State": "closed",
+        "Issue Title": "Unsupported display server type tty when running without display manager",
+        "Comment ID": 2661697541,
+        "Author": "schrmh",
+        "Created At": "2025-02-17T00:15:33Z",
+        "Comment Body": "Looks like it is still an issue. (Also tried the flatpak, as recommended in the Artix issue.)\nAlso using startx,\nthen Arch Linux as a distro (so systemd)\nand FVWM3 as a WM.\n\nAnd it would be nice if there was any option to ignore that (setting, button, command line switch) since it blocks incoming connections...."
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2401761906,
+        "Author": "Paolo-O",
+        "Created At": "2024-10-09T09:06:18Z",
+        "Comment Body": "Thank you very much fufesou.\r\nUnfortunately (probably due to my old age, 70) I have no idea of how to apply the fix or if it will be implemented in a future release.\r\nI tried the overnight 1.3.2 and it was not working as the 1.3.1.\r\nMay you please help me?"
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2402119385,
+        "Author": "fufesou",
+        "Created At": "2024-10-09T11:57:55Z",
+        "Comment Body": "@Paolo-O Do you use the nightly build as the controlled side?"
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2402177728,
+        "Author": "Paolo-O",
+        "Created At": "2024-10-09T12:25:32Z",
+        "Comment Body": "I used the following site:\r\nhttps://github.com/rustdesk/rustdesk/releases/tag/nightly\r\nIs it the controlled side that you mean?\r\n"
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2402194061,
+        "Author": "fufesou",
+        "Created At": "2024-10-09T12:31:50Z",
+        "Comment Body": "> https://github.com/rustdesk/rustdesk/releases/tag/nightly\r\n\r\nYes, use this executable on the remote(controlled) side. If you have installed 1.3.1, you need to upgrade to the nightly(1.3.2) version.\r\n\r\nIf you have an issue when using the nightly build as the controlled side, please also upload a short video if possible.\r\n"
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2402319481,
+        "Author": "Paolo-O",
+        "Created At": "2024-10-09T13:14:22Z",
+        "Comment Body": "Eventually I understood that you meant the pc that I need to control.\r\nYou are right, I did not use 1.3.2 on the controlled side.\r\nNow I do and IT WORKS.\r\nThatnk you very very much to be so patient with helping me!!!"
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2657580047,
+        "Author": "ZarzueloM",
+        "Created At": "2025-02-13T19:54:15Z",
+        "Comment Body": "Hello! I had the same issue with v1.3.1 too. I just updated to v1.3.7, but still have the problem with formulas and when copy/cut a whole column in Excel."
+    },
+    {
+        "Issue ID": 9570,
+        "Issue State": "closed",
+        "Issue Title": "fix: installed, copy&paste, special format",
+        "Comment ID": 2661347552,
+        "Author": "fufesou",
+        "Created At": "2025-02-16T09:44:05Z",
+        "Comment Body": "> but still have the problem with formulas and when copy/cut a whole column in Excel.\r\n\r\nHi, I tried copying cells with formulas. It works for me. Maybe there are some cases that need to be improved.\r\nCan you upload a short video so I can understand more about what is going on?\r\n\r\n\r\n\r\nhttps://github.com/user-attachments/assets/f4d33226-f30c-4cac-933a-24bd6a3c4284\r\n\r\n"
+    },
+    {
+        "Issue ID": 3592,
+        "Issue State": "closed",
+        "Issue Title": "Unable to connect to ubuntu with dummy display. (Ver 1.2.0)",
+        "Comment ID": 1464885460,
+        "Author": "fufesou",
+        "Created At": "2023-03-11T10:58:43Z",
+        "Comment Body": "@j7b3y Thanks for your feedback. I'll try to learn more on \"xserver-xorg-video-dummy\".\r\n\r\nI cannot open  [your gist.github.com](https://gist.github.com/j7b3y/ad33a48bad815310697d33d50badcb49#file-xorg-conf). Could you please attach the file here.\r\n\r\nBTW, I guess the error may be caused by account login.\r\nI see invalid `XAUTHORITY` from the log.\r\n\r\n> [2023-03-10 21:00:30.240818 +09:00] INFO [src/server.rs:388] XAUTHORITY=Err(NotPresent)\r\n\r\n\r\n"
+    },
+    {
+        "Issue ID": 3592,
+        "Issue State": "closed",
+        "Issue Title": "Unable to connect to ubuntu with dummy display. (Ver 1.2.0)",
+        "Comment ID": 1464917933,
+        "Author": "j7b3y",
+        "Created At": "2023-03-11T13:59:16Z",
+        "Comment Body": "excuse me.\r\nI have uploaded the file.\r\nI'm out of town right now, so I'll check later.\r\n[xorg.conf.txt](https://github.com/rustdesk/rustdesk/files/10948665/xorg.conf.txt)\r\n"
+    },
+    {
+        "Issue ID": 3592,
+        "Issue State": "closed",
+        "Issue Title": "Unable to connect to ubuntu with dummy display. (Ver 1.2.0)",
+        "Comment ID": 1493260210,
+        "Author": "fufesou",
+        "Created At": "2023-04-02T08:03:40Z",
+        "Comment Body": "This PR may fix this issue. \r\n https://github.com/rustdesk/rustdesk/pull/3855\r\n\r\n\r\nI didn't test the same case.\r\nI've tested starting an xrdp session. Rustdesk connection can be established.\r\nThey should be the same behavior.\r\n\r\nI'm out of home. I'll test the same case later."
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 1384816170,
+        "Author": "rustdesk",
+        "Created At": "2023-01-17T04:24:11Z",
+        "Comment Body": "TCP tunnel will be refactored (in our milestone) in the future, current implementation will not be maintained any more."
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 1399500796,
+        "Author": "mherrmann3",
+        "Created At": "2023-01-22T14:16:39Z",
+        "Comment Body": "(I also had similar issues; I found that it it works well for a while (3 ports), but eventually, all local ports are forwarded to the last-specified remote port.)\r\n\r\nLooking forward to the new implementation!"
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 2653614256,
+        "Author": "MikeT-KBU",
+        "Created At": "2025-02-12T12:46:25Z",
+        "Comment Body": "Any new infos? It is been over 2 Years already. We must use Teamviewer and can't switch to RustDesk before the Port Forwarding Feature is working correctly."
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 2653617764,
+        "Author": "rustdesk",
+        "Created At": "2025-02-12T12:47:46Z",
+        "Comment Body": "No plan yet, port forwarding is not our priority, you might choose the other product. Or you hire some one to fix, it is open source any way."
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 2656445179,
+        "Author": "mherrmann3",
+        "Created At": "2025-02-13T12:25:06Z",
+        "Comment Body": "@MikeT-KBU: for me it works very well and stable as long as you don't set up more than 3 port forwards, see https://github.com/rustdesk/rustdesk/issues/487#issuecomment-2564070164."
+    },
+    {
+        "Issue ID": 2835,
+        "Issue State": "closed",
+        "Issue Title": "tcp tunneling doesnt work correctly with multiple tunnels",
+        "Comment ID": 2656763841,
+        "Author": "MikeT-KBU",
+        "Created At": "2025-02-13T14:27:31Z",
+        "Comment Body": "@mherrmann3 : thx but don't work for us. We use Programms like Pl/Sql-Developer and that uses more than one Connection and this isn't working.\nWe have found a Workaround with ssh-tunnel over RustDesk Port-Forwarding but it is not nice und need many Config steps. And only one Person can use the RustDesk Portforwarding at a time."
+    },
+    {
+        "Issue ID": 9199,
+        "Issue State": "closed",
+        "Issue Title": "Multiple monitor feature is not working (wayland multiple monitors)",
+        "Comment ID": 2315341665,
+        "Author": "rustdesk",
+        "Created At": "2024-08-28T13:36:07Z",
+        "Comment Body": "It is expected. Wayland does not support it yet.\n\nIf you want to choose the other minitor, please go to settings of controlled PC, there is option to releasing token.\n\nhttps://github.com/rustdesk/rustdesk/pull/7988\n\n![Image](https://github.com/user-attachments/assets/9deab66c-3832-4114-b0a3-d3e52d2cbdde)"
+    },
+    {
+        "Issue ID": 7988,
+        "Issue State": "closed",
+        "Issue Title": "fix: wayland delete restore token",
+        "Comment ID": 2656132226,
+        "Author": "rustdesk",
+        "Created At": "2025-02-13T10:19:07Z",
+        "Comment Body": "![image](https://github.com/user-attachments/assets/824043e2-a5cc-406f-9728-b205db97abf0)\r\n"
+    },
+    {
+        "Issue ID": 10775,
+        "Issue State": "closed",
+        "Issue Title": "No Screen selection available on KDEneon",
+        "Comment ID": 2656122578,
+        "Author": "rustdesk",
+        "Created At": "2025-02-13T10:15:15Z",
+        "Comment Body": "https://github.com/rustdesk/rustdesk/issues/9199"
+    },
+    {
+        "Issue ID": 10772,
+        "Issue State": "closed",
+        "Issue Title": "Multi screen witch privacy issue",
+        "Comment ID": 2655645234,
+        "Author": "rustdesk",
+        "Created At": "2025-02-13T06:24:12Z",
+        "Comment Body": "Support one monitor only for the time being."
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 1780343176,
+        "Author": "rustdesk",
+        "Created At": "2023-10-26T03:04:27Z",
+        "Comment Body": "tracked by https://github.com/rustdesk/rustdesk/issues/3565"
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 1826744719,
+        "Author": "chchia",
+        "Created At": "2023-11-26T10:23:41Z",
+        "Comment Body": "just to addon, same thing happen for Ubuntu 23.10 on LAN. about 3 second behind."
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 1831393395,
+        "Author": "chchia",
+        "Created At": "2023-11-29T07:59:37Z",
+        "Comment Body": "Hi i just want to supplement that, i was having audio delay by 2 second issues with my ubuntu. and it turn out that i changed the default pulsewire to pipewire some time ago.\r\n\r\nchanging back to pulsewire fixed the audio delay issues. this might be a hint."
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2156606702,
+        "Author": "leucome",
+        "Created At": "2024-06-09T13:27:25Z",
+        "Comment Body": "It got the 3 sec delay after updating the computers to Manjaro 24.0. with Plasma 6.  I tried to install pulse audio instead of pipewire then I formatted the PC and installed Manjaro from scratch.  No improvement.  I tried multiple different version of Rustdesk. I also tried to build from source in case. \r\n\r\nI am going to do some more test. But mostly I put a message here to get a notification in case somebody find what is going on. "
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2185008717,
+        "Author": "Mortos360",
+        "Created At": "2024-06-23T14:18:43Z",
+        "Comment Body": "I have the same issue running AlmaLinux 9.4\r\nAudio has a delay of 2-3 sec, no matter if I go over the public relay server or direct IP connection in LAN, delay is always the same. I tried the version 1.2.4, 1.2.6 and the current nightly from 23.06.2024. No effect.\r\n"
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2217264343,
+        "Author": "savineugenioan",
+        "Created At": "2024-07-09T10:23:44Z",
+        "Comment Body": "I have the same issue on EndeavourOS\r\n![image](https://github.com/rustdesk/rustdesk/assets/49971855/a98fd2c5-8807-4d11-8832-cb8379743800)\r\n\r\nAudio has a delay of about 3 sec. Public relay server or direct IP connection in LAN.\r\nI tried the version 1.2.6, the current nightly buld 1.2.7.\r\nI also use pipewire.\r\nIssue seems to also appear on pulseaudio. Although I am not 100% sure I switched correctly from pipewire."
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2508084273,
+        "Author": "Marty651",
+        "Created At": "2024-11-29T16:03:48Z",
+        "Comment Body": "I have this issue between two Ubuntu 24.10 computers. So I believe the title is misleading as it seems to be a general problem with modern Linux distributions using pipewire. Is there any chance that somebody is working on that?"
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2646309055,
+        "Author": "OliverRhyme",
+        "Created At": "2025-02-09T13:41:25Z",
+        "Comment Body": "> I have this issue between two Ubuntu 24.10 computers. So I believe the title is misleading as it seems to be a general problem with modern Linux distributions using pipewire. Is there any chance that somebody is working on that?\n\nSame with my ubuntu 24.04 x11 the problem seems to be on the remote side since the same delay happens when whether the local is android or mac"
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2650684780,
+        "Author": "RogerVigo",
+        "Created At": "2025-02-11T12:31:40Z",
+        "Comment Body": "I'm using ubuntu 24.04 as a guest and after changing from pipewire to pulse audio the delay was reduced from 3 seconds to barely nothing."
+    },
+    {
+        "Issue ID": 6177,
+        "Issue State": "closed",
+        "Issue Title": "Audio delay (TUXEDO OS 2)",
+        "Comment ID": 2650981765,
+        "Author": "OliverRhyme",
+        "Created At": "2025-02-11T14:26:47Z",
+        "Comment Body": "> I'm using ubuntu 24.04 as a guest and after changing from pipewire to pulse audio the delay was reduced from 3 seconds to barely nothing.\n\nHow do you do that?"
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2603916439,
+        "Author": "21pages",
+        "Created At": "2025-01-21T08:09:10Z",
+        "Comment Body": "Could you run this program in cmd and show the log? It may crash.\n\nhttps://github.com/21pages/rustdesk/releases/download/tmp/test_log_crash.exe"
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2603932028,
+        "Author": "mimi365365",
+        "Created At": "2025-01-21T08:17:32Z",
+        "Comment Body": "I am someone who doesn't know much about computers and doesn't know how to use cmd. Today, I saw the 1.3.7 version update and updated it, and then the issue mentioned above occurred. I reverted to the 1.3.6 version, and everything works fine.\n\n\nAfter further testing, the 1.3.7 version only conflicts with the proxy software's TUN mode. After disabling the TUN mode, the 1.3.7 version works fine. The 1.3.6 version works normally with the proxy software's TUN mode enabled.\n\n\nI hope the engineers can fix this bug as soon as possible and add a feature to disable the detection of port 21114. For users who do not use the web client, the system keeps sending requests to check port 21114."
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2603934599,
+        "Author": "21pages",
+        "Created At": "2025-01-21T08:18:46Z",
+        "Comment Body": "Thanks, found the reason, I'll be fixed soon."
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2603948828,
+        "Author": "imperia777",
+        "Created At": "2025-01-21T08:25:40Z",
+        "Comment Body": "A: result: 111, length: 26992\nB: result: 0, length: 26992\nC: i: 1\nD 1: len: 0\nthread 'main' panicked at src\\win.rs:67:29:\nindex out of bounds: the len is 0 but the index is 0\nstack backtrace:\n   0:     0x7ff73ccba7d1 - <unknown>\n   1:     0x7ff73ccc741a - <unknown>\n   2:     0x7ff73ccb8ae7 - <unknown>\n   3:     0x7ff73ccba615 - <unknown>\n   4:     0x7ff73ccbbc45 - <unknown>\n   5:     0x7ff73ccbba24 - <unknown>\n   6:     0x7ff73ccbc2d3 - <unknown>\n   7:     0x7ff73ccbc159 - <unknown>\n   8:     0x7ff73ccbaf1f - <unknown>\n   9:     0x7ff73ccbbd5e - <unknown>\n  10:     0x7ff73ccccbd1 - <unknown>\n  11:     0x7ff73ccccd37 - <unknown>\n  12:     0x7ff73ccb1e43 - <unknown>\n  13:     0x7ff73ccb103e - <unknown>\n  14:     0x7ff73ccb1026 - <unknown>\n  15:     0x7ff73ccb100c - <unknown>\n  16:     0x7ff73ccb5c8c - <unknown>\n  17:     0x7ff73ccb10bc - <unknown>\n  18:     0x7ff73cccadcc - <unknown>\n  19:     0x7fff96a0e8d7 - BaseThreadInitThunk\n  20:     0x7fff97a3fbcc - RtlUserThreadStart"
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2604226231,
+        "Author": "rustdesk",
+        "Created At": "2025-01-21T10:00:21Z",
+        "Comment Body": "Please test this new build https://github.com/rustdesk/rustdesk/releases/download/1.3.7/rustdesk-1.3.7-x86_64.exe"
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2604233539,
+        "Author": "imperia777",
+        "Created At": "2025-01-21T10:02:28Z",
+        "Comment Body": "> Please test this new build https://github.com/rustdesk/rustdesk/releases/download/1.3.7/rustdesk-1.3.7-x86_64.exe\n\nIt seems to be working correctly now. Thanks!"
+    },
+    {
+        "Issue ID": 10559,
+        "Issue State": "closed",
+        "Issue Title": "The 1.3.7 version conflicts with TUN mode.",
+        "Comment ID": 2650586815,
+        "Author": "yilin101",
+        "Created At": "2025-02-11T11:53:50Z",
+        "Comment Body": "I'm having the same problem and hopefully it will be fixed in the self-compiling client soon!"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1119691195,
+        "Author": "rustdesk",
+        "Created At": "2022-05-06T14:34:44Z",
+        "Comment Body": "Yes, it is awesome, but this involves a lot of code/design change, already in the to-do list many months ago."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1214486017,
+        "Author": "techflashYT",
+        "Created At": "2022-08-15T00:28:37Z",
+        "Comment Body": "Any update on this?  Would love to use rustdesk as a software-based dual monitor solution over my LAN."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1235918655,
+        "Author": "TwoShortPlanks",
+        "Created At": "2022-09-02T21:44:46Z",
+        "Comment Body": "Hi. Just a thought. Can this be solved by allowing multiple connections to the same endpoint and just selecting screen 1 on the first connection and screen 2 on the second connection? Is this what Teamviewer does (can't remember)? Or is the multiple connections what would need the code/design change?"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1280072259,
+        "Author": "ForsakenRei",
+        "Created At": "2022-10-16T22:33:03Z",
+        "Comment Body": "Currently I think we can have two connections to one remote at the same time(though in my case I need reopen rustdesk window to start a new connection) but the problem is the two different sessions follows the remote focus, which means I cannot use the two screen on the remote side as both sessions will always display the same focusd screen.\r\n\r\nI guess this is where the code changes need to be done."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1280124882,
+        "Author": "rustdesk",
+        "Created At": "2022-10-17T01:03:47Z",
+        "Comment Body": "https://github.com/rustdesk/rustdesk/discussions/918"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1329189470,
+        "Author": "daTony16822",
+        "Created At": "2022-11-28T14:17:44Z",
+        "Comment Body": "@ForsakenRei \r\nI am getting the same problem. Did you have a chance to look into that?\r\nDo you need help?"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1329743602,
+        "Author": "wizzyto12",
+        "Created At": "2022-11-28T20:47:18Z",
+        "Comment Body": "Is there any plans for implementing this soon? Its kind of a bummer for us..."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1340874571,
+        "Author": "oodonnell",
+        "Created At": "2022-12-07T12:08:28Z",
+        "Comment Body": "was looking to change to rustdesk after my teamviewer gave issues\r\n\r\nthis is stopping me from being able to, I usually sign in twice to the same desktop and use monitor 1 on one client and monitor 2 on the other.. but both connections will follow what i select on the other nullifying the objective\r\n\r\nI can't continue to use this software while this isnt a functionality"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1351698840,
+        "Author": "Lordvader81",
+        "Created At": "2022-12-14T16:07:37Z",
+        "Comment Body": "This application works great for single monitor remote login sessions and while you really can't complain considering that it's free, however if the Devs did add in the ability to display two different screens at the same time somehow i'm sure there are plenty of people that would be willing to pay a small but fair amount ...1$ Per Month or somthing like that.\r\nwith emphasis on small & fair .... \r\nA reminder to the Dev team that this is the reason why millions and millions of users are users are moving away from application applications that were supposed to be free or have very low user fees such as anydesk ..... I understand that a lot of these companies moved in this direction because well they are companies and they need to make money However most of them are just plain greedy with their charge per user per PC mentality...\r\n\r\nthink about it .... there are billions of active PC users that require remote login capabilities especially now but times are changing with the workforce ... if you're charging an average of$1.00 a month with no other restrictions you're making a billion dollars a month just in subscription fees....... Why get greedy ??.. I mean it really makes no sense to me to be honest. "
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1386398683,
+        "Author": "rustdesk",
+        "Created At": "2023-01-18T02:48:44Z",
+        "Comment Body": "In our milestone."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1456283087,
+        "Author": "paulb39",
+        "Created At": "2023-03-06T14:52:44Z",
+        "Comment Body": "Could I get clarification on this enhancement? Since there many different levels of multi-monitor support. In the above request, the user has 2 monitors on the computer they are remoting into. But if I had 2 monitors on my computer, and 1 on the computer I was remoting into, would I be able to use dual monitors? I have been on a quest for remote software that can do that, but only thing that seems to have that ability is rdp / xrdp (and nothing for osx)"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1456813160,
+        "Author": "daTony16822",
+        "Created At": "2023-03-06T19:20:05Z",
+        "Comment Body": "> \r\n\r\nThe request is to have dual/multiples streams from source.\r\nIn the situation :\r\n-2 monitors on source (A and B)\r\n-2 monitors on destination (1 and 2)\r\n\r\nStream A -> 1\r\nStream B -> 2\r\n\r\nHope this clarify.\r\n\r\nAs per other software, there is at least one (1) that can do it - it is on a $/month basis. Probably more option that I don't know of. \r\nTo what I understand, that software works on Windows as well as OSX.\r\n"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1457215740,
+        "Author": "paulb39",
+        "Created At": "2023-03-06T23:36:00Z",
+        "Comment Body": "Could we update the enhancement request to work the other way? Only care about the client machine monitors? If I remote into a laptop without any monitors connected, but I have 2 on my machine, I'd want to be able to use my 2 monitors in extended mode. "
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1457255104,
+        "Author": "ForsakenRei",
+        "Created At": "2023-03-07T00:15:25Z",
+        "Comment Body": "Since you are asking for something totally different from the original request it will probably be a separate feature request then.\r\n\r\nAnd I'm not quiet understand what do you mean in extended mode, unless you have a dummy plug which support ultrawide then you can drag the window across multiple monitors from host, otherwise I don't think it's possilbe to attach host monitors to the remote by any means?"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1457373811,
+        "Author": "paulb39",
+        "Created At": "2023-03-07T02:00:53Z",
+        "Comment Body": "The only protocol I been able to find that supports it is RDP. I have 2 monitors on my computer, I remote into a laptop without any monitors attached - RDP does all the display rendering from the client machine, so I can just extend the displays- it renders it like if I had 2 monitors hooked up directly to the laptop."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1458299340,
+        "Author": "Lordvader81",
+        "Created At": "2023-03-07T14:45:40Z",
+        "Comment Body": "Ultraviewer does this.\r\n\r\n \r\n\r\nIt doesn't allow multiple streams to the same PC \u2026 Yet\u2026 \r\n\r\nBut you can view both monitors at the same time and drag the remote screen box across both of your monitors essentially allowing you to dual screen the remote machine\u2026\r\n\r\n \r\n\r\nHope this helps.\r\n"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1458357379,
+        "Author": "daTony16822",
+        "Created At": "2023-03-07T15:21:23Z",
+        "Comment Body": "Thank you for the suggestion.\r\nThere is plenty of paid programs doing it. The topic of this group is about improving Rustdesk which is a free solution."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1458493838,
+        "Author": "Lordvader81",
+        "Created At": "2023-03-07T16:45:40Z",
+        "Comment Body": "Yes, I understand that this group is about improving Rustdesk \u2026.. but Rustdesk is not the only free solution out there. Ultraviewer as previously Mentioned, does dual view in extended view and is also a FREE option.\r\n\r\n \r\n\r\nIn terms of usability, rustdesk is awesome especially considering the price tag, however due to the fact that it is open source, which we can all appreciate, it doesn't get the attention it deserves from the Devs. If I'm not mistaken, I posted this question about dual screen on remote computers a few months ago and this is the first response that we're getting \u2026.\ud83e\udd37\ud83e\udd37\r\n\r\n \r\n\r\nIt seems like it would be a very simple thing to add to the program \u2026 simply allow multiple connections to the remote PC from the same viewer.\r\n\r\nthis is the way Any Desk is ..\r\n\r\n \r\n"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1474225411,
+        "Author": "fragtion",
+        "Created At": "2023-03-17T18:12:33Z",
+        "Comment Body": "What about connecting to more than one remote computer? At the moment all of the tabs consolidate in the same window. This can make it difficult to work between several remote computers because you need to switch tabs in the same Rustdesk instance. It would be nice if we could detach a tab from that tab group, into a new tabbed window, and move that to another monitor... Similar to what most Web Browsers do when you drag a tab out of the window. It creates a new window with the new tab, and additional tabs can be added to that.\r\n\r\nThis was always a headache for me with AnyDesk, so it's a bit disappointing to see that RustDesk shares the same inherent limitation .."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1474546430,
+        "Author": "ForsakenRei",
+        "Created At": "2023-03-18T00:37:39Z",
+        "Comment Body": "> What about connecting to more than one remote computer? At the moment all of the tabs consolidate in the same window. This can make it difficult to work between several remote computers because you need to switch tabs in the same Rustdesk instance. It would be nice if we could detach a tab from that tab group, into a new tabbed window, and move that to another monitor... Similar to what most Web Browsers do when you drag a tab out of the window. It creates a new window with the new tab, and additional tabs can be added to that.\r\n> \r\n> This was always a headache for me with AnyDesk, so it's a bit disappointing to see that RustDesk shares the same inherent limitation ..\r\n\r\nAnydesk allows open two different instances but connect to same remote to display different screens of one machine. But since they changed their price model this is only available to paid users..."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1475276642,
+        "Author": "Lordvader81",
+        "Created At": "2023-03-19T14:28:14Z",
+        "Comment Body": "Ultra viewer does that too bro \u2026\r\n\r\nLook, I really hate to say it and I love rust desk but it just simply does not offer any of the options that I require therefore I only use it as an emergency redundant fall back\u2026.\r\n\r\n \r\n\r\nultra viewer does exactly what I needed to do and it works 95% of the time \u2026.\r\n\r\nobviously because it's not open source we know what it's doing \u2026 it's offering a good product with lots of updates and bug fixes trying to gather as many users as possible, once that happens they are going to sell to a larger conglomerate for hundreds of millions of dollars which in turn means that they are going to start charging a monthly subscription like everybody else but until then ultra viewer is what I'm using because it just works.\r\n"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1476418720,
+        "Author": "daTony16822",
+        "Created At": "2023-03-20T15:14:48Z",
+        "Comment Body": "> What about connecting to more than one remote computer? At the moment all of the tabs consolidate in the same window. This can make it difficult to work between several remote computers because you need to switch tabs in the same Rustdesk instance. It would be nice if we could detach a tab from that tab group, into a new tabbed window, and move that to another monitor... Similar to what most Web Browsers do when you drag a tab out of the window. It creates a new window with the new tab, and additional tabs can be added to that.\r\n> \r\n> This was always a headache for me with AnyDesk, so it's a bit disappointing to see that RustDesk shares the same inherent limitation ..\r\n\r\n> \r\n\r\nHi,\r\nI am able to open 2 instances of RustDesk and connect to 2 different computers. I have one instance on my screen #1 and another one on my screen #2.  \r\nTry opening 2 instances before connecting maybe?"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1493194865,
+        "Author": "rustdesk",
+        "Created At": "2023-04-02T01:42:19Z",
+        "Comment Body": "@Kingtous it is time to start this project."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1497983840,
+        "Author": "yass-SC",
+        "Created At": "2023-04-05T19:07:03Z",
+        "Comment Body": "I also want to note that this feature will be very useful for me."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1501088055,
+        "Author": "iwottan",
+        "Created At": "2023-04-09T09:41:08Z",
+        "Comment Body": "Great work on RustDesk. The devs had done amazing job so far. I see it as a very good balance between needed features and effectivenes.\r\nIf it is possible to run multiple instances of Rustdesk on the local machine (I know you can do it now)  and the remote side has two monitors and you are also able to choose different monitors for the different instances, that would be great. The use case I can see here is 1. When the local side also has two monitors, you can run once instance on every monitor and the experience will be the same as if you are working on the remote side (when you are in full screen). 2. When you have one monitor on the local side (like a laptop), you can use Virtual desktop (Win10/11, Linux has it integrated) and you can have an instance for every virtual desktop and switch faster between the two monitors on the remote.\r\nAs for the suggested payment part. I personally support very much the model to have a completely free (community) edition that can be used by everyone and a paid one (enterprise) solution that can be either customized and/or different level of support. And the donation (crypto, buy me a coffee) should always be on the table as an option."
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1645401168,
+        "Author": "solo2424",
+        "Created At": "2023-07-21T11:02:20Z",
+        "Comment Body": "@Kingtous have you looked into this at all? I think many people would benefit from this feature. I beleive most people drawn to open source in general are typically a little more tech savvy, and all the tech savvy people I know have multiple monitors. "
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1681053012,
+        "Author": "lucasmontec",
+        "Created At": "2023-08-16T18:00:28Z",
+        "Comment Body": "Is it possible to have dual screens from a pc streaming with only 1 screen?\r\n"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1682431550,
+        "Author": "fragtion",
+        "Created At": "2023-08-17T14:54:45Z",
+        "Comment Body": "> Is it possible to have dual screens from a pc streaming with only 1 screen?\r\n\r\nYou can try with usbmmidd, or similar software, to create a virtual monitor on the system which Rustdesk can then pass through"
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1690370084,
+        "Author": "caburet",
+        "Created At": "2023-08-23T17:37:36Z",
+        "Comment Body": "I also want to note that this feature will be very useful for me too! "
+    },
+    {
+        "Issue ID": 486,
+        "Issue State": "closed",
+        "Issue Title": "Dual screen remote dual screen",
+        "Comment ID": 1692208920,
+        "Author": "solo2424",
+        "Created At": "2023-08-24T18:27:32Z",
+        "Comment Body": "This feature would be greatly appreciated.\r\n\r\nOn Wed, Aug 23, 2023 at 1:37\u202fPM Joel Partida ***@***.***>\r\nwrote:\r\n\r\n> I also want to note that this feature will be very useful for me too!\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/rustdesk/rustdesk/issues/486#issuecomment-1690370084>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAOQWWSF2JSHOJETPY3UFRDXWY5WZANCNFSM5VIJWFZQ>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "Issue ID": 10759,
+        "Issue State": "closed",
+        "Issue Title": "Resolution downgrades to 1024x768 when remote monitor is not connected",
+        "Comment ID": 2650359246,
+        "Author": "rustdesk",
+        "Created At": "2025-02-11T10:15:25Z",
+        "Comment Body": "This is expected behavior. Because after you plug out monitor, your windows will trigger one dummy display with 1024x768 automatically, this is not what we can control."
+    },
+    {
+        "Issue ID": 10758,
+        "Issue State": "closed",
+        "Issue Title": "test",
+        "Comment ID": 2650309728,
+        "Author": "cnsdwu",
+        "Created At": "2025-02-11T09:55:05Z",
+        "Comment Body": "test"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1494189834,
+        "Author": "grummbeer",
+        "Created At": "2023-04-03T11:59:43Z",
+        "Comment Body": "Wow huge!\r\n\r\n@fufesou very nice! \r\n\r\n### ~~1. dialog~~ \r\n\r\n~~There must be a bit more space between the sections. Don't bother, i will fix this!~~\r\n\r\n![desktop-dark-password-required-linux-headless-before](https://user-images.githubusercontent.com/67791701/229499087-9e7e3c59-76c9-4479-be5f-7326c200c889.png)\r\n\r\n\r\n### 2. docs\r\n\r\nDocs needs to be updated, due `libpam0g-dev`, build feature `linux_headless`?\r\n\r\n### 3. notes\r\n\r\nYou split the large dialog Widget into much more smaller parts, what looks very good!\r\n\r\nDo you think the same could be done with other very large and cluttered widgets? And also with huge files?"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1494232978,
+        "Author": "congzhangzh",
+        "Created At": "2023-04-03T12:27:30Z",
+        "Comment Body": "cool"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1494281257,
+        "Author": "grummbeer",
+        "Created At": "2023-04-03T13:00:48Z",
+        "Comment Body": "> There must be a bit more space between the sections. Don't bother, i will fix this!\r\n\r\nnope \u2026 so nice :-) it is, but missed it because i faked the controller to make the os login visible. "
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1494330166,
+        "Author": "fufesou",
+        "Created At": "2023-04-03T13:30:36Z",
+        "Comment Body": "> Docs needs to be updated, due `libpam0g-dev`, build feature `linux_headless`?\r\n\r\nDo you mean `README.md` file? No need to update it.  \r\nIt is not the default feature.  \r\nAnd linux headless is a new experimental feature. There're still some TODOs here.\r\n\r\n> Do you think the same could be done with other very large and cluttered widgets? And also with huge files?\r\n\r\nYes. I think it is better. But I did not intentionally split the code. It was mainly due to seeing some duplicate code.\r\n"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1494373595,
+        "Author": "grummbeer",
+        "Created At": "2023-04-03T13:59:28Z",
+        "Comment Body": "OK, thanks.\r\n"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1513747398,
+        "Author": "ManuLinares",
+        "Created At": "2023-04-18T20:19:40Z",
+        "Comment Body": "How can I try this? I'm on rustdesk-nightly, running Arch with XFCE and lightdm.\r\n\r\nThis is the systemd service file:\r\n\r\n```\r\n# ~ cat /usr/lib/systemd/system/rustdesk.service\r\n\r\n[Unit]\r\nDescription=RustDesk\r\nRequires=network.target\r\nAfter=systemd-user-sessions.service\r\n\r\n[Service]\r\nType=simple\r\nExecStart=/usr/bin/rustdesk --service\r\nPIDFile=/run/rustdesk.pid\r\nKillMode=mixed\r\nTimeoutStopSec=30\r\nUser=root\r\nLimitNOFILE=100000\r\n\r\n[Install]\r\nWantedBy=multi-user.target\r\n```"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1615325870,
+        "Author": "joeySeal",
+        "Created At": "2023-07-01T01:12:13Z",
+        "Comment Body": "\"xfce4 may be supported\" does this mean xfce might work or xfce might be supported in the future?"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1921078646,
+        "Author": "adamency",
+        "Created At": "2024-02-01T11:11:12Z",
+        "Comment Body": "<!---\r\nGot it perfectly working on:\r\n\r\n- **Arch Linux**\r\n- **X11** display server\r\n- `xf86-video-dummy` driver\r\n- **i3** window manager\r\n- **lightdm** display manager\r\n\r\nFor about 6 months now. Either on public rustdesk servers or self-hosted.\r\n\r\nSo being on `gnome` and/or Ubuntu is absolutely unneeded. Basically any Linux system on X11 with the mentioned driver will work, provided nothings goes in the way. That should make every Linux user happy \ud83d\ude04\ud83d\ude80 ! \r\n\r\nPS: While teamviewer doesn't even work on this setup, it doesn't detect any display as soon as I unlock the session on the LightDM screen. This really feels great ! Thanks @rustdesk !\r\n-->"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 1937900476,
+        "Author": "lounging-lizard",
+        "Created At": "2024-02-11T22:47:05Z",
+        "Comment Body": "I was able to get this working for Ubuntu 22.04.03 LTS by using the following xorg config (inserted at `/usr/share/X11/xorg.conf.d/xorg.conf`).\r\n\r\nI had to create the config file as it was missing, I hope this helps someone else.\r\n\r\nThis is for a 1920x1080 display via X11/xorg, \r\n\r\n```\r\nSection \"Device\"\r\n  Identifier \"Configured Video Device\"\r\n  Driver \"dummy\"\r\n  VideoRam 16384\r\nEndSection\r\n\r\nSection \"Monitor\"\r\n  Identifier \"Configured Monitor\"\r\n  HorizSync 5.0 - 1000.0\r\n  VertRefresh 5.0 - 1000.0\r\n  ModeLine \"1920x1080\" 23.53 1920 1952 2040 2072 1080 1106 1108 1135\r\nEndSection\r\n\r\nSection \"Screen\"\r\n  Identifier \"Default Screen\"\r\n  Monitor \"Configured Monitor\"\r\n  Device \"Configured Video Device\"\r\n  DefaultDepth 24\r\n  SubSection \"Display\"\r\n    Depth 24\r\n    Modes \"1920x1080\"\r\n  EndSubSection\r\nEndSection\r\n```\r\n\r\nFor further details regarding Xorg configuration please see: https://wiki.archlinux.org/title/xorg"
+    },
+    {
+        "Issue ID": 3902,
+        "Issue State": "closed",
+        "Issue Title": "Feat/linux virtual display (headless linux)",
+        "Comment ID": 2648190330,
+        "Author": "sebadamus",
+        "Created At": "2025-02-10T14:36:45Z",
+        "Comment Body": "> I was able to get this working for Ubuntu 22.04.03 LTS by using the following xorg config (inserted at `/usr/share/X11/xorg.conf.d/xorg.conf`).\r\n> \r\n> I had to create the config file as it was missing, I hope this helps someone else.\r\n> \r\n> This is for a 1920x1080 display via X11/xorg,\r\n> \r\n> ```\r\n> Section \"Device\"\r\n>   Identifier \"Configured Video Device\"\r\n>   Driver \"dummy\"\r\n>   VideoRam 16384\r\n> EndSection\r\n> \r\n> Section \"Monitor\"\r\n>   Identifier \"Configured Monitor\"\r\n>   HorizSync 5.0 - 1000.0\r\n>   VertRefresh 5.0 - 1000.0\r\n>   ModeLine \"1920x1080\" 23.53 1920 1952 2040 2072 1080 1106 1108 1135\r\n> EndSection\r\n> \r\n> Section \"Screen\"\r\n>   Identifier \"Default Screen\"\r\n>   Monitor \"Configured Monitor\"\r\n>   Device \"Configured Video Device\"\r\n>   DefaultDepth 24\r\n>   SubSection \"Display\"\r\n>     Depth 24\r\n>     Modes \"1920x1080\"\r\n>   EndSubSection\r\n> EndSection\r\n> ```\r\n> \r\n> For further details regarding Xorg configuration please see: https://wiki.archlinux.org/title/xorg\r\n\r\nThanks mate, this worked for my with xserver-xorg-video-dummy installed, headless mode enables and the xorg config.\r\nRestared lightdm and could connect.  Before that I used to get \"no diplay\" error (I dont have any monitor connected)\r\n\r\nLinux Mint XFCE 21.1"
+    }
+]

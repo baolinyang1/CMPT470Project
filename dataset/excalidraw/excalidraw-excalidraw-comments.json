@@ -1,0 +1,1109 @@
+[
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2175653877,
+        "Author": "maekoos",
+        "Created At": "2024-06-18T09:35:56Z",
+        "Comment Body": "From what I quickly read on the [openAI Vision API website](https://platform.openai.com/docs/guides/vision) the api seems compatible with what is currently implemented: \r\nhttps://github.com/excalidraw/excalidraw/blob/4dc4590f247a0a0d9c3f5d39fe09c00c5cef87bf/packages/excalidraw/data/magic.ts#L50-L104\r\n\r\nSeems like all that is needed is to change the model to `\"gpt-4o\"`?"
+    },
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2175694439,
+        "Author": "maekoos",
+        "Created At": "2024-06-18T09:56:14Z",
+        "Comment Body": "I got it working by only changing the model to \"gpt-4o\".\r\n\r\nHowever, I found another issue in the process. Wireframes *inside* a frame will just generate a generic website:\r\n![image](https://github.com/excalidraw/excalidraw/assets/73549739/f7416889-075e-4a27-ba7e-5d3a4ad47812)\r\n\r\nA totally unrelated issue but also kind of awkward... :/"
+    },
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2175964908,
+        "Author": "dwelle",
+        "Created At": "2024-06-18T12:19:21Z",
+        "Comment Body": "We're actually in the process of moving away from bring-your-own-token workflow as it was too complicated and introduced it early only due to extremely low API limits on OpenAI's part. Further, it's limiting us to only use a specific service if we wanted to do something more dynamic.\r\n\r\nWe'll be updating this soon."
+    },
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2198907425,
+        "Author": "yunuuuk1",
+        "Created At": "2024-07-01T01:52:28Z",
+        "Comment Body": "![excalidraw_ai_setting](https://github.com/excalidraw/excalidraw/assets/140899918/4c68848e-e62e-4339-bed5-788922e70a7a)\r\n![P0001](https://github.com/excalidraw/excalidraw/assets/140899918/9938e272-be6a-4e8f-b66e-437d6b2ebc84)\r\n\r\n\r\nI'm using the wireframe to code feature in Excalidraw, but I'm getting this error message:\r\nError!\r\nThe model gpt-4-vision-preview has been deprecated, learn more here: https://platform.openai.com/docs/deprecations\r\nI also tried changing the default vision model to gpt-4o, but I'm still getting the same error. Can help me with this issue?\"\r\n\r\n"
+    },
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2199647734,
+        "Author": "maekoos",
+        "Created At": "2024-07-01T09:18:00Z",
+        "Comment Body": "As @dwelle said, they will be updating this soon.\n\nIf you need it right away and have a ChatGPT 4o token (you need to pay $5 on platform.openai.com I think) then you could try this version (the one generated from my pull request):\n\nhttps://excalidraw-git-fork-maekoos-fix-8147-excalidraw.vercel.app/"
+    },
+    {
+        "Issue ID": 8147,
+        "Issue State": "closed",
+        "Issue Title": "Wireframe to code must be upgraded to newer gpt model (gpt-4-vision-preview depricated)",
+        "Comment ID": 2664124572,
+        "Author": "dwelle",
+        "Created At": "2025-02-17T21:46:55Z",
+        "Comment Body": "fixed via https://github.com/excalidraw/excalidraw/pull/8269"
+    },
+    {
+        "Issue ID": 8148,
+        "Issue State": "closed",
+        "Issue Title": "fix: Upgraded from deprecated  \"gpt-4-vision-preview\" to \"gpt-4o\" in \"wirframe to code\"-tool",
+        "Comment ID": 2175722738,
+        "Author": "vercel[bot]",
+        "Created At": "2024-06-18T10:10:26Z",
+        "Comment Body": "[vc]: #ri+X4j9IkPWFJXuUlCiAE6MjLJSV+RhgtcYjUojVyYk=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy83RUQzZFFCZzUzSktnWnZkRkJTQ21SekV4aE4zIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWZvcmstbWFla29vcy1maXgtODE0Ny1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZSIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtc2NyaXB0LWluLWJyb3dzZXIiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS85d1NUNWNLeDVmVUhwU0RyS0pMVzh0aHZER01yIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLWdpdC1mb3JrLW1hZWtvb3MtZml4LTgxNDctZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn0seyJuYW1lIjoiZG9jcyIsInJvb3REaXJlY3RvcnkiOiJkZXYtZG9jcyIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2RvY3MvSHlrWk1Nb0pzYWNmN2Qyb1Q3N1hZa0F1dXo4NiIsInByZXZpZXdVcmwiOiJkb2NzLWdpdC1mb3JrLW1hZWtvb3MtZml4LTgxNDctZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvRndySGVrWTVFcGNDbkZoekx3R2ZxNFRuZnFYZiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZm8tYjhiNmJjLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/7ED3dQBg53JKgZvdFBSCmRzExhN3)) | [Visit Preview](https://excalidraw-git-fork-maekoos-fix-8147-excalidraw.vercel.app) | Jun 18, 2024 10:12am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/9wST5cKx5fUHpSDrKJLW8thvDGMr)) | [Visit Preview](https://excalidraw-package-example-git-fork-maekoos-fix-8147-excalidraw.vercel.app) | Jun 18, 2024 10:12am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/FwrHekY5EpcCnFhzLwGfq4TnfqXf)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-b8b6bc-excalidraw.vercel.app) | Jun 18, 2024 10:12am |\n\n<details><summary>1 Ignored Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/HykZMMoJsacf7d2oT77XYkAuuz86)) | [Visit Preview](https://docs-git-fork-maekoos-fix-8147-excalidraw.vercel.app) | Jun 18, 2024 10:12am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 8148,
+        "Issue State": "closed",
+        "Issue Title": "fix: Upgraded from deprecated  \"gpt-4-vision-preview\" to \"gpt-4o\" in \"wirframe to code\"-tool",
+        "Comment ID": 2664124088,
+        "Author": "dwelle",
+        "Created At": "2025-02-17T21:46:31Z",
+        "Comment Body": "via https://github.com/excalidraw/excalidraw/pull/8269"
+    },
+    {
+        "Issue ID": 8279,
+        "Issue State": "closed",
+        "Issue Title": "perf: update openai model name",
+        "Comment ID": 2246915199,
+        "Author": "vercel[bot]",
+        "Created At": "2024-07-24T05:14:25Z",
+        "Comment Body": "[vc]: #sYX8k0tTlT5w9b0Q4bks6jcsMLYH2l6xJuQ+CWfy3eE=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZSIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtc2NyaXB0LWluLWJyb3dzZXIiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS81eEpBbmtLaVhiaHg4N0xVYjg4RHpZYWhtUGk0IiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLWdpdC1mb3JrLWdyZXljb2RlZS0wNWM0YjctZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn0seyJuYW1lIjoiZXhjYWxpZHJhdyIsInJvb3REaXJlY3RvcnkiOm51bGwsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXcvRTVqRm43eGFnSHVtQXFtOW1SMnU1UW9SbXZWeiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LWdpdC1mb3JrLWdyZXljb2RlZS11cGRhdGUtb3BlbmFpLW1vZGVscy1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJkb2NzIiwicm9vdERpcmVjdG9yeSI6ImRldi1kb2NzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZG9jcy82NGVZdWllTkhUYXVzR0tybkI5ZGR2dmdZOVB3IiwicHJldmlld1VybCI6ImRvY3MtZ2l0LWZvcmstZ3JleWNvZGVlLXVwZGF0ZS1vcGVuYWktbW9kZWxzLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJJR05PUkVEIn0seyJuYW1lIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMiLCJyb290RGlyZWN0b3J5IjoiZXhhbXBsZXMvZXhjYWxpZHJhdy93aXRoLW5leHRqcyIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzL0V0VHRQbTZ3VlVmUzF2UHFHalkybllHRm9rbngiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMtZ2l0LWZvLTg3MDJjZi1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifV19\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/E5jFn7xagHumAqm9mR2u5QoRmvVz)) | [Visit Preview](https://excalidraw-git-fork-greycodee-update-openai-models-excalidraw.vercel.app) | Jul 24, 2024 5:16am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/5xJAnkKiXbhx87LUb88DzYahmPi4)) | [Visit Preview](https://excalidraw-package-example-git-fork-greycodee-05c4b7-excalidraw.vercel.app) | Jul 24, 2024 5:16am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/EtTtPm6wVUfS1vPqGjY2nYGFoknx)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-8702cf-excalidraw.vercel.app) | Jul 24, 2024 5:16am |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/64eYuieNHTausGKrnB9ddvvgY9Pw)) | [Visit Preview](https://docs-git-fork-greycodee-update-openai-models-excalidraw.vercel.app) | Jul 24, 2024 5:16am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 8279,
+        "Issue State": "closed",
+        "Issue Title": "perf: update openai model name",
+        "Comment ID": 2246930431,
+        "Author": "greycodee",
+        "Created At": "2024-07-24T05:27:08Z",
+        "Comment Body": "I have tested that the new model works fine, please review my code when you have time, thanks! @ad1992 @dwelle "
+    },
+    {
+        "Issue ID": 8279,
+        "Issue State": "closed",
+        "Issue Title": "perf: update openai model name",
+        "Comment ID": 2664123963,
+        "Author": "dwelle",
+        "Created At": "2025-02-17T21:46:23Z",
+        "Comment Body": "via https://github.com/excalidraw/excalidraw/pull/8269"
+    },
+    {
+        "Issue ID": 4408,
+        "Issue State": "closed",
+        "Issue Title": "[feature request] bill yearly",
+        "Comment ID": 1148861810,
+        "Author": "ethanneff",
+        "Created At": "2022-06-07T15:58:04Z",
+        "Comment Body": "What is the status on this request? The roadmap says it is still in progress, yet it has been half a year without an update. I have multiple teams in my company that would love to use this feature. \r\n\r\nhttps://plus.excalidraw.com/roadmap"
+    },
+    {
+        "Issue ID": 4408,
+        "Issue State": "closed",
+        "Issue Title": "[feature request] bill yearly",
+        "Comment ID": 1149798163,
+        "Author": "dwelle",
+        "Created At": "2022-06-08T11:31:32Z",
+        "Comment Body": "Beta is open now, if you'd like to be part of it, shoot us an email at support@ \u2014 after that, we'll release publicly, which should happen fairly soon (~week)."
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 789691819,
+        "Author": "mgudmund",
+        "Created At": "2021-03-03T12:50:04Z",
+        "Comment Body": "Example of a common use case when discussing software architecture: \r\n![image](https://user-images.githubusercontent.com/3577698/109808394-58c7f400-7c27-11eb-8499-cd77b7096401.png)\r\n"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 1087341983,
+        "Author": "baldurh",
+        "Created At": "2022-04-04T09:46:18Z",
+        "Comment Body": "I\u2019d love to revive this discussion. Especially I\u2019m interested in the crow's foot notation as suggested in https://github.com/excalidraw/excalidraw/issues/616\r\n\r\nI\u2019m up for contributing on this but it seems all the issues and PRs strand on the interface part. Can we come to a conclusion on that so this can be taken forward?\r\n\r\nThis is how it looks currently\r\n<img width=\"195\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1823617/161514331-241ddba8-d34b-4105-9f14-bb8c4bde888f.png\">\r\n\r\nDo we want to stick with the 3x3 grid or change it to 4x4? Do we want to introduce some arrowhead \"sets\" so that you can switch between sets (standard, crow's foot, etc.).\r\n\r\nSomething like\r\n<img width=\"248\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1823617/161516660-9187aa0e-5e7a-4eb4-ad14-e470e8bb6866.png\">\r\n\r\nor using an icon\r\n\r\n<img width=\"247\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1823617/161517387-edc29206-a883-4277-949b-2dbc91c0b063.png\">\r\n\r\n(disclaimer: obviously not a UX designer \ud83d\ude48)\r\n\r\nThat way we could eventually support all kinds of notations eg. different entity-relationship notations:\r\n<img width=\"344\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1823617/161514913-125223f3-2476-4d9a-beab-1f575617e5ba.png\">\r\n\r\nWhat do you think @dwelle @lipis @steveruizok ?\r\n\r\nLinks to other issues and PRs related to this:\r\nhttps://github.com/excalidraw/excalidraw/issues/616\r\nhttps://github.com/excalidraw/excalidraw/issues/839\r\nhttps://github.com/excalidraw/excalidraw/pull/2486\r\nhttps://github.com/excalidraw/excalidraw/pull/3477\r\n"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 1447760566,
+        "Author": "cocoonkid",
+        "Created At": "2023-02-28T08:22:49Z",
+        "Comment Body": "Just today we discussed replacing drawio with excalidraw but the lack of various arrow notations so far is unfortunately  a stopper rn.\r\n\r\n\r\n![image](https://user-images.githubusercontent.com/43231640/221795302-3f582729-2f27-451b-9c82-ecf7dcdf5fb4.png)\r\n\r\n\r\n\r\nlooking forward to see these implemented :)"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 1486153545,
+        "Author": "peterhungnxp",
+        "Created At": "2023-03-28T03:34:08Z",
+        "Comment Body": "Please add this, super useful!!!\r\n![image](https://user-images.githubusercontent.com/72534365/228121010-0a41f5ae-f26f-4e1d-b70d-eb34684b5614.png)\r\n"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 1687732258,
+        "Author": "edmondchuc",
+        "Created At": "2023-08-22T08:36:11Z",
+        "Comment Body": "Please also consider [UML class diagram arrowhead relationships](https://en.wikipedia.org/wiki/Class_diagram#Relationships).\r\n\r\n![Uml_classes_en](https://github.com/excalidraw/excalidraw/assets/37032744/68e355fb-0392-488c-abc0-b9b10c69fcf3)\r\n"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 1955912333,
+        "Author": "murningstar",
+        "Created At": "2024-02-21T05:15:52Z",
+        "Comment Body": "Consider this also please. Sometimes this semantics is very wanted\r\n![Screenshot_12](https://github.com/excalidraw/excalidraw/assets/104658898/866e0d2d-4bb1-4725-978b-4fbebd9b32b5)\r\n\r\n"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 2450500897,
+        "Author": "vizvamitra",
+        "Created At": "2024-10-31T17:59:27Z",
+        "Comment Body": "I also miss crowfoot notation a lot, it is much simpler than adding all those \"1\"s and \"n\"s. Also might be useful to add hotkeys for start/end arrowheads"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 2503517230,
+        "Author": "AndrewBasem1",
+        "Created At": "2024-11-27T10:34:36Z",
+        "Comment Body": "Still a much needed feature! please add crowfoot notation. (also thank you for all the hardwork)"
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 2561952968,
+        "Author": "georgekenessey",
+        "Created At": "2024-12-25T17:02:39Z",
+        "Comment Body": "Yes this would be great, we would love to replace Lucidchart fully but the remaining thing we need to is crowfoot notation so we can create entity diagrams. "
+    },
+    {
+        "Issue ID": 3167,
+        "Issue State": "closed",
+        "Issue Title": "More arrow ending shapes ",
+        "Comment ID": 2664101993,
+        "Author": "dwelle",
+        "Created At": "2025-02-17T21:27:32Z",
+        "Comment Body": "We've recently added more arrowheads so closing for now (https://x.com/excalidraw/status/1876276078177816692)"
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1050000446,
+        "Author": "dwelle",
+        "Created At": "2022-02-24T15:54:25Z",
+        "Comment Body": "Will be added soon as part of the color picker redesign!"
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1107466664,
+        "Author": "inwardmovement",
+        "Created At": "2022-04-23T12:50:07Z",
+        "Comment Body": "I think we should have easy access to white, black and transparent both in background and stroke color."
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1125472012,
+        "Author": "tom-sherman",
+        "Created At": "2022-05-12T22:21:20Z",
+        "Comment Body": "Is this as simple as adding transparent to the stroke color presets now?\r\n\r\n<img width=\"215\" alt=\"image\" src=\"https://user-images.githubusercontent.com/9257001/168177037-ad196d30-75e7-4b71-9518-825a66b13542.png\">\r\n\r\nThe question becomes: Which swatch should be dropped for transparent?"
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1125474213,
+        "Author": "dwelle",
+        "Created At": "2022-05-12T22:25:34Z",
+        "Comment Body": "Don't know yet, but we'll be doing a full revamp of the colors very soon (both stroke and bg), which will include ensuring both transparent and white colors are in both."
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1125480782,
+        "Author": "tom-sherman",
+        "Created At": "2022-05-12T22:37:19Z",
+        "Comment Body": "Ah ok, that's the new color picker - gotcha."
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 1310173847,
+        "Author": "eproxus",
+        "Created At": "2022-11-10T11:55:11Z",
+        "Comment Body": "I'd like this possibility too, is it included yet? I can't find it."
+    },
+    {
+        "Issue ID": 4842,
+        "Issue State": "closed",
+        "Issue Title": "Transparent stroke",
+        "Comment ID": 2664101398,
+        "Author": "dwelle",
+        "Created At": "2025-02-17T21:27:00Z",
+        "Comment Body": "(fixed long ago)"
+    },
+    {
+        "Issue ID": 9131,
+        "Issue State": "closed",
+        "Issue Title": "chore: Revert aspect ratio fix with element size limits and chk",
+        "Comment ID": 2653738269,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-12T13:37:21Z",
+        "Comment Body": "[vc]: #qyeGY8Yh/ShwEEVmVU/1Y1Lq7AYbLTpNwnfXea8vxn0=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy85ZjdjTVZkQ1BMN0FlUFZtU1E2bWl3QW5VbUpiIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWNob3JlLW1lZ2FzaXplZC1lbGVtZW50LWxvZ2dpbmctZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn0seyJuYW1lIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUiLCJyb290RGlyZWN0b3J5IjoiZXhhbXBsZXMvZXhjYWxpZHJhdy93aXRoLXNjcmlwdC1pbi1icm93c2VyIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUvSGN0bk56UzJ1enVZN2JZazRpdjN4OXliQW1ocyIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS1naXQtY2hvcmUtbWVnYXNpemUtMzk0NGY4LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImRvY3MiLCJyb290RGlyZWN0b3J5IjoiZGV2LWRvY3MiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9kb2NzL0hoQVF1aDlud3prSHhoeURNNFdmVGRRbjRYM24iLCJuZXh0Q29tbWl0U3RhdHVzIjoiSUdOT1JFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1uZXh0anMiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy81NDR3dk14TFpaQnA3NG44VjYzbW45QnV6VnUzIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzLWdpdC1jaC1hOGU4MDgtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn1dfQ==\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/9f7cMVdCPL7AePVmSQ6miwAnUmJb)) | [Visit Preview](https://excalidraw-git-chore-megasized-element-logging-excalidraw.vercel.app) | Feb 12, 2025 1:56pm |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/HctnNzS2uzuY7bYk4iv3x9ybAmhs)) | [Visit Preview](https://excalidraw-package-example-git-chore-megasize-3944f8-excalidraw.vercel.app) | Feb 12, 2025 1:56pm |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/544wvMxLZZBp74n8V63mn9BuzVu3)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-ch-a8e808-excalidraw.vercel.app) | Feb 12, 2025 1:56pm |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/HhAQuh9nwzkHxhyDM4WfTdQn4X3n)) |  | Feb 12, 2025 1:56pm |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9131,
+        "Issue State": "closed",
+        "Issue Title": "chore: Revert aspect ratio fix with element size limits and chk",
+        "Comment ID": 2653746890,
+        "Author": "github-actions[bot]",
+        "Created At": "2025-02-12T13:40:53Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Lines</td> <td align=\"right\">66.88% (\ud83c\udfaf 60%)</td> <td align=\"right\">68896 / 102999</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Statements</td> <td align=\"right\">66.88% (\ud83c\udfaf 60%)</td> <td align=\"right\">68896 / 102999</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Functions</td> <td align=\"right\">63.72% (\ud83c\udfaf 63%)</td> <td align=\"right\">1964 / 3082</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">79.76% (\ud83c\udfaf 70%)</td> <td align=\"right\">8340 / 10456</td> </tr> </tbody> </table><details><summary>File Coverage</summary><table> <thead> <tr> <th align=\"left\">File</th> <th align=\"right\">Stmts</th> <th align=\"right\">Branches</th> <th align=\"right\">Functions</th> <th align=\"right\">Lines</th> <th align=\"left\">Uncovered Lines</th> </tr> </thead> <tbody> <tr> <td align=\"left\" colspan=\"6\"><b>Changed Files</b></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/excalidraw-app/sentry.ts\">excalidraw-app/sentry.ts</a></td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/excalidraw-app/sentry.ts#L1-L41\" class=\"text-red\">1-41</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts\">packages/excalidraw/data/restore.ts</a></td> <td align=\"right\">90.31%</td> <td align=\"right\">82.41%</td> <td align=\"right\">78.57%</td> <td align=\"right\">90.31%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L99-L102\" class=\"text-red\">99-102</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L127\" class=\"text-red\">127</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L192\" class=\"text-red\">192</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L221-L226\" class=\"text-red\">221-226</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L254-L259\" class=\"text-red\">254-259</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L284-L286\" class=\"text-red\">284-286</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L359\" class=\"text-red\">359</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L475\" class=\"text-red\">475</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L505-L515\" class=\"text-red\">505-515</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L560-L561\" class=\"text-red\">560-561</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L570-L578\" class=\"text-red\">570-578</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L586-L587\" class=\"text-red\">586-587</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L593-L594\" class=\"text-red\">593-594</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L602-L611\" class=\"text-red\">602-611</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L620-L629\" class=\"text-red\">620-629</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/data/restore.ts#L647-L652\" class=\"text-red\">647-652</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf23f6e220fa23354ae873f4a5e551ecc2992f14/packages/excalidraw/element/elbowArrow.ts\">packages/excalidraw/element/elbowArrow.ts</a></td> <td align=\"right\">70.44%</td> <td align=\"right\">84.58%</td> <td align=\"right\">93.33%</td> <td align=\"right\">70.44%<"
+    },
+    {
+        "Issue ID": 9131,
+        "Issue State": "closed",
+        "Issue Title": "chore: Revert aspect ratio fix with element size limits and chk",
+        "Comment ID": 2653770301,
+        "Author": "dwelle",
+        "Created At": "2025-02-12T13:50:31Z",
+        "Comment Body": "\ud83d\udc4d"
+    },
+    {
+        "Issue ID": 9131,
+        "Issue State": "closed",
+        "Issue Title": "chore: Revert aspect ratio fix with element size limits and chk",
+        "Comment ID": 2656574871,
+        "Author": "sentry-io[bot]",
+        "Created At": "2025-02-13T13:16:52Z",
+        "Comment Body": "## Suspect Issues\nThis pull request was deployed and Sentry observed the following issues:\n\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `storedScene(data/firebase)` [View Issue](https://excalidraw.sentry.io/issues/6296032219/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296032308/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296032405/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296113397/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `restore(packages/excalidraw/components/ImageExp...` [View Issue](https://excalidraw.sentry.io/issues/6296326963/?referrer=github-pr-bot)\n\n<sub>Did you find this useful? React with a \ud83d\udc4d or \ud83d\udc4e</sub>"
+    },
+    {
+        "Issue ID": 9142,
+        "Issue State": "closed",
+        "Issue Title": "Unusable amount of lag on Firefox with Excalidraw+",
+        "Comment ID": 2659800346,
+        "Author": "torves",
+        "Created At": "2025-02-14T16:42:11Z",
+        "Comment Body": "Not sure if anything got rolled back on the live app but this appears to no longer be an issue. Leaving open for another day to see if it re-occurs. "
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1272879961,
+        "Author": "alshdavid",
+        "Created At": "2022-10-10T07:19:33Z",
+        "Comment Body": "Agreed! I use Excalidraw with an iPad + stylus pen and this would give me a lot more room to work with.\r\n\r\nCurrently the toolbar occupies a large portion of the working area encouraging me to draw in lower right corner \r\n\r\n<img width=\"639\" alt=\"Screen Shot 2022-10-10 at 6 16 26 pm\" src=\"https://user-images.githubusercontent.com/12656294/194815111-80d01ef1-9d61-44dd-89b6-f099c365db19.png\">"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273026021,
+        "Author": "solomonshalom",
+        "Created At": "2022-10-10T09:21:35Z",
+        "Comment Body": "> Agreed! I use Excalidraw with an iPad + stylus pen and this would give me a lot more room to work with.\r\n> \r\n> Currently the toolbar occupies a large portion of the working area encouraging me to draw in lower right corner\r\n> \r\n> <img alt=\"Screen Shot 2022-10-10 at 6 16 26 pm\" width=\"639\" src=\"https://user-images.githubusercontent.com/12656294/194815111-80d01ef1-9d61-44dd-89b6-f099c365db19.png\">\r\n\r\nWell, hope they add it as a feature!"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273034341,
+        "Author": "dwelle",
+        "Created At": "2022-10-10T09:28:34Z",
+        "Comment Body": "There's the zen-mode (via context menu or Alt/Opt-Z), but it's not very usable because you won't be able to customize the shape properties."
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273428211,
+        "Author": "solomonshalom",
+        "Created At": "2022-10-10T14:45:52Z",
+        "Comment Body": "> There's the zen-mode (via context menu or Alt/Opt-Z), but it's not very usable because you won't be able to customize the shape properties.\r\n\r\nIt's a great feature but I still want to access everything, while having the option to unhide or hide the toolbar"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273434746,
+        "Author": "dwelle",
+        "Created At": "2022-10-10T14:50:26Z",
+        "Comment Body": "By toolbar, do you mean (2) or (1) as well? In your original post you mention both.\r\n\r\n![image](https://user-images.githubusercontent.com/5153846/194894135-8ebc3b74-8ef8-4cd8-827b-99ffcb917347.png)\r\n"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273507007,
+        "Author": "dhfherna",
+        "Created At": "2022-10-10T15:44:35Z",
+        "Comment Body": "I can work on it, Can do you assign me?"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1273745491,
+        "Author": "dwelle",
+        "Created At": "2022-10-10T19:52:25Z",
+        "Comment Body": "@dhfherna what had you in mind? Things like this must be well thought through in terms of UI and UX. We are also very mindful of adding new features to keep our app simple.\r\n\r\nWe are also in the process of tweaking the UI, so changes like these would have to wait for that effort to finish first.\r\n\r\nBut we're happy to discuss this further, and we will consider it, for sure."
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1276250871,
+        "Author": "solomonshalom",
+        "Created At": "2022-10-12T14:13:00Z",
+        "Comment Body": "> I can work on it, Can do you assign me?\r\n\r\nHey, Man! I am working on another project based on excalidraw, it's called Skyflow. It's basically the clone with more features, as excalidraw was taking way too much time merging PRs. So, why don't you open up a PR regarding it and I will be merging it @ https://skyflow.vercel.app\r\n\r\n@dhfherna :D"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1276251645,
+        "Author": "solomonshalom",
+        "Created At": "2022-10-12T14:13:34Z",
+        "Comment Body": "> By toolbar, do you mean (2) or (1) as well? In your original post you mention both.\r\n> \r\n> ![image](https://user-images.githubusercontent.com/5153846/194894135-8ebc3b74-8ef8-4cd8-827b-99ffcb917347.png)\r\n\r\nJust One, second is needed. The idea being if I were to close it, I can re-open it back on 2"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1445389300,
+        "Author": "dwelle",
+        "Created At": "2023-02-26T15:29:16Z",
+        "Comment Body": "This issue should be fixed by way of our new design."
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1869789631,
+        "Author": "Swoodend",
+        "Created At": "2023-12-26T21:53:25Z",
+        "Comment Body": "> This issue should be fixed by way of our new design.\r\n\r\nSo was this ever released? I'm having the same problem a year later"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 1869807942,
+        "Author": "alshdavid",
+        "Created At": "2023-12-26T22:48:35Z",
+        "Comment Body": "> > By toolbar, do you mean (2) or (1) as well? In your original post you mention both.\r\n> > ![image](https://user-images.githubusercontent.com/5153846/194894135-8ebc3b74-8ef8-4cd8-827b-99ffcb917347.png)\r\n> \r\n> Just One, second is needed. The idea being if I were to close it, I can re-open it back on 2\r\n\r\nThis wouldn't work on a tablet as I don't have a spacebar or mouse. Only a stylus and touch controls.\r\n\r\nIn my use case, a little chevron on the side of toolbar to toggle translating it off screen would be sufficient to open up the workspace\r\n\r\n![image](https://github.com/excalidraw/excalidraw/assets/12656294/508fbbdb-f41c-48bf-ad2e-596eb46be003)\r\n\r\nI guess this is a different issue than the main toolbar as I'm talking about toolbar to control the settings of the selected tool\r\n"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 2060160533,
+        "Author": "infinite-ram",
+        "Created At": "2024-04-17T01:10:05Z",
+        "Comment Body": "How do we hide the top toolbar? \r\n"
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 2487720015,
+        "Author": "alexandertam15",
+        "Created At": "2024-11-20T07:30:02Z",
+        "Comment Body": "Also - I need a feature to make the top toolbar/side menu toolbar text bigger. Control + should make the toolbar text size bigger as well.\n\nI can barely see what the toolbar is saying as it's so small on my external monitor. Competitor Draw.io has this feature."
+    },
+    {
+        "Issue ID": 5745,
+        "Issue State": "closed",
+        "Issue Title": "Feature Request - Toolbar Hide/Unhide",
+        "Comment ID": 2661100365,
+        "Author": "soapergem",
+        "Created At": "2025-02-15T21:03:11Z",
+        "Comment Body": "Can this issue be re-opened please? It never got a resolution. I just upgraded to Excalidraw+ this week and in some ways it seems like a downgrade now that the left bar is ever present and impossible to collapse. That left bar effectively occupies 15% of the screen and is not present on the free version. I am genuinely surprised there is no way to collapse it yet..."
+    },
+    {
+        "Issue ID": 9134,
+        "Issue State": "closed",
+        "Issue Title": "chore: Upgrade Sentry to latest and update debug messages",
+        "Comment ID": 2656002158,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-13T09:26:05Z",
+        "Comment Body": "[vc]: #ZAgfmP48NbCEissxdaGio+190WYfmQ2iqsCPSNm3JVk=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy9ETnBIdlBVOFlLVUpUMWVCRHR2WXdTc0JLMjNCIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWNob3JlLXVwZ3JhZGUtc2VudHJ5LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1zY3JpcHQtaW4tYnJvd3NlciIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlL0JLRVI5R01BTW9SSDVLSDFMdlRSZlRLQkJ4U3kiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtZ2l0LWNob3JlLXVwZ3JhZGUtc2VudHJ5LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImRvY3MiLCJyb290RGlyZWN0b3J5IjoiZGV2LWRvY3MiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9kb2NzLzZ3NzNwZUcxcFBGRFhhMXQ1V2Jvejk3Z1BqOHkiLCJwcmV2aWV3VXJsIjoiZG9jcy1naXQtY2hvcmUtdXBncmFkZS1zZW50cnktZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvRHpBQlVxUWFtZ0JoMXNNemhkY0hnNnh6alRVRiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtY2gtNWFlYjc0LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/DNpHvPU8YKUJT1eBDtvYwSsBK23B)) | [Visit Preview](https://excalidraw-git-chore-upgrade-sentry-excalidraw.vercel.app) | Feb 13, 2025 11:42am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/BKER9GMAMoRH5KH1LvTRfTKBBxSy)) | [Visit Preview](https://excalidraw-package-example-git-chore-upgrade-sentry-excalidraw.vercel.app) | Feb 13, 2025 11:42am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/DzABUqQamgBh1sMzhdcHg6xzjTUF)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-ch-5aeb74-excalidraw.vercel.app) | Feb 13, 2025 11:42am |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/6w73peG1pPFDXa1t5Wboz97gPj8y)) | [Visit Preview](https://docs-git-chore-upgrade-sentry-excalidraw.vercel.app) | Feb 13, 2025 11:42am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9134,
+        "Issue State": "closed",
+        "Issue Title": "chore: Upgrade Sentry to latest and update debug messages",
+        "Comment ID": 2656010207,
+        "Author": "github-actions[bot]",
+        "Created At": "2025-02-13T09:29:26Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Lines</td> <td align=\"right\">66.86% (\ud83c\udfaf 60%)</td> <td align=\"right\">68896 / 103035</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Statements</td> <td align=\"right\">66.86% (\ud83c\udfaf 60%)</td> <td align=\"right\">68896 / 103035</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Functions</td> <td align=\"right\">63.72% (\ud83c\udfaf 63%)</td> <td align=\"right\">1964 / 3082</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">79.75% (\ud83c\udfaf 70%)</td> <td align=\"right\">8338 / 10454</td> </tr> </tbody> </table><details><summary>File Coverage</summary><table> <thead> <tr> <th align=\"left\">File</th> <th align=\"right\">Stmts</th> <th align=\"right\">Branches</th> <th align=\"right\">Functions</th> <th align=\"right\">Lines</th> <th align=\"left\">Uncovered Lines</th> </tr> </thead> <tbody> <tr> <td align=\"left\" colspan=\"6\"><b>Changed Files</b></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/excalidraw-app/sentry.ts\">excalidraw-app/sentry.ts</a></td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"right\">0%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/excalidraw-app/sentry.ts#L1-L81\" class=\"text-red\">1-81</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts\">packages/excalidraw/data/restore.ts</a></td> <td align=\"right\">90.89%</td> <td align=\"right\">82.41%</td> <td align=\"right\">78.57%</td> <td align=\"right\">90.89%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L99-L102\" class=\"text-red\">99-102</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L127\" class=\"text-red\">127</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L192\" class=\"text-red\">192</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L221-L225\" class=\"text-red\">221-225</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L253-L254\" class=\"text-red\">253-254</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L279-L281\" class=\"text-red\">279-281</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L354\" class=\"text-red\">354</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L470\" class=\"text-red\">470</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L500-L510\" class=\"text-red\">500-510</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L555-L556\" class=\"text-red\">555-556</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L565-L573\" class=\"text-red\">565-573</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L581-L582\" class=\"text-red\">581-582</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L588-L589\" class=\"text-red\">588-589</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L597-L606\" class=\"text-red\">597-606</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L615-L624\" class=\"text-red\">615-624</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/data/restore.ts#L642-L647\" class=\"text-red\">642-647</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/fcf40de9007baf4f417cc782b88510de1a3116b7/packages/excalidraw/element/elbowArrow.ts\">packages/excalidraw/element/elbowArrow.ts</a></td> <td align=\"right\">70.41%</td> <td align=\"right\">84.58%</td> <td align=\"right\">93.33%</td> <td align=\"right\">70.41%<"
+    },
+    {
+        "Issue ID": 9134,
+        "Issue State": "closed",
+        "Issue Title": "chore: Upgrade Sentry to latest and update debug messages",
+        "Comment ID": 2656574909,
+        "Author": "sentry-io[bot]",
+        "Created At": "2025-02-13T13:16:53Z",
+        "Comment Body": "## Suspect Issues\nThis pull request was deployed and Sentry observed the following issues:\n\n- \u203c\ufe0f **ConsoleError: Restore element with properties size or position is too large [object Object]** `loadScene(App)` [View Issue](https://excalidraw.sentry.io/issues/6295955971/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296032293/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296032400/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element size or position is too large [object Object]** `restoreElements(collab/Collab)` [View Issue](https://excalidraw.sentry.io/issues/6296116759/?referrer=github-pr-bot)\n- \u203c\ufe0f **ConsoleError: Restore element size or position is too large [object Object]** `restore(packages/excalidraw/components/ImageExp...` [View Issue](https://excalidraw.sentry.io/issues/6296158265/?referrer=github-pr-bot)\n\n<sub>Did you find this useful? React with a \ud83d\udc4d or \ud83d\udc4e</sub>"
+    },
+    {
+        "Issue ID": 9121,
+        "Issue State": "closed",
+        "Issue Title": "feat: custom text metrics provider",
+        "Comment ID": 2649061440,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-10T19:40:05Z",
+        "Comment Body": "[vc]: #VyOyadfxm7pcbtPfeEVAWFY7STitKSp/Y9YZ9219qcE=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy85ZGVvS2VtUE1XWUUxTkdLUWdiSE44TlFuWXNhIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LW1yYXphdG9yLWN1c3RvbS10ZXh0LW1ldHJpY3MtcHJvdmlkZXItZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn0seyJuYW1lIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUiLCJyb290RGlyZWN0b3J5IjoiZXhhbXBsZXMvZXhjYWxpZHJhdy93aXRoLXNjcmlwdC1pbi1icm93c2VyIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUvM2hTb21DeXpvRXFDbXRXVXJXRWsyNjFQejdNRCIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS1naXQtbXJhemF0b3ItY3VzdG8tYjJlZWEwLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImRvY3MiLCJyb290RGlyZWN0b3J5IjoiZGV2LWRvY3MiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9kb2NzL0JObUhXczYzaXJuaTJnSzc5WVUxWU1LVzZaYXQiLCJuZXh0Q29tbWl0U3RhdHVzIjoiSUdOT1JFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1uZXh0anMiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy83ZGVxa2Jhd1F0WGo0VmVRM1RRZTMzR0xQTUtDIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzLWdpdC1tci1kODgzY2QtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn1dfQ==\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/9deoKemPMWYE1NGKQgbHN8NQnYsa)) | [Visit Preview](https://excalidraw-git-mrazator-custom-text-metrics-provider-excalidraw.vercel.app) | Feb 10, 2025 7:41pm |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/3hSomCyzoEqCmtWUrWEk261Pz7MD)) | [Visit Preview](https://excalidraw-package-example-git-mrazator-custo-b2eea0-excalidraw.vercel.app) | Feb 10, 2025 7:41pm |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/7deqkbawQtXj4VeQ3TQe33GLPMKC)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-mr-d883cd-excalidraw.vercel.app) | Feb 10, 2025 7:41pm |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/BNmHWs63irni2gK79YU1YMKW6Zat)) |  | Feb 10, 2025 7:41pm |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9121,
+        "Issue State": "closed",
+        "Issue Title": "feat: custom text metrics provider",
+        "Comment ID": 2649069120,
+        "Author": "github-actions[bot]",
+        "Created At": "2025-02-10T19:43:37Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Lines</td> <td align=\"right\">66.89% (\ud83c\udfaf 60%)</td> <td align=\"right\">68801 / 102843</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Statements</td> <td align=\"right\">66.89% (\ud83c\udfaf 60%)</td> <td align=\"right\">68801 / 102843</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Functions</td> <td align=\"right\">63.72% (\ud83c\udfaf 63%)</td> <td align=\"right\">1964 / 3082</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">79.78% (\ud83c\udfaf 70%)</td> <td align=\"right\">8315 / 10422</td> </tr> </tbody> </table><details><summary>File Coverage</summary><table> <thead> <tr> <th align=\"left\">File</th> <th align=\"right\">Stmts</th> <th align=\"right\">Branches</th> <th align=\"right\">Functions</th> <th align=\"right\">Lines</th> <th align=\"left\">Uncovered Lines</th> </tr> </thead> <tbody> <tr> <td align=\"left\" colspan=\"6\"><b>Changed Files</b></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/index.tsx\">packages/excalidraw/index.tsx</a></td> <td align=\"right\">81.6%</td> <td align=\"right\">88.88%</td> <td align=\"right\">75%</td> <td align=\"right\">81.6%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/index.tsx#L95-L99\" class=\"text-red\">95-99</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/index.tsx#L158-L207\" class=\"text-red\">158-207</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx\">packages/excalidraw/actions/actionBoundText.tsx</a></td> <td align=\"right\">97.87%</td> <td align=\"right\">84.61%</td> <td align=\"right\">100%</td> <td align=\"right\">97.87%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx#L110-L111\" class=\"text-red\">110-111</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx#L133\" class=\"text-red\">133</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx#L135-L136\" class=\"text-red\">135-136</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx#L245\" class=\"text-red\">245</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionBoundText.tsx#L247\" class=\"text-red\">247</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionTextAutoResize.ts\">packages/excalidraw/actions/actionTextAutoResize.ts</a></td> <td align=\"right\">50%</td> <td align=\"right\">100%</td> <td align=\"right\">50%</td> <td align=\"right\">50%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/actions/actionTextAutoResize.ts#L24-L47\" class=\"text-red\">24-47</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx\">packages/excalidraw/components/App.tsx</a></td> <td align=\"right\">70.11%</td> <td align=\"right\">76.49%</td> <td align=\"right\">71.5%</td> <td align=\"right\">70.11%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L511-L512\" class=\"text-red\">511-512</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L624-L633\" class=\"text-red\">624-633</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L733-L734\" class=\"text-red\">733-734</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L752-L753\" class=\"text-red\">752-753</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L774-L834\" class=\"text-red\">774-834</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/d365eb4154d1be2132dc29e9ba1a39d08cb893d2/packages/excalidraw/components/App.tsx#L837-L843\" class=\"text-red\">837-"
+    },
+    {
+        "Issue ID": 9121,
+        "Issue State": "closed",
+        "Issue Title": "feat: custom text metrics provider",
+        "Comment ID": 2658596682,
+        "Author": "sentry-io[bot]",
+        "Created At": "2025-02-14T08:33:41Z",
+        "Comment Body": "## Suspect Issues\nThis pull request was deployed and Sentry observed the following issues:\n\n- \u203c\ufe0f **TypeError: Object.hasOwn is not a function. (In 'Object.hasOwn(e,\"fixedPoint\")', 'Object.hasOwn' is undefined)** `measureText(packages/excalidraw/element/textMea...` [View Issue](https://excalidraw.sentry.io/issues/6298830817/?referrer=github-pr-bot)\n\n<sub>Did you find this useful? React with a \ud83d\udc4d or \ud83d\udc4e</sub>"
+    },
+    {
+        "Issue ID": 9096,
+        "Issue State": "closed",
+        "Issue Title": "extensions are set when opening files, except in Safari on iOS",
+        "Comment ID": 2635825664,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-05T06:42:57Z",
+        "Comment Body": "[vc]: #B23rdlr9C31Pon5y7t5K9bWoTlNZkrS1eu2GXt05fHA=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZSIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtc2NyaXB0LWluLWJyb3dzZXIiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS85b2htdDdLdkJ4REVGVU5zenhYQXNQY2ttRHZIIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLWdpdC1mb3JrLW92aWNlaW5jLWIxODlmYy1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvQ0M3S3VVeEI0ZUFGN0RCZFRXQzJtMmJUN1RhRiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZm8tYzhjN2E1LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImRvY3MiLCJyb290RGlyZWN0b3J5IjoiZGV2LWRvY3MiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9kb2NzL0dkOHY0dExwOGRtekhKcEVNRlpOTjVTZzN5U3IiLCJwcmV2aWV3VXJsIjoiZG9jcy1naXQtZm9yay1vdmljZWluYy1maWxldHlwZS1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiSUdOT1JFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXciLCJyb290RGlyZWN0b3J5IjpudWxsLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LzhreGQ5Nzg0RVdDMzFNTDc3WjVYQnFvRFU1TlgiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1naXQtZm9yay1vdmljZWluYy1maWxldHlwZS1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifV19\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/8kxd9784EWC31ML77Z5XBqoDU5NX)) | [Visit Preview](https://excalidraw-git-fork-oviceinc-filetype-excalidraw.vercel.app) | Feb 5, 2025 7:01am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/9ohmt7KvBxDEFUNszxXAsPckmDvH)) | [Visit Preview](https://excalidraw-package-example-git-fork-oviceinc-b189fc-excalidraw.vercel.app) | Feb 5, 2025 7:01am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/CC7KuUxB4eAF7DBdTWC2m2bT7TaF)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-c8c7a5-excalidraw.vercel.app) | Feb 5, 2025 7:01am |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/Gd8v4tLp8dmzHJpEMFZNN5Sg3ySr)) | [Visit Preview](https://docs-git-fork-oviceinc-filetype-excalidraw.vercel.app) | Feb 5, 2025 7:01am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9022,
+        "Issue State": "closed",
+        "Issue Title": "add props for handleGestureGlobally",
+        "Comment ID": 2597718621,
+        "Author": "vercel[bot]",
+        "Created At": "2025-01-17T08:45:56Z",
+        "Comment Body": "[vc]: #wnHXVb7hL8kPqYR7Vi73p2jj69+DGnBc0amzQU7JRHM=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvOEgyQ2lBN1RRNEVBeVJQQWF1d0FtaEt1V2hINiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZm8tMjE5MjlmLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1zY3JpcHQtaW4tYnJvd3NlciIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlL29UNldVbnc2QWVXdkVkbXAzRmhmZFNwekFvNUgiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtZ2l0LWZvcmstb3ZpY2VpbmMtYWI1OWJlLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXciLCJyb290RGlyZWN0b3J5IjpudWxsLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LzdqRFZuR2JKVG1NbmFCdmtucXJYbXg5UlhxY1kiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1naXQtZm9yay1vdmljZWluYy1zYWZhcmlnZXN0dXJlLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImRvY3MiLCJyb290RGlyZWN0b3J5IjoiZGV2LWRvY3MiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9kb2NzLzNvSmpXTkV2QmtpUHV4a3FIa05CTFVTOFdNb3oiLCJwcmV2aWV3VXJsIjoiZG9jcy1naXQtZm9yay1vdmljZWluYy1zYWZhcmlnZXN0dXJlLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/docs/3oJjWNEvBkiPuxkqHkNBLUS8WMoz)) | [Visit Preview](https://docs-git-fork-oviceinc-safarigesture-excalidraw.vercel.app) | Jan 17, 2025 8:49am |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/7jDVnGbJTmMnaBvknqrXmx9RXqcY)) | [Visit Preview](https://excalidraw-git-fork-oviceinc-safarigesture-excalidraw.vercel.app) | Jan 17, 2025 8:49am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/oT6WUnw6AeWvEdmp3FhfdSpzAo5H)) | [Visit Preview](https://excalidraw-package-example-git-fork-oviceinc-ab59be-excalidraw.vercel.app) | Jan 17, 2025 8:49am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/8H2CiA7TQ4EAyRPAauwAmhKuWhH6)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-21929f-excalidraw.vercel.app) | Jan 17, 2025 8:49am |\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9109,
+        "Issue State": "closed",
+        "Issue Title": "feat: grouped together Undo and Redo buttons on mobile",
+        "Comment ID": 2645625110,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-08T13:33:28Z",
+        "Comment Body": "[vc]: #m7sMnOozra2gFRHq02pAX+Xl+uiOvp447WTOD12BChw=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJkb2NzIiwicm9vdERpcmVjdG9yeSI6ImRldi1kb2NzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZG9jcy80WXNTbTdmMXVCMWhtSHpFZ1habW1zR0ZFeG9SIiwicHJldmlld1VybCI6ImRvY3MtZ2l0LWZvcmstYWJoaXRydWVwcm9ncmFtbWVyLW1vYmlsZXRvb2xiYXJmaXgtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvM3FLeXR1N2ptSjh5Sk52SzF0YU03QVplNXdDcSIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZm8tZmVmZDE5LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXciLCJyb290RGlyZWN0b3J5IjpudWxsLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3L0c5MUVqcUt6cjFyWG5nbnk3QUZtcks1aVpBOFIiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1naXQtZm9yay1hYmhpdHJ1ZXByb2dyYW1tZXItbW9iaWxlLTlhY2I2OS1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZSIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtc2NyaXB0LWluLWJyb3dzZXIiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS83R3R5TDM4UVVWRHBmWW5VV0tTNUVvR0NjTDVrIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLWdpdC1mb3JrLWFiaGl0cnVlcC1iNGYzODctZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn1dfQ==\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/G91EjqKzr1rXngny7AFmrK5iZA8R)) | [Visit Preview](https://excalidraw-git-fork-abhitrueprogrammer-mobile-9acb69-excalidraw.vercel.app) | Feb 12, 2025 6:44pm |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/7GtyL38QUVDpfYnUWKS5EoGCcL5k)) | [Visit Preview](https://excalidraw-package-example-git-fork-abhitruep-b4f387-excalidraw.vercel.app) | Feb 12, 2025 6:44pm |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/3qKytu7jmJ8yJNvK1taM7AZe5wCq)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-fefd19-excalidraw.vercel.app) | Feb 12, 2025 6:44pm |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/4YsSm7f1uB1hmHzEgXZmmsGFExoR)) | [Visit Preview](https://docs-git-fork-abhitrueprogrammer-mobiletoolbarfix-excalidraw.vercel.app) | Feb 12, 2025 6:44pm |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9109,
+        "Issue State": "closed",
+        "Issue Title": "feat: grouped together Undo and Redo buttons on mobile",
+        "Comment ID": 2647635885,
+        "Author": "dwelle",
+        "Created At": "2025-02-10T10:57:22Z",
+        "Comment Body": "Hi, and thanks for the PR!\r\n\r\nHow about putting undo/redo buttons always on the right so that they don't jump around if selection changes as part of the undo/redo action?"
+    },
+    {
+        "Issue ID": 9109,
+        "Issue State": "closed",
+        "Issue Title": "feat: grouped together Undo and Redo buttons on mobile",
+        "Comment ID": 2654529499,
+        "Author": "abhitrueprogrammer",
+        "Created At": "2025-02-12T18:28:04Z",
+        "Comment Body": "Thanks for the review! Sure, makes sense. Making the changes."
+    },
+    {
+        "Issue ID": 9109,
+        "Issue State": "closed",
+        "Issue Title": "feat: grouped together Undo and Redo buttons on mobile",
+        "Comment ID": 2654553871,
+        "Author": "abhitrueprogrammer",
+        "Created At": "2025-02-12T18:39:41Z",
+        "Comment Body": "@dwelle made the required changes and updated the pr description accordingly,"
+    },
+    {
+        "Issue ID": 9109,
+        "Issue State": "closed",
+        "Issue Title": "feat: grouped together Undo and Redo buttons on mobile",
+        "Comment ID": 2656538795,
+        "Author": "dwelle",
+        "Created At": "2025-02-13T13:04:02Z",
+        "Comment Body": "Awesome, thanks!"
+    },
+    {
+        "Issue ID": 9136,
+        "Issue State": "closed",
+        "Issue Title": "chore: update firebase@8 to @11",
+        "Comment ID": 2656409647,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-13T12:10:37Z",
+        "Comment Body": "[vc]: #2acTRKsOnukn68T/Ytq+A7UeqCs3lSgiSzLb8JLDNlI=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy9Ha3B0VEdRZmVzZ055VWExdTE4YVVTSjlqRjNBIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWR3ZWxsZS11cGdyYWRlLWZpcmViYXNlLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1zY3JpcHQtaW4tYnJvd3NlciIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlL0c3SFdUazVrVlB1czRINW5FTjI4cFJxMmU0VzEiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtZ2l0LWR3ZWxsZS11cGdyYWRlLTI1YTBlOC1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJkb2NzIiwicm9vdERpcmVjdG9yeSI6ImRldi1kb2NzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZG9jcy9FYzVMcXVRUlBZVk5LSGNOd0JLcWNwdmE4bUR0IiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvR0tkVlNYWTRvZ1FFcjhWQVNpbkhwZEt0TURycCIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZHctMTdmM2NiLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/GkptTGQfesgNyUa1u18aUSJ9jF3A)) | [Visit Preview](https://excalidraw-git-dwelle-upgrade-firebase-excalidraw.vercel.app) | Feb 13, 2025 0:13am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/G7HWTk5kVPus4H5nEN28pRq2e4W1)) | [Visit Preview](https://excalidraw-package-example-git-dwelle-upgrade-25a0e8-excalidraw.vercel.app) | Feb 13, 2025 0:13am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/GKdVSXY4ogQEr8VASinHpdKtMDrp)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-dw-17f3cb-excalidraw.vercel.app) | Feb 13, 2025 0:13am |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/Ec5LquQRPYVNKHcNwBKqcpva8mDt)) |  | Feb 13, 2025 0:13am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9136,
+        "Issue State": "closed",
+        "Issue Title": "chore: update firebase@8 to @11",
+        "Comment ID": 2656418118,
+        "Author": "github-actions[bot]",
+        "Created At": "2025-02-13T12:13:57Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Lines</td> <td align=\"right\">66.9% (\ud83c\udfaf 60%)</td> <td align=\"right\">68902 / 102985</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Statements</td> <td align=\"right\">66.9% (\ud83c\udfaf 60%)</td> <td align=\"right\">68902 / 102985</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Functions</td> <td align=\"right\">63.72% (\ud83c\udfaf 63%)</td> <td align=\"right\">1964 / 3082</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">79.76% (\ud83c\udfaf 70%)</td> <td align=\"right\">8341 / 10457</td> </tr> </tbody> </table><details><summary>File Coverage</summary><table> <thead> <tr> <th align=\"left\">File</th> <th align=\"right\">Stmts</th> <th align=\"right\">Branches</th> <th align=\"right\">Functions</th> <th align=\"right\">Lines</th> <th align=\"left\">Uncovered Lines</th> </tr> </thead> <tbody> <tr> <td align=\"left\" colspan=\"6\"><b>Changed Files</b></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/components/ExportToExcalidrawPlus.tsx\">excalidraw-app/components/ExportToExcalidrawPlus.tsx</a></td> <td align=\"right\">29.32%</td> <td align=\"right\">100%</td> <td align=\"right\">0%</td> <td align=\"right\">29.32%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/components/ExportToExcalidrawPlus.tsx#L31-L86\" class=\"text-red\">31-86</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/components/ExportToExcalidrawPlus.tsx#L96-L133\" class=\"text-red\">96-133</a></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts\">excalidraw-app/data/firebase.ts</a></td> <td align=\"right\">29.39%</td> <td align=\"right\">100%</td> <td align=\"right\">6.66%</td> <td align=\"right\">29.39%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L57-L61\" class=\"text-red\">57-61</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L64-L68\" class=\"text-red\">64-68</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L71-L75\" class=\"text-red\">71-75</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L80-L81\" class=\"text-red\">80-81</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L90-L98\" class=\"text-red\">90-98</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L101-L112\" class=\"text-red\">101-112</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L117-L118\" class=\"text-red\">117-118</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L120-L124\" class=\"text-red\">120-124</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L128-L139\" class=\"text-red\">128-139</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L142-L168\" class=\"text-red\">142-168</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L171-L181\" class=\"text-red\">171-181</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L184-L243\" class=\"text-red\">184-243</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L246-L266\" class=\"text-red\">246-266</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/bf24567e318d5f227367eb83e070943b513a62d1/excalidraw-app/data/firebase.ts#L269-L313\" class=\"text-red\">269-313</a></td> </tr> </tbody> </table></details>\n<em>Generated in workflow <a href=https://github.com/excalidraw/excalidraw/actions/runs/13307368615>#4314</a> for commit <a href=\"https://github.com/excalidraw/excalidraw/commit/bf24567e318d5f227367eb83e070943b513a62d1\">bf24567</a> by the <a href=\"https://github.com/davelosert/vitest-coverage-report-action\">Vitest Coverage Report Action</a></em>\n\n<!-- vitest-coverage-report-marker-root -->"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049478783,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T11:27:29Z",
+        "Comment Body": "Hello j'ai le m\u00eame probl\u00e8me que toi, je ne peux rien s\u00e9lectionner. Je peux faire des formes sans probl\u00e8me mais je ne peux pas les bouger supprimer / \u00e9crire / s\u00e9lectionner des \u00e9l\u00e9ments. Je ne sais pas comment faire pour retrouver la mobilit\u00e9. Hier tout fonctionnait tr\u00e8s bien. Tu as une astuce ? "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049505645,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T11:38:23Z",
+        "Comment Body": "I just checked that if I clean the canvas and start from the beginning I don't have any problems, and also, the errors in the chrome inspector disappear"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049507039,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T11:39:18Z",
+        "Comment Body": "Yes j'ai pareil que toi si je pars de z\u00e9ro c'est ok mais pour tous fiches excalidraw uploader \u00e7a ne fonctionne pas c'est chiant parce que j'avais tout param\u00e9tr\u00e9"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049509457,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T11:40:39Z",
+        "Comment Body": "> Hello j'ai le m\u00eame probl\u00e8me que toi, je ne peux rien s\u00e9lectionner. Je peux faire des formes sans probl\u00e8me mais je ne peux pas les bouger supprimer / \u00e9crire / s\u00e9lectionner des \u00e9l\u00e9ments. Je ne sais pas comment faire pour retrouver la mobilit\u00e9. Hier tout fonctionnait tr\u00e8s bien. Tu as une astuce ?\r\n\r\n\r\nWhat I'm going to try is to download the canvas in svg and inspect it to see if I see anything strange, but beyond that... no idea.\r\n\r\nI imagine it has to be related to the console error that appeared above."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049511159,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T11:41:45Z",
+        "Comment Body": "Oui je pense que c'est li\u00e9 \u00e0 l'erreur que tu as mentionn\u00e9 ci-dessus. Y a surement du avoir une mise \u00e0 jour ou un truc comme \u00e7a. J'ai essay\u00e9 de changer de navigateur mais rien n'y fait c'est la m\u00eame chose. "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049517250,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T11:45:50Z",
+        "Comment Body": "Then I'm going to debug the svg, maybe there may be a poorly closed tag or something..."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049524359,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T11:50:11Z",
+        "Comment Body": "Je pense que niveau code tu es 100 fois meilleur que moi si tu trouves la solution je suis chaud\r\n"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049541254,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T12:01:21Z",
+        "Comment Body": "J'ai envoy\u00e9 un mail au support pour voir"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049553506,
+        "Author": "PabloLigeroIsla",
+        "Created At": "2024-04-11T12:08:38Z",
+        "Comment Body": "Same here!\r\n\r\nShortcuts (as Ctrl + a) also work. \r\n\r\nThanks @Nicbib and @adominguez "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049581542,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T12:25:13Z",
+        "Comment Body": "Merci pour ton retour @PabloLigeroIsla tu as une astuce pour \u00e9viter de tout s\u00e9lectionner avec des raccourcis ?"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049630417,
+        "Author": "PabloLigeroIsla",
+        "Created At": "2024-04-11T12:53:41Z",
+        "Comment Body": "No @Nicbib . Sorry. I also try to select just groups of elements. But was not possible. \r\n\r\nAnother interesting addition,\r\n\r\n- This is NOT happening in all of my boards in Excalidraw. Just in some of them.\r\n- If a copy paste all the elements from an old Excalidraw which has the bug to a new one (clean new), the bug is reproduced again. \r\n\r\nI didn't identify the combination of elements that cause the bug. "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049679488,
+        "Author": "bepintocosta",
+        "Created At": "2024-04-11T13:19:36Z",
+        "Comment Body": "Hi everyone.\r\nI have the same problem too."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049691660,
+        "Author": "erik-vo",
+        "Created At": "2024-04-11T13:25:58Z",
+        "Comment Body": "Same here! "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049695611,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T13:27:55Z",
+        "Comment Body": "Toujours pas de nouvelles du support quelqu'un \u00e0 r\u00e9ussi \u00e0 avancer ?"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049696986,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T13:28:38Z",
+        "Comment Body": "As I see, new commits have been added 3 hours ago, I don't know if there could be a problem in any of those files, perhaps the problem can be narrowed down https://github.com/excalidraw/excalidraw/pull/7876"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049725726,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T13:43:15Z",
+        "Comment Body": "> Toujours pas de nouvelles du support quelqu'un \u00e0 r\u00e9ussi \u00e0 avancer ?\r\n\r\n\r\nNothing... For now, I'm going to open a new canvas and continue working there while this is being fixed, and once it's fixed, I'll transfer the changes from one to the other. At least that way I can keep making progress."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049734717,
+        "Author": "mbbertolini",
+        "Created At": "2024-04-11T13:47:33Z",
+        "Comment Body": "****The files that have graphics generated by me are not allowing me to select any object in the drawing.\r\nI have a set of artifacts that, if I could no longer use them due to any changes made there, would cause enormous harm to my work using the solution. I ask for support to resolve the issue."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049744658,
+        "Author": "martin-blaus",
+        "Created At": "2024-04-11T13:52:16Z",
+        "Comment Body": "Im having the same issue, a null pointer on the p4 since its undefined, can't find the elements in the exported json (.excalidraw) to fix it.\r\n\r\nAny solution?  I dont want to lose my work"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049768605,
+        "Author": "adominguez",
+        "Created At": "2024-04-11T14:03:28Z",
+        "Comment Body": "I just started a new canvas, and I've encountered the same problem again when trying to add an object from a library. That might be where the issue lies.\r\n\r\n![image](https://github.com/excalidraw/excalidraw/assets/30770867/6a9f310d-88e3-4476-8594-29c485b6cd71)\r\n\r\nPerhaps now it's asking for some new property or something specific that these objects don't have, and that might be where the error is coming from.\r\n\r\nIf I undo (Ctrl + Z) and remove the added element, everything works correctly. So, it must be an issue with the objects being added to the canvas.\r\n"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049825910,
+        "Author": "git-nascimento-denison",
+        "Created At": "2024-04-11T14:28:41Z",
+        "Comment Body": "Hey guys! I have the same problem. I need to continue work on my screen and it doesn't allow editing. I am desperate! I eagerly await the correction."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049834936,
+        "Author": "Fobhep",
+        "Created At": "2024-04-11T14:32:54Z",
+        "Comment Body": "I can confirm the observation regarding adding library objects. I think this is triggering the error"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049838799,
+        "Author": "emanuelelongo",
+        "Created At": "2024-04-11T14:34:28Z",
+        "Comment Body": "Same problem.\r\nThe only workaround I found is to import a backup file of my drawing on Obsidian end working there with the Excalidraw plugin."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049885760,
+        "Author": "PabloLigeroIsla",
+        "Created At": "2024-04-11T14:55:05Z",
+        "Comment Body": "Workaround: \r\n\r\nIs posible to open and edit the .excalidraw files with the bug using the Excalidraw Plugin of VSCode. \r\n\r\nhttps://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor\r\n\r\nI test it and I can select individual elements."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049894680,
+        "Author": "Nicbib",
+        "Created At": "2024-04-11T14:59:06Z",
+        "Comment Body": "Tu peux m'expliquer le process pour le mettre en place sur Mac ? "
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049896945,
+        "Author": "zaboco",
+        "Created At": "2024-04-11T15:00:00Z",
+        "Comment Body": "I have the same issue. I noticed that it happens when I add a closed polygon which doesn't have 3n lines. So 3, 6, 9 is fine; others (4, 5, 8) trigger the error. Don't know if that helps, but it might be a starting point when debugging."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049942999,
+        "Author": "Fobhep",
+        "Created At": "2024-04-11T15:18:01Z",
+        "Comment Body": "> Tu peux m'expliquer le process pour le mettre en place sur Mac ?\r\n\r\nEt pourquoi pas l'anglais ;) C'est Github, les discussions sont g\u00e9n\u00e9ralement en anglais pour que tout le monde comprenne."
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049970029,
+        "Author": "martin-blaus",
+        "Created At": "2024-04-11T15:31:14Z",
+        "Comment Body": "With the visual studio code plugin works fine, so it must be a newly deployed changed that breaks on undefined p4, p3. Not exactly sure what property are the failed objects missing\r\n"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2049972447,
+        "Author": "Fobhep",
+        "Created At": "2024-04-11T15:32:15Z",
+        "Comment Body": "Intellij plugin works fine as well - in case somebody is using not vscode:\r\nhttps://plugins.jetbrains.com/plugin/17096-excalidraw-integration"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2050024973,
+        "Author": "ryan-di",
+        "Created At": "2024-04-11T15:59:06Z",
+        "Comment Body": "Thank you all for reporting and following up on the issue \u2764\ufe0f We're terribly sorry about the inconvenience this has caused. As @adominguez has correctly pointed out, this bug is caused by the recently merged #7636 refactor on geometry. \r\n\r\nLooking into it now! Hope to get back to you soon with a fix!"
+    },
+    {
+        "Issue ID": 7879,
+        "Issue State": "closed",
+        "Issue Title": " I can't select any elements on the canvas",
+        "Comment ID": 2050046053,
+        "Author": "dwelle",
+        "Created At": "2024-04-11T16:11:20Z",
+        "Comment Body": "Hi, we've reverted the deployment for now."
+    },
+    {
+        "Issue ID": 7786,
+        "Issue State": "closed",
+        "Issue Title": "docs @0.18.0",
+        "Comment ID": 2461884830,
+        "Author": "Mrazator",
+        "Created At": "2024-11-07T10:36:30Z",
+        "Comment Body": "For future reference, there is already a PR:\nhttps://github.com/excalidraw/excalidraw/pull/7911"
+    },
+    {
+        "Issue ID": 7786,
+        "Issue State": "closed",
+        "Issue Title": "docs @0.18.0",
+        "Comment ID": 2653656634,
+        "Author": "Mrazator",
+        "Created At": "2025-02-12T13:04:27Z",
+        "Comment Body": "Moved the tasklist to the release PR #9127."
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2065418300,
+        "Author": "vercel[bot]",
+        "Created At": "2024-04-18T22:15:59Z",
+        "Comment Body": "[vc]: #ZT2IIkbSSP1l5H52d63VeLwaE+x0Fx1iA3tcsPxb91w=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy9DUXhMRTl0cnhiU043ZXNrTlhpd1lTbjVOcGtRIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWRvY3MtbmV4dC1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZSIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtc2NyaXB0LWluLWJyb3dzZXIiLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS81Zm5QYUZBNW9BZE1SQTRrcXA5bmZZN3lkd3V6IiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLWdpdC1kb2NzLW5leHQtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IkRFUExPWUVEIn0seyJuYW1lIjoiZG9jcyIsInJvb3REaXJlY3RvcnkiOiJkZXYtZG9jcyIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2RvY3MvQ2NzR3VRa3NWbU4yUHJRazJ6MzdHRWFNNXRrcyIsInByZXZpZXdVcmwiOiJkb2NzLWdpdC1kb2NzLW5leHQtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQifSx7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvNEJHSlpDd3ZYODl6Vmg3enpydTFTZno3Y2VMZyIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZG9jcy1uZXh0LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/CQxLE9trxbSN7eskNXiwYSn5NpkQ)) | [Visit Preview](https://excalidraw-git-docs-next-excalidraw.vercel.app) | Jul 31, 2024 4:19pm |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/5fnPaFA5oAdMRA4kqp9nfY7ydwuz)) | [Visit Preview](https://excalidraw-package-example-git-docs-next-excalidraw.vercel.app) | Jul 31, 2024 4:19pm |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/4BGJZCwvX89zVh7zzru1Sfz7ceLg)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-docs-next-excalidraw.vercel.app) | Jul 31, 2024 4:19pm |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/CcsGuQksVmN2PrQk2z37GEaM5tks)) | [Visit Preview](https://docs-git-docs-next-excalidraw.vercel.app) | Jul 31, 2024 4:19pm |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2065421312,
+        "Author": "github-actions[bot]",
+        "Created At": "2024-04-18T22:19:08Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udd34</td> <td align=\"left\">Lines</td> <td align=\"right\">65.84% (\ud83c\udfaf 70%)</td> <td align=\"right\">54594 / 82914</td> </tr> <tr> <td align=\"center\">\ud83d\udd34</td> <td align=\"left\">Statements</td> <td align=\"right\">65.84% (\ud83c\udfaf 70%)</td> <td align=\"right\">54594 / 82914</td> </tr> <tr> <td align=\"center\">\ud83d\udd34</td> <td align=\"left\">Functions</td> <td align=\"right\">67.29% (\ud83c\udfaf 68%)</td> <td align=\"right\">1632 / 2425</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">80.65% (\ud83c\udfaf 70%)</td> <td align=\"right\">6612 / 8198</td> </tr> </tbody> </table><details><summary>File Coverage</summary>No changed files found.</details>\n<em>Generated in workflow <a href=https://github.com/excalidraw/excalidraw/actions/runs/10183880683>#2926</a></em>\n\n<!-- vitest-coverage-report-marker-root -->"
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2077369943,
+        "Author": "Mrazator",
+        "Created At": "2024-04-25T14:38:36Z",
+        "Comment Body": "Before we merge, let's discuss the naming of `StoreActions` as they are not super clear to the outside world #7898"
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2122883408,
+        "Author": "Mrazator",
+        "Created At": "2024-05-21T15:23:48Z",
+        "Comment Body": "As part of #8045 we also exposed `normalizeIndices` (apart from being accessible through `restoreElements` params). It's up to discussion whether we should also document it's standalone usage in docs, for now, it's not."
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2233651948,
+        "Author": "Mrazator",
+        "Created At": "2024-07-17T15:53:24Z",
+        "Comment Body": "Consider adding more documentation about a font picker - available fonts & styles, registration of custom fonts (once we have that), etc.\r\n\r\nAnd correcting the existing docs, as a lot is pointing into the old webpack bundle."
+    },
+    {
+        "Issue ID": 7911,
+        "Issue State": "closed",
+        "Issue Title": "docs: Docs for vNext \ud83d\ude80",
+        "Comment ID": 2653650422,
+        "Author": "Mrazator",
+        "Created At": "2025-02-12T13:02:05Z",
+        "Comment Body": "Closing in favor of #9127"
+    },
+    {
+        "Issue ID": 9128,
+        "Issue State": "closed",
+        "Issue Title": "fix: stop using structuredClone",
+        "Comment ID": 2653187335,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-12T09:53:06Z",
+        "Comment Body": "[vc]: #E+RgsiKaLkTHZs9nfQ0OEssqejJoNk93WqT2wc4V5M0=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3Iiwicm9vdERpcmVjdG9yeSI6bnVsbCwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy9IcXF1SnExRTRmUGViODdicXdHdUhqY0NVU0tNIiwicHJldmlld1VybCI6ImV4Y2FsaWRyYXctZ2l0LWR3ZWxsZS1maXgtc3RydWN0dXJlZGNsb25lLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1zY3JpcHQtaW4tYnJvd3NlciIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlL0ZTcWp6RlNDbTZjcXRzZWo0c3RXQzExNzVOTFEiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtZ2l0LWR3ZWxsZS1maXgtc3RyLWE4MzE4MC1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJkb2NzIiwicm9vdERpcmVjdG9yeSI6ImRldi1kb2NzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZG9jcy82bzVZcHJBb0x1OGsyTEtRMjdKSHhiWXBuUzRjIiwibmV4dENvbW1pdFN0YXR1cyI6IklHTk9SRUQiLCJwcmV2aWV3VXJsIjoiZG9jcy1naXQtZHdlbGxlLWZpeC1zdHJ1Y3R1cmVkY2xvbmUtZXhjYWxpZHJhdy52ZXJjZWwuYXBwIn0seyJuYW1lIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMiLCJyb290RGlyZWN0b3J5IjoiZXhhbXBsZXMvZXhjYWxpZHJhdy93aXRoLW5leHRqcyIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLXdpdGgtbmV4dGpzL0NCblVkRzR1cjFRWmFqUVVNY2tGdjhUdzJDQ20iLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMtZ2l0LWR3LTRmODIzNi1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifV19\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/HqquJq1E4fPeb87bqwGuHjcCUSKM)) | [Visit Preview](https://excalidraw-git-dwelle-fix-structuredclone-excalidraw.vercel.app) | Feb 12, 2025 0:00am |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/FSqjzFSCm6cqtsej4stWC1175NLQ)) | [Visit Preview](https://excalidraw-package-example-git-dwelle-fix-str-a83180-excalidraw.vercel.app) | Feb 12, 2025 0:00am |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/CBnUdG4ur1QZajQUMckFv8Tw2CCm)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-dw-4f8236-excalidraw.vercel.app) | Feb 12, 2025 0:00am |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/6o5YprAoLu8k2LKQ27JHxbYpnS4c)) | [Visit Preview](https://docs-git-dwelle-fix-structuredclone-excalidraw.vercel.app) | Feb 12, 2025 0:00am |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9128,
+        "Issue State": "closed",
+        "Issue Title": "fix: stop using structuredClone",
+        "Comment ID": 2653196036,
+        "Author": "github-actions[bot]",
+        "Created At": "2025-02-12T09:56:38Z",
+        "Comment Body": "<h2>Coverage Report</h2>\n<table> <thead> <tr> <th align=\"center\">Status</th> <th align=\"left\">Category</th> <th align=\"right\">Percentage</th> <th align=\"right\">Covered / Total</th> </tr> </thead> <tbody> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Lines</td> <td align=\"right\">66.89% (\ud83c\udfaf 60%)</td> <td align=\"right\">68801 / 102843</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Statements</td> <td align=\"right\">66.89% (\ud83c\udfaf 60%)</td> <td align=\"right\">68801 / 102843</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Functions</td> <td align=\"right\">63.72% (\ud83c\udfaf 63%)</td> <td align=\"right\">1964 / 3082</td> </tr> <tr> <td align=\"center\">\ud83d\udfe2</td> <td align=\"left\">Branches</td> <td align=\"right\">79.78% (\ud83c\udfaf 70%)</td> <td align=\"right\">8316 / 10423</td> </tr> </tbody> </table><details><summary>File Coverage</summary><table> <thead> <tr> <th align=\"left\">File</th> <th align=\"right\">Stmts</th> <th align=\"right\">Branches</th> <th align=\"right\">Functions</th> <th align=\"right\">Lines</th> <th align=\"left\">Uncovered Lines</th> </tr> </thead> <tbody> <tr> <td align=\"left\" colspan=\"6\"><b>Changed Files</b></td> </tr> <tr> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts\">packages/excalidraw/element/elbowArrow.ts</a></td> <td align=\"right\">70.23%</td> <td align=\"right\">84.93%</td> <td align=\"right\">93.33%</td> <td align=\"right\">70.23%</td> <td align=\"left\"><a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L130-L162\" class=\"text-red\">130-162</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L178-L216\" class=\"text-red\">178-216</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L226-L245\" class=\"text-red\">226-245</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L272-L440\" class=\"text-red\">272-440</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L464\" class=\"text-red\">464</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L466-L467\" class=\"text-red\">466-467</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L493\" class=\"text-red\">493</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L495-L512\" class=\"text-red\">495-512</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L519\" class=\"text-red\">519</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L521-L538\" class=\"text-red\">521-538</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L569\" class=\"text-red\">569</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L574\" class=\"text-red\">574</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L593-L602\" class=\"text-red\">593-602</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L608-L617\" class=\"text-red\">608-617</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L621-L643\" class=\"text-red\">621-643</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L647-L666\" class=\"text-red\">647-666</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L687-L864\" class=\"text-red\">687-864</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L995\" class=\"text-red\">995</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L997-L998\" class=\"text-red\">997-998</a>, <a href=\"https://github.com/excalidraw/excalidraw/blob/20ea2a912dd60e1b8468f231eed25ccb7613a188/packages/excalidraw/element/elbowArrow.ts#L1027-L1028\" class=\"text-red\">1027-"
+    },
+    {
+        "Issue ID": 9086,
+        "Issue State": "closed",
+        "Issue Title": "perf: Improved pointer events related performance when the sidebar is docked with a large library open",
+        "Comment ID": 2630846663,
+        "Author": "vercel[bot]",
+        "Created At": "2025-02-03T12:44:20Z",
+        "Comment Body": "[vc]: #Wo2doyL+wNNYQN8oqmaJyP2qGEeWwZVaJW0zvlppukk=:eyJpc01vbm9yZXBvIjp0cnVlLCJ0eXBlIjoiZ2l0aHViIiwicHJvamVjdHMiOlt7Im5hbWUiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcyIsInJvb3REaXJlY3RvcnkiOiJleGFtcGxlcy9leGNhbGlkcmF3L3dpdGgtbmV4dGpzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtd2l0aC1uZXh0anMvN1g0emtCUDVZWlN4UDRKZk4yR2R3UTMzeW15NiIsInByZXZpZXdVcmwiOiJleGNhbGlkcmF3LXBhY2thZ2UtZXhhbXBsZS13aXRoLW5leHRqcy1naXQtZm8tYzlkMzA0LWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlIiwicm9vdERpcmVjdG9yeSI6ImV4YW1wbGVzL2V4Y2FsaWRyYXcvd2l0aC1zY3JpcHQtaW4tYnJvd3NlciIsImluc3BlY3RvclVybCI6Imh0dHBzOi8vdmVyY2VsLmNvbS9leGNhbGlkcmF3L2V4Y2FsaWRyYXctcGFja2FnZS1leGFtcGxlLzZ2OFU3TGZUalhpM3d1M2dMc3ZudlBLUUNEaUQiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1wYWNrYWdlLWV4YW1wbGUtZ2l0LWZvcmstdG90aGF0dDgxLTgwZTQ0MC1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiREVQTE9ZRUQifSx7Im5hbWUiOiJkb2NzIiwicm9vdERpcmVjdG9yeSI6ImRldi1kb2NzIiwiaW5zcGVjdG9yVXJsIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2V4Y2FsaWRyYXcvZG9jcy9HQVEyQ3RNcjRCUnV2MmlNVWRKRzVtZUJMY0VOIiwicHJldmlld1VybCI6ImRvY3MtZ2l0LWZvcmstdG90aGF0dDgxLWxpYnJhcnktcGVyZi1leGNhbGlkcmF3LnZlcmNlbC5hcHAiLCJuZXh0Q29tbWl0U3RhdHVzIjoiSUdOT1JFRCJ9LHsibmFtZSI6ImV4Y2FsaWRyYXciLCJyb290RGlyZWN0b3J5IjpudWxsLCJpbnNwZWN0b3JVcmwiOiJodHRwczovL3ZlcmNlbC5jb20vZXhjYWxpZHJhdy9leGNhbGlkcmF3LzVRamVlU0pBWDREeTFWYTFYTG5wZFNCY3cxMnoiLCJwcmV2aWV3VXJsIjoiZXhjYWxpZHJhdy1naXQtZm9yay10b3RoYXR0ODEtbGlicmFyeS1wZXJmLWV4Y2FsaWRyYXcudmVyY2VsLmFwcCIsIm5leHRDb21taXRTdGF0dXMiOiJERVBMT1lFRCJ9XX0=\n**The latest updates on your projects**. Learn more about [Vercel for Git \u2197\ufe0e](https://vercel.link/github-learn-more)\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **excalidraw** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw/5QjeeSJAX4Dy1Va1XLnpdSBcw12z)) | [Visit Preview](https://excalidraw-git-fork-tothatt81-library-perf-excalidraw.vercel.app) | Feb 4, 2025 8:59pm |\n| **excalidraw-package-example** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example/6v8U7LfTjXi3wu3gLsvnvPKQCDiD)) | [Visit Preview](https://excalidraw-package-example-git-fork-tothatt81-80e440-excalidraw.vercel.app) | Feb 4, 2025 8:59pm |\n| **excalidraw-package-example-with-nextjs** | \u2705 Ready ([Inspect](https://vercel.com/excalidraw/excalidraw-package-example-with-nextjs/7X4zkBP5YZSxP4JfN2GdwQ33ymy6)) | [Visit Preview](https://excalidraw-package-example-with-nextjs-git-fo-c9d304-excalidraw.vercel.app) | Feb 4, 2025 8:59pm |\n\n<details><summary>1 Skipped Deployment</summary>\n\n| Name | Status | Preview | Updated (UTC) |\n| :--- | :----- | :------ | :------ |\n| **docs** | \u2b1c\ufe0f Ignored ([Inspect](https://vercel.com/excalidraw/docs/GAQ2CtMr4BRuv2iMUdJG5meBLcEN)) | [Visit Preview](https://docs-git-fork-tothatt81-library-perf-excalidraw.vercel.app) | Feb 4, 2025 8:59pm |\n</details>\n\n\n\n\n"
+    },
+    {
+        "Issue ID": 9086,
+        "Issue State": "closed",
+        "Issue Title": "perf: Improved pointer events related performance when the sidebar is docked with a large library open",
+        "Comment ID": 2632337180,
+        "Author": "dwelle",
+        "Created At": "2025-02-03T22:36:31Z",
+        "Comment Body": "Hey!\r\n\r\n> However, this detour helped me identify the real bottleneck. I noticed that although pointer events no longer triggered React re-renders, there was still some unusual behavior. After some more investigation, I found that the App component frequently changes the --ui-pointerEvent CSS variable to block other elements' interactivity, and applying these changes was the root cause of the lags.\r\n> \r\n> My proposed solution is to remove these changes while maintaining the same UX (i.e., no interaction with outside elements during canvas interaction). During a canvas pointer up event, we capture the pointer events to the canvas itself. This ensures that all other outside elements will be non-interactive until a pointer up event. I tested this solution and it provides the same UX as before, though there could be some edge cases I'm not aware of. Unfortunately, I have noticed the tests are failing because pepjs, the library that polyfills pointer events to jsdom does not properly support the capturing phase for pointer events. Still, I think this idea is worth considering at least.\r\n\r\nInteresting find, and solution! I've mocked the API for tests since we weren't testing this part of the UI behavior anyway. We'll see if it bites us in the future.\r\n\r\nI've also kept the old logic in case the `setPointerCapture` is not supported \u2014 while it has a good browser support, on mobile it's not quite universal, and a pointer handling shouldn't be something we'll completely break in those cases.\r\n\r\n--\r\n\r\nI'll need to go through the LibraryMenu changes tomorrow, but so far, looking good \ud83d\udc4d."
+    },
+    {
+        "Issue ID": 9086,
+        "Issue State": "closed",
+        "Issue Title": "perf: Improved pointer events related performance when the sidebar is docked with a large library open",
+        "Comment ID": 2635073437,
+        "Author": "dwelle",
+        "Created At": "2025-02-04T21:04:42Z",
+        "Comment Body": "Alright, so [first](https://github.com/excalidraw/excalidraw/pull/9086/commits/9d90808c87a82994c515a6341523afefbb2d3efe) I removed the `pendingElements` update optimizations you made because there were issues with updates (e.g. when you change color of current selection, it wouldn't catch the change), and also it seemed it wasn't worth the effort.\r\n\r\nBut then I realized that in multiplayer scenarios it will rerender the `LibraryMenuContent` on every remote change because `cursorButton` will be `up` most of the time, so I [reintroduced](https://github.com/excalidraw/excalidraw/pull/9086/commits/3e9707196311e87e733a674ef3d2818e53ab57bf) the memoization but made it a bit more robust \u2014 which also made it more complicated / slower. But it seems there's some non-trivial perf benefit.\r\n\r\nThat said, there are some non-intuitive things happening, such as that without the optim (technically _with_ the optim as well) there are more rerenders when the remote client is dragging an element you _don't_ have selected (which should bail) as opposed to editing your own selection. Unclear why, something that can be investigated later.\r\n\r\nThus, the quest for making Library sidebar more optimized continues, I would say \u2014 but I'm glad we've made a good step toward optimizing it :).\r\n\r\nThanks! \u2764\ufe0f"
+    },
+    {
+        "Issue ID": 9086,
+        "Issue State": "closed",
+        "Issue Title": "perf: Improved pointer events related performance when the sidebar is docked with a large library open",
+        "Comment ID": 2652836515,
+        "Author": "sentry-io[bot]",
+        "Created At": "2025-02-12T07:08:36Z",
+        "Comment Body": "## Suspect Issues\nThis pull request was deployed and Sentry observed the following issues:\n\n- \u203c\ufe0f **ReferenceError: structuredClone is not defined** `updateElbowArrowPoints(packages/excalidraw/elem...` [View Issue](https://excalidraw.sentry.io/issues/6291795739/?referrer=github-pr-bot)\n\n<sub>Did you find this useful? React with a \ud83d\udc4d or \ud83d\udc4e</sub>"
+    },
+    {
+        "Issue ID": 9105,
+        "Issue State": "closed",
+        "Issue Title": "The `onChange` event is also executed for simple mouse movements.",
+        "Comment ID": 2650580334,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:50:59Z",
+        "Comment Body": "> Is the execution cycle of these 'onChange' events intended?\n\nYes, we know it's suboptimal. However, you should be able to detect if an element has changed or not based on it's version. In the future we might have another API which does the version caching / detection it for you."
+    },
+    {
+        "Issue ID": 9090,
+        "Issue State": "closed",
+        "Issue Title": "Images suddenly disappear",
+        "Comment ID": 2633785920,
+        "Author": "dwelle",
+        "Created At": "2025-02-04T12:37:31Z",
+        "Comment Body": "Hi. No related to premium. Could be a bug, but it's likely the browser decided to clear the IndexedDB where images are stored locally in the browser."
+    },
+    {
+        "Issue ID": 9087,
+        "Issue State": "closed",
+        "Issue Title": "Missing text underlining, bold, and italics",
+        "Comment ID": 2646253643,
+        "Author": "ItsLasa",
+        "Created At": "2025-02-09T12:50:40Z",
+        "Comment Body": "I\u2019m working on this issue regarding the missing text formatting features (underlining, bold, and italics)..so please waiting for this feature soon"
+    },
+    {
+        "Issue ID": 9087,
+        "Issue State": "closed",
+        "Issue Title": "Missing text underlining, bold, and italics",
+        "Comment ID": 2650570618,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:46:27Z",
+        "Comment Body": "Let's track it as part of https://github.com/excalidraw/excalidraw/issues/1126."
+    },
+    {
+        "Issue ID": 9084,
+        "Issue State": "closed",
+        "Issue Title": "Firebase Configuration",
+        "Comment ID": 2650566649,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:44:33Z",
+        "Comment Body": "> Firebase Storage is not available for free at this time?\n\nThat's unfortunate, seems like they removed the free tier. For free option you will need to fork the repo and try to use some other object storage."
+    },
+    {
+        "Issue ID": 9085,
+        "Issue State": "closed",
+        "Issue Title": "Tax Residency Certificate for 2025",
+        "Comment ID": 2650561455,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:41:56Z",
+        "Comment Body": "Please ping us at support@excalidraw.com"
+    },
+    {
+        "Issue ID": 9065,
+        "Issue State": "closed",
+        "Issue Title": "Automatic switch between light/dark mode with Sphinx documentation",
+        "Comment ID": 2650550259,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:36:18Z",
+        "Comment Body": "> somehow be able to dynamically change the color scheme from light to dark and viceversa\n\nFor this you would need to embed excalidraw instance inside the documentation portal and then change the theme based on you documentation theme with https://docs.excalidraw.com/docs/@excalidraw/excalidraw/api/constants#theme.\n\nOtherwise, you can always export both light & dark versions of the scenes (i.e. as png) and then switch betwee them."
+    },
+    {
+        "Issue ID": 9061,
+        "Issue State": "closed",
+        "Issue Title": "there is no keyboard shortcuts to Create a flowchart from a generic element",
+        "Comment ID": 2622870815,
+        "Author": "Mrazator",
+        "Created At": "2025-01-29T21:16:25Z",
+        "Comment Body": "Were you looking for these shortcuts?\n\nhttps://x.com/excalidraw/status/1823079626156961937"
+    },
+    {
+        "Issue ID": 9061,
+        "Issue State": "closed",
+        "Issue Title": "there is no keyboard shortcuts to Create a flowchart from a generic element",
+        "Comment ID": 2623257998,
+        "Author": "adesa-rep",
+        "Created At": "2025-01-30T00:32:56Z",
+        "Comment Body": "I was looking for it on an extension for visual studio code but it doesn't work"
+    },
+    {
+        "Issue ID": 9061,
+        "Issue State": "closed",
+        "Issue Title": "there is no keyboard shortcuts to Create a flowchart from a generic element",
+        "Comment ID": 2625624849,
+        "Author": "dwelle",
+        "Created At": "2025-01-30T21:23:22Z",
+        "Comment Body": "not in VS Code yet"
+    },
+    {
+        "Issue ID": 9061,
+        "Issue State": "closed",
+        "Issue Title": "there is no keyboard shortcuts to Create a flowchart from a generic element",
+        "Comment ID": 2625760098,
+        "Author": "adesa-rep",
+        "Created At": "2025-01-30T22:43:03Z",
+        "Comment Body": "ohh, I see. Well, I'll be waiting for it. It would be nice to have that shortcut.\n\nThanks!!!"
+    },
+    {
+        "Issue ID": 9107,
+        "Issue State": "closed",
+        "Issue Title": "Enhancement - Allow adding padding to rectangles and other figures.",
+        "Comment ID": 2646806525,
+        "Author": "surya-d-621",
+        "Created At": "2025-02-10T02:52:31Z",
+        "Comment Body": "I've already worked on padding enhancement for rectangle bound text #8834 . Shall I work on this?"
+    },
+    {
+        "Issue ID": 9107,
+        "Issue State": "closed",
+        "Issue Title": "Enhancement - Allow adding padding to rectangles and other figures.",
+        "Comment ID": 2648164487,
+        "Author": "mbv401920150",
+        "Created At": "2025-02-10T14:28:23Z",
+        "Comment Body": "Lovely, I saw the other PR, looks correct to me! - Thanks to take it in advance"
+    },
+    {
+        "Issue ID": 9107,
+        "Issue State": "closed",
+        "Issue Title": "Enhancement - Allow adding padding to rectangles and other figures.",
+        "Comment ID": 2650515587,
+        "Author": "Mrazator",
+        "Created At": "2025-02-11T11:19:44Z",
+        "Comment Body": "I don't think we will be adding user option to change to padding, mostly due to feature creep, but the padding should by there by default. Closing as duplicate of https://github.com/excalidraw/excalidraw/issues/8834."
+    }
+]

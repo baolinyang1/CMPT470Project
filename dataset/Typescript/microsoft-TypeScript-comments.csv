@@ -1,0 +1,2766 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+61186,closed,type alternatives in arguments become function alternatives and are then inferred to a never argument.,2661106650,Andarist,2025-02-15T21:13:24Z,"You might have wanted to use a non-distributive conditional type there:
+```ts
+function voidOrNot<T = void>(): { f: [T] extends [void] ? () => void : (arg: T) => void } {
+  return null!;
+}
+```"
+61186,closed,type alternatives in arguments become function alternatives and are then inferred to a never argument.,2661109901,sparecycles,2025-02-15T21:22:57Z,"@Andarist that solved my issue, thanks!
+
+---
+
+Thinking about this.... I left out that the oldest version of typescript (3.3.3) in the Playground changes `""A""|""B""` to `""A""&""B""`
+
+<img width=""540"" alt=""Image"" src=""https://github.com/user-attachments/assets/86c3cdc0-9c28-45f8-a204-be65ee5125ec"" />
+
+(which was also wrong).
+
+---
+
+If conditional types are meant to distribute, wouldn't transforming `(arg: ""A""|""B"") => void` to `((arg: ""A"") => void) & ((arg: ""B"") => void)` be the correct way to do it (with `&` instead of `|`)?
+
+<img width=""460"" alt=""Image"" src=""https://github.com/user-attachments/assets/625d7c7f-510a-4172-8e89-fd4fc5e2a682"" />"
+61186,closed,type alternatives in arguments become function alternatives and are then inferred to a never argument.,2661118291,sparecycles,2025-02-15T21:47:01Z,"Searched more, looks like this is a duplicate of, or related to
+- https://github.com/microsoft/TypeScript/issues/30378 (fixed by the above suggestion?)
+- https://github.com/Microsoft/TypeScript/issues/29535 (not fixed by the above suggestion)
+
+"
+61186,closed,type alternatives in arguments become function alternatives and are then inferred to a never argument.,2661365641,Andarist,2025-02-16T10:27:00Z,"> If conditional types are meant to distribute, wouldn't transforming (arg: ""A""|""B"") => void to ((arg: ""A"") => void) & ((arg: ""B"") => void) be the correct way to do it (with & instead of |)?
+
+That might be what you want to get in certain situations but the compiler can't predict your intention. A union distributes into another union "
+61186,closed,type alternatives in arguments become function alternatives and are then inferred to a never argument.,2661574451,sparecycles,2025-02-16T19:09:28Z,"I'm not convinced this is the best language decision, but thanks again for the tight workaround!
+"
+61130,closed,As package developers we need an ignore flag for typescript compiler.,2639343445,MartinJohns,2025-02-06T09:56:17Z,"> i would a directive like. that would avoid them from being added to the .d.ts files during compilation.
+
+The [stripInternal](https://www.typescriptlang.org/tsconfig/#stripInternal) compiler option does exactly this."
+61130,closed,As package developers we need an ignore flag for typescript compiler.,2639397297,FridayCandour,2025-02-06T10:18:24Z,Thanks this works for me.
+61130,closed,As package developers we need an ignore flag for typescript compiler.,2639416891,MartinJohns,2025-02-06T10:25:21Z,"Be warned that the stripped properties won't be part of any compatibility check anymore, as they're *""truly""* gone:
+
+```typescript
+declare class Page {
+	a: string;
+
+	/** @internal */
+	b: string;
+}
+```
+
+results in this .d.ts file:
+
+```typescript
+declare class Page {
+    a: string;
+}
+```
+
+so the object `{ a: ""abc"" }` will be compatible with `Page`, despite the missing `b` property."
+61130,closed,As package developers we need an ignore flag for typescript compiler.,2661279750,FridayCandour,2025-02-16T06:38:14Z,"
+> declare class Page {
+> 	a: string;
+> 
+> 	/** @internal */
+> 	b: string;
+> }
+> results in this .d.ts file:
+> 
+> declare class Page {
+>     a: string;
+> }
+> so the object `{ a: ""abc"" }` will be compatible with `Page`, despite the missing `b` property.
+
+
+that's not a problem for what i am currently working on."
+60812,closed,Write path normalization without array allocations,2552364476,andrewbranch,2024-12-18T22:10:32Z,@typescript-bot perf test this
+60812,closed,Write path normalization without array allocations,2552364562,typescript-bot,2024-12-18T22:10:36Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `perf test this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164428) | [👀 Results](https://github.com/microsoft/TypeScript/pull/60812#issuecomment-2552421140) |"
+60812,closed,Write path normalization without array allocations,2552421140,typescript-bot,2024-12-18T22:53:29Z,"@andrewbranch
+The results of the perf run you requested are in!
+<details><summary> Here they are:</summary><p>
+<h2>tsc</h2>
+<b>Comparison Report - baseline..pr</b>
+<table border=""0"" cellpadding=""0"" cellspacing=""0"" >
+<thead>
+<tr>
+<th align=left><sub>Metric</sub></th>
+<th align=right><sub>baseline</sub></th>
+<th align=right><sub>pr</sub></th>
+<th align=right><sub>Delta</sub></th>
+<th align=right><sub>Best</sub></th>
+<th align=right><sub>Worst</sub></th>
+<th align=right><sub>p-value</sub></th>
+</tr>
+</thead>
+<tr class=""group""><th align=left colspan=""7""><sub>Compiler-Unions - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>195,362k (± 1.01%)</sub></td>
+<td align=right><sub>196,140k (± 0.73%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>193,230k</sub></td>
+<td align=right><sub>196,885k</sub></td>
+<td align=right><sub>p=0.230 n=6</sub></td>
+</tr>
+<tr class=""measurement parse-time scenario0 host0"">
+<td align=left><sub>Parse Time</sub></td>
+<td align=right><sub>1.59s (± 1.19%)</sub></td>
+<td align=right><sub>1.61s (± 1.01%)</sub></td>
+<td align=right><sub>+0.02s (+ 1.47%)</sub></td>
+<td align=right><sub>1.60s</sub></td>
+<td align=right><sub>1.64s</sub></td>
+<td align=right><sub>p=0.048 n=6</sub></td>
+</tr>
+<tr class=""measurement bind-time scenario0 host0"">
+<td align=left><sub>Bind Time</sub></td>
+<td align=right><sub>0.87s (± 1.62%)</sub></td>
+<td align=right><sub>0.86s (± 1.47%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>0.85s</sub></td>
+<td align=right><sub>0.88s</sub></td>
+<td align=right><sub>p=0.249 n=6</sub></td>
+</tr>
+<tr class=""measurement check-time scenario0 host0"">
+<td align=left><sub>Check Time</sub></td>
+<td align=right><sub>11.73s (± 0.48%)</sub></td>
+<td align=right><sub>11.79s (± 0.56%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>11.71s</sub></td>
+<td align=right><sub>11.87s</sub></td>
+<td align=right><sub>p=0.261 n=6</sub></td>
+</tr>
+<tr class=""measurement emit-time scenario0 host0"">
+<td align=left><sub>Emit Time</sub></td>
+<td align=right><sub>3.46s (± 3.38%)</sub></td>
+<td align=right><sub>3.33s (± 2.58%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>3.26s</sub></td>
+<td align=right><sub>3.50s</sub></td>
+<td align=right><sub>p=0.063 n=6</sub></td>
+</tr>
+<tr class=""measurement total scenario0 host0"">
+<td align=left><sub>Total Time</sub></td>
+<td align=right><sub>17.65s (± 0.66%)</sub></td>
+<td align=right><sub>17.60s (± 0.75%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>17.45s</sub></td>
+<td align=right><sub>17.77s</sub></td>
+<td align=right><sub>p=0.471 n=6</sub></td>
+</tr>
+</tbody>
+<tr class=""group""><th align=left colspan=""7""><sub>angular-1 - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>1,226,014k (± 0.00%)</sub></td>
+<td align=right><sub>1,225,733k (± 0.00%)</sub></td>
+<td align=right><sub>-281k (- 0.02%)</sub></td>
+<td align=right><sub>1,225,632k</sub></td>
+<td ali"
+60812,closed,Write path normalization without array allocations,2552468158,andrewbranch,2024-12-18T23:38:13Z,I’m puzzled by the perf results
+60812,closed,Write path normalization without array allocations,2552494439,andrewbranch,2024-12-18T23:59:33Z,"Changing the scenarios to have long paths that are already normalized shows the old `normalizePath` regex fast path to be the winner. The scenarios being benchmarked are the tests, which skew heavily toward needing normalization, whereas real-world usage usually results in a no-op. Probably using the regex to test, new function to modify, is going to be the best combination."
+60812,closed,Write path normalization without array allocations,2552501434,andrewbranch,2024-12-19T00:06:22Z,@typescript-bot perf test
+60812,closed,Write path normalization without array allocations,2552501483,typescript-bot,2024-12-19T00:06:26Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `perf test` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164429) | [👀 Results](https://github.com/microsoft/TypeScript/pull/60812#issuecomment-2552546486) |"
+60812,closed,Write path normalization without array allocations,2552546486,typescript-bot,2024-12-19T00:49:33Z,"@andrewbranch
+The results of the perf run you requested are in!
+<details><summary> Here they are:</summary><p>
+<h2>tsc</h2>
+<b>Comparison Report - baseline..pr</b>
+<table border=""0"" cellpadding=""0"" cellspacing=""0"" >
+<thead>
+<tr>
+<th align=left><sub>Metric</sub></th>
+<th align=right><sub>baseline</sub></th>
+<th align=right><sub>pr</sub></th>
+<th align=right><sub>Delta</sub></th>
+<th align=right><sub>Best</sub></th>
+<th align=right><sub>Worst</sub></th>
+<th align=right><sub>p-value</sub></th>
+</tr>
+</thead>
+<tr class=""group""><th align=left colspan=""7""><sub>Compiler-Unions - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>195,042k (± 1.01%)</sub></td>
+<td align=right><sub>196,764k (± 0.09%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>196,453k</sub></td>
+<td align=right><sub>196,962k</sub></td>
+<td align=right><sub>p=0.298 n=6</sub></td>
+</tr>
+<tr class=""measurement parse-time scenario0 host0"">
+<td align=left><sub>Parse Time</sub></td>
+<td align=right><sub>1.61s (± 1.30%)</sub></td>
+<td align=right><sub>1.60s (± 1.84%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1.56s</sub></td>
+<td align=right><sub>1.64s</sub></td>
+<td align=right><sub>p=0.373 n=6</sub></td>
+</tr>
+<tr class=""measurement bind-time scenario0 host0"">
+<td align=left><sub>Bind Time</sub></td>
+<td align=right><sub>0.88s (± 2.14%)</sub></td>
+<td align=right><sub>0.87s (± 0.60%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>0.86s</sub></td>
+<td align=right><sub>0.87s</sub></td>
+<td align=right><sub>p=0.452 n=6</sub></td>
+</tr>
+<tr class=""measurement check-time scenario0 host0"">
+<td align=left><sub>Check Time</sub></td>
+<td align=right><sub>11.74s (± 0.14%)</sub></td>
+<td align=right><sub>11.76s (± 0.66%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>11.67s</sub></td>
+<td align=right><sub>11.90s</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement emit-time scenario0 host0"">
+<td align=left><sub>Emit Time</sub></td>
+<td align=right><sub>3.28s (± 1.20%)</sub></td>
+<td align=right><sub>3.31s (± 3.47%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>3.24s</sub></td>
+<td align=right><sub>3.54s</sub></td>
+<td align=right><sub>p=0.936 n=6</sub></td>
+</tr>
+<tr class=""measurement total scenario0 host0"">
+<td align=left><sub>Total Time</sub></td>
+<td align=right><sub>17.50s (± 0.42%)</sub></td>
+<td align=right><sub>17.53s (± 0.61%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>17.40s</sub></td>
+<td align=right><sub>17.66s</sub></td>
+<td align=right><sub>p=0.687 n=6</sub></td>
+</tr>
+</tbody>
+<tr class=""group""><th align=left colspan=""7""><sub>angular-1 - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>1,226,032k (± 0.00%)</sub></td>
+<td align=right><sub>1,225,726k (± 0.01%)</sub></td>
+<td align=right><sub>-306k (- 0.02%)</sub></td>
+<td align=right><sub>1,225,636k</sub></td>
+<td align=right><sub>1"
+60812,closed,Write path normalization without array allocations,2557639886,andrewbranch,2024-12-20T19:58:15Z,"From instrumenting the compilation of VS Code, I learned two things:
+
+1. The number of `normalizePath` calls outweighs `getNormalizedAbsolutePath` by ~300x.
+2. >99% of all calls to either function end up being a no-op.
+
+Optimizing `getNormalizedAbsolutePath` is unlikely to make a measurable difference.
+
+I'm going to repeat the instrumentation for a TS Server program update and see if the ratios are similar."
+60812,closed,Write path normalization without array allocations,2557676612,andrewbranch,2024-12-20T20:28:51Z,"During a TS Server update, _literally_ every call is a no-op.
+
+```
+{
+  initialize: {
+    normalizePath: {
+      total: 108354,
+      noop: 108026,
+      slashes: 0,
+      fastReplace: 0,
+      full: 328
+    },
+    getNormalizedAbsolutePath: {
+      total: 1978,
+      noop: 1958
+    }
+  },
+  update: {
+    normalizePath: {
+      total: 7839,
+      noop: 7839,
+      slashes: 0,
+      fastReplace: 0,
+      full: 0
+    },
+    getNormalizedAbsolutePath: {
+      total: 467,
+      noop: 467
+    }
+  }
+}
+```"
+60812,closed,Write path normalization without array allocations,2578722187,DanielRosenwasser,2025-01-08T21:41:54Z,@typescript-bot pack this
+60812,closed,Write path normalization without array allocations,2578722293,typescript-bot,2025-01-08T21:41:59Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `pack this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164497) | [❌ Results](https://github.com/microsoft/TypeScript/pull/60812#issuecomment-2578725011) |"
+60812,closed,Write path normalization without array allocations,2578725011,typescript-bot,2025-01-08T21:43:54Z,"Hey @DanielRosenwasser, something went wrong when looking for the build artifact. ([You can check the log here](https://typescript.visualstudio.com/TypeScript/_build/index?buildId=164497&_a=summary))."
+60812,closed,Write path normalization without array allocations,2578761386,DanielRosenwasser,2025-01-08T22:05:50Z,@typescript-bot pack this
+60812,closed,Write path normalization without array allocations,2578761609,typescript-bot,2025-01-08T22:05:55Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `pack this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164499) | [✅ Results](https://github.com/microsoft/TypeScript/pull/60812#issuecomment-2578766694) |"
+60812,closed,Write path normalization without array allocations,2578766694,typescript-bot,2025-01-08T22:08:16Z,"Hey @DanielRosenwasser, I've packed this into [an installable tgz](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_apis/build/builds/164499/artifacts?artifactName=tgz&fileId=C363503DDC9CF8EDD088ADAB07110C96DF6B54D1E2E2CDD0508EAC13AAB8CE4D02&fileName=/typescript-5.8.0-insiders.20250108.tgz). You can install it for testing by referencing it in your `package.json` like so:
+```
+{
+    ""devDependencies"": {
+        ""typescript"": ""https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_apis/build/builds/164499/artifacts?artifactName=tgz&fileId=C363503DDC9CF8EDD088ADAB07110C96DF6B54D1E2E2CDD0508EAC13AAB8CE4D02&fileName=/typescript-5.8.0-insiders.20250108.tgz""
+    }
+}
+```
+and then running `npm install`.
+
+
+---
+
+There is also a playground [for this build](https://www.typescriptlang.org/play?ts=5.8.0-pr-60812-15) and an [npm](https://www.npmjs.com/package/@typescript-deploys/pr-build/v/5.8.0-pr-60812-15) module you can use via `""typescript"": ""npm:@typescript-deploys/pr-build@5.8.0-pr-60812-15""`.;"
+60812,closed,Write path normalization without array allocations,2578986116,andrewbranch,2025-01-09T01:02:01Z,"```
+ts  - getNormalizedAbsolutePath - non-normalized inputs x 312,203 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.13us...3.35us)
+new - getNormalizedAbsolutePath - non-normalized inputs x 470,033 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(2.12us...2.14us)
+ts  - normalizePath             - non-normalized inputs x 279,383 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.51us...3.74us)
+new - normalizePath             - non-normalized inputs x 317,772 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.13us...3.17us)
+
+ts  - getNormalizedAbsolutePath - normalized inputs  x 1,351,618 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(727.40ns...753.29ns)
+new - getNormalizedAbsolutePath - normalized inputs  x 9,384,673 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(105.79ns...106.60ns)
+ts  - normalizePath             - normalized inputs x 11,299,524 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(87.34ns...89.66ns)
+new - normalizePath             - normalized inputs x 11,162,477 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(88.69ns...90.97ns)
+
+ts  - getNormalizedAbsolutePath - normalized inputs (long)   x 239,527 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(4.13us...4.22us)
+new - getNormalizedAbsolutePath - normalized inputs (long) x 3,004,483 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(331.61ns...333.89ns)
+ts  - normalizePath             - normalized inputs (long) x 3,221,628 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(307.32ns...315.50ns)
+new - normalizePath             - normalized inputs (long) x 3,213,039 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(310.61ns...312.85ns)
+
+ts  - tsc-vscode-macos.json   x 2.44 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(406.30ms...414.83ms)
+new - tsc-vscode-macos.json   x 2.45 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(404.74ms...414.85ms)
+ts  - tsc-vscode-windows.json x 2.63 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(373.04ms...389.78ms)
+new - tsc-vscode-windows.json x 2.74 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(363.90ms...367.53ms)
+
+ts  - tsserver-edit-vscode-macos.json   x 2,220 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(437.21us...457.24us)
+new - tsserver-edit-vscode-macos.json   x 4,930 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(200.00us...203.69us)
+ts  - tsserver-edit-vscode-windows.json x 2,521 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(380.36us...405.09us)
+new - tsserver-edit-vscode-windows.json x 5,392 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(182.71us...187.61us)
+
+ts  - tsserver-startup-vscode-macos.json   x 219 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(4.44ms...4.57ms)
+new - tsserver-startup-vscode-macos.json   x 256 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.85ms...4.00ms)
+ts  - tsserver-startup-vscode-windows.json x 256 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(3.88ms...3.93ms)
+new - tsserver-startup-vscode-windows.json x 294 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.36ms...3.47ms)
+```"
+60812,closed,Write path normalization without array allocations,2579011242,andrewbranch,2025-01-09T01:24:25Z,"After latest commit:
+
+```
+ts  - getNormalizedAbsolutePath - non-normalized inputs x 302,861 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(3.21us...3.45us)
+new - getNormalizedAbsolutePath - non-normalized inputs x 536,370 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(1.79us...1.91us)
+ts  - normalizePath             - non-normalized inputs x 237,263 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(3.59us...3.80us)
+new - normalizePath             - non-normalized inputs x 383,873 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(2.54us...2.68us)
+
+ts  - getNormalizedAbsolutePath - normalized inputs  x 1,303,039 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(749.03ns...839.55ns)
+new - getNormalizedAbsolutePath - normalized inputs  x 8,795,269 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(111.05ns...114.70ns)
+ts  - normalizePath             - normalized inputs x 10,916,299 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(89.41ns...95.17ns)
+new - normalizePath             - normalized inputs x 10,677,227 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(90.96ns...98.74ns)
+
+ts  - getNormalizedAbsolutePath - normalized inputs (long) x 231,771 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(4.17us...4.59us)
+new - getNormalizedAbsolutePath - normalized inputs (long) x 2,899,659 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(337.72ns...360.04ns)
+ts  - normalizePath - normalized inputs (long) x 2,996,074 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(310.80ns...332.25ns)
+new - normalizePath - normalized inputs (long) x 3,096,857 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(312.29ns...328.02ns)
+
+ts  - tsc-vscode-macos.json   x 2.39 ops/sec (9 runs sampled) v8-never-optimize=true min..max=(406.07ms...418.08ms)
+new - tsc-vscode-macos.json   x 2.45 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(401.52ms...422.69ms)
+ts  - tsc-vscode-windows.json x 2.62 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(379.20ms...386.33ms)
+new - tsc-vscode-windows.json x 2.77 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(358.76ms...361.70ms)
+
+ts  - tsserver-edit-vscode-macos.json   x 2,232 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(444.66us...453.18us)
+new - tsserver-edit-vscode-macos.json   x 4,895 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(202.00us...208.18us)
+ts  - tsserver-edit-vscode-windows.json x 2,536 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(390.12us...400.87us)
+new - tsserver-edit-vscode-windows.json x 5,320 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(186.94us...189.56us)
+
+ts  - tsserver-startup-vscode-macos.json   x 216 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(4.54ms...4.71ms)
+new - tsserver-startup-vscode-macos.json   x 247 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(4.02ms...4.11ms)
+ts  - tsserver-startup-vscode-windows.json x 247 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.95ms...4.17ms)
+new - tsserver-startup-vscode-windows.json x 291 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(3.36ms...3.54ms)
+```
+
+and just comparing the last commit to the one before it:
+
+```
+old - getNormalizedAbsolutePath - non-normalized inputs x 449,445 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(2.20us...2.27us)
+new - getNormalizedAbsolutePath - non-normalized inputs x 564,347 ops/sec (12 runs sampled) v8-never-optimize=true min..max=(1.74us...1.79us)
+old - normalizePath             - non-normalized inputs x 307,495 ops/sec (10 runs sampled) v8-never-optimize=true min..max=(3.22us...3.27us)
+new - normalizePath             - non-normalized inputs x 396,067 ops/sec (11 runs sampled) v8-never-optimize=true min..max=(2.49us...2.55us)
+```"
+60812,closed,Write path normalization without array allocations,2580770507,andrewbranch,2025-01-09T16:38:36Z,@typescript-bot perf test
+60812,closed,Write path normalization without array allocations,2580770672,typescript-bot,2025-01-09T16:38:41Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `perf test` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164502) | [👀 Results](https://github.com/microsoft/TypeScript/pull/60812#issuecomment-2580865172) |"
+60812,closed,Write path normalization without array allocations,2580865172,typescript-bot,2025-01-09T17:22:28Z,"@andrewbranch
+The results of the perf run you requested are in!
+<details><summary> Here they are:</summary><p>
+<h2>tsc</h2>
+<b>Comparison Report - baseline..pr</b>
+<table border=""0"" cellpadding=""0"" cellspacing=""0"" >
+<thead>
+<tr>
+<th align=left><sub>Metric</sub></th>
+<th align=right><sub>baseline</sub></th>
+<th align=right><sub>pr</sub></th>
+<th align=right><sub>Delta</sub></th>
+<th align=right><sub>Best</sub></th>
+<th align=right><sub>Worst</sub></th>
+<th align=right><sub>p-value</sub></th>
+</tr>
+</thead>
+<tr class=""group""><th align=left colspan=""7""><sub>Compiler-Unions - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>62,363</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>196,108k (± 0.85%)</sub></td>
+<td align=right><sub>195,616k (± 0.94%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>193,218k</sub></td>
+<td align=right><sub>196,876k</sub></td>
+<td align=right><sub>p=0.810 n=6</sub></td>
+</tr>
+<tr class=""measurement parse-time scenario0 host0"">
+<td align=left><sub>Parse Time</sub></td>
+<td align=right><sub>1.59s (± 1.80%)</sub></td>
+<td align=right><sub>1.60s (± 1.52%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1.55s</sub></td>
+<td align=right><sub>1.62s</sub></td>
+<td align=right><sub>p=0.936 n=6</sub></td>
+</tr>
+<tr class=""measurement bind-time scenario0 host0"">
+<td align=left><sub>Bind Time</sub></td>
+<td align=right><sub>0.88s (± 0.92%)</sub></td>
+<td align=right><sub>0.88s (± 1.33%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>0.86s</sub></td>
+<td align=right><sub>0.89s</sub></td>
+<td align=right><sub>p=0.498 n=6</sub></td>
+</tr>
+<tr class=""measurement check-time scenario0 host0"">
+<td align=left><sub>Check Time</sub></td>
+<td align=right><sub>11.72s (± 0.54%)</sub></td>
+<td align=right><sub>11.78s (± 0.49%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>11.71s</sub></td>
+<td align=right><sub>11.87s</sub></td>
+<td align=right><sub>p=0.146 n=6</sub></td>
+</tr>
+<tr class=""measurement emit-time scenario0 host0"">
+<td align=left><sub>Emit Time</sub></td>
+<td align=right><sub>3.34s (± 3.62%)</sub></td>
+<td align=right><sub>3.32s (± 0.78%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>3.28s</sub></td>
+<td align=right><sub>3.36s</sub></td>
+<td align=right><sub>p=0.371 n=6</sub></td>
+</tr>
+<tr class=""measurement total scenario0 host0"">
+<td align=left><sub>Total Time</sub></td>
+<td align=right><sub>17.54s (± 0.74%)</sub></td>
+<td align=right><sub>17.57s (± 0.27%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>17.51s</sub></td>
+<td align=right><sub>17.64s</sub></td>
+<td align=right><sub>p=0.336 n=6</sub></td>
+</tr>
+</tbody>
+<tr class=""group""><th align=left colspan=""7""><sub>angular-1 - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>947,936</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>410,955</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>1,226,002k (± 0.01%)</sub></td>
+<td align=right><sub>1,225,798k (± 0.00%)</sub></td>
+<td align=right><sub>-204k (- 0.02%)</sub></td>
+<td align=right><sub>1,225,740k</sub></td>
+<td align=right><sub>1"
+60812,closed,Write path normalization without array allocations,2582005045,dbaeumer,2025-01-10T08:03:35Z,Thanks!!
+60812,closed,Write path normalization without array allocations,2660872978,dsherret,2025-02-15T11:06:45Z,Sweet. Thanks! We noticed this in Deno in TS 5.7 and I was just about to investigate opening a PR to fix it.
+61162,closed,Declaration merging can break equality tests for named tuples,2651609513,jcalz,2025-02-11T18:01:10Z,"Not a TS team member.
+
+Looks like the TS team isn't really interested in supporting that `Equals` check, which probes implementation details of TS:
+https://github.com/microsoft/TypeScript/issues/57918#issuecomment-2622206624
+https://github.com/microsoft/TypeScript/issues/58163#issuecomment-2052032482
+
+Two types that pass the `Equals` check are almost certainly equal, but two types that fail the check might well be ""equal"", they might just not share a single internal reference. (Like how in JavaScript one should not be surprised that, say, `{} !== {}`.) Maybe if there's some trivial fix that doesn't degrade compiler performance they'd accept it, but generally speaking they'd mostly just discourage you from using that check in the first place."
+61162,closed,Declaration merging can break equality tests for named tuples,2652750527,LukeAbby,2025-02-12T06:08:04Z,"While I'm sympathetic to that point of view, the issue with the other mutual assignability test defined as `type Equals<T, U> = [T, U] extends [U, T] ? true : false` is that it has a number of adverse cases:
+```
+Equals<{}, { x?: number }> // true
+Equals<any, 1> // true
+Equals<{}, object> // true
+Equals<void | undefined, void> // true
+```
+
+When a type testing library is involved I'd say you probably don't want any of those to count as equal. If you want to deal with them what you'll need to do is do a recursive walk of the type (properly bailing on loops in the type!) and looking for these edge case types and then special casing them.
+
+While not impossible they're definitely not performant either."
+61162,closed,Declaration merging can break equality tests for named tuples,2653731679,jcalz,2025-02-12T13:34:45Z,"So then maybe we want upvotes and feedback on #48100 asking for a better type level equality operator, since neither mutual assignability nor reference equality does the trick, and user-defined versions are complex and slow. Maybe an argument could be made there that in the absence of a reasonable native operator, too many people are choosing to use an unsupported/unsupportable approach.  
+
+I thought the main problem is that there are too many edge cases where people disagree on what equality is.  "
+61162,closed,Declaration merging can break equality tests for named tuples,2660613429,typescript-bot,2025-02-15T01:32:25Z,"This issue has been marked as ""Not a Defect"" and has seen no recent activity. It has been automatically closed for house-keeping purposes."
+61168,closed,Array.flatMap incorrectly narrows types.,2654639228,jcalz,2025-02-12T19:19:48Z,duplicate #31033
+61168,closed,Array.flatMap incorrectly narrows types.,2660613395,typescript-bot,2025-02-15T01:32:22Z,"This issue has been marked as ""Duplicate"" and has seen no recent activity. It has been automatically closed for house-keeping purposes."
+61175,closed,Ban import=require and export= under erasableSyntaxOnly,2660243892,jakebailey,2025-02-14T20:55:29Z,@typescript-bot cherry-pick this to release-5.8
+61175,closed,Ban import=require and export= under erasableSyntaxOnly,2660243970,typescript-bot,2025-02-14T20:55:33Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `cherry-pick this to release-5.8` | [✅ Started](https://github.com/microsoft/TypeScript/actions/runs/13337335001) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61175#issuecomment-2660254156) |"
+61175,closed,Ban import=require and export= under erasableSyntaxOnly,2660254156,typescript-bot,2025-02-14T20:57:57Z,"Hey, @jakebailey! I've created #61178 for you."
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2634423561,RyanCavanaugh,2025-02-04T16:07:28Z,Which emit are you referring to (i.e. what's the input code that's causing this)?
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2634445737,OfekShilon,2025-02-04T16:15:07Z,"Again quoting the devtools discussion, TS source:
+```ts
+private hideRadiosAndSetDiff() {
+        const root = unwrap(this.modal).find('.historiccode');
+        const items = root.find('li:not(.template)');
+
+        let foundbase = false;
+        let foundcomp = false;
+
+        for (const elem of items) {          // breakpoint 1
+            const li = $(elem);              // breakpoint 2
+            const dt = li.data('dt');
+
+            const base = li.find('.base');
+            const comp = li.find('.comp');
+
+            let baseShouldBeVisible = true;
+            let compShouldBeVisible = true;
+
+            if (comp.prop('checked')) {
+                foundcomp = true;
+                baseShouldBeVisible = false;
+
+                const itemRight = this.currentList.find(item => item.dt === dt);
+                if (itemRight) {
+                    unwrap(this.rhs).update(itemRight);
+                }
+            } else if (base.prop('checked')) {
+                foundbase = true;
+
+                const itemLeft = this.currentList.find(item => item.dt === dt);
+                if (itemLeft) {
+                    unwrap(this.lhs).update(itemLeft);
+                }
+            }
+
+            if (foundbase && foundcomp) {
+                compShouldBeVisible = false;
+            } else if (!foundbase && !foundcomp) {
+                baseShouldBeVisible = false;
+            }
+
+            if (compShouldBeVisible) {
+                comp.css('visibility', '');
+            } else {
+                comp.css('visibility', 'hidden');
+            }
+
+            if (baseShouldBeVisible) {
+                base.css('visibility', '');
+            } else {
+                base.css('visibility', 'hidden');
+            }
+        }
+    }
+
+```
+
+Uglified transpiled JS:
+```js
+e.prototype.hideRadiosAndSetDiff = function() {
+                var e, t, i = (0,
+                l.unwrap)(this.modal).find("".historiccode"").find(""li:not(.template)""), r = !1, s = !1, a = function(e) {
+                    var t = (0,
+                    n.default)(e)        // breakpoint 2
+                      , i = t.data(""dt"")
+                      , o = t.find("".base"")
+                      , a = t.find("".comp"")
+                      , c = !0
+                      , d = !0;
+                    if (a.prop(""checked"")) {
+                        s = !0,
+                        c = !1;
+                        var p = u.currentList.find((function(e) {
+                            return e.dt === i
+                        }
+                        ));
+                        p && (0,
+                        l.unwrap)(u.rhs).update(p)
+                    } else if (o.prop(""checked"")) {
+                        r = !0;
+                        var g = u.currentList.find((function(e) {
+                            return e.dt === i
+                        }
+                        ));
+                        g && (0,
+                        l.unwrap)(u.lhs).update(g)
+                    }
+                    r && s ? d = !1 : r || s || (c = !1),
+                    d ? a.css(""visibility"", """") : a.css(""visibility"", ""hidden""),
+                    c ? o.css(""visibility"", """") : o.css(""visibility"", ""hidden"")
+                }, u = this;
+                try {
+                    for (var c = o.__values(i), d = c.next(); !d.done; d = c.next()) {  // breakpoint 1
+                        a(d.value)
+                    }
+                } catch (t) {
+                    e = {
+                        error: t
+                    }
+                } finally {
+                    try {
+                        d && !d.done && (t = c.return) && t.call(c)
+                    } finally {
+                        if (e)
+                            throw e.error
+                    }
+                }
+            }
+```"
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2634497997,RyanCavanaugh,2025-02-04T16:36:07Z,"The function body here is necessary to get the correct `let` scoping semantics in ES5.
+
+A really good alternative is to target ES6+, which virtually every runtime (and certainly any runtime running on a dev machine) supports"
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2636122154,OfekShilon,2025-02-05T09:00:49Z,"> The function body here is necessary to get the correct `let` scoping semantics in ES5.
+> 
+> A really good alternative is to target ES6+, which virtually every runtime (and certainly any runtime running on a dev machine) supports
+
+Thank you for the suggestion, but I actually see zero diff in JS when changing tsconfig to `""target"": ""es6""`.  Even `ESNext` doesn't change anything.
+---------------------
+Edit: Sorry, now it seems I can't build anything with ES6+.. will keep trying."
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2636460612,MartinJohns,2025-02-05T11:23:44Z,"> I actually see zero diff in JS when changing tsconfig to ""target"": ""es6"". Even ESNext doesn't change anything.
+
+That's a configuration error on your side then (of whatever tooling you use besides TypeScript)."
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2644411916,typescript-bot,2025-02-08T01:32:13Z,"This issue has been marked as ""Question"" and has seen no recent activity. It has been automatically closed for house-keeping purposes."
+61111,closed,Help debuggers by not emitting loop bodies in new functions/classes?,2660213610,OfekShilon,2025-02-14T20:33:22Z,"Apologies for not responding sooner. Turns out properly migrating the project to ES6 would be quite an undertaking, I'm entirely ok with closing this as is."
+61164,closed,Add option to require interface implementations to strictly conform to the declarations.,2652610225,jcalz,2025-02-12T04:05:00Z,"Your example code has no runtime error when I run it. So what's the use case? It's pretty clear from the issue you linked (and the many, many, many issues linked within) that they don't want to do this. So presumably if you want them to revisit that decision, you'd present something where ""you get runtime errors that would have been trivial to catch at compile time"". Where is it?"
+61164,closed,Add option to require interface implementations to strictly conform to the declarations.,2652788487,alekop,2025-02-12T06:34:39Z,"> Your example code has no runtime error when I run it. So what's the use case? It's pretty clear from the issue you linked (and the many, many, many issues linked within) that they don't want to do this. So presumably if you want them to revisit that decision, you'd present something where ""you get runtime errors that would have been trivial to catch at compile time"". Where is it?
+
+Okay, I updated the example with a more real-world scenario: a database interface with more than one implementation. When one team changes the interface, the other team's implementation breaks - while continuing to compile and pass tests."
+61164,closed,Add option to require interface implementations to strictly conform to the declarations.,2653675221,jcalz,2025-02-12T13:12:06Z,"The new example doesn't have any runtime JavaScript errors either. Your description mentions a database, but I don't see how TypeScript could prevent database problems (or at least it's not apparent here). I would expect to see a reproducible example we can all just drop into the TypeScript Playground and see the runtime error for ourselves, directly. 
+
+In [the FAQ entry](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters) it says ""that this sort of enforcement wouldn't ever directly fix a bug"". If you have a counterexample for that statement, please show it. It should jump out at us.
+
+We know that the TS team doesn't want to do this already, and #30876-and-friends make this painfully clear:
+
+> [If there's some angle not covered by the dozens of issues about this already, I'm happy to discuss, but we really have thought about it many times, and really do still believe this kind of check is not the right thing to add to the language.](https://github.com/microsoft/TypeScript/issues/30876#issuecomment-483740388)
+
+> [There are dozens of issues where people have argued about this; we don't need another.](https://github.com/microsoft/TypeScript/issues/21868#issuecomment-364775805)
+
+So I would really hope that someone bringing this up yet again would read through those issues, and make sure they have something new to contribute, instead of merely re-introducing an existing argument that didn't convince them the first time. Otherwise you're just making busy work for the language maintainers.  Could you please either provide an obvious example of an uncaught runtime error that occurs without your suggested flag, or close this issue so that the TS team doesn't need to triage it? "
+61164,closed,Add option to require interface implementations to strictly conform to the declarations.,2654708276,RyanCavanaugh,2025-02-12T19:53:21Z,"We have the rule that implementing an interface is a check of type compatibility, nothing more, nothing less, and I think it'd be counterproductive to introduce a new inconsistency here. Once you change the definition of this to something else, you start having to justify why it's different, what other exceptions there should be, when this applies to methods vs the properties they return vs the inputs they accept vs the type constraints of the methods vs a hundred other things that just makes the language feel less consistent and more confusing."
+61164,closed,Add option to require interface implementations to strictly conform to the declarations.,2659876110,alekop,2025-02-14T17:19:45Z,"I'll close the issue, though IMHO the fact that this keeps coming up suggests that it's unresolved. It's just not how interfaces work in any other strongly-typed language, and it's obviously causing confusion for a lot of people."
+61157,closed,TypeScript LSP Cannot Resolve `lib.dom.d.ts` Despite File Existing,2654690061,RyanCavanaugh,2025-02-12T19:44:57Z,"I believe this line is wrong:
+```ts
+    lib: [""lib.dom.d.ts""] // should just be ""lib.dom""
+```
+
+The provided sample throws unrelated errors; please provide a true runnable sample if you need further help"
+61157,closed,TypeScript LSP Cannot Resolve `lib.dom.d.ts` Despite File Existing,2656979187,s19514tt,2025-02-13T15:34:43Z,"@RyanCavanaugh 
+
+Thank you for your response.
+
+I updated `lib: [""lib.dom.d.ts""]` to `lib: [""lib.dom""]`, but now I encounter a different error:
+
+```
+File '/Users/username/.vscode/extensions/lunasdev.lunas-0.0.1-beta.1/node_modules/typescript/lib/lib.dom' has an unsupported extension. The only supported extensions are '.ts', '.tsx', '.d.ts', '.js', '.jsx', '.cts', '.d.cts', '.cjs', '.mts', '.d.mts', '.mjs'.
+```
+
+The full implementation of the language server can be found here:  
+[server.ts](https://github.com/lunas-dev/lunas-vscode/blob/main/src/server.ts)
+
+To reproduce the issue, you can clone [my repository](https://github.com/lunas-dev/lunas-vscode). The README contains instructions on how to run the extension and language server. Additionally, `.lun` files for testing can be found in the `test` folder of the repository.
+
+Let me know if you need any additional information to help diagnose the issue."
+61157,closed,TypeScript LSP Cannot Resolve `lib.dom.d.ts` Despite File Existing,2657356137,RyanCavanaugh,2025-02-13T18:00:05Z,"We're not able to provide this level of support. If you have a single runnable standalone script that demonstrates a defect, we can look at that, but this API obviously works for everyone else so there's either something wrong with the way you're calling it, or something very specific about the scenario that needs to be distilled down into an actionable defect
+
+I recommend looking at how other people are using the API: https://github.com/search?q=getDefaultLibFileName&type=code"
+61157,closed,TypeScript LSP Cannot Resolve `lib.dom.d.ts` Despite File Existing,2658098639,s19514tt,2025-02-14T02:05:23Z,"Thank you for your response.
+
+After reviewing my implementation, I realized that I misunderstood the distinction between readFile and getScriptSnapshot in LanguageServiceHost. I had not properly implemented getScriptSnapshot, which led to the issue. Now that I understand the correct usage, I have fixed my implementation, and the problem is resolved.
+
+I appreciate your guidance. My apologies for taking up your time with my own oversight. Thank you for your time."
+61169,closed,Distributive type on generic has surprising results,2654652935,jcalz,2025-02-12T19:26:59Z,"* That's not a [distributive conditional type](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types). In `string extends T`, the type `string` is not a generic type parameter, so it is just a plain conditional type, it does not distribute across unions.
+
+* Even if it were distributive, this could never work; the type `string | ""literal""` is eagerly reduced to `string`, so there is no way for `Test3` to behave differently from `Test1`, no matter how `LiteralString<T>` were implemented.
+
+This is not a bug in TypeScript."
+61169,closed,Distributive type on generic has surprising results,2654655645,ceymard,2025-02-12T19:28:21Z,Is there a way to prevent that eagerness to keep the literal types ?
+61169,closed,Distributive type on generic has surprising results,2654673674,jcalz,2025-02-12T19:36:33Z,"See #29729; you could try things like https://github.com/microsoft/TypeScript/issues/29729#issuecomment-505826972 (e.g., `(string & {}) | ""literal""`) but that could have weird side effects. Or are other things you can do, like wrapping your types in something else (e.g., `[string] | [""literal""]`) but again, that would involve some kind of refactoring. In any case this isn't a bug in TS and this is not a general support forum so I'll disengage. Good luck!"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657687,typescript-bot,2025-02-09T23:41:47Z,"
+<details>
+<summary>New server no longer reports this error: Timed out after 600000 ms</summary>
+
+```
+Timed out after 600000 ms
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/n8n-io/n8n"">n8n-io/n8n</a></summary>
+Raw error text: <code>RepoResults1/n8n-io.n8n.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults1/n8n-io.n8n.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":15915,""type"":""request"",""command"":""navtree"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/editor-ui/src/components/canvas/elements/handles/render-types/parts/CanvasHandleDot.test.ts""}}
+{""seq"":15916,""type"":""request"",""command"":""navbar"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/editor-ui/src/components/canvas/elements/handles/render-types/parts/CanvasHandleDot.test.ts""}}
+{""seq"":15917,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[{""fileName"":""@PROJECT_ROOT@/packages/editor-ui/src/components/canvas/elements/handles/render-types/parts/CanvasHandleDot.test.ts"",""textChanges"":[{""newText"":"" //comment"",""start"":{""line"":1,""offset"":53},""end"":{""line"":1,""offset"":53}}]}],""closedFiles"":[],""openFiles"":[]}}
+{""seq"":15918,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/editor-ui/src/components/canvas/elements/handles/render-types/parts/CanvasHandleDot.test.ts"",""line"":7,""offset"":24,""includeExternalModuleExports"":false,""triggerKind"":2,""triggerCharacter"":"" ""}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/n8n-io/n8n --recurse-submodules
+git -C ""./n8n"" reset --hard d41ca832dc6e96440004cc69366ff4e034b5eed9
+pnpm --dir ""./n8n"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults1&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults1.zip ""$downloadUrl""
+unzip -p RepoResults1.zip RepoResults1/n8n-io.n8n.replay.txt > n8n-io.n8n.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./n8n ./n8n-io.n8n.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+
+</details>
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657693,typescript-bot,2025-02-09T23:41:48Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/labring/sealos"">labring/sealos</a></summary>
+Raw error text: <code>RepoResults8/labring.sealos.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults8/labring.sealos.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":11,""type"":""request"",""command"":""references"",""arguments"":{""file"":""@PROJECT_ROOT@/service/license/next.config.js"",""line"":5,""offset"":5}}
+{""seq"":12,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/service/license/next.config.js"",""line"":5,""offset"":5,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":13,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/service/license/next.config.js"",""line"":5,""offset"":5,""entryNames"":[""@abstract""]}}
+{""seq"":14,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[],""openFiles"":[{""file"":""@PROJECT_ROOT@/frontend/desktop/next.config.js"",""projectRootPath"":""@PROJECT_ROOT@""}]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/labring/sealos --recurse-submodules
+git -C ""./sealos"" reset --hard 53daadf9a64b0169c7461271753e5e09d24726bb
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+pnpm --dir ""./sealos/service/license"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./sealos/frontend"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+npm --prefix ""./sealos/extensions/ide/vscode/devbox"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+yarn --cwd ""./sealos/docs/website"" install --ignore-engines --ignore-scripts --silent
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults8&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults8.zip ""$downloadUrl""
+unzip -p RepoResults8.zip RepoResults8/labring.sealos.replay.txt > labring.sealos.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./sealos ./labring.sealos.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657697,typescript-bot,2025-02-09T23:41:48Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/elastic/kibana"">elastic/kibana</a></summary>
+Raw error text: <code>RepoResults6/elastic.kibana.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults6/elastic.kibana.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":51,""type"":""request"",""command"":""references"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/kbn-babel-preset/node_preset.js"",""line"":38,""offset"":24}}
+{""seq"":52,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/kbn-babel-preset/node_preset.js"",""line"":38,""offset"":24,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":53,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[""@PROJECT_ROOT@/scripts/check_mappings_update.js""],""openFiles"":[]}}
+{""seq"":54,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[],""openFiles"":[{""file"":""@PROJECT_ROOT@/x-pack/test/licensing_plugin/services.ts"",""projectRootPath"":""@PROJECT_ROOT@""}]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/elastic/kibana --recurse-submodules
+git -C ""./kibana"" reset --hard 73c7f87acd51d2def50e99a51510ef1c7d6f75c1
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+yarn --cwd ""./kibana"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test_serverless/functional/test_suites/observability/cypress"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/task_manager_claimer_update_by_query/plugins/sample_task_plugin_mget"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/security_solution_playwright"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/security_solution_cypress"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/security_solution_api_integration"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/security_api_integration/packages/helpers"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/plugin_api_perf/plugins/task_manager_performance"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/plugin_api_integration/plugins/sample_task_plugin"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/plugin_api_integration/plugins/event_log"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/plugin_api_integration/plugins/elasticsearch_client"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/functional_with_es_ssl/plugins/cases"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/functional_with_es_ssl/plugins/alerts"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/functional_execution_context/plugins/alerts"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/functional_embedded/plugins/iframe_embedded"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/functional_cors/plugins/kibana_cors_test"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/cases_api_integration/common/plugins/security_solution"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/cases_api_integration/common/plugins/observability"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/cases_api_integration/common/plugins/cases"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/alerting_api_integration/packages/helpers"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/alerting_api_integration/common/plugins/alerts_restricted"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/alerting_api_integration/common/plugins/alerts"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/alerting_api_integration/common/plugins/actions_simulators"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/test/alerting_api_integration/common/plugins/aad"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./kibana/x-pack/solutions/security/plugins/threat_intellig"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657699,typescript-bot,2025-02-09T23:41:49Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/remotion-dev/remotion"">remotion-dev/remotion</a></summary>
+Raw error text: <code>RepoResults5/remotion-dev.remotion.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults5/remotion-dev.remotion.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":624,""type"":""request"",""command"":""getOutliningSpans"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/svg-3d-engine/src/truthy.ts""}}
+{""seq"":625,""type"":""request"",""command"":""navtree"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/svg-3d-engine/src/truthy.ts""}}
+{""seq"":626,""type"":""request"",""command"":""navbar"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/svg-3d-engine/src/truthy.ts""}}
+{""seq"":627,""type"":""request"",""command"":""navto"",""arguments"":{""searchValue"":""a"",""maxResultCount"":256}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/remotion-dev/remotion --recurse-submodules
+git -C ""./remotion"" reset --hard b49c99b6c7ba25dc15d68c4e0f1f9b041e508280
+pnpm --dir ""./remotion"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults5&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults5.zip ""$downloadUrl""
+unzip -p RepoResults5.zip RepoResults5/remotion-dev.remotion.replay.txt > remotion-dev.remotion.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./remotion ./remotion-dev.remotion.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657702,typescript-bot,2025-02-09T23:41:50Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/drizzle-team/drizzle-orm"">drizzle-team/drizzle-orm</a></summary>
+Raw error text: <code>RepoResults4/drizzle-team.drizzle-orm.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults4/drizzle-team.drizzle-orm.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":14816,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/drizzle-orm/src/pg-core/subquery.ts"",""line"":7,""offset"":70,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":14817,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/drizzle-orm/src/pg-core/subquery.ts"",""line"":7,""offset"":70,""entryNames"":[""AddAliasToSelection""]}}
+{""seq"":14818,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/drizzle-orm/src/pg-core/subquery.ts"",""line"":12,""offset"":2,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":14819,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/drizzle-orm/src/pg-core/subquery.ts"",""line"":12,""offset"":2,""entryNames"":[""AddAliasToSelection""]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/drizzle-team/drizzle-orm --recurse-submodules
+git -C ""./drizzle-orm"" reset --hard 555e4ff64bd38ca3c136371669617ed7f86e24ed
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+pnpm --dir ""./drizzle-orm"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/sqlite-proxy"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/postgresjs"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/pg-proxy"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/neon-cloudflare"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/mysql-proxy"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/libsql"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/cloudflare-d1"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/better-sqlite3"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+pnpm --dir ""./drizzle-orm/examples/aws-lambda"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults4&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults4.zip ""$downloadUrl""
+unzip -p RepoResults4.zip RepoResults4/drizzle-team.drizzle-orm.replay.txt > drizzle-team.drizzle-orm.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./drizzle-orm ./drizzle-team.drizzle-orm.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657710,typescript-bot,2025-02-09T23:41:50Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/backstage/backstage"">backstage/backstage</a></summary>
+Raw error text: <code>RepoResults3/backstage.backstage.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults3/backstage.backstage.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""rootDirPlaceholder"":""@PROJECT_ROOT@"",""serverArgs"":[""--disableAutomaticTypingAcquisition""]}
+{""seq"":1,""type"":""request"",""command"":""configure"",""arguments"":{""preferences"":{""disableLineTextInReferences"":true,""includePackageJsonAutoImports"":""auto"",""includeCompletionsForImportStatements"":true,""includeCompletionsWithSnippetText"":true,""includeAutomaticOptionalChainCompletions"":true,""includeCompletionsWithInsertText"":true,""includeCompletionsWithClassMemberSnippets"":true,""allowIncompleteCompletions"":true,""includeCompletionsForModuleExports"":false},""watchOptions"":{""excludeDirectories"":[""**/node_modules""]}}}
+{""seq"":2,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[],""openFiles"":[{""file"":""@PROJECT_ROOT@/scripts/list-ownership.js"",""projectRootPath"":""@PROJECT_ROOT@""}]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/backstage/backstage --recurse-submodules
+git -C ""./backstage"" reset --hard a706caf76bc1b7837bbebf1f29dd3b567dafa711
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+yarn --cwd ""./backstage"" install --no-immutable --mode=skip-build
+yarn --cwd ""./backstage/storybook"" install --no-immutable --mode=skip-build
+yarn --cwd ""./backstage/microsite"" install --no-immutable --mode=skip-build
+yarn --cwd ""./backstage/canon-docs"" install --no-immutable --mode=skip-build
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults3&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults3.zip ""$downloadUrl""
+unzip -p RepoResults3.zip RepoResults3/backstage.backstage.replay.txt > backstage.backstage.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./backstage ./backstage.backstage.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657716,typescript-bot,2025-02-09T23:41:51Z,"<h2>Error: Debug Failure. False expression.</h2>
+
+```
+Req #11232 - completionInfo
+    at getPos2 (/typescript-5.8.0-dev.20250209/lib/typescript.js:177873:9)
+    at assignPositionsToNodeArray (/typescript-5.8.0-dev.20250209/lib/typescript.js:178788:33)
+    at visitEachChildOfParameterDeclaration (/typescript-5.8.0-dev.20250209/lib/typescript.js:94294:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at visitArrayWorker (/typescript-5.8.0-dev.20250209/lib/typescript.js:94079:49)
+    at visitNodes2 (/typescript-5.8.0-dev.20250209/lib/typescript.js:94050:19)
+    at assignPositionsToNodeArray (/typescript-5.8.0-dev.20250209/lib/typescript.js:178782:19)
+    at visitEachChildOfFunctionTypeNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:94432:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at visitNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:94017:19)
+    at visitEachChildOfMethodDeclaration (/typescript-5.8.0-dev.20250209/lib/typescript.js:94349:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at Object.assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:167241:50
+    at flatMap (/typescript-5.8.0-dev.20250209/lib/typescript.js:2536:17)
+    at Object.printAndFormatSnippetList (/typescript-5.8.0-dev.20250209/lib/typescript.js:167240:21)
+    at getEntryForMemberCompletion (/typescript-5.8.0-dev.20250209/lib/typescript.js:166991:28)
+    at createCompletionEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:166771:35)
+    at getCompletionEntriesFromSymbols (/typescript-5.8.0-dev.20250209/lib/typescript.js:167414:19)
+    at completionInfoFromData (/typescript-5.8.0-dev.20250209/lib/typescript.js:166404:23)
+    at Object.getCompletionsAtPosition (/typescript-5.8.0-dev.20250209/lib/typescript.js:165937:24)
+    at Object.getCompletionsAtPosition2 [as getCompletionsAtPosition] (/typescript-5.8.0-dev.20250209/lib/typescript.js:152172:35)
+    at IOSession.getCompletions (/typescript-5.8.0-dev.20250209/lib/typescript.js:194881:54)
+    at completionInfo (/typescript-5.8.0-dev.20250209/lib/typescript.js:193156:43)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:195657:15
+    at IOSession.executeWithRequestId (/typescript-5.8.0-dev.20250209/lib/typescript.js:195646:14)
+    at IOSession.executeCommand (/typescript-5.8.0-dev.20250209/lib/typescript.js:195655:29)
+    at IOSession.onMessage (/typescript-5.8.0-dev.20250209/lib/typescript.js:195703:68)
+    at Interface.<anonymous> (/typescript-5.8.0-dev.20250209/lib/_tsserver.js:495:14)
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/baidu/amis"">baidu/amis</a></summary>
+Raw error text: <code>RepoResults6/baidu.amis.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults6/baidu.amis.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":11229,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/amis-core/src/renderers/Form.tsx"",""line"":2151,""offset"":1,""entryNames"":[""key""]}}
+{""seq"":11230,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/amis-core/src/renderers/Form.tsx"",""line"":2198,""offset"":27,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":11231,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/amis-core/src/renderers/Form.tsx"",""line"":2198,""offset"":27,""entryNames"":[""$path""]}}
+{""seq"":11232,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/amis-core/src/renderers/Form.tsx"",""line"":2326,""offset"":1,""includeExternalModuleExports"":false,""triggerKind"":1}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/baidu/amis --recurse-submodules
+git -C ""./amis"" reset --hard 057e809392e17496d07c00102c85a5afd375eca8
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+npm --prefix ""./amis"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./amis/mock/cfc"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults6&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults6.zip ""$downloadUrl""
+"
+61155,closed,[ServerErrors][TypeScript] 5.8.0-dev.20250209 vs 5.7.3,2646657722,typescript-bot,2025-02-09T23:41:52Z,"<h2>TypeError: Cannot read properties of undefined (reading 'sourceFile')</h2>
+
+```
+Req #132 - updateOpen
+    at isDocumentRegistryEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:142910:18)
+    at getDocumentRegistryEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:142986:19)
+    at Object.releaseDocumentWithKey (/typescript-5.8.0-dev.20250209/lib/typescript.js:143081:19)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:152032:65
+    at forEach (/typescript-5.8.0-dev.20250209/lib/typescript.js:2305:22)
+    at cleanupSemanticCache (/typescript-5.8.0-dev.20250209/lib/typescript.js:152032:7)
+    at Object.dispose (/typescript-5.8.0-dev.20250209/lib/typescript.js:152037:5)
+    at ConfiguredProject2.close (/typescript-5.8.0-dev.20250209/lib/typescript.js:186569:26)
+    at ConfiguredProject2.close (/typescript-5.8.0-dev.20250209/lib/typescript.js:188165:11)
+    at _ProjectService.removeProject (/typescript-5.8.0-dev.20250209/lib/typescript.js:189478:13)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:191468:33
+    at _ProjectService.cleanupConfiguredProjects (/typescript-5.8.0-dev.20250209/lib/typescript.js:191468:7)
+    at _ProjectService.cleanupProjectsAndScriptInfos (/typescript-5.8.0-dev.20250209/lib/typescript.js:191471:10)
+    at _ProjectService.applyChangesInOpenFiles (/typescript-5.8.0-dev.20250209/lib/typescript.js:191719:12)
+    at updateOpen (/typescript-5.8.0-dev.20250209/lib/typescript.js:192939:29)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:195657:15
+    at IOSession.executeWithRequestId (/typescript-5.8.0-dev.20250209/lib/typescript.js:195646:14)
+    at IOSession.executeCommand (/typescript-5.8.0-dev.20250209/lib/typescript.js:195655:29)
+    at IOSession.onMessage (/typescript-5.8.0-dev.20250209/lib/typescript.js:195703:68)
+    at Interface.<anonymous> (/typescript-5.8.0-dev.20250209/lib/_tsserver.js:495:14)
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/umijs/umi"">umijs/umi</a></summary>
+Raw error text: <code>RepoResults8/umijs.umi.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults8/umijs.umi.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164757&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":129,""type"":""request"",""command"":""references"",""arguments"":{""file"":""@PROJECT_ROOT@/ui/pages/index.tsx"",""line"":2,""offset"":36}}
+{""seq"":130,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/ui/pages/index.tsx"",""line"":96,""offset"":19,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":131,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[""@PROJECT_ROOT@/scripts/checkPackageFiles.ts""],""openFiles"":[]}}
+{""seq"":132,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[],""openFiles"":[{""file"":""@PROJECT_ROOT@/ui/pages/config.tsx"",""projectRootPath"":""@PROJECT_ROOT@""}]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/umijs/umi --recurse-submodules
+git -C ""./umi"" reset --hard cca66a2edbdb7bad96e87eb701246208f37448fe
+pnpm --dir ""./umi"" install --no-frozen-lockfile --prefer-offline --ignore-scripts --reporter=silent
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164757/artifacts?artifactName=RepoResults8&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults8.zip ""$downloadUrl""
+unzip -p RepoResults8.zip RepoResults8/umijs.umi.replay.txt > umijs.umi.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./umi ./umijs.umi.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61153,closed,[ServerErrors][JavaScript] 5.8.0-dev.20250209 vs 5.7.3,2646619787,typescript-bot,2025-02-09T22:01:26Z,"<h2>Server exited prematurely with code unknown and signal SIGABRT
+</h2>
+
+```
+Server exited prematurely with code unknown and signal SIGABRT
+
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/tastejs/todomvc"">tastejs/todomvc</a></summary>
+Raw error text: <code>RepoResults3/tastejs.todomvc.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults3/tastejs.todomvc.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":22583,""type"":""request"",""command"":""definitionAndBoundSpan"",""arguments"":{""file"":""@PROJECT_ROOT@/examples/angular-dart/web/main.dart.js"",""line"":14005,""offset"":9}}
+{""seq"":22584,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/examples/angular-dart/web/main.dart.js"",""line"":14010,""offset"":22,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":22585,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/examples/angular-dart/web/main.dart.js"",""line"":14010,""offset"":22,""entryNames"":[""$""]}}
+{""seq"":22586,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/examples/angular-dart/web/main.dart.js"",""line"":14033,""offset"":4,""includeExternalModuleExports"":false,""triggerKind"":1}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/tastejs/todomvc --recurse-submodules
+git -C ""./todomvc"" reset --hard c8aedce5f512e47991a62b37b9ee3ef38df1a4b6
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+npm --prefix ""./todomvc"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/tooling"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/tests"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/tasks"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/web-components"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/vue"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/typescript-react"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/typescript-backbone"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/typescript-angular"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/svelte"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/riotjs"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/reagent"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/react-redux"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/react"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/ractive"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/preact"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/polymer"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/mithril"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/lit"" ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/lavaca_require"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/knockoutjs_require"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/knockoutjs"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/knockback"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/jsblocks"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./todomvc/examples/js_of_ocaml"" install --prefer-offline --no"
+61153,closed,[ServerErrors][JavaScript] 5.8.0-dev.20250209 vs 5.7.3,2646619790,typescript-bot,2025-02-09T22:01:27Z,"<h2>Error: Debug Failure. Did not expect ObjectLiteralExpression to have an Identifier in its trivia</h2>
+
+```
+Req #1053 - references
+    at addSyntheticNodes (/typescript-5.8.0-dev.20250209/lib/typescript.js:150964:15)
+    at createSyntaxList (/typescript-5.8.0-dev.20250209/lib/typescript.js:150979:5)
+    at processNodes (/typescript-5.8.0-dev.20250209/lib/typescript.js:150944:19)
+    at visitNodes (/typescript-5.8.0-dev.20250209/lib/typescript.js:32313:14)
+    at forEachChildInObjectLiteralExpression (/typescript-5.8.0-dev.20250209/lib/typescript.js:32465:12)
+    at forEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:32829:35)
+    at NodeObject.forEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:150924:12)
+    at createChildren (/typescript-5.8.0-dev.20250209/lib/typescript.js:150949:8)
+    at NodeObject.getChildren (/typescript-5.8.0-dev.20250209/lib/typescript.js:150903:83)
+    at getTokenAtPositionWorker (/typescript-5.8.0-dev.20250209/lib/typescript.js:139187:32)
+    at getTouchingToken (/typescript-5.8.0-dev.20250209/lib/typescript.js:139160:10)
+    at getTouchingPropertyName (/typescript-5.8.0-dev.20250209/lib/typescript.js:139157:10)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:172526:33
+    at mapDefined (/typescript-5.8.0-dev.20250209/lib/typescript.js:2606:22)
+    at getPossibleSymbolReferenceNodes (/typescript-5.8.0-dev.20250209/lib/typescript.js:172525:12)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:173052:25
+    at flatMap (/typescript-5.8.0-dev.20250209/lib/typescript.js:2536:17)
+    at getReferencesForStringLiteral (/typescript-5.8.0-dev.20250209/lib/typescript.js:173050:24)
+    at Object.getReferencedSymbolsForNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:171930:16)
+    at Object.findReferencedSymbols (/typescript-5.8.0-dev.20250209/lib/typescript.js:171534:34)
+    at Object.findReferences (/typescript-5.8.0-dev.20250209/lib/typescript.js:152349:41)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:192607:43
+    at searchPosition (/typescript-5.8.0-dev.20250209/lib/typescript.js:192748:28)
+    at getPerProjectReferences (/typescript-5.8.0-dev.20250209/lib/typescript.js:192727:32)
+    at getReferencesWorker (/typescript-5.8.0-dev.20250209/lib/typescript.js:192594:29)
+    at IOSession.getReferences (/typescript-5.8.0-dev.20250209/lib/typescript.js:194628:24)
+    at references (/typescript-5.8.0-dev.20250209/lib/typescript.js:193037:43)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:195657:15
+    at IOSession.executeWithRequestId (/typescript-5.8.0-dev.20250209/lib/typescript.js:195646:14)
+    at IOSession.executeCommand (/typescript-5.8.0-dev.20250209/lib/typescript.js:195655:29)
+    at IOSession.onMessage (/typescript-5.8.0-dev.20250209/lib/typescript.js:195703:68)
+    at Interface.<anonymous> (/typescript-5.8.0-dev.20250209/lib/_tsserver.js:495:14)
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/HumanSignal/label-studio"">HumanSignal/label-studio</a></summary>
+Raw error text: <code>RepoResults6/HumanSignal.label-studio.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults6/HumanSignal.label-studio.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":1050,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/web/dist/apps/labelstudio/main.js"",""line"":2,""offset"":71487,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":1051,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/web/dist/apps/labelstudio/main.js"",""line"":2,""offset"":71487,""entryNames"":[""_""]}}
+{""seq"":1052,""type"":""request"",""command"":""definitionAndBoundSpan"",""arguments"":{""file"":""@PROJECT_ROOT@/web/dist/apps/labelstudio/main.js"",""line"":2,""offset"":71901}}
+{""seq"":1053,""type"":""request"",""command"":""references"",""arguments"":{""file"":""@PROJECT_ROOT@/web/dist/apps/labelstudio/main.js"",""line"":2,""offset"":71901}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/HumanSignal/label-studio --recurse-submodules
+git -C ""./label-studio"" reset --hard e1e6cbab25687031577c9d90106d9d28d4efdc5d
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+yarn --cwd ""./label-studio/web"" install --ignore-engines --ignore-scripts --silent
+yarn --cwd ""./label-studio/web/tools/version"" install --ignore-engines --ignore-scripts --silent
+npm --prefix ""./label-studio/web/libs/ui"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./label-studio/web/libs/frontend-test/src/bin/assets"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --"
+61153,closed,[ServerErrors][JavaScript] 5.8.0-dev.20250209 vs 5.7.3,2646619795,typescript-bot,2025-02-09T22:01:28Z,"<h2>Error: Debug Failure. False expression.</h2>
+
+```
+Req #2638 - completionInfo
+    at getPos2 (/typescript-5.8.0-dev.20250209/lib/typescript.js:177873:9)
+    at assignPositionsToNodeArray (/typescript-5.8.0-dev.20250209/lib/typescript.js:178788:33)
+    at visitEachChildOfParameterDeclaration (/typescript-5.8.0-dev.20250209/lib/typescript.js:94294:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at visitArrayWorker (/typescript-5.8.0-dev.20250209/lib/typescript.js:94079:49)
+    at visitNodes2 (/typescript-5.8.0-dev.20250209/lib/typescript.js:94050:19)
+    at assignPositionsToNodeArray (/typescript-5.8.0-dev.20250209/lib/typescript.js:178782:19)
+    at visitEachChildOfFunctionTypeNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:94432:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at visitNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:94017:19)
+    at visitEachChildOfParameterDeclaration (/typescript-5.8.0-dev.20250209/lib/typescript.js:94298:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at visitArrayWorker (/typescript-5.8.0-dev.20250209/lib/typescript.js:94079:49)
+    at visitNodes2 (/typescript-5.8.0-dev.20250209/lib/typescript.js:94050:19)
+    at assignPositionsToNodeArray (/typescript-5.8.0-dev.20250209/lib/typescript.js:178782:19)
+    at visitParameterList (/typescript-5.8.0-dev.20250209/lib/typescript.js:94115:15)
+    at visitEachChildOfMethodDeclaration (/typescript-5.8.0-dev.20250209/lib/typescript.js:94348:7)
+    at visitEachChild (/typescript-5.8.0-dev.20250209/lib/typescript.js:94265:33)
+    at Object.assignPositionsToNode (/typescript-5.8.0-dev.20250209/lib/typescript.js:178776:19)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:167241:50
+    at flatMap (/typescript-5.8.0-dev.20250209/lib/typescript.js:2536:17)
+    at Object.printAndFormatSnippetList (/typescript-5.8.0-dev.20250209/lib/typescript.js:167240:21)
+    at getEntryForMemberCompletion (/typescript-5.8.0-dev.20250209/lib/typescript.js:166991:28)
+    at createCompletionEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:166771:35)
+    at getCompletionEntriesFromSymbols (/typescript-5.8.0-dev.20250209/lib/typescript.js:167414:19)
+    at completionInfoFromData (/typescript-5.8.0-dev.20250209/lib/typescript.js:166404:23)
+    at Object.getCompletionsAtPosition (/typescript-5.8.0-dev.20250209/lib/typescript.js:165937:24)
+    at Object.getCompletionsAtPosition2 [as getCompletionsAtPosition] (/typescript-5.8.0-dev.20250209/lib/typescript.js:152172:35)
+    at IOSession.getCompletions (/typescript-5.8.0-dev.20250209/lib/typescript.js:194881:54)
+    at completionInfo (/typescript-5.8.0-dev.20250209/lib/typescript.js:193156:43)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:195657:15
+    at IOSession.executeWithRequestId (/typescript-5.8.0-dev.20250209/lib/typescript.js:195646:14)
+    at IOSession.executeCommand (/typescript-5.8.0-dev.20250209/lib/typescript.js:195655:29)
+    at IOSession.onMessage (/typescript-5.8.0-dev.20250209/lib/typescript.js:195703:68)
+    at Interface.<anonymous> (/typescript-5.8.0-dev.20250209/lib/_tsserver.js:495:14)
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/decaporg/decap-cms"">decaporg/decap-cms</a></summary>
+Raw error text: <code>RepoResults7/decaporg.decap-cms.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults7/decaporg.decap-cms.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":2635,""type"":""request"",""command"":""definitionAndBoundSpan"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/decap-cms-backend-github/src/GraphQLAPI.ts"",""line"":454,""offset"":35}}
+{""seq"":2636,""type"":""request"",""command"":""references"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/decap-cms-backend-github/src/GraphQLAPI.ts"",""line"":454,""offset"":35}}
+{""seq"":2637,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/decap-cms-backend-github/src/GraphQLAPI.ts"",""line"":454,""offset"":35,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":2638,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/packages/decap-cms-backend-github/src/GraphQLAPI.ts"",""line"":459,""offset"":4,""includeExternalModuleExports"":false,""triggerKind"":1}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/decaporg/decap-cms --"
+61153,closed,[ServerErrors][JavaScript] 5.8.0-dev.20250209 vs 5.7.3,2646619799,typescript-bot,2025-02-09T22:01:29Z,"<h2>TypeError: Cannot read properties of undefined (reading 'sourceFile')</h2>
+
+```
+Req #337 - updateOpen
+    at isDocumentRegistryEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:142910:18)
+    at getDocumentRegistryEntry (/typescript-5.8.0-dev.20250209/lib/typescript.js:142986:19)
+    at Object.releaseDocumentWithKey (/typescript-5.8.0-dev.20250209/lib/typescript.js:143081:19)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:152032:65
+    at forEach (/typescript-5.8.0-dev.20250209/lib/typescript.js:2305:22)
+    at cleanupSemanticCache (/typescript-5.8.0-dev.20250209/lib/typescript.js:152032:7)
+    at Object.dispose (/typescript-5.8.0-dev.20250209/lib/typescript.js:152037:5)
+    at InferredProject2.close (/typescript-5.8.0-dev.20250209/lib/typescript.js:186569:26)
+    at InferredProject2.close (/typescript-5.8.0-dev.20250209/lib/typescript.js:187684:11)
+    at _ProjectService.removeProject (/typescript-5.8.0-dev.20250209/lib/typescript.js:189478:13)
+    at _ProjectService.cleanupProjectsAndScriptInfos (/typescript-5.8.0-dev.20250209/lib/typescript.js:191478:14)
+    at _ProjectService.applyChangesInOpenFiles (/typescript-5.8.0-dev.20250209/lib/typescript.js:191719:12)
+    at updateOpen (/typescript-5.8.0-dev.20250209/lib/typescript.js:192939:29)
+    at /typescript-5.8.0-dev.20250209/lib/typescript.js:195657:15
+    at IOSession.executeWithRequestId (/typescript-5.8.0-dev.20250209/lib/typescript.js:195646:14)
+    at IOSession.executeCommand (/typescript-5.8.0-dev.20250209/lib/typescript.js:195655:29)
+    at IOSession.onMessage (/typescript-5.8.0-dev.20250209/lib/typescript.js:195703:68)
+    at Interface.<anonymous> (/typescript-5.8.0-dev.20250209/lib/_tsserver.js:495:14)
+```
+
+<h4>Affected repos</h4>
+<details>
+<summary><a href=""https://github.com/eslint/eslint"">eslint/eslint</a></summary>
+Raw error text: <code>RepoResults4/eslint.eslint.rawError.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a> <br />
+Replay commands: <code>RepoResults4/eslint.eslint.replay.txt</code> in the <a href=""https://typescript.visualstudio.com/TypeScript/_build/results?buildId=164758&view=artifacts&type=publishedArtifacts"">artifact folder</a>
+<h4>Last few requests</h4>
+
+```json
+{""seq"":334,""type"":""request"",""command"":""completionInfo"",""arguments"":{""file"":""@PROJECT_ROOT@/tools/fuzzer-runner.js"",""line"":81,""offset"":16,""includeExternalModuleExports"":false,""triggerKind"":1}}
+{""seq"":335,""type"":""request"",""command"":""completionEntryDetails"",""arguments"":{""file"":""@PROJECT_ROOT@/tools/fuzzer-runner.js"",""line"":81,""offset"":16,""entryNames"":[""CRASH_AUTOFIX_TEST_COUNT_RATIO""]}}
+{""seq"":336,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[""@PROJECT_ROOT@/eslint.config.js""],""openFiles"":[]}}
+{""seq"":337,""type"":""request"",""command"":""updateOpen"",""arguments"":{""changedFiles"":[],""closedFiles"":[],""openFiles"":[{""file"":""@PROJECT_ROOT@/tools/eslint-fuzzer.js"",""projectRootPath"":""@PROJECT_ROOT@""}]}}
+
+```
+
+<h4>Repro steps</h4>
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/eslint/eslint --recurse-submodules
+git -C ""./eslint"" reset --hard ccb60c0b1452e73750e3734c9cd7c7b12c473827
+# Install packages (exact steps are below, but it might be easier to follow the repo readme)
+npm --prefix ""./eslint"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./eslint/packages/js"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./eslint/packages/eslint-config-eslint"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./eslint/docs"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./eslint/docs/_examples/integration-tutorial-code"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+npm --prefix ""./eslint/docs/_examples/custom-rule-tutorial-code"" install --prefer-offline --no-audit --no-progress --legacy-peer-deps --ignore-scripts -q
+downloadUrl=$(curl -s ""https://typescript.visualstudio.com/TypeScript/_apis/build/builds/164758/artifacts?artifactName=RepoResults4&api-version=7.0"" | jq -r "".resource.downloadUrl"")
+wget -O RepoResults4.zip ""$downloadUrl""
+unzip -p RepoResults4.zip RepoResults4/eslint.eslint.replay.txt > eslint.eslint.replay.txt
+npm install --no-save @typescript/server-replay
+```
+
+To run the repro:
+```bash
+# `npx tsreplay --help` to learn about helpful switches for debugging, logging, etc.
+npx tsreplay ./eslint ./eslint.eslint.replay.txt <PATH_TO_tsserver.js>
+```
+
+</details>
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552353,typescript-bot,2025-02-09T19:33:10Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/alibaba/formily"">alibaba/formily</a></h2>
+</summary>
+
+**29 of 38 projects failed to build with the old tsc and were ignored**
+### [packages\/grid\/tsconfig.json](https://github.com/alibaba/formily/blob/961619439bcc5ef626dcc0a2384052ca8095b90d/packages/grid/tsconfig.json)
+ - `error TS2322: Type 'T | T[]' is not assignable to type 'T'.`
+   - [packages\/grid\/src\/index.ts\#L111](https://github.com/alibaba/formily/blob/961619439bcc5ef626dcc0a2384052ca8095b90d/packages/grid/src/index.ts#L111)
+### [packages\/grid\/tsconfig.build.json](https://github.com/alibaba/formily/blob/961619439bcc5ef626dcc0a2384052ca8095b90d/packages/grid/tsconfig.build.json)
+ - `error TS2322: Type 'T | T[]' is not assignable to type 'T'.`
+   - [packages\/grid\/src\/index.ts\#L111](https://github.com/alibaba/formily/blob/961619439bcc5ef626dcc0a2384052ca8095b90d/packages/grid/src/index.ts#L111)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552356,typescript-bot,2025-02-09T19:33:11Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/antvis/G2"">antvis/G2</a></h2>
+</summary>
+
+**2 of 3 projects failed to build with the old tsc and were ignored**
+### [tsconfig.json](https://github.com/antvis/G2/blob/d67f6df64cc8a46ddcb01612951c8ed43aa1d50f/tsconfig.json)
+ - `error TS2322: Type 'number[]' is not assignable to type 'Record<string, any>[]'.`
+   - [src\/runtime\/plot.ts\#L1281](https://github.com/antvis/G2/blob/d67f6df64cc8a46ddcb01612951c8ed43aa1d50f/src/runtime/plot.ts#L1281)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552360,typescript-bot,2025-02-09T19:33:11Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/apache/superset"">apache/superset</a></h2>
+</summary>
+
+**6 of 31 projects failed to build with the old tsc and were ignored**
+### [superset-frontend\/packages\/superset-ui-core\/test\/tsconfig.json](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/tsconfig.json)
+ - `error TS2322: Type 'string' is not assignable to type '{ (regexp: string | RegExp): number; (searcher: { [Symbol.search](string: string): number; }): number; } & string'.`
+   - [superset-frontend\/packages\/superset-ui-core\/test\/connection\/SupersetClientClass.test.ts\#L521](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/connection/SupersetClientClass.test.ts#L521) in [superset-frontend\/packages\/superset-ui-core\/test\/tsconfig.json](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/tsconfig.json)
+   - [superset-frontend\/packages\/superset-ui-core\/test\/connection\/SupersetClientClass.test.ts\#L560](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/connection/SupersetClientClass.test.ts#L560) in [superset-frontend\/packages\/superset-ui-core\/test\/tsconfig.json](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/tsconfig.json)
+ - `error TS2578: Unused '@ts-expect-error' directive.`
+   - [superset-frontend\/packages\/superset-ui-core\/test\/connection\/SupersetClientClass.test.ts\#L556](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/connection/SupersetClientClass.test.ts#L556) in [superset-frontend\/packages\/superset-ui-core\/test\/tsconfig.json](https://github.com/apache/superset/blob/06f8f8e6082371df603571aa3fde8c763ed4f77e/superset-frontend/packages/superset-ui-core/test/tsconfig.json)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552366,typescript-bot,2025-02-09T19:33:12Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/ariakit/ariakit"">ariakit/ariakit</a></h2>
+</summary>
+
+### [website\/tsconfig.json](https://github.com/ariakit/ariakit/blob/64c14001f3689d70979f12d0ef0a92db9e6595f8/website/tsconfig.json)
+ - `error TS2880: Import assertions have been replaced by import attributes. Use 'with' instead of 'assert'.`
+   - [website\/components\/header-version-select.tsx\#L7](https://github.com/ariakit/ariakit/blob/64c14001f3689d70979f12d0ef0a92db9e6595f8/website/components/header-version-select.tsx#L7)
+ - `error TS2307: Cannot find module '@stripe/stripe-js/pure' or its corresponding type declarations.`
+   - [website\/components\/plus.tsx\#L34](https://github.com/ariakit/ariakit/blob/64c14001f3689d70979f12d0ef0a92db9e6595f8/website/components/plus.tsx#L34)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552371,typescript-bot,2025-02-09T19:33:13Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/Chocobozzz/PeerTube"">Chocobozzz/PeerTube</a></h2>
+</summary>
+
+**5 of 12 projects failed to build with the old tsc and were ignored**
+### [packages\/types-generator\/tsconfig.types.json](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/packages/types-generator/tsconfig.types.json)
+ - `error TS2307: Cannot find module 'winston/lib/winston/transports' or its corresponding type declarations.`
+   - [server\/core\/helpers\/logger.ts\#L7](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/server/core/helpers/logger.ts#L7) in [server\/tsconfig.types.json](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/server/tsconfig.types.json)
+### [packages\/tests\/tsconfig.json](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/packages/tests/tsconfig.json)
+ - `error TS2307: Cannot find module 'winston/lib/winston/transports' or its corresponding type declarations.`
+   - [server\/core\/helpers\/logger.ts\#L7](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/server/core/helpers/logger.ts#L7) in [server\/tsconfig.lib.json](https://github.com/Chocobozzz/PeerTube/blob/e6725e6d3ae4bdd1518606f3d3c1f168cc3c785a/server/tsconfig.lib.json)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552375,typescript-bot,2025-02-09T19:33:13Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/facebook/docusaurus"">facebook/docusaurus</a></h2>
+</summary>
+
+**25 of 42 projects failed to build with the old tsc and were ignored**
+### [packages\/docusaurus-remark-plugin-npm2yarn\/tsconfig.json](https://github.com/facebook/docusaurus/blob/45065e8d2b5831117b8d69fec1be28f5520cf105/packages/docusaurus-remark-plugin-npm2yarn/tsconfig.json)
+ - `error TS2578: Unused '@ts-expect-error' directive.`
+   - [packages\/docusaurus-remark-plugin-npm2yarn\/src\/index.ts\#L10](https://github.com/facebook/docusaurus/blob/45065e8d2b5831117b8d69fec1be28f5520cf105/packages/docusaurus-remark-plugin-npm2yarn/src/index.ts#L10) in [packages\/docusaurus-remark-plugin-npm2yarn\/tsconfig.json](https://github.com/facebook/docusaurus/blob/45065e8d2b5831117b8d69fec1be28f5520cf105/packages/docusaurus-remark-plugin-npm2yarn/tsconfig.json)
+   - [packages\/docusaurus-remark-plugin-npm2yarn\/src\/index.ts\#L13](https://github.com/facebook/docusaurus/blob/45065e8d2b5831117b8d69fec1be28f5520cf105/packages/docusaurus-remark-plugin-npm2yarn/src/index.ts#L13) in [packages\/docusaurus-remark-plugin-npm2yarn\/tsconfig.json](https://github.com/facebook/docusaurus/blob/45065e8d2b5831117b8d69fec1be28f5520cf105/packages/docusaurus-remark-plugin-npm2yarn/tsconfig.json)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552381,typescript-bot,2025-02-09T19:33:14Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/GrapesJS/grapesjs"">GrapesJS/grapesjs</a></h2>
+</summary>
+
+**1 of 3 projects failed to build with the old tsc and were ignored**
+### [packages\/core\/tsconfig.json](https://github.com/GrapesJS/grapesjs/blob/8225e3e9d122269bf4befeaeffef854ab969e819/packages/core/tsconfig.json)
+ - `error TS2322: Type 'Component[]' is not assignable to type 'undefined extends T ? Components : Component[]'.`
+   - [packages\/core\/src\/dom\_components\/model\/Component.ts\#L1062](https://github.com/GrapesJS/grapesjs/blob/8225e3e9d122269bf4befeaeffef854ab969e819/packages/core/src/dom_components/model/Component.ts#L1062)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552384,typescript-bot,2025-02-09T19:33:15Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/ionic-team/stencil"">ionic-team/stencil</a></h2>
+</summary>
+
+**41 of 44 projects failed to build with the old tsc and were ignored**
+### [scripts\/tsconfig.json](https://github.com/ionic-team/stencil/blob/32811591777de726f0374649a4f5e250a0a8e355/scripts/tsconfig.json)
+ - `error TS2322: Type 'string | null' is not assignable to type 'string'.`
+   - [scripts\/utils\/release-utils.ts\#L62](https://github.com/ionic-team/stencil/blob/32811591777de726f0374649a4f5e250a0a8e355/scripts/utils/release-utils.ts#L62)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552388,typescript-bot,2025-02-09T19:33:15Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/jupyterlab/jupyterlab"">jupyterlab/jupyterlab</a></h2>
+</summary>
+
+**45 of 59 projects failed to build with the old tsc and were ignored**
+### [examples\/filebrowser\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/tsconfig.json)
+ - `error TS2307: Cannot find module '@jupyterlab/codemirror' or its corresponding type declarations.`
+   - [examples\/filebrowser\/src\/index.ts\#L25](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/index.ts#L25) in [examples\/filebrowser\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/tsconfig.json)
+ - `error TS2307: Cannot find module '@jupyterlab/fileeditor' or its corresponding type declarations.`
+   - [examples\/filebrowser\/src\/index.ts\#L33](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/index.ts#L33) in [examples\/filebrowser\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/tsconfig.json)
+ - `error TS7006: Parameter 'language' implicitly has an 'any' type.`
+   - [examples\/filebrowser\/src\/index.ts\#L99](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/index.ts#L99) in [examples\/filebrowser\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/tsconfig.json)
+   - [examples\/filebrowser\/src\/index.ts\#L102](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/index.ts#L102) in [examples\/filebrowser\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/filebrowser/src/tsconfig.json)
+### [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS2307: Cannot find module '@jupyterlab/codemirror' or its corresponding type declarations.`
+   - [examples\/console\/src\/index.ts\#L26](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L26) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS2307: Cannot find module '@jupyterlab/console' or its corresponding type declarations.`
+   - [examples\/console\/src\/index.ts\#L28](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L28) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS7006: Parameter 'theme' implicitly has an 'any' type.`
+   - [examples\/console\/src\/index.ts\#L96](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L96) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS7006: Parameter 'extensionFactory' implicitly has an 'any' type.`
+   - [examples\/console\/src\/index.ts\#L102](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L102) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS7006: Parameter 'options' implicitly has an 'any' type.`
+   - [examples\/console\/src\/index.ts\#L108](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L108) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+ - `error TS7006: Parameter 'language' implicitly has an 'any' type.`
+   - [examples\/console\/src\/index.ts\#L123](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L123) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/tsconfig.json)
+   - [examples\/console\/src\/index.ts\#L126](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b37ebdb83/examples/console/src/index.ts#L126) in [examples\/console\/src\/tsconfig.json](https://github.com/jupyterlab/jupyterlab/blob/5138e10ce54f136b92fb36b9f863653b3"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552392,typescript-bot,2025-02-09T19:33:16Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/mikro-orm/mikro-orm"">mikro-orm/mikro-orm</a></h2>
+</summary>
+
+**15 of 37 projects failed to build with the old tsc and were ignored**
+### [tests\/tsconfig.json](https://github.com/mikro-orm/mikro-orm/blob/784ee891165165a78bb0598acb6eec21eaa479bf/tests/tsconfig.json)
+ - `error TS2322: Type '{} | { $and?: FilterQuery<object>[] | undefined; $or?: FilterQuery<object>[] | undefined; $eq?: ExpandScalar<object> | readonly ExpandScalar<object>[] | undefined; $ne?: ExpandScalar<object> | undefined; $in?: readonly ExpandScalar<object>[] | undefined; $nin?: readonly ExpandScalar<object>[] | undefined; $not?: FilterQuery<object> | undefined; $none?: FilterQuery<object> | undefined; $some?: FilterQuery<object> | undefined; $every?: FilterQuery<object> | undefined; $gt?: ExpandScalar<object> | undefined; $gte?: ExpandScalar<object> | undefined; $lt?: ExpandScalar<object> | undefined; $lte?: ExpandScalar<object> | undefined; $like?: string | undefined; $re?: string | undefined; $ilike?: string | undefined; $fulltext?: string | undefined; $overlap?: string | object | readonly string[] | undefined; $contains?: string | object | readonly string[] | undefined; $contained?: string | object | readonly string[] | undefined; $exists?: boolean | undefined; $hasKey?: string | undefined; $hasKeys?: readonly string[] | undefined; $hasSomeKeys?: readonly string[] | undefined; } | { $and?: FilterQuery<object>[] | undefined; $or?: FilterQuery<object>[] | undefined; $eq?: ExpandScalar<object> | readonly ExpandScalar<object>[] | undefined; $ne?: ExpandScalar<object> | undefined; $in?: readonly ExpandScalar<object>[] | undefined; $nin?: readonly ExpandScalar<object>[] | undefined; $not?: FilterQuery<object> | undefined; $none?: FilterQuery<object> | undefined; $some?: FilterQuery<object> | undefined; $every?: FilterQuery<object> | undefined; $gt?: ExpandScalar<object> | undefined; $gte?: ExpandScalar<object> | undefined; $lt?: ExpandScalar<object> | undefined; $lte?: ExpandScalar<object> | undefined; $like?: string | undefined; $re?: string | undefined; $ilike?: string | undefined; $fulltext?: string | undefined; $overlap?: string | object | readonly string[] | undefined; $contains?: string | object | readonly string[] | undefined; $contained?: string | object | readonly string[] | undefined; $exists?: boolean | undefined; $hasKey?: string | undefined; $hasKeys?: readonly string[] | undefined; $hasSomeKeys?: readonly string[] | undefined; } | { length: number; toString(): string; toLocaleString(): string; toLocaleString(locales: string | string[], options?: (NumberFormatOptions & DateTimeFormatOptions) | undefined): string; pop(): FilterQuery<object> | undefined; push(...items: FilterQuery<object>[]): number; concat(...items: ConcatArray<FilterQuery<object>>[]): FilterQuery<object>[]; concat(...items: (FilterQuery<object> | ConcatArray<FilterQuery<object>>)[]): FilterQuery<object>[]; join(separator?: string | undefined): string; reverse(): FilterQuery<object>[]; shift(): FilterQuery<object> | undefined; slice(start?: number | undefined, end?: number | undefined): FilterQuery<object>[]; sort(compareFn?: ((a: FilterQuery<object>, b: FilterQuery<object>) => number) | undefined): FilterQuery<object>[]; splice(start: number, deleteCount?: number | undefined): FilterQuery<object>[]; splice(start: number, deleteCount: number, ...items: FilterQuery<object>[]): FilterQuery<object>[]; unshift(...items: FilterQuery<object>[]): number; indexOf(searchElement: FilterQuery<object>, fromIndex?: number | undefined): number; lastIndexOf(searchElement: FilterQuery<object>, fromIndex?: number | undefined): number; every<S extends FilterQuery<object>>(predicate: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => value is S, thisArg?: any): this is S[]; every(predicate: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => unknown, thisArg?: any): boolean; some(predicate: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => unknown, thisArg?: any): boolean; forEach(callbackfn: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => void, thisArg?: any): void; map<U>(callbackfn: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => U, thisArg?: any): U[]; filter<S extends FilterQuery<object>>(predicate: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => value is S, thisArg?: any): S[]; filter(predicate: (value: FilterQuery<object>, index: number, array: FilterQuery<object>[]) => unknown, thisArg?: any): FilterQuery<object>[]; reduce(callbackfn: (previousValue: FilterQuery<object>, currentValue: FilterQuery<object>, currentIndex: number, array: FilterQuery<object>[]) => FilterQuery<object>): FilterQuery<object>; reduce(callbackfn: (previousValue: FilterQuery<object>, currentValue: FilterQuery<object>, currentIndex: number, array: FilterQuery<object>[]) => Filt"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552410,typescript-bot,2025-02-09T19:33:19Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/misskey-dev/misskey"">misskey-dev/misskey</a></h2>
+</summary>
+
+**8 of 17 projects failed to build with the old tsc and were ignored**
+### [packages\/backend\/tsconfig.json](https://github.com/misskey-dev/misskey/blob/dc608aada04f982d7c2e9b54e3699e121633f95c/packages/backend/tsconfig.json)
+ - `error TS2345: Argument of type 'FileWriterStream' is not assignable to parameter of type 'WritableStream<Uint8Array<ArrayBufferLike>>'.`
+   - [packages\/backend\/src\/queue\/processors\/ExportNotesProcessorService.ts\#L147](https://github.com/misskey-dev/misskey/blob/dc608aada04f982d7c2e9b54e3699e121633f95c/packages/backend/src/queue/processors/ExportNotesProcessorService.ts#L147)
+### [packages\/backend\/test\/tsconfig.json](https://github.com/misskey-dev/misskey/blob/dc608aada04f982d7c2e9b54e3699e121633f95c/packages/backend/test/tsconfig.json)
+ - `error TS2345: Argument of type 'FileWriterStream' is not assignable to parameter of type 'WritableStream<Uint8Array<ArrayBufferLike>>'.`
+   - [packages\/backend\/src\/queue\/processors\/ExportNotesProcessorService.ts\#L147](https://github.com/misskey-dev/misskey/blob/dc608aada04f982d7c2e9b54e3699e121633f95c/packages/backend/src/queue/processors/ExportNotesProcessorService.ts#L147)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552416,typescript-bot,2025-02-09T19:33:19Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/nextauthjs/next-auth"">nextauthjs/next-auth</a></h2>
+</summary>
+
+**22 of 45 projects failed to build with the old tsc and were ignored**
+### [packages\/adapter-pg\/tsconfig.json](https://github.com/nextauthjs/next-auth/blob/507aaddaa7cd6f770038b0c4a55579bfc141e999/packages/adapter-pg/tsconfig.json)
+ - `error TS2322: Type 'null' is not assignable to type 'VerificationToken'.`
+   - [packages\/adapter-pg\/src\/index.ts\#L58](https://github.com/nextauthjs/next-auth/blob/507aaddaa7cd6f770038b0c4a55579bfc141e999/packages/adapter-pg/src/index.ts#L58)
+### [packages\/adapter-neon\/tsconfig.json](https://github.com/nextauthjs/next-auth/blob/507aaddaa7cd6f770038b0c4a55579bfc141e999/packages/adapter-neon/tsconfig.json)
+ - `error TS2322: Type 'null' is not assignable to type 'VerificationToken'.`
+   - [packages\/adapter-neon\/src\/index.ts\#L50](https://github.com/nextauthjs/next-auth/blob/507aaddaa7cd6f770038b0c4a55579bfc141e999/packages/adapter-neon/src/index.ts#L50)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552426,typescript-bot,2025-02-09T19:33:20Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/pmndrs/valtio"">pmndrs/valtio</a></h2>
+</summary>
+
+### [tsconfig.json](https://github.com/pmndrs/valtio/blob/86de4ec8cf3161553226ff24372bcf6a925e9d52/tsconfig.json)
+ - `error TS2322: Type 'T' is not assignable to type 'Awaited<T>'.`
+   - [tests\/async.test.tsx\#L14](https://github.com/pmndrs/valtio/blob/86de4ec8cf3161553226ff24372bcf6a925e9d52/tests/async.test.tsx#L14)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552430,typescript-bot,2025-02-09T19:33:21Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/primefaces/primeng"">primefaces/primeng</a></h2>
+</summary>
+
+**1 of 4 projects failed to build with the old tsc and were ignored**
+### [tsconfig.json](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/tsconfig.json)
+ - `error TS2305: Module '""@primeuix/utils""' has no exported member 'findSingle'.`
+   - [packages\/primeng\/src\/accordion\/accordion.ts\#L29](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/accordion/accordion.ts#L29)
+   - [packages\/primeng\/src\/autocomplete\/autocomplete.ts\#L30](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/autocomplete/autocomplete.ts#L30)
+   - [packages\/primeng\/src\/button\/button.ts\#L25](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/button/button.ts#L25)
+   - [packages\/primeng\/src\/calendar\/calendar.ts\#L34](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/calendar/calendar.ts#L34)
+   - [packages\/primeng\/src\/carousel\/carousel.ts\#L23](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/carousel/carousel.ts#L23)
+   - [packages\/primeng\/src\/cascadeselect\/cascadeselect.ts\#L28](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/cascadeselect/cascadeselect.ts#L28)
+   - [packages\/primeng\/src\/confirmdialog\/confirmdialog.ts\#L23](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/confirmdialog/confirmdialog.ts#L23)
+   - [packages\/primeng\/src\/confirmpopup\/confirmpopup.ts\#L25](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/confirmpopup/confirmpopup.ts#L25)
+   - [packages\/primeng\/src\/contextmenu\/contextmenu.ts\#L34](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/contextmenu/contextmenu.ts#L34)
+   - [packages\/primeng\/src\/datepicker\/datepicker.ts\#L35](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/datepicker/datepicker.ts#L35)
+   - [packages\/primeng\/src\/dock\/dock.ts\#L4](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/dock/dock.ts#L4)
+   - [packages\/primeng\/src\/dropdown\/dropdown.ts\#L37](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/dropdown/dropdown.ts#L37)
+   - [packages\/primeng\/src\/editor\/editor.ts\#L4](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/editor/editor.ts#L4)
+   - [packages\/primeng\/src\/galleria\/galleria.ts\#L35](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/galleria/galleria.ts#L35)
+   - [packages\/primeng\/src\/listbox\/listbox.ts\#L28](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/listbox/listbox.ts#L28)
+   - [packages\/primeng\/src\/megamenu\/megamenu.ts\#L27](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/megamenu/megamenu.ts#L27)
+   - [packages\/primeng\/src\/menu\/menu.ts\#L33](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/menu/menu.ts#L33)
+   - [packages\/primeng\/src\/menubar\/menubar.ts\#L31](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/menubar/menubar.ts#L31)
+   - [packages\/primeng\/src\/multiselect\/multiselect.ts\#L37](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/multiselect/multiselect.ts#L37)
+   - [packages\/primeng\/src\/orderlist\/orderlist.ts\#L23](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/orderlist/orderlist.ts#L23)
+   - [packages\/primeng\/src\/overlaypanel\/overlaypanel.ts\#L25](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/overlaypanel/overlaypanel.ts#L25)
+   - [packages\/primeng\/src\/panelmenu\/panelmenu.ts\#L28](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/panelmenu/panelmenu.ts#L28)
+   - [packages\/primeng\/src\/picklist\/picklist.ts\#L24](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/picklist/picklist.ts#L24)
+   - [packages\/primeng\/src\/popover\/popover.ts\#L25](https://github.com/primefaces/primeng/blob/cd5848c7fcc3ec30a6d246d23a7a5d7dcd822b3b/packages/primeng/src/popover/popover.ts#L25)
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552434,typescript-bot,2025-02-09T19:33:21Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/reduxjs/redux-devtools"">reduxjs/redux-devtools</a></h2>
+</summary>
+
+**25 of 58 projects failed to build with the old tsc and were ignored**
+### [packages\/react-dock\/tsconfig.test.json](https://github.com/reduxjs/redux-devtools/blob/750046c4d9791f0f0a5f99f0d2537da1fe37bd1a/packages/react-dock/tsconfig.test.json)
+ - `error TS2307: Cannot find module 'react-test-renderer/shallow' or its corresponding type declarations.`
+   - [packages\/react-dock\/test\/index.test.tsx\#L2](https://github.com/reduxjs/redux-devtools/blob/750046c4d9791f0f0a5f99f0d2537da1fe37bd1a/packages/react-dock/test/index.test.tsx#L2)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552437,typescript-bot,2025-02-09T19:33:22Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/tailwindlabs/headlessui"">tailwindlabs/headlessui</a></h2>
+</summary>
+
+**2 of 5 projects failed to build with the old tsc and were ignored**
+### [packages\/@headlessui-vue\/tsconfig.json](https://github.com/tailwindlabs/headlessui/blob/1be0e67c764b0f0efdb76ed647e3be7ab42ca9e8/packages/@headlessui-vue/tsconfig.json)
+ - `error TS2322: Type 'TReturnValue | ((...args: any[]) => TReturnValue)' is not assignable to type 'TReturnValue'.`
+   - [packages\/@headlessui-vue\/src\/utils\/match.ts\#L8](https://github.com/tailwindlabs/headlessui/blob/1be0e67c764b0f0efdb76ed647e3be7ab42ca9e8/packages/@headlessui-vue/src/utils/match.ts#L8)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552441,typescript-bot,2025-02-09T19:33:23Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/vuejs/devtools-v6"">vuejs/devtools-v6</a></h2>
+</summary>
+
+**7 of 8 projects failed to build with the old tsc and were ignored**
+### [packages\/api\/tsconfig.json](https://github.com/vuejs/devtools-v6/blob/dd2ab5d4275187cbd81952a2a3d53c335643c1f4/packages/api/tsconfig.json)
+ - `error TS2578: Unused '@ts-expect-error' directive.`
+   - [packages\/api\/src\/env.ts\#L20](https://github.com/vuejs/devtools-v6/blob/dd2ab5d4275187cbd81952a2a3d53c335643c1f4/packages/api/src/env.ts#L20)
+ - `error TS2559: Type 'Window & typeof globalThis' has no properties in common with type 'GlobalTarget'.`
+   - [packages\/api\/src\/env.ts\#L22](https://github.com/vuejs/devtools-v6/blob/dd2ab5d4275187cbd81952a2a3d53c335643c1f4/packages/api/src/env.ts#L22)
+ - `error TS2559: Type 'typeof globalThis' has no properties in common with type 'GlobalTarget'.`
+   - [packages\/api\/src\/env.ts\#L24](https://github.com/vuejs/devtools-v6/blob/dd2ab5d4275187cbd81952a2a3d53c335643c1f4/packages/api/src/env.ts#L24)
+
+</details>
+
+"
+61152,closed,[NewErrors] 5.8.0-dev.20250209 vs 5.7.3,2646552444,typescript-bot,2025-02-09T19:33:23Z,"<details open=""true"">
+<summary>
+<h2><a href=""https://github.com/vuejs/vue"">vuejs/vue</a></h2>
+</summary>
+
+**7 of 8 projects failed to build with the old tsc and were ignored**
+### [tsconfig.json](https://github.com/vuejs/vue/blob/9e88707940088cb1f4cd7dd210c9168a50dc347c/tsconfig.json)
+ - `error TS2578: Unused '@ts-expect-error' directive.`
+   - [src\/platforms\/web\/runtime\/directives\/show.ts\#L7](https://github.com/vuejs/vue/blob/9e88707940088cb1f4cd7dd210c9168a50dc347c/src/platforms/web/runtime/directives/show.ts#L7)
+ - `error TS2322: Type 'VNode | VNodeWithData' is not assignable to type 'VNodeWithData'.`
+   - [src\/platforms\/web\/runtime\/directives\/show.ts\#L10](https://github.com/vuejs/vue/blob/9e88707940088cb1f4cd7dd210c9168a50dc347c/src/platforms/web/runtime/directives/show.ts#L10)
+
+</details>
+
+"
+46149,closed,Provide a specialized error on top-level await and --module node12,931671927,fatcerberus,2021-09-30T20:56:24Z,"I thought `""module"": ""es2020""` allowed top-level await.  Did that change?"
+46149,closed,Provide a specialized error on top-level await and --module node12,931699838,DanielRosenwasser,2021-09-30T21:04:25Z,"`import()` is in `module: es2020`, but top-level await hasn't technically been added to a latest-ratified standard. When it does, it will likely be ES2022.
+
+[In other words, it hit stage 4 this past year.](https://github.com/tc39/proposals/blob/6e25d28c7ab39818be8617ac4447832664eba32d/finished-proposals.md)"
+46149,closed,Provide a specialized error on top-level await and --module node12,944149294,sidharthv96,2021-10-15T09:36:08Z,"Proposed new error messages would be similar to:
+
+- `The module setting 'es2015' does not support top-level 'await' expressions. Consider switching to 'es2022'.`
+- `The module setting 'node12' does not support top-level 'await' expressions. Consider switching to 'nodenext'.`
+- `The target setting 'es5' does not support top-level 'await' expressions. Consider switching to 'es2017'.`
+
+Is there a situation to suggest `esnext` or `system`?
+
+<hr/>
+
+Is the same applicable for this message too?
+
+```
+Top-level 'for await' loops are only allowed when the 'module' option is set to 'es2022', 'esnext', 'system', or 'nodenext', and the 'target' option is set to 'es2017' or higher.
+```
+
+Changed to:
+- `The module setting '{0}' does not support top-level 'for await' expressions. Consider switching to '{1}'.`"
+46149,closed,Provide a specialized error on top-level await and --module node12,944492569,DanielRosenwasser,2021-10-15T18:00:47Z,"> The target setting 'es5' does not support top-level 'await' expressions. Consider switching to 'es2017'.
+
+I believe that unless you're using `system` for your module target, the `target` has to be `es2022` or later. Very confusing, but someone else may be able to correct me."
+46149,closed,Provide a specialized error on top-level await and --module node12,944607855,sidharthv96,2021-10-15T19:27:21Z,"This is the current check for the message.
+```ts
+(moduleKind !== ModuleKind.ES2022 && moduleKind !== ModuleKind.ESNext && moduleKind !== ModuleKind.System && !(moduleKind === ModuleKind.NodeNext && getSourceFileOfNode(node).impliedNodeFormat === ModuleKind.ESNext)) || languageVersion < ScriptTarget.ES2017
+```
+
+So if someone is using `module: ES2015` and `target:ES5`, should they get two error messages?
+(I'm not sure if this is a valid scenario or not 😅)
+
+Based on the current error message, My understanding is
+| GivenModule | GivenTarget | SuggestedModule | SuggestedTarget |
+| ----------- | ----------- | --------------- | --------------- |
+| >= ES2022   | >= ES2017   | -               | -               |
+| System      | >= ES2017   | -               | -               |
+| NodeNext    | >= ES2017   | -               | -               |
+| < ES2022    | >= ES2017   | ES2022          | -               |
+| Node12      | >= ES2017   | NodeNext        | -               |
+| >= ES2022   | < ES2017    | -               | ES2017          |
+| < ES2022    | < ES2017    | ES2022          | ES2017          |
+
+
+I'm not sure if you meant the `target` to be `es2022` as the code only has till `es2021`
+```ts
+export const enum ScriptTarget {
+        ES3 = 0,
+        ES5 = 1,
+        ES2015 = 2,
+        ES2016 = 3,
+        ES2017 = 4,
+        ES2018 = 5,
+        ES2019 = 6,
+        ES2020 = 7,
+        ES2021 = 8,
+        ESNext = 99,
+        JSON = 100,
+        Latest = ESNext,
+    }
+```
+
+This is really confusing indeed. 😅
+"
+46149,closed,Provide a specialized error on top-level await and --module node12,944619639,weswigham,2021-10-15T19:49:07Z,"TLA is actually allowed in only in esm mode `nodenext` files, since latest node allows TLA in esm - we have tests to that effect - a specialized error for cjs mode files would be good, though."
+46149,closed,Provide a specialized error on top-level await and --module node12,1112794424,DanielRosenwasser,2022-04-29T01:11:46Z,"Just as a heads up, #46149 is updating the logic here as well."
+46149,closed,Provide a specialized error on top-level await and --module node12,2394577580,Athan-Johnson,2024-10-04T20:57:49Z,"Hi! I wanted to get some clarification on the error messages, what should the new ones look like? I can't what the final decision on the formatting was here."
+46149,closed,Provide a specialized error on top-level await and --module node12,2614575420,priyanshscpp,2025-01-26T20:15:43Z,"import() is in module: es2020, but top-level await hasn't technically been added to a latest-ratified standard. When it does, it will likely be ES2022.
+
+[In other words, it hit stage 4 this past year.](https://github.com/tc39/proposals/blob/6e25d28c7ab39818be8617ac4447832664eba32d/finished-proposals.md)"
+46149,closed,Provide a specialized error on top-level await and --module node12,2641751787,atsushi196323,2025-02-07T02:02:28Z,"Hello! I found this issue and I'm interested in working on it. 
+Before I start, I would like to confirm: is this issue still relevant in the latest TypeScript version?
+Thanks!"
+46149,closed,Provide a specialized error on top-level await and --module node12,2643415215,RyanCavanaugh,2025-02-07T16:31:39Z,"> Before I start, I would like to confirm: is this issue still relevant in the latest TypeScript version?
+
+Good question. The answer is not really; `node12` is likely to be deprecated in the near future."
+46149,closed,Provide a specialized error on top-level await and --module node12,2645805786,atsushi196323,2025-02-08T15:59:34Z,"Thank you for the clarification!
+
+I see. Do you know if there is an official timeline for the deprecation of Node.js 12 in this project?"
+46149,closed,Provide a specialized error on top-level await and --module node12,2653710311,Abrenstorm,2025-02-12T13:25:45Z,"""Hi! I’d like to work on this issue as my first contribution. Can I take it?"""
+46149,closed,Provide a specialized error on top-level await and --module node12,2653839104,atsushi196323,2025-02-12T14:16:25Z,"Hi! This issue looks interesting and I’d also love to help if possible. Do you think there’s a way we can split the work, or is there another issue I can help with? I’ve checked the contributing guide and I’m happy to follow any guidelines."
+46149,closed,Provide a specialized error on top-level await and --module node12,2654290456,RyanCavanaugh,2025-02-12T16:47:10Z,The bots have found this one I see.
+61163,closed,Rename symbol to not proceed if a naming conflict would occur,2651601028,colinday,2025-02-11T17:57:16Z,I meant to open this in the VSCode project
+50276,closed,Type Acquisition does not work on packages that include their own typings,1212286599,mjbvz,2022-08-11T17:38:52Z,`typeAcquisition` doesn't sound like the correct setting. Have you tried installing the package into your project: `npm install tippy.js`?
+50276,closed,Type Acquisition does not work on packages that include their own typings,1212315052,RyanCavanaugh,2022-08-11T18:06:54Z,"Enabling `typeAcquisition` won't do anything for this scenario. TS/JS/VS Code will never automatically install a package itself -- doing so would be potentially very impactful (e.g. some npm packages will load several hundred megabytes of data).
+
+If the package is installed into the project's local node_modules, it'll get picked up automatically."
+50276,closed,Type Acquisition does not work on packages that include their own typings,1213444123,matthew-e-brown,2022-08-12T19:25:13Z,"> @mjbvz  
+> Have you tried installing the package into your project: `npm install tippy.js?`
+
+I was hoping I didn't have to do that: if I can use one package's types without having to introduce a `package.json` to this project, I hoped I could use any package's types without having to do so.
+
+Moving to a bundler/build step isn't feasible/desired for this project, so we don't have a `package.json` at all at the moment. That makes this feature feel incomplete to me: if I have to install things as `devDependencies` for my `ts-check` to work at all, it's odd to me that that requirement is only for some libraries&mdash;at that point I may as well just install **all** the `@types/*` packages manually and never even use `typeAcquisition`.
+
+Perhaps I mis-read the feature's purpose: if some libraries still force installing packages I'm not going to use from `node_modules` just for types, why don't all packages just require me to install their `@types/*` counterparts to get their types?
+
+I guess it's simply not intended for this use-case.
+
+----
+
+> @RyanCavanaugh  
+> TS/JS/VS Code will never automatically install a package itself -- doing so would be potentially very impactful (e.g. some npm packages will load several hundred megabytes of data).
+
+That makes sense. I figured that me *manually* specifying packages in `include` would allow me to tell it to basically do what an `npm install` would do.
+
+...I guess at that point I basically have a mini-`package.json` and may as well just one a real one 😅
+
+----
+
+Oh, well. Thank you, to you both."
+50276,closed,Type Acquisition does not work on packages that include their own typings,2650729400,thomthom,2025-02-11T12:49:59Z,"> Enabling `typeAcquisition` won't do anything for this scenario. TS/JS/VS Code will never automatically install a package itself -- doing so would be potentially very impactful (e.g. some npm packages will load several hundred megabytes of data).
+> 
+> If the package is installed into the project's local node_modules, it'll get picked up automatically.
+
+The ""Working With JavaScript"" docs says (https://code.visualstudio.com/docs/nodejs/working-with-javascript):
+
+> Type declaration files are automatically downloaded and managed by Visual Studio Code for packages listed in your project's package.json *or that you import into a JavaScript file.*
+
+(Emphasis mine). That bit had me thinking that listing the libs I wanted type hints for in `typeAcquisition.include` was enough. I realize this thread is 2.5 years old, so I'm wondering is this still the case?"
+61135,closed,TS Intellisense Performance: Unusable on versions 1.94+,2641429721,vs-code-engineering[bot],2025-02-07T00:03:53Z,"Thanks for creating this issue! It looks like you may be using an old version of VS Code, the latest stable release is 1.97.0. Please try upgrading to the latest version and checking whether this issue remains.
+
+Happy Coding!"
+61135,closed,TS Intellisense Performance: Unusable on versions 1.94+,2641475133,kan-o-ash,2025-02-07T00:16:56Z,"@mjbvz I noticed you transferred this to `microsoft/TypeScript` but given the benchmarking above, it does seem like an issue with VSCode specifically, likely how it interacts with the TS language server"
+61135,closed,TS Intellisense Performance: Unusable on versions 1.94+,2641504975,kan-o-ash,2025-02-07T00:22:44Z,"> Thanks for creating this issue! It looks like you may be using an old version of VS Code, the latest stable release is 1.97.0. Please try upgrading to the latest version and checking whether this issue remains.
+> 
+> Happy Coding!
+
+For any readers, this is mentioned in the description but it's an issue confirmed on 1.94, 1.95, 1.96, and 1.97."
+61135,closed,TS Intellisense Performance: Unusable on versions 1.94+,2649511432,kan-o-ash,2025-02-10T23:49:50Z,"For anyone that runs into this issue, it was caused by [this vscode change](https://github.com/microsoft/vscode/pull/228703/files#diff-a9de977db38cdb2cceb14a46802e7047eaa3c3a5f5a8e459f38f396ed38f6651R227), falling back to node.js file watchers with a significant performance hit."
+51692,closed,strange inheritance issue,1332702897,RyanCavanaugh,2022-11-30T20:30:27Z,"This is a correct error. The surprising aspect comes because the classes are only nominal when they have a protected field, otherwise they would be structurally identical"
+51692,closed,strange inheritance issue,1332743101,fatcerberus,2022-11-30T21:14:51Z,@RyanCavanaugh I’m a bit confused myself - even in a nominal type system `Derived` should always be assignable to `Base` if the former extends the latter and there are no errors in either class definition
+51692,closed,strange inheritance issue,2649247723,denis-migdal,2025-02-10T21:10:24Z,"I think this issue didn't received proper explanation.
+
+If you had something like :
+```ts
+abstract class Base {
+  protected abstract testify:(source: Base) => this;
+}
+
+abstract class Derived extends Base {
+  protected abstract override testify:(source: Derived) => this;
+}
+```
+
+This would raise a TS error, as you should be able to substitute any instances of `Base` by one of its children, i.e. :
+```ts 
+let b: Base;
+a.testify(b);
+```
+should be possible, with `a` being a `Base`, or a `Derived`.
+But this is not possible for `Derived` as `testify` only accept `Derived` instances therefore raising an error.
+
+However, you used `this`, which, if I am not mistaken kind of internally transforms the classes into generic classes, something like :
+```ts
+abstract class Base<T> {
+  protected abstract testify:(source: T) => T;
+}
+
+abstract class Derived<T> extends Base<T> {
+  protected abstract override testify:(source: T) => T;
+}
+```
+
+In this case, you have `Base = Base<Base>` and `Derived = Derived<Derived>` (extending `Base<Derived>`).
+`Base<Derived>` is not assignable to `Base<Base>` for the same reason as previously stated.
+
+In this case, using `this` hides the initial error in the class definition, but would raise error during assignations.
+
+However, as TS uses duck typing, if `Base<T>` and `Derived<T>` have the same interface, then they are assume kind of being ""the same"". Hence no error when the properties are public.
+
+The issue being that the `protected` attribute seems to kind of wear off the duck typing for implementation reasons.
+Protected methods not being a part of the public interface, and being excluded in some type operations."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259203548,RyanCavanaugh,2024-07-30T21:02:06Z,"The StackBlitz doesn't have the reproing code in it, and I think the code you have in the issue isn't quite right? You have
+```ts
+import IconButton from '@mui/material'
+```
+but it should be
+```ts
+import { IconButton } from '@mui/material'
+```
+I'm not seeing any error once I correct that problem"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259206710,jakebailey,2024-07-30T21:04:09Z,"Yes, I just tested this too; note that the screenshot says ""3 problems"":
+
+```
+src/index.tsx:16:8 - error TS2604: JSX element type 'IconButton' does not have any construct or call signatures.
+
+16       <IconButton onClick={(event) => handleCopyClick(event, 'id')}>
+          ~~~~~~~~~~
+
+src/index.tsx:16:8 - error TS2786: 'IconButton' cannot be used as a JSX component.
+  Its type 'typeof import(""/home/jabaile/work/repros/issue59474/node_modules/@mui/material/index"")' is not a valid JSX element type.
+
+16       <IconButton onClick={(event) => handleCopyClick(event, 'id')}>
+          ~~~~~~~~~~
+
+src/index.tsx:16:29 - error TS7006: Parameter 'event' implicitly has an 'any' type.
+
+16       <IconButton onClick={(event) => handleCopyClick(event, 'id')}>
+                               ~~~~~
+```
+
+The implict any is the least of the problems"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259255314,marc-at-brightnight,2024-07-30T21:37:44Z,"Whoops, seems I was a bit hasty when I put together the example 🤪
+
+Corrected example [here](https://codesandbox.io/p/sandbox/bold-ben-pdgszs?file=%2Fsrc%2FApp.tsx&layout=%257B%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522rootPanelGroup%2522%253A%257B%2522direction%2522%253A%2522horizontal%2522%252C%2522contentType%2522%253A%2522UNKNOWN%2522%252C%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522id%2522%253A%2522ROOT_LAYOUT%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522UNKNOWN%2522%252C%2522direction%2522%253A%2522vertical%2522%252C%2522id%2522%253A%2522clz8x9p7700073b6gibb1mmmu%2522%252C%2522sizes%2522%253A%255B100%252C0%255D%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522EDITOR%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522EDITOR%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522EDITOR%2522%252C%2522id%2522%253A%2522clz8x9p7600033b6gjw9e6rt5%2522%257D%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522SHELLS%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522SHELLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522SHELLS%2522%252C%2522id%2522%253A%2522clz8x9p7600043b6gla5v5hha%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522contentType%2522%253A%2522DEVTOOLS%2522%252C%2522direction%2522%253A%2522vertical%2522%252C%2522id%2522%253A%2522DEVTOOLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522contentType%2522%253A%2522DEVTOOLS%2522%252C%2522id%2522%253A%2522clz8x9p7700063b6ggzop0d8g%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%252C%2522sizes%2522%253A%255B50%252C50%255D%257D%252C%2522tabbedPanels%2522%253A%257B%2522clz8x9p7600033b6gjw9e6rt5%2522%253A%257B%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clz8x9p7600023b6g4u5y2cjf%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522FILE%2522%252C%2522filepath%2522%253A%2522%252Fsrc%252FApp.tsx%2522%252C%2522state%2522%253A%2522IDLE%2522%257D%255D%252C%2522id%2522%253A%2522clz8x9p7600033b6gjw9e6rt5%2522%252C%2522activeTabId%2522%253A%2522clz8x9p7600023b6g4u5y2cjf%2522%257D%252C%2522clz8x9p7700063b6ggzop0d8g%2522%253A%257B%2522id%2522%253A%2522clz8x9p7700063b6ggzop0d8g%2522%252C%2522activeTabId%2522%253A%2522clz8x9p7600053b6gg66a2uqp%2522%252C%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clz8x9p7600053b6gg66a2uqp%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522UNASSIGNED_PORT%2522%252C%2522port%2522%253A0%252C%2522path%2522%253A%2522%252F%2522%257D%252C%257B%2522type%2522%253A%2522CHANGELOG%2522%252C%2522id%2522%253A%2522clz8xnww0001r3b6fa4jjtphv%2522%252C%2522mode%2522%253A%2522permanent%2522%257D%255D%257D%252C%2522clz8x9p7600043b6gla5v5hha%2522%253A%257B%2522tabs%2522%253A%255B%255D%252C%2522id%2522%253A%2522clz8x9p7600043b6gla5v5hha%2522%257D%257D%252C%2522showDevtools%2522%253Atrue%252C%2522showShells%2522%253Afalse%252C%2522showSidebar%2522%253Atrue%252C%2522sidebarPanelSize%2522%253A15%257D)
+
+@RyanCavanaugh you are correct, there is no more issue and the types are inferred correctly. Now I'm completely at a loss, as I have essentially the same code with the same package versions in my production code (screenshot below) but staring at that error as clear as day... I will have to investigate more to see if I can reproduce the issue but definitely seems like an issue with my app and not Typescript (thank god!). (and yes, my imports are correct 😅)
+
+![image](https://github.com/user-attachments/assets/d83908cd-3baf-437d-8d03-e5c8d73a853d)"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259257305,jakebailey,2024-07-30T21:39:23Z,"If you're certain this is a regression in 5.5, consider using https://www.npmjs.com/package/every-ts to bisect `tsc` to figure out where it changed."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259336212,marc-at-brightnight,2024-07-30T22:55:52Z,"@jakebailey thanks, great idea! Definitely seems like 5.5 is the issue, seems to work on 5.4...
+![image](https://github.com/user-attachments/assets/545b4e92-bf2c-42f7-adc6-935f27eb7420)
+"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259337605,jakebailey,2024-07-30T22:57:31Z,"To be clear, I mean using `every-ts bisect`: https://www.npmjs.com/package/every-ts#Bisecting"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259368910,marc-at-brightnight,2024-07-30T23:33:53Z,"> To be clear, I mean using `every-ts bisect`: https://www.npmjs.com/package/every-ts#Bisecting
+
+I gotcha. Is this what you meant?
+```
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default
+❯ every-ts bisect start
+status: waiting for both good and bad commits
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default
+❯ every-ts bisect good 5.4
+Resolved 5.4 to origin/release-5.4
+status: waiting for bad commit, 1 good commit known
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default
+❯ every-ts bisect bad 5.5
+Resolved 5.5 to origin/release-5.5
+Bisecting: a merge base must be tested
+remote: Enumerating objects: 468, done.
+remote: Counting objects: 100% (445/445), done.
+remote: Compressing objects: 100% (213/213), done.
+remote: Total 468 (delta 283), reused 232 (delta 232), pack-reused 23
+Receiving objects: 100% (468/468), 1.33 MiB | 6.38 MiB/s, done.
+Resolving deltas: 100% (285/285), done.
+[d04e3489b0d8e6bc9a8a9396a633632a5a467328] Improve apparent type of mapped types (#57122)
+Building TypeScript...
+TypeScript built successfully!
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default took 23s
+❯ every-ts tsc --version
+Version 5.4.0-dev
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default
+❯ every-ts tsc --noEmit -p .
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default took 11s
+❯ every-ts bisect bad
+The merge base d04e3489b0d8e6bc9a8a9396a633632a5a467328 is bad.
+This means the bug has been fixed between d04e3489b0d8e6bc9a8a9396a633632a5a467328 and [27bcd4cb5a98bce46c9cdd749752703ead021a4b].
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default took 2s
+❯ every-ts bisect good
+The merge base d04e3489b0d8e6bc9a8a9396a633632a5a467328 is bad.
+This means the bug has been fixed between d04e3489b0d8e6bc9a8a9396a633632a5a467328 and [27bcd4cb5a98bce46c9cdd749752703ead021a4b d04e3489b0d8e6bc9a8a9396a633632a5a467328].
+```"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259373249,RyanCavanaugh,2024-07-30T23:39:12Z,"I've never seen a correct bisect not land on a specific commit. How many steps did it run? You'll also want to make sure you're deleting the .tsbuildinfo between runs, if any"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259375029,marc-at-brightnight,2024-07-30T23:41:16Z,"my bad, I read the git docs and now I understand what you guys mean. working through the steps..."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2259380862,marc-at-brightnight,2024-07-30T23:48:42Z,"ok after 8 steps, some bad, some good, this is what I got:
+```
+b3f3bb3d3876d954a6194e6e66ae58e3b74e8c39 is the first bad commit
+commit b3f3bb3d3876d954a6194e6e66ae58e3b74e8c39
+Author: Wesley Wigham <wewigham@microsoft.com>
+Date:   Thu May 23 09:38:57 2024 -0700
+
+    Propagate the error any type in union and intersection construction (#58610)
+
+    Co-authored-by: TypeScript Bot <typescriptbot@microsoft.com>
+
+ src/compiler/checker.ts                                        |  7 +++++--
+ src/compiler/types.ts                                          |  4 ++++
+ .../jsDeclarationsExportDoubleAssignmentInClosure.types        |  2 +-
+ .../reference/jsxNestedWithinTernaryParsesCorrectly.types      |  2 +-
+ .../reference/logicalAssignment10(target=es2015).types         |  4 ++--
+ .../reference/logicalAssignment10(target=es2020).types         |  4 ++--
+ .../reference/logicalAssignment10(target=es2021).types         |  4 ++--
+ .../reference/logicalAssignment10(target=esnext).types         |  4 ++--
+ .../reference/parsingDeepParenthensizedExpression.types        |  8 ++++----
+ .../transpile/declarationSelfReferentialConstraint.d.ts        |  8 ++++++++
+ tests/baselines/reference/tsxReactEmitNesting.types            |  2 +-
+ .../reference/unionOfFunctionAndSignatureIsCallable.types      | 10 +++++-----
+ tests/cases/transpile/declarationSelfReferentialConstraint.ts  |  5 +++++
+ 13 files changed, 42 insertions(+), 22 deletions(-)
+ create mode 100644 tests/baselines/reference/transpile/declarationSelfReferentialConstraint.d.ts
+ create mode 100644 tests/cases/transpile/declarationSelfReferentialConstraint.ts
+Building TypeScript...
+TypeScript built successfully!
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default took 3s
+❯ every-ts tsc --noEmit -p .
+
+poweralpha-app/packages/ui on  upgrade-typescript-to-5.5 [$] via  v20.12.0 on ☁️  default took 10s
+❯ every-ts tsc --version
+Version 5.5.0-dev
+```
+from what I understand 5.5.0-dev is the last ""good"" commit, and then comes the first bad"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2271872363,weswigham,2024-08-06T18:15:08Z,"Unless I'm mistaken, there's no functioning repro in this issue? @marc-at-brightnight you said you can only get this to repro in your local project, right? In your local, larger example, is there something `//@ts-ignore`'d that is maybe affecting this? It'd be an expected change of the diff'd PR if that's the case (previously the error type was treated differently from `any`, now it's handled like `any`, and retains its error-ness through union and intersection construction - so this kind of error could appear if, for example, somewhere in the type of the handler is a sneaky error in a dependency that's been suppressed (which could also be suppressed by `skipLibCheck`)!)
+
+In any case, I don't really have a path forward without a repro. ☹️ "
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2272171992,marc-at-brightnight,2024-08-06T21:19:55Z,"@weswigham yeah I figured it would be an issue to not have a reproducible example. There are only a few `ts-ignore`'s in the repo (before I learned about `ts-expect-error`) but there are mostly in some test files, not related to MUI files.
+
+Shoot! well I was looking forward to upgrading to 5.5 but not sure how to get to a reproducible example. Would have expected others to report this as well but seems like I'm the only one so far... Not sure if/when I'll have time to look at this further but do let me know if you have any more ideas. Maybe we can keep this issue open in the meantime."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2454660394,eljenso,2024-11-04T13:02:10Z,"Has anyone found a fix or a workaround for this issue?
+
+We are facing the same issue when trying to upgrade from TS v5.4 to 5.6."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2455197684,jakebailey,2024-11-04T16:42:55Z,"See the comments above; we have no repro so can't look into it. If you have code which shows this exact problem, providing it would be helpful."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2457953617,eljenso,2024-11-05T19:07:11Z,"I was finally able to reproduce the issue, and the step causing the issue is adding [react-three-fiber](https://github.com/pmndrs/react-three-fiber) to the mix.
+Here is the repro: https://github.com/eljenso/typescript-59474-repro
+
+Once I have added the usage of react-three-fiber, TypeScript started to complain about the types of the event handlers:
+![Image](https://github.com/user-attachments/assets/158e8703-6f88-484c-9857-8d8777e19d73)
+
+Weirdly, `tsc --noemit` doesn't produce any error output."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2470795535,eljenso,2024-11-12T15:11:02Z,@jakebailey Does my repro help you?
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2514450407,Pumpuli,2024-12-03T12:37:57Z,"I've also hit this issue in a project that has `@react-three/fiber`. In fact, I've had to patch `@react-three/fiber` because of another [issue](https://github.com/pmndrs/react-three-fiber/discussions/1752) with TypeScript (in combination with Material UI library). I wonder if these two issues have any connection whatsoever. Maybe not, since that other problem boils down to `JSX.IntrinsicElements` becoming too big (since it's extended by both Material UI and React Three Fiber). I mean, I guess it's possible some other limit is hit somewhere."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2514995330,amodiopescefaro,2024-12-03T16:13:16Z,"@jakebailey 
+I have a smaller repo that reproduce the issue
+https://github.com/amodiopescefaro/ts_mui_r3f_issue
+
+I'm not able to fix the issue just patching @eact-three/fiber as we need the IntrinsticElement R3F extensions to write our code.
+
+Typescript 5.4.5 do not have any issue in this repo"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2515424829,amodiopescefaro,2024-12-03T19:55:53Z,"I used every-ts bisect on my repo and I arrived to the same commit @marc-at-brightnight found here https://github.com/microsoft/TypeScript/issues/59474#issuecomment-2259380862
+
+I just cloned my repo then executed
+```
+npm install
+npm install -g every-ts
+every-ts
+every-ts bisect start
+every-ts bisect good v5.4.4
+every-ts bisect bad v5.5.4
+every-ts bisect run tsc
+```
+That resulted in 
+```
+b3f3bb3d3876d954a6194e6e66ae58e3b74e8c39 is the first bad commit
+commit b3f3bb3d3876d954a6194e6e66ae58e3b74e8c39
+Author: Wesley Wigham <wewigham@microsoft.com>
+Date:   Thu May 23 09:38:57 2024 -0700
+```
+
+And I can confirm that reverting commit b3f3bb3 on top of today master fixes this issue"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2515500785,jakebailey,2024-12-03T20:36:08Z,"As said above, the only way that this PR could have broken something is if the types depend on ignored errors. It would be useful to `--listFiles` and find all instances of ignored/expected errors."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2516383048,amodiopescefaro,2024-12-04T07:15:13Z,"I've run npx tsc --listFiles
+I don't see how this output can be useful as the only error reported is the final error and no other intermediate error is reported.
+
+Blocking the code to run for errors that are not reported anywhere makes it impossible to diagnose what is happening.
+From my point of view, of an user of bot MUI and R3F I see both library working properly in isolation, but then giving error in unrelated code when used togheter.
+
+If a better error handling is needed then the error reporting should be improved too to allow us to diagnose and solve issues.
+
+Currently this change is preventing anyone using MUI + R3F to update past typescrypt 5.4
+
+Now an easy way to reproduce the issue is available to be able to investigate properly and solve this issue. I'm available for other tests but I think it would be more efficient if someone with the experties of how typescript works have a look at this issue
+
+```
+pescea@RZZLCND90359QP:~/dev/ts_issue$ npx tsc --listfiles
+src/index.tsx:13:23 - error TS7006: Parameter 'ev' implicitly has an 'any' type.
+
+13     <Button onClick={(ev) => console.log(ev)}>
+                         ~~
+
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es5.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2016.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.dom.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.dom.iterable.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.webworker.importscripts.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.scripthost.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.core.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.collection.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.generator.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.iterable.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.promise.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.proxy.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.reflect.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.symbol.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2016.array.include.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2016.intl.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.decorators.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.decorators.legacy.d.ts
+/home/pescea/dev/ts_issue/node_modules/typescript/lib/lib.es2016.full.d.ts
+/home/pescea/dev/ts_issue/node_modules/@types/react/global.d.ts
+/home/pescea/dev/ts_issue/node_modules/csstype/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@types/prop-types/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@types/react/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@types/react/jsx-runtime.d.ts
+/home/pescea/dev/ts_issue/node_modules/@types/react-dom/client.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/types/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/material/styles/identifier.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/styled-engine/StyledEngineProvider/StyledEngineProvider.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/styled-engine/StyledEngineProvider/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/styled-engine/GlobalStyles/GlobalStyles.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/styled-engine/GlobalStyles/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/styled-engine/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/createBreakpoints/createBreakpoints.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/createTheme/shape.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/createTheme/createSpacing.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/StandardCssProperties.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/AliasesCSSProperties.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/OverwriteCSSProperties.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/styleFunctionSx.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/extendSxProp.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/style/style.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/style/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/defaultSxConfig.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/styleFunctionSx/index.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/createTheme/applyStyles.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/cssContainerQueries/cssContainerQueries.d.ts
+/home/pescea/dev/ts_issue/node_modules/@mui/system/cssContainerQueries/index.d.ts
+/home/pescea/dev/ts"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2516415236,jakebailey,2024-12-04T07:35:56Z,"I wasn't suggesting you share the file list, but that you could grep the listed files for any ignored errors."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2516417246,amodiopescefaro,2024-12-04T07:37:22Z,"> I wasn't suggesting you share the file list, but that you could grep the listed files for any ignored errors.
+
+Can you guide me trough on how to do it as I do not see this explained anywhere"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2516542560,amodiopescefaro,2024-12-04T08:32:48Z,"I've found out that in my reproduction repository the issue was that the ""three"" types were missing, installing those made the issue go away.
+And I was able to found this changing skipLibCheck to false, and checking all the type issues in the dependency code too.
+
+The issue now is that on my main application branch I've done the same, I've put skipLibCheck to false and solved all other type issues but still I can't solve the problem
+
+Are there other possible errors that are not reported even with skipLibCheck set to false? Because I do not know what more to check"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2516933463,amodiopescefaro,2024-12-04T10:47:12Z,"I found out that updating @react-three/fiber and @react-three/drei to their respective last versions solved the issue at least for us.
+Still diagnosing this problem was hard. 
+No error or diagnostic for the compiler pointed in any sensible direction."
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2521695865,marc-at-brightnight,2024-12-05T23:13:35Z,"> I found out that updating @react-three/fiber and @react-three/drei to their respective last versions solved the issue at least for us. Still diagnosing this problem was hard. No error or diagnostic for the compiler pointed in any sensible direction.
+
+Updating @react-three/drei to 9.120.0 and @react-three/fiber to 8.17.10 (three to 0.171.0, just for the heck of it), was not enough to solve the problem for me. Similar to @Pumpuli, I also have a patch on @react-three/fiber types to narrow `IntrinsicElements` from `ThreeElements` to just those that I need. Removing the `postinstall` command from my npm and running a clean install removed the event handler typing issues. However, now without the patch, I get the `error TS2590: Expression produces a union type that is too complex to represent.` from issue [1752 from @react-three/fiber](https://github.com/pmndrs/react-three-fiber/discussions/1752).
+
+```
+// @react-three+fiber+8.16.2.patch
+declare global {
+    namespace JSX {
+        interface IntrinsicElements extends ThreeElements {
+        interface IntrinsicElements extends Pick<ThreeElements,
+          | 'createPortal'
+          | 'extend'
+          | 'MaterialNode'
+          | 'useFrame'
+          | 'Canvas'
+          | 'bufferAttribute'
+          | 'mesh'
+          | 'bufferGeometry'
+          | 'simulationMaterial'
+          | 'points'
+          | 'dofPointsMaterial'
+
+        > {
+        }
+    }
+}
+```
+ 
+So I'm a bit stuck between a rock and a hard place"
+59474,closed,Typescript 5.5 does not infer event handler types in MUI,2648926572,marc-at-brightnight,2025-02-10T18:42:58Z,"""Solved"" this by ripping out @react-three completely from our repo"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2606286232,jakebailey,2025-01-22T04:45:51Z,"You haven't provided much information.
+
+Are you calling it on the same location each time, or a different one?
+
+How much memory is being used before/after?
+
+If you're saying it happens in the ""latest"" version, are you saying that it didn't used to happen?
+
+If it didn't happen before, have you tried to bisect with https://www.npmjs.com/package/every-ts?"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2608770039,majie77,2025-01-23T03:27:39Z,"My demo code is as follows:
+
+`global.gc();`
+`const m = process.memoryUsage();`
+`console.log(m.heapUsed);`
+`for (let a=1;a <= 1000000;a++) {`
+`typeChecker.getTypeAtLocation(node.typeName);`
+`}`
+`global.gc();`
+`const m1 = process.memoryUsage();`
+`console.log(m1.heapUsed);`
+
+Test results of different versions：
+
+![Image](https://github.com/user-attachments/assets/110c0069-0299-4fa7-8f9b-40dddc9131ec)"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2625804687,RyanCavanaugh,2025-01-30T23:05:53Z,Please post a sample we can run ourselves; this could depend on any number of factors
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2635523222,majie77,2025-02-05T01:50:37Z,"A code demo that can run immediately：
+```
+const ts = require(""typescript"");
+const testFile = ""test.ts"";
+const code = `
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printName(person: Person): void {
+    console.log(person.name);
+}
+`;
+
+const program = ts.createProgram([testFile],{allowJs: false,experimentalDecorators: true, etsAnnotationsEnable: true, strict: true});
+const typeChecker = program.getTypeChecker();
+const sourceFile = ts.createSourceFile(
+    testFile,
+    code,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS
+);
+
+
+global.gc();
+const m = process.memoryUsage();
+console.log(m.heapUsed/1024/1024);
+
+function findTypeReferences(node) {
+    if (node.kind === ts.SyntaxKind.TypeReference) {
+        for (let a=1;a <= 1000000;a++) {
+            typeChecker.getTypeAtLocation(node.typeName);
+        }
+    }
+    ts.forEachChild(node, findTypeReferences);
+}
+
+findTypeReferences(sourceFile);
+
+global.gc();
+const m1 = process.memoryUsage();
+console.log(`after,${m1.heapUsed/1024/1024}`);
+```"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2637615310,RyanCavanaugh,2025-02-05T17:47:05Z,"Verifying that the number just keeps going up
+```js
+const ts = require(""typescript"");
+const testFile = ""test.ts"";
+const code = `
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printName(person: Person): void {
+    console.log(person.name);
+}
+`;
+
+const program = ts.createProgram([testFile], { allowJs: false, experimentalDecorators: true, etsAnnotationsEnable: true, strict: true });
+const typeChecker = program.getTypeChecker();
+const sourceFile = ts.createSourceFile(
+    testFile,
+    code,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS
+);
+
+function findTypeReferences(node) {
+    if (node.kind === ts.SyntaxKind.TypeReference) {
+        for (let a = 1; a <= 1000000; a++) {
+            void typeChecker.getTypeAtLocation(node.typeName);
+        }
+    }
+    ts.forEachChild(node, findTypeReferences);
+}
+
+for (let x = 1; x <= 1000; x++) {
+  global.gc();
+  const m2 = process.memoryUsage();
+  console.log(`${m2.heapUsed / 1024 / 1024}`);
+  findTypeReferences(sourceFile);
+}
+```
+->
+```
+57.838043212890625
+190.1006317138672
+324.61339569091797
+457.8843307495117
+579.9553298950195
+718.8173522949219
+840.8882446289062
+988.1521453857422
+1110.258056640625
+```"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2639028538,majie77,2025-02-06T07:24:35Z,"I found that if ignoreErrors of the resolveEntityName() method is set to TRUE, the memory leak will be fixed. What is the function of this parameter? Can I set it to TRUE?"
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2640987606,RyanCavanaugh,2025-02-06T20:52:01Z,"I can't figure out why you would be doing this (calling `getTypeAtLocation` for the same location more than once) in the first place, so it's hard to advise."
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2641784279,majie77,2025-02-07T02:32:54Z,"This is only a demo to prove that the `getTypeAtLocation` may have a memory leak problem. During actual compilation, the method may be invoked in different locations."
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2644123291,jakebailey,2025-02-07T21:03:05Z,"I took a look at this; all of the memory being added on are coming from `addLazyDiagnostic`, stemming from `getSymbolOfNameOrPropertyAccessExpression` calling `resolveEntityName` with errors enabled. Flipping that breaks no tests and fixes the leak.
+
+Note that this is more or less happening because you're asking questions about a program with errors, so not having errors would also fix this (but I think this is probably valuable to fix just because most programs are in an invalid state in an editor, in `ts-eslint` especially)."
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2644166849,jakebailey,2025-02-07T21:31:47Z,@majie77 Feel free to try the build on https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644158204.
+61008,closed,Memory leakage occurs in the getTypeAtLocation method in the latest version.,2648870760,RyanCavanaugh,2025-02-10T18:17:20Z,"We both forgot to mention that the demo program itself has a bug; it's passing a node from `sourceFile` to a checker instance created from a program that doesn't have that source file. Likely not a problem in your ""real"" code but worth pointing out."
+61160,closed,Unwanted Template string product when same union is used multiple times.,2648750614,jcalz,2025-02-10T17:27:51Z,"[search `in:title template literal union`](https://github.com/search?q=repo%3Amicrosoft%2FTypeScript%20in%3Atitle%20template%20literal%20union&type=issues)
+
+Duplicate of #49132"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644151739,jakebailey,2025-02-07T21:21:55Z,"@typescript-bot pack this
+@typescript-bot test it"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644151844,typescript-bot,2025-02-07T21:21:59Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `pack this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164752) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644158204) |
+| `test top400` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164753) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644279285) |
+| `user test this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164754) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644184169) |
+| `run dt` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164751) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644186609) |
+| `perf test this faster` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164755) | [👀 Results](https://github.com/microsoft/TypeScript/pull/61144#issuecomment-2644210767) |"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644158204,typescript-bot,2025-02-07T21:26:09Z,"Hey @jakebailey, I've packed this into [an installable tgz](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_apis/build/builds/164752/artifacts?artifactName=tgz&fileId=0225747C8AD14ECDEA81F4DAC6BDCF17DA8E79769C2EF0DE9C4D25753BF0B36302&fileName=/typescript-5.8.0-insiders.20250207.tgz). You can install it for testing by referencing it in your `package.json` like so:
+```
+{
+    ""devDependencies"": {
+        ""typescript"": ""https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_apis/build/builds/164752/artifacts?artifactName=tgz&fileId=0225747C8AD14ECDEA81F4DAC6BDCF17DA8E79769C2EF0DE9C4D25753BF0B36302&fileName=/typescript-5.8.0-insiders.20250207.tgz""
+    }
+}
+```
+and then running `npm install`.
+
+
+---
+
+There is also a playground [for this build](https://www.typescriptlang.org/play?ts=5.8.0-pr-61144-2) and an [npm](https://www.npmjs.com/package/@typescript-deploys/pr-build/v/5.8.0-pr-61144-2) module you can use via `""typescript"": ""npm:@typescript-deploys/pr-build@5.8.0-pr-61144-2""`.;"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644184169,typescript-bot,2025-02-07T21:43:18Z,"@jakebailey Here are the results of running the user tests with tsc comparing `main` and `refs/pull/61144/merge`:
+
+Everything looks good!"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644186609,typescript-bot,2025-02-07T21:45:07Z,"Hey @jakebailey, the results of running the DT tests are ready.
+
+Everything looks the same!
+
+[You can check the log here](https://typescript.visualstudio.com/TypeScript/_build/index?buildId=164751&_a=summary)."
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644210767,typescript-bot,2025-02-07T22:03:07Z,"@jakebailey
+The results of the perf run you requested are in!
+<details><summary> Here they are:</summary><p>
+<h2>tsc</h2>
+<b>Comparison Report - baseline..pr</b>
+<table border=""0"" cellpadding=""0"" cellspacing=""0"" >
+<thead>
+<tr>
+<th align=left><sub>Metric</sub></th>
+<th align=right><sub>baseline</sub></th>
+<th align=right><sub>pr</sub></th>
+<th align=right><sub>Delta</sub></th>
+<th align=right><sub>Best</sub></th>
+<th align=right><sub>Worst</sub></th>
+<th align=right><sub>p-value</sub></th>
+</tr>
+</thead>
+<tr class=""group""><th align=left colspan=""7""><sub>Compiler-Unions - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>62,390</sub></td>
+<td align=right><sub>62,390</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>196,646k (± 0.04%)</sub></td>
+<td align=right><sub>195,948k (± 0.79%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>192,791k</sub></td>
+<td align=right><sub>196,715k</sub></td>
+<td align=right><sub>p=0.575 n=6</sub></td>
+</tr>
+<tr class=""measurement parse-time scenario0 host0"">
+<td align=left><sub>Parse Time</sub></td>
+<td align=right><sub>1.60s (± 1.09%)</sub></td>
+<td align=right><sub>1.61s (± 0.78%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1.59s</sub></td>
+<td align=right><sub>1.63s</sub></td>
+<td align=right><sub>p=0.440 n=6</sub></td>
+</tr>
+<tr class=""measurement bind-time scenario0 host0"">
+<td align=left><sub>Bind Time</sub></td>
+<td align=right><sub>0.89s (± 1.42%)</sub></td>
+<td align=right><sub>0.88s (± 1.55%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>0.86s</sub></td>
+<td align=right><sub>0.90s</sub></td>
+<td align=right><sub>p=0.408 n=6</sub></td>
+</tr>
+<tr class=""measurement check-time scenario0 host0"">
+<td align=left><sub>Check Time</sub></td>
+<td align=right><sub>11.73s (± 0.66%)</sub></td>
+<td align=right><sub>11.71s (± 0.34%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>11.66s</sub></td>
+<td align=right><sub>11.76s</sub></td>
+<td align=right><sub>p=0.629 n=6</sub></td>
+</tr>
+<tr class=""measurement emit-time scenario0 host0"">
+<td align=left><sub>Emit Time</sub></td>
+<td align=right><sub>3.29s (± 0.72%)</sub></td>
+<td align=right><sub>3.37s (± 3.68%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>3.25s</sub></td>
+<td align=right><sub>3.55s</sub></td>
+<td align=right><sub>p=0.222 n=6</sub></td>
+</tr>
+<tr class=""measurement total scenario0 host0"">
+<td align=left><sub>Total Time</sub></td>
+<td align=right><sub>17.52s (± 0.55%)</sub></td>
+<td align=right><sub>17.57s (± 0.82%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>17.44s</sub></td>
+<td align=right><sub>17.77s</sub></td>
+<td align=right><sub>p=0.629 n=6</sub></td>
+</tr>
+</tbody>
+<tr class=""group""><th align=left colspan=""7""><sub>angular-1 - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>948,488</sub></td>
+<td align=right><sub>948,488</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>411,006</sub></td>
+<td align=right><sub>411,006</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>1,224,265k (± 0.01%)</sub></td>
+<td align=right><sub>1,224,338k (± 0.01%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1,224,252k</sub></td>
+<td align=right><sub>1,224,460k</sub><"
+61144,closed,Pass ignoreErrors=true to more resolveEntityName callers,2644279285,typescript-bot,2025-02-07T22:57:32Z,"@jakebailey Here are the results of running the top 400 repos with tsc comparing `main` and `refs/pull/61144/merge`:
+
+Everything looks good!"
+61132,closed,"Revert ""Proposed expandable hover API""",2640766779,typescript-bot,2025-02-06T19:11:07Z,"Thanks for the PR! It looks like you've changed the TSServer protocol in some way. Please ensure that any changes here don't break consumers of the current TSServer API. For some extra review, we'll ping @sheetalkamat, @mjbvz, @zkat, and @joj for you. Feel free to loop in other consumers/maintainers if necessary."
+61132,closed,"Revert ""Proposed expandable hover API""",2640766818,typescript-bot,2025-02-06T19:11:08Z,"Looks like you're introducing a change to the public API surface area. If this includes breaking changes, please document them [on our wiki's API Breaking Changes page](https://github.com/microsoft/TypeScript/wiki/API-Breaking-Changes).
+
+Also, please make sure @DanielRosenwasser and @RyanCavanaugh are aware of the changes, just as a heads up."
+61132,closed,"Revert ""Proposed expandable hover API""",2641548815,gabritto,2025-02-07T00:55:40Z,@typescript-bot test it
+61132,closed,"Revert ""Proposed expandable hover API""",2641549221,typescript-bot,2025-02-07T00:55:45Z,"Starting jobs; this comment will be updated as builds start and complete.
+
+| Command | Status | Results |
+| ------- | ------ | ------- |
+| `test top400` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164736) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61132#issuecomment-2641792626) |
+| `user test this` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164737) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61132#issuecomment-2641592309) |
+| `run dt` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164735) | [✅ Results](https://github.com/microsoft/TypeScript/pull/61132#issuecomment-2641600571) |
+| `perf test this faster` | [✅ Started](https://typescript.visualstudio.com/cf7ac146-d525-443c-b23c-0d58337efebc/_build/results?buildId=164738) | [👀 Results](https://github.com/microsoft/TypeScript/pull/61132#issuecomment-2641726643) |"
+61132,closed,"Revert ""Proposed expandable hover API""",2641592309,typescript-bot,2025-02-07T01:17:33Z,"@gabritto Here are the results of running the user tests with tsc comparing `main` and `refs/pull/61132/merge`:
+
+Everything looks good!"
+61132,closed,"Revert ""Proposed expandable hover API""",2641600571,typescript-bot,2025-02-07T01:19:37Z,"Hey @gabritto, the results of running the DT tests are ready.
+
+Everything looks the same!
+
+[You can check the log here](https://typescript.visualstudio.com/TypeScript/_build/index?buildId=164735&_a=summary)."
+61132,closed,"Revert ""Proposed expandable hover API""",2641726643,typescript-bot,2025-02-07T01:41:09Z,"@gabritto
+The results of the perf run you requested are in!
+<details><summary> Here they are:</summary><p>
+<h2>tsc</h2>
+<b>Comparison Report - baseline..pr</b>
+<table border=""0"" cellpadding=""0"" cellspacing=""0"" >
+<thead>
+<tr>
+<th align=left><sub>Metric</sub></th>
+<th align=right><sub>baseline</sub></th>
+<th align=right><sub>pr</sub></th>
+<th align=right><sub>Delta</sub></th>
+<th align=right><sub>Best</sub></th>
+<th align=right><sub>Worst</sub></th>
+<th align=right><sub>p-value</sub></th>
+</tr>
+</thead>
+<tr class=""group""><th align=left colspan=""7""><sub>Compiler-Unions - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>34</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>62,390</sub></td>
+<td align=right><sub>62,390</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>50,395</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>194,950k (± 1.02%)</sub></td>
+<td align=right><sub>193,762k (± 0.81%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>193,107k</sub></td>
+<td align=right><sub>196,959k</sub></td>
+<td align=right><sub>p=0.297 n=6</sub></td>
+</tr>
+<tr class=""measurement parse-time scenario0 host0"">
+<td align=left><sub>Parse Time</sub></td>
+<td align=right><sub>1.32s (± 1.03%)</sub></td>
+<td align=right><sub>1.31s (± 0.84%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1.30s</sub></td>
+<td align=right><sub>1.32s</sub></td>
+<td align=right><sub>p=0.090 n=6</sub></td>
+</tr>
+<tr class=""measurement bind-time scenario0 host0"">
+<td align=left><sub>Bind Time</sub></td>
+<td align=right><sub>0.73s</sub></td>
+<td align=right><sub>0.73s (± 0.70%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>0.73s</sub></td>
+<td align=right><sub>0.74s</sub></td>
+<td align=right><sub>p=0.174 n=6</sub></td>
+</tr>
+<tr class=""measurement check-time scenario0 host0"">
+<td align=left><sub>Check Time</sub></td>
+<td align=right><sub>9.78s (± 0.14%)</sub></td>
+<td align=right><sub>9.81s (± 0.29%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>9.77s</sub></td>
+<td align=right><sub>9.84s</sub></td>
+<td align=right><sub>p=0.187 n=6</sub></td>
+</tr>
+<tr class=""measurement emit-time scenario0 host0"">
+<td align=left><sub>Emit Time</sub></td>
+<td align=right><sub>2.75s (± 0.65%)</sub></td>
+<td align=right><sub>2.76s (± 0.85%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>2.73s</sub></td>
+<td align=right><sub>2.80s</sub></td>
+<td align=right><sub>p=0.623 n=6</sub></td>
+</tr>
+<tr class=""measurement total scenario0 host0"">
+<td align=left><sub>Total Time</sub></td>
+<td align=right><sub>14.59s (± 0.20%)</sub></td>
+<td align=right><sub>14.61s (± 0.31%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>14.53s</sub></td>
+<td align=right><sub>14.65s</sub></td>
+<td align=right><sub>p=0.335 n=6</sub></td>
+</tr>
+</tbody>
+<tr class=""group""><th align=left colspan=""7""><sub>angular-1 - node (v18.15.0, x64)</sub></th></tr>
+<tbody>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Errors</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>37</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Symbols</sub></td>
+<td align=right><sub>948,488</sub></td>
+<td align=right><sub>948,488</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement scenario0 host0"">
+<td align=left><sub>Types</sub></td>
+<td align=right><sub>411,006</sub></td>
+<td align=right><sub>411,006</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>p=1.000 n=6</sub></td>
+</tr>
+<tr class=""measurement memory scenario0 host0"">
+<td align=left><sub>Memory used</sub></td>
+<td align=right><sub>1,225,422k (± 0.00%)</sub></td>
+<td align=right><sub>1,225,425k (± 0.00%)</sub></td>
+<td align=right><sub>~</sub></td>
+<td align=right><sub>1,225,366k</sub></td>
+<td align=right><sub>1,225,523k</sub></td>
+<td align=r"
+61132,closed,"Revert ""Proposed expandable hover API""",2641792626,typescript-bot,2025-02-07T02:40:41Z,"@gabritto Here are the results of running the top 400 repos with tsc comparing `main` and `refs/pull/61132/merge`:
+
+Everything looks good!"
+61132,closed,"Revert ""Proposed expandable hover API""",2643734821,gabritto,2025-02-07T18:55:02Z,"> Does VS Code need to know to not send this request anymore, or will it ""just work"" because the extra data will be ignored?
+
+Good question, I'll double check."
+61132,closed,"Revert ""Proposed expandable hover API""",2644035604,mjbvz,2025-02-07T20:12:50Z,"@gabritto On the VS Code side we gate our check to TS 5.7 , not specific pre-release version (plus you need the setting enabled). If you're planning to remove this, can you update VS Code to only send this request on TS 5.9+"
+61132,closed,"Revert ""Proposed expandable hover API""",2644087543,gabritto,2025-02-07T20:42:53Z,"> @gabritto On the VS Code side we gate our check to TS 5.7 , not specific pre-release version (plus you need the setting enabled). If you're planning to remove this, can you update VS Code to only send this request on TS 5.9+
+
+@mjbvz should I temporarily remove the whole feature from the vscode side as well? I could update it to only send the request for TS 5.9+, but in theory, we'll ship TS 5.9 nightly versions starting next week, and I won't bring this back into TSServer time for that. On the same vein, I'd also have to remove the setting."
+61132,closed,"Revert ""Proposed expandable hover API""",2644090131,gabritto,2025-02-07T20:43:53Z,"> > Does VS Code need to know to not send this request anymore, or will it ""just work"" because the extra data will be ignored?
+> 
+> Good question, I'll double check.
+
+I checked, and it works."
+61132,closed,"Revert ""Proposed expandable hover API""",2648743798,mylesmmurphy,2025-02-10T17:25:15Z,"Hey @gabritto! Really great work on this, very excited to see this coming. I have some feedback / questions related to this that I mentioned [here](https://github.com/microsoft/vscode/issues/232685#issuecomment-2648703798), and felt it might be relevant to your work and would love your feedback. 😄  "

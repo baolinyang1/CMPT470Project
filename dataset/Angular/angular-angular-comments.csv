@@ -1,0 +1,606 @@
+Issue ID,Issue State,Issue Title,Comment ID,Author,Created At,Comment Body
+59770,closed,VS Code Not Initializing Angular Language Features in Angular 19,2621823232,atscott,2025-01-29T14:33:09Z,Can you provide a reproduction? Many people are using v19 with the language service so the problem must be environment/project-specific. 
+59770,closed,VS Code Not Initializing Angular Language Features in Angular 19,2636453652,aashif-sajah,2025-02-05T11:20:16Z,"> Can you provide a reproduction? Many people are using v19 with the language service so the problem must be environment/project-specific.
+
+Thanks for your response. Here are the details of my environment:
+
+Angular CLI: 19.1.5
+Angular Version: 19.1.4
+Node.js Version: 22.11.0
+NPM Version: 10.9.1
+TypeScript Version: 5.7.3
+OS: Windows 10/11 x64
+
+Steps to reproduce:
+
+Created a new Angular 19 project using ng new my-app --standalone.
+Opened the project in VS Code.
+Installed Angular Language Service Extention.
+Restarted VS Code.
+Issue: TypeScript configuration (tsconfig.json) did not initialize properly, and Angular language features like IntelliSense and autocompletion are missing."
+59770,closed,VS Code Not Initializing Angular Language Features in Angular 19,2654672351,atscott,2025-02-12T19:35:53Z,"I'm sorry but we can't reproduce the problem you are reporting. We require that reported issues have a minimal reproduction that showcases the problem.
+
+If the problem still exists in your application, please [open a new issue](https://github.com/angular/angular/issues/new/choose) and follow the instructions in the issue template that include info on how to create a reproduction using our template.
+
+Reproduction was attempted with the latest VSCode, extension, and an `ng new` app."
+59770,closed,VS Code Not Initializing Angular Language Features in Angular 19,2663405895,aashif-sajah,2025-02-17T15:12:50Z,"Hey @atscott ,
+
+Thanks for your time! It turned out to be a permission issue related to the Angular cache. I resolved it by manually deleting the .angular folder and clearing the cache with:
+
+```npx ng cache clean
+npm cache clean --force
+```
+
+Then, I reinstalled dependencies and restarted the project. Everything is working fine now. 
+
+I appreciate the help, and thanks for your support! 🙌
+
+"
+59568,closed,docs(router): Fix small grammatical errors,2599235519,AndrewKushnir,2025-01-17T21:19:37Z,"**Caretaker note**: no presubmit required, docs-only change."
+59568,closed,docs(router): Fix small grammatical errors,2599237840,AndrewKushnir,2025-01-17T21:21:29Z,"This PR was merged into the repository by commit 16b08853bcd3719aec1781949e8adcf0e558a033.
+
+The changes were merged into the following branches: main, 19.1.x"
+59568,closed,docs(router): Fix small grammatical errors,2661695517,angular-automatic-lock-bot[bot],2025-02-17T00:12:13Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59598,closed,fix(core): cleanup stash listener when app is destroyed,2598905296,AndrewKushnir,2025-01-17T18:00:59Z,"This PR was merged into the repository by commit 14791f3e1200f3673aca772cede07338c8b05780.
+
+The changes were merged into the following branches: main, 19.1.x"
+59598,closed,fix(core): cleanup stash listener when app is destroyed,2661695507,angular-automatic-lock-bot[bot],2025-02-17T00:12:12Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59572,closed,refactor(core): reuse setupStaticAttributes in ComponentRef,2598518022,pkozlowski-opensource,2025-01-17T14:42:17Z,"caretaker note: I've got a ""green"" [TGP](https://fusion2.corp.google.com/presubmit/716573679/OCL:716573679:BASE:716636436:1737121936673:e31a73a;groups=PossiblyNewlyFailing/targets) for this one."
+59572,closed,refactor(core): reuse setupStaticAttributes in ComponentRef,2598903722,AndrewKushnir,2025-01-17T18:00:02Z,"This PR was merged into the repository by commit 35e5bbb0dcc07563717617dc0d552884c88d515f.
+
+The changes were merged into the following branches: main, 19.1.x"
+59572,closed,refactor(core): reuse setupStaticAttributes in ComponentRef,2661695494,angular-automatic-lock-bot[bot],2025-02-17T00:12:11Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59583,closed,Update installation.md,2597458521,google-cla[bot],2025-01-17T05:22:39Z,"Thanks for your pull request! It looks like this may be your first contribution to a Google open source project. Before we can look at your pull request, you'll need to sign a Contributor License Agreement (CLA).
+
+View this [failed invocation](https://github.com/angular/angular/pull/59583/checks?check_run_id=35757353198) of the CLA check for more information.
+
+For the most up to date status, view the checks section at the bottom of the pull request."
+59583,closed,Update installation.md,2598598910,kirjs,2025-01-17T15:21:52Z,"hello, thanks for contributing, I don't understand this change, and there's no description, so I'm closing this, feel free to reopen and update those"
+59583,closed,Update installation.md,2661695484,angular-automatic-lock-bot[bot],2025-02-17T00:12:09Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59579,closed,test(platform-server): fix flaky hydration test,2597804560,pkozlowski-opensource,2025-01-17T09:30:54Z,"This PR was merged into the repository by commit 8ea691a9d8af85ab03cc8a3039feaad3ed679889.
+
+The changes were merged into the following branches: main, 19.1.x"
+59579,closed,test(platform-server): fix flaky hydration test,2661695470,angular-automatic-lock-bot[bot],2025-02-17T00:12:08Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59555,closed,Add linkedSignalWithChanges for easier linkedSignal previous to current changes reaction,2595279290,pkozlowski-opensource,2025-01-16T11:32:09Z,"Thnx for opening the issue @Harpush - I can definitively see your use-case but I'm not sure the API change is warranted here. More specifically ""Source will be array of signals (and not a reactive function)"" would make things more complicated for a (common) case of depending on one source.
+
+TBH I think that your initial code is _fine_ "
+59555,closed,Add linkedSignalWithChanges for easier linkedSignal previous to current changes reaction,2596849644,alxhub,2025-01-16T20:41:26Z,"+1 to the initial code being reasonable. I would probably write this as:
+
+```ts
+checkedItems = linkedSignal({
+  source: this.data,
+  computation: (data, previous) => {
+    if (!previous || data !== previous.source) {
+      return [];
+    }
+
+    return previous.value.filter((checkedItem) => this.filteredData().includes(checkedItem));
+  },
+});
+```
+
+"
+59555,closed,Add linkedSignalWithChanges for easier linkedSignal previous to current changes reaction,2597131910,Harpush,2025-01-16T23:43:03Z,"@pkozlowski-opensource @alxhub Thanks for answering. I guess I will use the linked signal as it is or wrap it myself if it becomes too much.
+I wasn't sure doing ""change detection"" is the correct way but as I understand from your answers there is nothing wrong with it."
+59555,closed,Add linkedSignalWithChanges for easier linkedSignal previous to current changes reaction,2598402233,Harpush,2025-01-17T13:45:57Z,"> +1 to the initial code being reasonable. I would probably write this as:
+> 
+> checkedItems = linkedSignal({
+>   source: this.data,
+>   computation: (data, previous) => {
+>     if (!previous || data !== previous.source) {
+>       return [];
+>     }
+> 
+>     return previous.value.filter((checkedItem) => this.filteredData().includes(checkedItem));
+>   },
+> });
+
+@alxhub  I might be wrong here but I think that won't work... At the first time filteredData won't be accessed so any changes to it won't invoke the signal. That's why I used an array as source to begin with.
+Edit: [stackblitz](https://stackblitz.com/edit/stackblitz-starters-aqp9lmyf?file=src%2Fmain.ts)"
+59555,closed,Add linkedSignalWithChanges for easier linkedSignal previous to current changes reaction,2661695456,angular-automatic-lock-bot[bot],2025-02-17T00:12:07Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59593,closed,fix(core): preserve dependencies when replacing metadata,2661695443,angular-automatic-lock-bot[bot],2025-02-17T00:12:06Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59591,closed,fix(compiler-cli): preserve all HMR dependencies,2661695430,angular-automatic-lock-bot[bot],2025-02-17T00:12:05Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59584,closed,test(platform-server): fix flaky incremental hydration test,2597834350,pkozlowski-opensource,2025-01-17T09:45:39Z,"This PR was merged into the repository by commit 4e6017a9f5cda389c5fbf4f2c1519ce1bba23e11.
+
+The changes were merged into the following branches: main, 19.1.x"
+59584,closed,test(platform-server): fix flaky incremental hydration test,2661695419,angular-automatic-lock-bot[bot],2025-02-17T00:12:04Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59586,closed,"Why HttpFeature interface fields starting with ""ɵ"" symbol?",2597594184,JoostK,2025-01-17T07:23:33Z,This is Angular's convention to indicate a private name that should not be used in user code directly. In the case of feature providers it's done to ensure that the relevant feature provider functions are used instead of fabricating the feature object manually.
+59586,closed,"Why HttpFeature interface fields starting with ""ɵ"" symbol?",2661695397,angular-automatic-lock-bot[bot],2025-02-17T00:12:01Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2518809949,shannonvc,2024-12-05T00:08:41Z,"We also had this in our project.
+It is indeed caused by the way HMR loads styles seperately from the components.
+In the repro link, running the app with `ng serve --no-hmr` (or changing he npm start script to include the flag) will work as it did before."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2521229169,otodockal,2024-12-05T19:28:51Z,"I just wanted to report this issue and have created a demo repository to reproduce it: https://github.com/otodockal/ng-host.
+
+In my case, the flickering occurs when combining styles declared in `:host` and HMR (which is default now).
+
+https://github.com/user-attachments/assets/03ee440d-717e-4e70-9b5f-44b24d597b62
+
+"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2523713573,WebTechnolog,2024-12-06T16:46:02Z,"I encounter the same issue. And it also strangely affects `mat-table` with sticky columns.
+I have a table in a dialog and 2 sticky columns positioned next to each other. But with this issue there are gaps between these columns. Their `left` positions are not properly calculated.
+`ng serve --no-hmr` fixes the issue, but HMR is a cool feature of v19, and would be great to have it fixed."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2525562052,joewIST,2024-12-08T09:42:22Z,I am experiencing the same issue even with HMR off.
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2525565259,e-oz,2024-12-08T09:50:54Z,"@joewIST then it, perhaps, is a different bug and requires a different reproduction example."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2525575375,joewIST,2024-12-08T10:16:44Z,"All I can see is that on v19, when a component is lazy loaded, there is an asynchronous request to load that component's stylesheet (even if it's already been loaded):
+
+![Image](https://github.com/user-attachments/assets/e2557473-5b25-49e6-8587-2510f62a6be9)
+
+This wasn't happening on v18:
+
+![Image](https://github.com/user-attachments/assets/eae14b05-419c-4155-967b-19d0c9bbdb98)
+
+
+"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2528425351,RafalSzczuka,2024-12-09T15:40:25Z,It is worth noticing that this issue does not occur in Firefox browser. Turning off hmr flag helps for me as well.
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2528481795,joewIST,2024-12-09T15:54:16Z,"We still get the flickering on Firefox (which occurs while the styles are loaded). The only difference is that on Firefox, once the styles have been loaded, they are not reloaded whenever the component is reused. On Edge/Chrome, they seem to be loaded every time the component is requested, which causes the flicker to occur a lot.
+
+For reference, this is only happening when a) a component is dynamically rendered (e.g. something in a dropdown that gets initialised when the dropdown is opened or b) a component is wrapped in an @if block and is only rendered after a user interaction (e.g. a loading state in a button)."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2531134015,joewIST,2024-12-10T10:23:52Z,"I have been able to remove the flickering, based on the asynchronous loading of styles, but for our project it only works when I set the ""live-reload"" flag to false. The ""hmr"" flag seems to have no impact. When I serve the application with this flag set, the styles are working as they did before upgrading to v19. 
+
+Obviously, there is a cost with this, as the app requires a manual refresh for any changes to be reflected, so it would be good to have this fixed!
+
+Thanks"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2531148945,hakimio,2024-12-10T10:30:10Z,@joewIST are you testing with `--hmr false` or `--no-hmr` flag?
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2531161927,joewIST,2024-12-10T10:34:47Z,"@hakimio I have tried it with both and neither have any impact. Like I said, the only thing that has made a difference is turning live reload off..."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2536004982,AndSokolov,2024-12-11T13:33:29Z,"I also created a similar issue https://github.com/angular/angular/issues/59129.
+Another way to fix this is to replace builder in angular.json with ""builder"": ""@angular-devkit/build-angular:browser"""
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2536020328,ZixZux,2024-12-11T13:39:37Z,"I have the same issue.
+
+But it's the smallest of the problem - the key problem is that now **ngAfterViewInit is called before the styles of component are loaded**.
+
+It's very huge impact on the application.
+
+I've created separated issue: ""Angular 19: Component initialization logic is broken by HMR #59151""."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2538654734,SebastianPodgajny,2024-12-12T11:42:09Z,"FYI 
+Nx dev-server ignores hmr option for Angular@19
+https://github.com/nrwl/nx/blob/master/packages/angular/src/builders/dev-server/lib/normalize-options.ts#L24
+possible fix https://github.com/nrwl/nx/pull/29322
+"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2546391176,Tom-ITietz,2024-12-16T18:51:41Z,Hi Everyone i got the same Issue even after Deployment using `ng build`
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2548935330,avicarpio,2024-12-17T16:22:43Z,Also having this issue.
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2549056306,JeanMeche,2024-12-17T17:05:30Z,"> [!IMPORTANT]
+> To help us investigate, please provide the specific version of the software you're using. This will help us pinpoint the issue more effectively"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2564128557,abdurrahmanarikan,2024-12-28T01:23:38Z,"Using v18 on my mac without nx, it happens when the main page is loading. After the loading, whenever I press refresh (f5) it also happens"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2564652346,muhamedkarajic,2024-12-29T08:31:33Z,"Under [here](https://github.com/muhamedkarajic/ng-v19-init-async-transition-bug-example) I made a minimal reproduction when using the flag `npm run serve` and `npm run serve-no-hmr` the issue is obvious cause when hmr is enabled the red circle moves when opening the page or refreshing it while its not like that without hmr. The red circle is in my case a navbar and its not a great dev experience that the style transitions. I think that should somehow get patched if possible cause by me even it causes the smooth scroll to not work properly cause there is a layout shift. 
+
+All details of my OS, etc I wrote already under: 
+https://github.com/angular/angular/issues/59318
+
+Update: When building it and running it from a server its not happening. Its purly in my case solved by not using hmr. 
+
+NOTE: On my website, when transitioning pages I have the hmr issue as well. So this is NOT only when opening the page for the first time and refreshing but also when navigating trough the pages e.g. home, about, etc."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2564663968,muhamedkarajic,2024-12-29T09:24:47Z,"I spent so far 7h on this, updating node version, adding back standalone, making a open source version so someone can reproduce it, writing down everything. 
+
+I don't mind the time. However I'm afraid of the frameworks reputation cause people will update, devs will experience this issue and be lost. Maybe keep v18 again as I did in the first place.
+
+I get that the milions of tests, that google has, has not catched this issue cause its a purly developer experience issue but on the other hand I never ever saw a developer updating the hole project and then first running its tests before opening the page once and looking at it. Maybe at least in some projects the tests have to be also executed serving the project not building it then this bug would have been noticed. 
+
+Please revert the HMR as a default or fix the issue but this can not stay until v20 like this, not even until 19.1 I think. "
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2564858405,muhamedkarajic,2024-12-29T22:51:10Z,"> FYI Nx dev-server ignores hmr option for Angular@19 https://github.com/nrwl/nx/blob/master/packages/angular/src/builders/dev-server/lib/normalize-options.ts#L24 possible fix [nrwl/nx#29322](https://github.com/nrwl/nx/pull/29322)
+
+I have Nx v20, yesterday updated using latest flag. Had the issue as everyone else. So its not true that its ignoring it. At least not right now. "
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2572753562,CryshotX,2025-01-06T09:51:45Z,"I am experiencing the same issue.
+
+Since I updated my project to Angular v19, I am experiencing style flickering for a split second, everytime I am navigating my application using the internal angular router. It also happens when refreshing the app with F5.
+
+Disabling HMR fixes the issue, although I'd really like to use it."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2572891291,mk-16,2025-01-06T11:11:30Z,"i openened an issue, but was immidiatly closed because of duplication....
+ViewContainerRef createComponent UI Flickering #59372 
+
+there, i point out source/underlying issue & quick workaround without compromising on project, enjoy"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2592226353,hakimio,2025-01-15T10:15:04Z,"This late/lazy HMR style loading breaks `Material Sidenav`. `mat-sidenav-content` margin is calculated incorrectly.
+
+**`HMR` enabled**:
+
+![with style HMR 1](https://github.com/user-attachments/assets/15226eaf-e32d-452a-a682-989ea4fa30fd)
+
+**`HMR` disabled**:
+
+![without HMR](https://github.com/user-attachments/assets/5d3294be-b8b8-4814-b669-0571155c350e)
+
+
+
+The demo project with steps to reproduce the issue: [Material Sidnav style HMR bug](https://github.com/hakimio/material-sidenav-hmr-bug)
+
+
+@clydin it's crazy that [some 6 year old bugs](https://github.com/angular/angular/issues/25749) are not fixed because [the fix](https://github.com/angular/angular/pull/55761) causes Google internal tests to break. Yet it feels like this new `style HMR` was enabled by default without any testing at all.
+Is there a fix coming anytime soon or is this considered a low priority issue?"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2593795525,jamesstztu,2025-01-15T19:44:45Z,"The issue  went away for me when I turned hmr off.
+You can do it via `ng serve --hmr=false`
+or update your angular.json
+`""hmr"": off`"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2594605212,vinuram1729,2025-01-16T06:03:59Z,"When ""hmr"": off is added to the angular.json file, the issue is resolved,
+but it negatively impacts the application's performance. For example, when
+opening a modal, there is a noticeable delay.
+
+On Thu, Jan 16, 2025 at 1:15 AM James Tu (Starz) ***@***.***>
+wrote:
+
+> The issue went away for me when I turned hmr off.
+> You can do it via ng serve --hmr=false
+> or update your angular.json
+> ""hmr"": off
+>
+> —
+> Reply to this email directly, view it on GitHub
+> <https://github.com/angular/angular/issues/59058#issuecomment-2593795525>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/ALEDTY2T7YKOFIW5ULBKGF32K23EVAVCNFSM6AAAAABTBIVW2WVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDKOJTG44TKNJSGU>
+> .
+> You are receiving this because you commented.Message ID:
+> ***@***.***>
+>
+"
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2594725749,AndSokolov,2025-01-16T07:35:07Z,"As an alternative you can change your builder in angular.json to ""builder"": ""@angular-devkit/build-angular:browser"". And the flickering will disappear."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2597783636,alan-agius4,2025-01-17T09:20:15Z,"Thanks for reporting this issue. Luckily, it has already been fixed in one of the recent releases. Please update to the most recent version to resolve the problem."
+59058,closed,Angular 19: Issue with Style Flickering When Switching Views (ng serve),2661695408,angular-automatic-lock-bot[bot],2025-02-17T00:12:02Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59442,closed,Docs: broken style is doc snippets,2581715037,JeanMeche,2025-01-10T04:24:00Z,The regression was introduced by https://github.com/angular/angular/pull/59395/files 
+59442,closed,Docs: broken style is doc snippets,2582995889,Ahmed-Hakeem,2025-01-10T15:44:17Z,Was about to raise this one =D .... the problem is all about we're overriding the class attribute .... so any parent applying a class attr to this component's host will be overriden. 
+59442,closed,Docs: broken style is doc snippets,2583003370,JeanMeche,2025-01-10T15:46:05Z,"This is supposed to work, there is something broken somewhere (maybe in angular itself), so it needs further investigation. "
+59442,closed,Docs: broken style is doc snippets,2583597995,Ahmed-Hakeem,2025-01-10T18:55:32Z,Ahaa .... Nice @JeanMeche  ❤  ..... the problem was actually that the icons are loaded twice ... once as part of CopySourceCodeButton in `this.loadCopySourceCodeButtons();` which renders the icon correctly as expected ... and then we reload it in   `loadIcons` which renders a generic `docs-icon` component which you just removed it in the PR ❤  
+59442,closed,Docs: broken style is doc snippets,2661695385,angular-automatic-lock-bot[bot],2025-02-17T00:12:00Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59458,closed,refactor(router): drop forRoot guard in production,2596985441,AndrewKushnir,2025-01-16T21:55:51Z,"This PR was merged into the repository by commit c51c66ef1e6123758832b4e3a1e8f9bc3663885c.
+
+The changes were merged into the following branches: main, 19.1.x"
+59458,closed,refactor(router): drop forRoot guard in production,2661157686,angular-automatic-lock-bot[bot],2025-02-16T00:12:39Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2590791400,tbondwilkinson,2025-01-14T18:24:13Z,"Generally speaking the `EarlyJsactionData` is cleared as soon as its used, so there would be no references to q left. It's unclear where you're seeing a memory leak."
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2590797438,arturovt,2025-01-14T18:25:29Z,"> Generally speaking the `EarlyJsactionData` is cleared as soon as its used, so there would be no references to q left. It's unclear where you're seeing a memory leak.
+
+https://github.com/angular/angular/issues/59261"
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2590813173,tbondwilkinson,2025-01-14T18:28:54Z,"`_ejsa` should be deleted when the app is destroyed - that's the proper fix for this, I suspect"
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2591105057,thePunderWoman,2025-01-14T21:07:52Z,@arturovt Can you add tests for this so we don't regress in the future?
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2596987012,AndrewKushnir,2025-01-16T21:56:31Z,"This PR was merged into the repository by commit f6e97763cfab9fa2bea6e6b1303b64f1b499c3ef.
+
+The changes were merged into the following branches: main, 19.1.x"
+59492,closed,fix(core): cleanup `_ejsa` when app is destroyed,2661157681,angular-automatic-lock-bot[bot],2025-02-16T00:12:38Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+58453,closed,refactor(docs-infra): migrate adev to signal-based inputs,2450116376,sheikalthaf,2024-10-31T15:04:59Z,@pkozlowski-opensource FYI it is not updated the relevant html files.
+58453,closed,refactor(docs-infra): migrate adev to signal-based inputs,2450146492,pkozlowski-opensource,2024-10-31T15:17:45Z,@sheikalthaf yep. Opened https://github.com/angular/angular/issues/58455 to track this
+58453,closed,refactor(docs-infra): migrate adev to signal-based inputs,2450166098,sheikalthaf,2024-10-31T15:26:09Z,"@pkozlowski-opensource also the migration is skipped the dynaimcally created component inputs usage
+
+https://github.com/angular/angular/pull/58453/files#diff-ebf0862f94d30389f8c321de5912bc5767b659ead7106d83a61f98eb3aa04c8cR210-R211
+
+![image](https://github.com/user-attachments/assets/e2e3c31a-2a1e-4e63-913e-90a3a744c0f1)
+"
+58453,closed,refactor(docs-infra): migrate adev to signal-based inputs,2661157671,angular-automatic-lock-bot[bot],2025-02-16T00:12:36Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+58415,closed,wip,2661157675,angular-automatic-lock-bot[bot],2025-02-16T00:12:37Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59574,closed,fix(core): animation sometimes renderer not being destroyed during HMR,2596701966,AndrewKushnir,2025-01-16T19:36:45Z,"This PR was merged into the repository by commit b76be83b4d311c8cae54c0c2e7553768946138eb.
+
+The changes were merged into the following branches: main, 19.1.x"
+59574,closed,fix(core): animation sometimes renderer not being destroyed during HMR,2661157665,angular-automatic-lock-bot[bot],2025-02-16T00:12:35Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59571,closed,build: update cross-repo angular dependencies to v19.2.0-next.0,2596453096,AndrewKushnir,2025-01-16T18:40:04Z,"This PR was merged into the repository by commit 884e0b437a50129e44a6769f5144a46680b7fc62.
+
+The changes were merged into the following branches: main, 19.1.x"
+59571,closed,build: update cross-repo angular dependencies to v19.2.0-next.0,2661157659,angular-automatic-lock-bot[bot],2025-02-16T00:12:34Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59556,closed,Optional update migration: provide-initializer not working correctly,2595007843,JoostK,2025-01-16T09:32:28Z,"The migrated code is doing exactly what the original was doing; the `deps` array is expected to be consumed as factory parameters otherwise they aren't used at all. Only depending for their request to have a side-effect is arguably a bad practice.
+
+I don't think this warrants a change in the migration; note that migrations cannot in the general sense account for all possible coding patterns and I'd argue this is one such pattern."
+59556,closed,Optional update migration: provide-initializer not working correctly,2596498552,alxhub,2025-01-16T18:52:23Z,"I'd agree - the passing of the `deps` to the `useFactory` function is not type-checked in the previous API, but that's what happens at runtime. The failure after the migration is surfacing an issue that's present in the original code but not caught by type-checking.
+
+If we wanted to preserve this behavior, we could cast the factory function to `any`:
+
+```ts
+const initializerFn = ((() => () => {}) as any)(inject(Sentry.TraceService));
+```
+
+However, I think this would be to the detriment of other usages of `deps` which are truly parameters to the factory function. I don't think we should change the migration in that case."
+59556,closed,Optional update migration: provide-initializer not working correctly,2661157653,angular-automatic-lock-bot[bot],2025-02-16T00:12:33Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59462,closed,refactor(core): move DOM manipulation logic to its own file,2596448969,AndrewKushnir,2025-01-16T18:38:47Z,"This PR was merged into the repository by commit 10f280a4d31f53b08d16986fa3bb6cb7d45ac764.
+
+The changes were merged into the following branches: main, 19.1.x"
+59462,closed,refactor(core): move DOM manipulation logic to its own file,2661157646,angular-automatic-lock-bot[bot],2025-02-16T00:12:32Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59024,closed,Several commits for resource(),2529604713,flensrocker,2024-12-09T21:53:53Z,"I really like the defaultValue on resource. Having not an `undefined` on the value is always a good thing IMHO.
+
+Thanks for that!"
+59024,closed,Several commits for resource(),2596277714,alxhub,2025-01-16T17:13:11Z,Caretaker: this PR is sensitive to backsliding. we need to patch cl/716243172 so far (and potentially more depending on presubmit failures).
+59024,closed,Several commits for resource(),2596297109,AndrewKushnir,2025-01-16T17:22:49Z,"This PR was merged into the repository by commit 01fffdb54778dea8e809354de8d75c40070bb0fe.
+
+The changes were merged into the following branches: main, 19.1.x"
+59024,closed,Several commits for resource(),2661157636,angular-automatic-lock-bot[bot],2025-02-16T00:12:31Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2113482319,leonsenft,2024-05-15T21:26:25Z,@alxhub PTAL–I don't currently have permission to assign you as a reviewer.
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2502361207,leonsenft,2024-11-27T00:49:25Z,@pkozlowski-opensource I've updated this change to no longer track signal reads in `equal` as per our discussion.
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2595034180,pkozlowski-opensource,2025-01-16T09:44:37Z,Started a [TGP](https://fusion2.corp.google.com/presubmit/715734578/OCL:715734578:BASE:716136054:1737020644951:75df487e/targets) on this one.
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2595713465,pkozlowski-opensource,2025-01-16T13:36:08Z,[Green TGP](https://fusion2.corp.google.com/presubmit/715734578/OCL:715734578:BASE:716187639:1737032084793:d0802de;groups=PossiblyAlreadyFailing/targets) after deflaking
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2595718184,pkozlowski-opensource,2025-01-16T13:38:05Z,TESTED=[Green TGP](https://fusion2.corp.google.com/presubmit/715734578/OCL:715734578:BASE:716187639:1737032084793:d0802de;groups=PossiblyAlreadyFailing/targets) after deflaking
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2596132228,AndrewKushnir,2025-01-16T16:10:15Z,"This PR was merged into the repository by commit f8b8e80d7915f4eaaf8df49327f0bd6efe1f29e4.
+
+The changes were merged into the following branches: main, 19.1.x"
+55818,closed,fix(core): treat reads/exceptions in `equal` as part of computation,2661157629,angular-automatic-lock-bot[bot],2025-02-16T00:12:30Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59532,closed,docs: update linkedSignal documentation,2596130326,AndrewKushnir,2025-01-16T16:09:26Z,"This PR was merged into the repository by commit 055624d0da31abcdb1f6d0a2d0d2c2013f9f2645.
+
+The changes were merged into the following branches: main, 19.1.x"
+59532,closed,docs: update linkedSignal documentation,2661157609,angular-automatic-lock-bot[bot],2025-02-16T00:12:29Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59094,closed,Mistake in the description of equality comparison for linked signal,2524039742,nickregeda,2024-12-06T19:48:33Z,"```
+const activeUser = signal({id: 123, name: 'Morgan'});
+const email = linkedSignal(() => `${activeUser().name}@example.com`, {
+  // Consider the user as the same if it's the same `id`.
+  equal: (a, b) => a.id === b.id,
+});
+// Or, if separating `source` and `computation`
+const alternateEmail = linkedSignal({
+  source: activeUser,
+  computation: user => `${user.name}@example.com`,
+  equal: (a, b) => a.id === b.id,
+});
+// This update to `activeUser` does not cause `email` or `alternateEmail`
+// to update because the `id` is the same.
+activeUser.set({id: 123, name: 'Morgan', isAdmin: false});
+```
+
+The whole example in the “Custom equality comparison” section is wrong, because equal takes the values (a, b) of the computation result
+And they are the strings in this example
+In this case it would be correct to use ""equal: (a, b) => a.id === b.id"" just in the activeUser signal"
+59094,closed,Mistake in the description of equality comparison for linked signal,2524070975,saikorthivada,2024-12-06T20:08:59Z,"@nickregeda It seems the issue persists. The `equals` function is focusing on the returned value from the computation callback rather than the original signal. I tested a different approach, and it worked as expected.
+
+### TS Code
+```
+import { CommonModule } from '@angular/common';
+import { Component, computed, linkedSignal, signal } from '@angular/core';
+
+interface IUser {id: number, name: string}
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  imports: [CommonModule],
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'v-19';
+  activeUser = signal<any>({id: 123, name: 'Morgan'});
+  email = linkedSignal(() => ({email:`${this.activeUser().name}@example.com`, ...this.activeUser()}), {
+    equal: (a, b) => a.id == b.id,
+  });
+
+  alternateEmail = linkedSignal({
+    source: this.activeUser,
+    computation: user => ({email:`${user.name}@example.com`, ...user}),
+    equal: (a, b) => a.id === b.id,
+  });
+
+  constructor() {
+    setTimeout(() => {
+    this.activeUser.set({id: 1234, name: 'Morgan123', isAmin: false});
+    }, 3000);
+  }
+}
+```
+### HTML Code
+```
+
+<p>{{alternateEmail().email}}</p>
+<p>{{email().email}}</p>
+```
+
+In the example above, instead of returning a string value from the computation, I returned a full object with the required property added. This resolved the issue, and it started working as expected.
+
+It seems the behavior described in the documentation differs from how it actually works.
+
+Uncertain About the Expected Behavior of This Feature"
+59094,closed,Mistake in the description of equality comparison for linked signal,2524086954,nickregeda,2024-12-06T20:20:13Z,"@saikorthivada 
+That's right
+equal is specified for a particular signal and defines the condition by which it will be evaluated as updated or not, and thus whether or not it will trigger computed or linkedSignal or effect.
+That doesn't mean we can just specify equal for the source signal in linkedSignal and hope that it will use its values in params, that's it"
+59094,closed,Mistake in the description of equality comparison for linked signal,2524143801,saikorthivada,2024-12-06T20:44:23Z,@nickregeda  yeah you are right. Need to know how exactly this should work from Angular team. Great finding.
+59094,closed,Mistake in the description of equality comparison for linked signal,2525255081,JeanMeche,2024-12-07T17:34:07Z,"The equal function is used to determine if the signal itself (in the case the `linkedSignal`) was changed. The dirtyness of the source signal is determined by that said signal. 
+The example should probably be 
+
+```ts
+const activeUser = signal({id: 123, name: 'Morgan', isAdmin: true});
+const email = linkedSignal(() => ({id:`${activeUser().name}@example.com`}), {
+  // Consider the user as the same if it's the same `id`.
+  equal: (a, b) => a.id === b.id,
+});
+// Or, if separating `source` and `computation`
+const alternateEmail = linkedSignal({
+  source: activeUser,
+  computation: user => ({id:`${user.name}@example.com`}),
+  equal: (a, b) => a.id === b.id,
+});
+// This update to `activeUser` does not cause `email` or `alternateEmail`
+// to update because the `id` is the same.
+activeUser.set({id: 123, name: 'Morgan', isAdmin: false});
+```
+"
+59094,closed,Mistake in the description of equality comparison for linked signal,2569350557,bst-celum,2025-01-03T14:52:53Z,"The documentation still feels a bit misleading to me and might cause some confusion.
+
+The original idea seems to be that the `email` signal should only update when the `id` of the `activeUser` changes. However, in the current example, the `email` signal produces an object with an `id` property, which feels out of place.
+
+Here are the main issues I see:
+
+- Type Mismatch: The `email` signal is producing an object `{ id: ... }` instead of a `string` (the actual email). This doesn't align with what you'd expect given the name and context.
+- Confusion Around Equality Check: The equality function is comparing the `id` property of the result of the computation, but the description implies that it’s tied to changes in the `activeUser` signal (the source). This creates a disconnect between the intended and intuitive behavior - that might be expected from the description - and what’s actually happening in the code.
+
+In my opinion, it would be better to link to the equality section of ""plain"" signals https://angular.dev/guide/signals#signal-equality-functions and only showcase here that the same can be done with a `linkedSignal` without an example around it.
+
+<details>
+ <summary>Rough suggestion</summary>
+
+![Image](https://github.com/user-attachments/assets/63a00380-27d8-44e8-a17a-b232dcb22f49)
+
+</details>
+
+
+
+"
+59094,closed,Mistake in the description of equality comparison for linked signal,2586470312,bst-celum,2025-01-13T08:24:06Z,"I still think that the documentation is misleading, also including the last changes.
+- the email is still an object with an id property which is odd as an example
+- you mention that `This update to 'activeUser' does not cause 'email' or 'alternateEmail'  to update because the 'id' is the same.` but if you actually try it out with a different name `{ id: 123, name: 'Stanley', isAdmin: false }`, then the id does not change but the linkedSignals will still update because the equality function targets the name (computation output), not the actual user id (source signal)
+
+`activeUser.set({ id: 123, name: 'Stanley', isAdmin: false }) // linkedSignals will fire again with Stanley@example.com`
+
+example: https://stackblitz.com/edit/stackblitz-starters-uxwnjgos?file=src%2Fmain.ts"
+59094,closed,Mistake in the description of equality comparison for linked signal,2593160278,pkozlowski-opensource,2025-01-15T15:18:16Z,"@bst-celum you are completely right, the code example is misleading. 
+
+I've sent https://github.com/angular/angular/pull/59532 to propose _something_ but open to other suggestions. "
+59094,closed,Mistake in the description of equality comparison for linked signal,2661157620,angular-automatic-lock-bot[bot],2025-02-16T00:12:29Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59538,closed,Update adev shared docs template to use application builder (esbuild and vite) ,2661157604,angular-automatic-lock-bot[bot],2025-02-16T00:12:28Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59539,closed,docs: update examples to the application builder,2593784251,github-actions[bot],2025-01-15T19:37:56Z,"Deployed adev-preview for cdb84a9fcebbb2c6b75a0df7ce49f99397666c59 to: https://ng-dev-previews-fw--pr-angular-angular-59539-adev-prev-78ikkm6a.web.app
+
+_**Note**: As new commits are pushed to this pull request, this link is updated after the preview is rebuilt._
+<!-- Sticky Pull Request Commentadev-preview -->"
+59539,closed,docs: update examples to the application builder,2596128468,AndrewKushnir,2025-01-16T16:08:39Z,"This PR was merged into the repository by commit e4dd1773db9f1b2daa942b0e0199eaf09fb87983.
+
+The changes were merged into the following branches: main, 19.1.x"
+59539,closed,docs: update examples to the application builder,2661157594,angular-automatic-lock-bot[bot],2025-02-16T00:12:27Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59560,closed,Role Guard Doesn't Wait for API Response Before Allowing Navigation,2595311249,stewieoO,2025-01-16T11:48:55Z,Do you return a promise or observable from the guard?
+59560,closed,Role Guard Doesn't Wait for API Response Before Allowing Navigation,2595882421,atscott,2025-01-16T14:30:28Z,"Without a reproduction, this isn’t actionable. But I can definitely say this is not how it works and there must be an issue with your guard. I’d suggest looking for support on [StackOverflow](http://stackoverflow.com/) using tag `angular`.
+
+If you are wondering why we don't resolve support issues via the issue tracker, please [check out this explanation](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-got-a-question-or-problem)."
+59560,closed,Role Guard Doesn't Wait for API Response Before Allowing Navigation,2661157586,angular-automatic-lock-bot[bot],2025-02-16T00:12:26Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59557,closed,fix(platform-browser): roll back HMR fix,2595270955,pkozlowski-opensource,2025-01-16T11:27:53Z,"This PR was merged into the repository by commit 2fe54a11f4539a712452d5819d8b4deb691953c1.
+
+The changes were merged into the following branches: main, 19.1.x"
+59557,closed,fix(platform-browser): roll back HMR fix,2595854523,michael-small,2025-01-16T14:19:28Z,"Thank you for handling this, and so responsively <3. I personally verified with a fork of my SB repro and it worked as intended. Very excited to proceed with my upgrade to the latest version now with this patch."
+59557,closed,fix(platform-browser): roll back HMR fix,2661157582,angular-automatic-lock-bot[bot],2025-02-16T00:12:25Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"
+59562,closed,fix(core): run HMR replacement in the zone,2595237825,wartab,2025-01-16T11:11:04Z,"I don't like being that guy, but could we get a fast tracked release for this? I had to disable hmr because I'm never sure if the issue is my code or this."
+59562,closed,fix(core): run HMR replacement in the zone,2595241087,pkozlowski-opensource,2025-01-16T11:12:40Z,@wartab we are planning to cut a patch release as soon as this fix lands.
+59562,closed,fix(core): run HMR replacement in the zone,2595288459,pkozlowski-opensource,2025-01-16T11:37:00Z,"This PR was merged into the repository by commit c9cd5585c25849546aa543f9ecb72211fb9ff265.
+
+The changes were merged into the following branches: main, 19.1.x"
+59562,closed,fix(core): run HMR replacement in the zone,2595445672,pkozlowski-opensource,2025-01-16T12:25:38Z,@wartab 19.1.1 patch release with a fix should be on the npm 
+59562,closed,fix(core): run HMR replacement in the zone,2595469662,wartab,2025-01-16T12:31:31Z,@pkozlowski-opensource Thank you so much for keeping me updated. I'll give it a try now.
+59562,closed,fix(core): run HMR replacement in the zone,2661157575,angular-automatic-lock-bot[bot],2025-02-16T00:12:24Z,"This issue has been automatically locked due to inactivity.
+Please file a new issue if you are encountering a similar or related problem.
+
+Read more about our [automatic conversation locking policy](https://github.com/angular/angular/blob/f0fbced1c55bc8b8ed9df01cea99df42f3e7eae3/contributing-docs/auto-issue-locking.md).
+
+<sub>_This action has been performed automatically by a bot._</sub>"

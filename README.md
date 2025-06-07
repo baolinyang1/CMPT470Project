@@ -1,4 +1,4 @@
-# CMPT470 Project  
+# Project  
 
 ## **Project Title**  
 **Analyzing Pull Request Acceptance Rates**  

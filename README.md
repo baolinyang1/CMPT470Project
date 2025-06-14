@@ -1,8 +1,6 @@
 # DOWNLOAD PAPER: [Analysing PR Acceptance Rate.pdf](https://github.com/user-attachments/files/20735739/Analysing.PR.Acceptance.Rate.pdf)
 
 
-# Project  
-
 ## **Project Title**  
 **Analyzing Pull Request Acceptance Rates**  
 
